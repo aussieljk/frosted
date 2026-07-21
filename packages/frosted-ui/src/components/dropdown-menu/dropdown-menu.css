@@ -1,0 +1,6 @@
+@import '../base-menu/base-menu.css';
+
+.fui-DropdownMenuContent {
+  /* Base UI provides --available-height and --transform-origin on the Popup */
+  max-height: var(--available-height);
+}

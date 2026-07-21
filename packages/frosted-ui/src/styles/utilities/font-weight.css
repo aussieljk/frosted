@@ -1,0 +1,19 @@
+.fui-r-weight-light {
+  font-weight: var(--font-weight-light);
+}
+
+.fui-r-weight-regular {
+  font-weight: var(--font-weight-regular);
+}
+
+.fui-r-weight-medium {
+  font-weight: var(--font-weight-medium);
+}
+
+.fui-r-weight-semi-bold {
+  font-weight: var(--font-weight-semi-bold);
+}
+
+.fui-r-weight-bold {
+  font-weight: var(--font-weight-bold);
+}
