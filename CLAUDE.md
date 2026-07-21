@@ -9,6 +9,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **Dev server**: `bun run dev --filter=<app>` (Example: `bun run dev --filter=tailwind`)
 - **Build**: `bun run build --filter=<app>`
 - **Lint**: `bun run lint --filter=<app>`
+- **Typecheck**: `bun run typecheck` (turbo, all packages; TypeScript 7)
 
 ### Frosted UI Package (`@aussieljk/frosted`, in `packages/frosted-ui`)
 - **Dev server**: `bun run --filter="@aussieljk/frosted" dev`
@@ -29,4 +30,4 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Publishing
 
-The main package publishes to npm as `@aussieljk/frosted` (see `packages/frosted-ui`). To publish: build the package, then run `npm publish` from `packages/frosted-ui` (`prepublishOnly` runs lint + build automatically).
+The main package publishes to npm as `@aussieljk/frosted` (see `packages/frosted-ui`). Versioning uses changesets (`bun x changeset`); the Release GitHub workflow (manual dispatch only) versions and publishes. Local publish: `npm publish` from `packages/frosted-ui` (`prepublishOnly` runs lint + build).

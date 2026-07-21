@@ -55,6 +55,12 @@
         "src/**",
         ".storybook/**"
       ]
+    },
+    "typecheck": {
+      "dependsOn": [
+        "^build"
+      ],
+      "outputs": []
     }
   }
 }

@@ -1,5 +1,5 @@
 import { ChevronDown16, MagnifyingGlass16 } from '@frosted-ui/icons';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as React from 'react';
 import { Avatar, Button, Callout, Dialog, Field, Form, ScrollArea, Spinner, Text, TextField } from '../index';
 import * as Combobox from './combobox';

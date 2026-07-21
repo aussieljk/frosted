@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import creditCardType from 'credit-card-type';
 
 import React, { useState } from 'react';

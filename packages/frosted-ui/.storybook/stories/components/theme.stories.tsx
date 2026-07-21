@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 import { Button, Card, Code, Switch, Text, TextArea } from '../../../src/components';
 import { Theme } from '../../../src/theme';
@@ -20,7 +20,7 @@ type Story = StoryObj<typeof meta>;
 
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 export const Default: Story = {
-  render: (args) => (
+  render: () => (
     <Theme {...args}>
       <div style={{ padding: '30px 80px' }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
@@ -55,7 +55,7 @@ export const Default: Story = {
 };
 
 export const Colors: Story = {
-  render: (args) => (
+  render: () => (
     <div style={{ display: 'flex', gap: 'var(--space-6)' }}>
       <Theme
         grayColor="gray"
@@ -128,7 +128,7 @@ export const Colors: Story = {
 };
 
 export const Appearance: Story = {
-  render: (args) => (
+  render: () => (
     <div style={{ display: 'flex', gap: 'var(--space-6)' }}>
       <Theme
         appearance="light"

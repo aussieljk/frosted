@@ -1,5 +1,5 @@
 import { Copy12 } from '@frosted-ui/icons';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 import {
   Badge,

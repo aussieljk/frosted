@@ -1,0 +1,21 @@
+{
+  "$schema": "https://unpkg.com/@changesets/config@3.1.4/schema.json",
+  "changelog": "@changesets/cli/changelog",
+  "commit": false,
+  "fixed": [],
+  "linked": [],
+  "access": "public",
+  "baseBranch": "main",
+  "updateInternalDependencies": "patch",
+  "ignore": [
+    "tailwind",
+    "eslint-config-custom",
+    "tsconfig",
+    "generate-icon-lib",
+    "@frosted-ui/colors",
+    "@frosted-ui/icons",
+    "@frosted-ui/react-native",
+    "frosted-ui-native-colors",
+    "@frosted-ui/figma-icon-sync-plugin"
+  ]
+}

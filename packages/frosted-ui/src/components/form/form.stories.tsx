@@ -1,5 +1,5 @@
 import { Plus16 } from '@frosted-ui/icons';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useForm as useTanStackForm } from '@tanstack/react-form';
 import * as React from 'react';
 import { Controller, useForm as useReactHookForm } from 'react-hook-form';

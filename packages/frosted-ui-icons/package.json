@@ -56,17 +56,18 @@
     "build": "bun run clean && bun run build:js",
     "build:js": "bun run build:js:cjs && bun run build:js:esm",
     "build:js:cjs": "tsc --project tsconfig-cjs.json",
-    "build:js:esm": "tsc --project tsconfig-esm.json"
+    "build:js:esm": "tsc --project tsconfig-esm.json",
+    "typecheck": "tsc --project tsconfig-cjs.json --noEmit"
   },
   "peerDependencies": {
     "@types/react": "*",
     "react": "^16.x || ^17.x || ^18.x"
   },
   "devDependencies": {
-    "@types/react": "^16.8.17",
+    "@types/react": "^19.2.17",
     "generate-icon-lib": "workspace:*",
-    "react": "17.0.2",
-    "rimraf": "^5.0.5",
-    "typescript": "^4.5.3"
+    "react": "19.2.7",
+    "rimraf": "^6.1.3",
+    "typescript": "^7.0.2"
   }
 }

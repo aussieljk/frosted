@@ -4,15 +4,25 @@
     "declarationDir": "types",
     "module": "esnext",
     "target": "ES2019",
-    "lib": ["esnext"],
+    "lib": [
+      "esnext"
+    ],
     "declaration": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
-    "moduleResolution": "node",
-    "isolatedModules": true
+    "moduleResolution": "bundler",
+    "isolatedModules": true,
+    "skipLibCheck": true,
+    "types": []
   },
-  "include": ["./src"],
-  "exclude": ["/*.css", "/index.js", "/index.mjs"]
+  "include": [
+    "./src"
+  ],
+  "exclude": [
+    "/*.css",
+    "/index.js",
+    "/index.mjs"
+  ]
 }

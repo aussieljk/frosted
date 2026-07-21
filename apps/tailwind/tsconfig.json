@@ -7,7 +7,7 @@
     "forceConsistentCasingInFileNames": true,
     "inlineSources": false,
     "isolatedModules": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "preserveWatchOutput": true,
@@ -21,8 +21,12 @@
     "declaration": false,
     "declarationMap": false,
     "incremental": true,
-    "jsx": "preserve",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "jsx": "react-jsx",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "module": "esnext",
     "noEmit": true,
     "resolveJsonModule": true,
@@ -36,7 +40,10 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "../../packages/frosted-ui/src/tailwindPlugin.ts",
-    "tailwind.config.js"
+    "tailwind.config.js",
+    ".next/dev/types/**/*.ts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules"
+  ]
 }

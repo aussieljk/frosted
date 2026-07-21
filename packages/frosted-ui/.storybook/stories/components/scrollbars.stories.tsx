@@ -1,4 +1,4 @@
-import type { StoryObj } from '@storybook/react';
+import type { StoryObj } from '@storybook/react-vite';
 
 import React from 'react';
 import { Text } from '../../../src/components/text';
@@ -20,7 +20,7 @@ type Story = StoryObj<typeof meta>;
 
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 export const Default: Story = {
-  render: (args) => (
+  render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
       <Text>Frosted-UI comes with custom styles for native CSS scrollbars:</Text>
       <div

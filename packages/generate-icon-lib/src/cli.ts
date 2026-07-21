@@ -38,15 +38,15 @@ async function main() {
 	  $ ${path.basename(process.argv[1])} --type=pictograms
 `,
     {
-      hardRejection: false,
+      importMeta: import.meta,
       flags: {
         file: {
           type: 'string',
-          alias: 'f',
+          shortFlag: 'f',
         },
         type: {
           type: 'string',
-          alias: 't',
+          shortFlag: 't',
           default: 'icons',
         },
       },

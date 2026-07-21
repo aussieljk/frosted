@@ -1,8 +1,30 @@
 .fui-SheetOverlay {
   position: fixed;
   inset: 0;
+  min-height: 100dvh;
   background: rgba(0, 0, 0, 0.4);
   user-select: none;
+  opacity: calc(1 - var(--drawer-swipe-progress, 0));
+  transition: opacity 450ms cubic-bezier(0.32, 0.72, 0, 1);
+}
+.fui-SheetOverlay[data-starting-style],
+.fui-SheetOverlay[data-ending-style] {
+  opacity: 0;
+}
+.fui-SheetOverlay[data-swiping] {
+  transition-duration: 0ms;
+}
+.fui-SheetOverlay[data-ending-style] {
+  pointer-events: none;
+  transition-duration: calc(var(--drawer-swipe-strength, 1) * 400ms);
+}
+
+.fui-SheetViewport {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
 }
 
 .fui-SheetContent {
@@ -10,10 +32,9 @@
   --inset-padding: var(--sheet-content-padding);
   --sheet-border-color: var(--gray-a3);
 
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  box-sizing: border-box;
+  position: relative;
+  width: 100%;
   max-height: calc(100% - 48px);
   display: flex;
   flex-direction: column;
@@ -23,20 +44,25 @@
   border: 1px solid var(--sheet-border-color);
   background-color: var(--color-panel-solid);
   user-select: none;
+  will-change: transform;
+  transform: translateY(var(--drawer-swipe-movement-y, 0px));
+  transition: transform 450ms cubic-bezier(0.32, 0.72, 0, 1);
+}
+.fui-SheetContent[data-starting-style],
+.fui-SheetContent[data-ending-style] {
+  transform: translateY(calc(100% + 1px));
+}
+.fui-SheetContent[data-swiping] {
+  transition-duration: 0ms;
+}
+.fui-SheetContent[data-ending-style] {
+  transition-duration: calc(var(--drawer-swipe-strength, 1) * 400ms);
 }
 
 .fui-SheetContent,
 .fui-SheetContent:focus,
 .fui-SheetContent:focus-visible {
   outline: none;
-}
-
-.fui-SheetContent[vaul-drawer][vaul-drawer-direction='bottom']::after {
-  border-left: 1px solid var(--sheet-border-color);
-  border-right: 1px solid var(--sheet-border-color);
-  left: -1px;
-  right: -1px;
-  user-select: none;
 }
 .fui-SheetBody {
   padding: var(--inset-padding);

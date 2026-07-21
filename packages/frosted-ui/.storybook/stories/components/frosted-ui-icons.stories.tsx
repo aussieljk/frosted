@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import * as Icons from '@frosted-ui/icons';
 import { MagnifyingGlass20, XCircleFilled16 } from '@frosted-ui/icons';

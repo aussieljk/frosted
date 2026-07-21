@@ -1,5 +1,5 @@
 import { Checkmark12, XMarkSmall12 } from '@frosted-ui/icons';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import * as React from 'react';
 import {

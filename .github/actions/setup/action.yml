@@ -1,0 +1,13 @@
+# Shared setup used by every workflow job: install Bun + workspace deps.
+# (Checkout must happen in the calling job before this action is available.)
+name: Setup
+description: Install Bun 1.3.11 and workspace dependencies
+
+runs:
+  using: composite
+  steps:
+    - uses: oven-sh/setup-bun@v2
+      with:
+        bun-version: 1.3.11
+    - run: bun install
+      shell: bash

@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import React from 'react';
 import { Avatar, Button, Card, Code, RadioButtonGroup, Text, Tooltip, radioGroupPropDefs } from '..';

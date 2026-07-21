@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import React, { useState } from 'react';
 import { Badge, StackedHorizontalBarChart, Text, TextField } from '../../../src/components';
 import { emojiColorMap, getColorForEmoji, type ColorScale } from '../../../src/helpers/emoji-colors';

@@ -75,7 +75,7 @@ export interface IDiffSummary {
 type Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
 
 interface ErrorResponse {
-  readonly err?: string;
+  readonly err?: string | null;
   readonly status?: 400 | 403 | 404 | 429 | 500;
 }
 export type IFigmaCanvas = Canvas;

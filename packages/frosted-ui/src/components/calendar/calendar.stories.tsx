@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { DateValue, getLocalTimeZone, isWeekend, parseDate, today } from '@internationalized/date';
 import { useLocale } from '@react-aria/i18n';

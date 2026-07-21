@@ -3,7 +3,7 @@ import isOnline from 'is-online';
 import * as _ from 'lodash';
 import { PropertyName } from 'lodash';
 import nodeFetch, { Response } from 'node-fetch';
-import SVGO from 'svgo';
+import { Config as SvgoConfig, PluginConfig as SvgoPluginConfig } from 'svgo';
 import { CodedError, ERRORS, GeneratorMode, RequestInitWithRetry } from './types';
 import { unmount } from './view';
 
@@ -90,11 +90,11 @@ export function pushObjLeafNodesToArr(obj: object, arr: string[], accessor: Prop
   });
 }
 
-const svgoCache: Partial<Record<GeneratorMode, SVGO>> = {};
-let pictogramRemergeSvgo: SVGO | null = null;
+const svgoCache: Partial<Record<GeneratorMode, SvgoConfig>> = {};
+let pictogramRemergeSvgo: SvgoConfig | null = null;
 
 /**
- * Returns an SVGO instance that runs ONLY the path-merging plugins. Used by
+ * Returns an SVGO config that runs ONLY the path-merging plugins. Used by
  * the pictograms switched-fallback branch in services.ts to re-merge adjacent
  * same-color paths after `analyzePictogramAlignment` has finished comparing
  * variants. We can't leave `mergePaths`/`collapseGroups` on in `getSvgo`
@@ -106,30 +106,19 @@ let pictogramRemergeSvgo: SVGO | null = null;
  */
 export function getPictogramRemergeSvgo() {
   if (pictogramRemergeSvgo) return pictogramRemergeSvgo;
-  // SVGO 1.x merges this plugins list with its DEFAULT plugin set rather than
-  // replacing it, so any default plugin we don't explicitly disable will still
-  // run. Two of those defaults are dangerous for us:
-  //   - `removeViewBox` strips `viewBox="0 0 240 240"` from the root SVG, which
-  //     breaks consumer scaling (renders paths at 240×240 inside whatever box
-  //     the consumer sizes the <svg> to, producing visually clipped/offset art).
-  //   - `convertPathData` rewrites `d` attributes — at best cosmetic, at worst
-  //     applies group transforms to coordinates differently than the first pass
-  //     did and shifts paths.
-  // We explicitly turn both off here, alongside other defaults that could
-  // surprise us, and only enable the few we actually want.
-  pictogramRemergeSvgo = new SVGO({
+  // In SVGO 4, an explicit `plugins` array REPLACES the default preset entirely,
+  // so only the plugins listed here run. That's exactly what we want: dangerous
+  // defaults like `removeViewBox` (strips `viewBox="0 0 240 240"` from the root
+  // SVG, breaking consumer scaling) and `convertPathData` (rewrites `d`
+  // attributes and can shift paths) simply never run because we don't list them.
+  pictogramRemergeSvgo = {
     plugins: [
-      { removeViewBox: false },
-      { convertPathData: false },
-      { cleanupNumericValues: false },
-      { convertTransform: false },
-      { sortAttrs: false },
-      { moveElemsAttrsToGroup: true },
-      { moveGroupAttrsToElems: true },
-      { collapseGroups: true },
-      { mergePaths: true },
+      'moveElemsAttrsToGroup',
+      'moveGroupAttrsToElems',
+      'collapseGroups',
+      'mergePaths',
     ],
-  });
+  };
   return pictogramRemergeSvgo;
 }
 
@@ -147,57 +136,49 @@ export function getSvgo(mode: GeneratorMode = 'icons') {
   // post-SVGO output preserves the original Figma topology 1:1 across
   // variants. They stay enabled for monochromatic icons where there's only
   // a single variant to reason about.
+  // In SVGO 4, an explicit `plugins` array REPLACES the default preset, so this
+  // list is exhaustive: anything not listed (notably `removeViewBox` and
+  // `convertPathData`, which we previously had to disable explicitly) does not run.
   const isPictograms = mode === 'pictograms';
-  svgoCache[mode] = new SVGO({
-    plugins: [
-      { removeDoctype: true },
-      { removeXMLProcInst: true },
-      { removeComments: true },
-      { removeMetadata: true },
-      { removeXMLNS: false },
-      { removeEditorsNSData: true },
-      { cleanupAttrs: true },
-      { minifyStyles: true },
-      { convertStyleToAttrs: true },
-      { cleanupIDs: true },
-      { removeRasterImages: false },
-      { removeUselessDefs: true },
-      { cleanupNumericValues: true },
-      { cleanupListOfValues: false },
-      { convertColors: true },
-      { removeUnknownsAndDefaults: true },
-      { removeNonInheritableGroupAttrs: true },
-      { removeUselessStrokeAndFill: true },
-      { removeViewBox: false },
-      { cleanupEnableBackground: true },
-      { removeHiddenElems: true },
-      { removeEmptyText: true },
-      { convertShapeToPath: true },
-      { moveElemsAttrsToGroup: !isPictograms },
-      { moveGroupAttrsToElems: !isPictograms },
-      { collapseGroups: !isPictograms },
-      { convertPathData: false },
-      { convertTransform: true },
-      { removeEmptyAttrs: true },
-      { removeEmptyContainers: true },
-      { mergePaths: !isPictograms },
-      { removeUnusedNS: true },
-      { sortAttrs: false },
-      { removeTitle: true },
-      { removeDesc: true },
-      { removeDimensions: false },
-      { removeStyleElement: false },
-      { removeScriptElement: false },
-      {
-        addAttributesToSVGElement: {
-          attributes: [
-            {
-              [dataAttr]: 'true',
-            },
-          ],
-        },
+  const plugins: SvgoPluginConfig[] = [
+    'removeDoctype',
+    'removeXMLProcInst',
+    'removeComments',
+    'removeMetadata',
+    'removeEditorsNSData',
+    'cleanupAttrs',
+    'minifyStyles',
+    'convertStyleToAttrs',
+    'cleanupIds',
+    'removeUselessDefs',
+    'cleanupNumericValues',
+    'convertColors',
+    'removeUnknownsAndDefaults',
+    'removeNonInheritableGroupAttrs',
+    'removeUselessStrokeAndFill',
+    'cleanupEnableBackground',
+    'removeHiddenElems',
+    'removeEmptyText',
+    'convertShapeToPath',
+    ...(isPictograms ? [] : (['moveElemsAttrsToGroup', 'moveGroupAttrsToElems', 'collapseGroups'] as SvgoPluginConfig[])),
+    'convertTransform',
+    'removeEmptyAttrs',
+    'removeEmptyContainers',
+    ...(isPictograms ? [] : (['mergePaths'] as SvgoPluginConfig[])),
+    'removeUnusedNS',
+    'removeTitle',
+    'removeDesc',
+    {
+      name: 'addAttributesToSVGElement',
+      params: {
+        attributes: [
+          {
+            [dataAttr]: 'true',
+          },
+        ],
       },
-    ],
-  });
+    },
+  ];
+  svgoCache[mode] = { plugins };
   return svgoCache[mode];
 }

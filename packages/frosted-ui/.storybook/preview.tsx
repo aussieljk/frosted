@@ -1,4 +1,4 @@
-import type { Decorator, Preview } from '@storybook/react';
+import type { Decorator, Preview } from '@storybook/react-vite';
 import React from 'react';
 import { Toaster } from '../src/components/toast';
 import { Theme } from '../src/theme';
@@ -32,29 +32,30 @@ export const withTheme: Decorator = (Story, context) => {
   );
 };
 
-export const globalTypes = {
-  theme: {
-    name: 'Theme',
-    description: 'Global theme for components',
-    defaultValue: 'light',
-    toolbar: {
-      // The icon for the toolbar item
-      icon: 'circlehollow',
-      // Array of options
-      items: [
-        { value: 'light', icon: 'circlehollow', title: 'light' },
-        { value: 'dark', icon: 'circle', title: 'dark' },
-      ],
-      // Property that specifies if the name of the item will be displayed
-      showName: true,
+const preview: Preview = {
+  decorators: [withTheme],
+
+  globalTypes: {
+    theme: {
+      name: 'Theme',
+      description: 'Global theme for components',
+      toolbar: {
+        // The icon for the toolbar item
+        icon: 'circlehollow',
+        // Array of options
+        items: [
+          { value: 'light', icon: 'circlehollow', title: 'light' },
+          { value: 'dark', icon: 'circle', title: 'dark' },
+        ],
+        // Property that specifies if the name of the item will be displayed
+        showName: true,
+      },
     },
   },
-};
 
-const decorators = [withTheme];
-
-const preview: Preview = {
-  decorators: decorators,
+  initialGlobals: {
+    theme: 'light',
+  },
 
   parameters: {
     actions: { argTypesRegex: '^on[A-Z].*' },

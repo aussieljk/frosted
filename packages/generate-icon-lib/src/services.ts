@@ -1,14 +1,15 @@
 import chalk from 'chalk';
-import cheerio from 'cheerio';
+import * as cheerio from 'cheerio';
 import * as ejs from 'ejs';
-import execa from 'execa';
+import { execa } from 'execa';
 import * as fs from 'fs-extra';
 import isOnline from 'is-online';
 import * as _ from 'lodash';
 import { Headers } from 'node-fetch';
 import * as path from 'path';
 import * as prettier from 'prettier';
-import * as tempy from 'tempy';
+import { optimize } from 'svgo';
+import { temporaryDirectory } from 'tempy';
 import {
   FILE_PATH_ENTRY,
   FILE_PATH_MANIFEST,
@@ -45,9 +46,8 @@ const transformers = {
    * Pass SVG through SVGO to reduce size.
    */
   async passSVGO(svgRaw: string, mode: GeneratorMode = 'icons') {
-    const svgo = getSvgo(mode);
-    const { data } = await svgo.optimize(svgRaw);
-    return data as string;
+    const { data } = optimize(svgRaw, getSvgo(mode));
+    return data;
   },
 
   /**
@@ -56,6 +56,7 @@ const transformers = {
   injectCurrentColor(svgRaw: string) {
     const $ = cheerio.load(svgRaw, { xmlMode: true });
     $('*').each((i, el) => {
+      if (!('attribs' in el)) return;
       Object.keys(el.attribs).forEach((attrKey) => {
         if (['fill', 'stroke'].includes(attrKey)) {
           const val = $(el).attr(attrKey);
@@ -69,14 +70,15 @@ const transformers = {
     return $.xml();
   },
 
-  prettify(svgRaw: string) {
-    const prettierOptions = prettier.resolveConfig.sync(process.cwd());
+  async prettify(svgRaw: string) {
+    const prettierOptions = await prettier.resolveConfig(process.cwd());
     return prettier.format(svgRaw, { ...prettierOptions, parser: 'html' });
   },
 
   readyForJSX(svgRaw: string) {
     const $ = cheerio.load(svgRaw, { xmlMode: true });
     $('*').each((i, el) => {
+      if (!('attribs' in el)) return;
       Object.keys(el.attribs).forEach((attrKey) => {
         if (attrKey.includes('-') && !attrKey.startsWith('data-')) {
           $(el)
@@ -131,9 +133,9 @@ const labelling = {
   },
 };
 
-const currentTempDir = tempy.directory();
+const currentTempDir = temporaryDirectory();
 
-const currentListOfAddedFiles = [];
+const currentListOfAddedFiles: string[] = [];
 
 /**
  * Returns the list of pathspecs (relative to repo root via FOLDER_PATH_ICONS) that
@@ -203,7 +205,7 @@ export function createFigmaConfig(fileKey: string): IFigmaConfig {
     baseUrl: 'https://api.figma.com',
     fileKey,
     headers: new Headers({
-      'X-Figma-Token': process.env.FIGMA_ACCESS_TOKEN,
+      'X-Figma-Token': process.env.FIGMA_ACCESS_TOKEN ?? '',
     }),
   };
 }
@@ -276,7 +278,7 @@ export async function renderIdsToSvgs(
       err: null,
       images: {},
     };
-    if (resp.headers.get('content-type').includes('application/json')) {
+    if (resp.headers.get('content-type')?.includes('application/json')) {
       data = (await resp.json()) as IFigmaFileImageResponse;
     }
     const error = typeof data.err === 'object' ? JSON.stringify(data.err, null, 2) : data.err;
@@ -710,7 +712,7 @@ export async function generateReactComponents(icons: IIcons, mode: GeneratorMode
     },
   };
 
-  const prettierOptions = prettier.resolveConfig.sync(process.cwd());
+  const prettierOptions = await prettier.resolveConfig(process.cwd());
   const componentsOutputDir =
     mode === 'pictograms' ? path.resolve(currentTempDir, FOLDER_NAME_PICTOGRAM_SRC) : path.resolve(currentTempDir, 'src');
   const entryFilePath = path.resolve(currentTempDir, mode === 'pictograms' ? FILE_PATH_PICTOGRAMS_ENTRY : FILE_PATH_ENTRY);
@@ -753,9 +755,8 @@ export async function generateReactComponents(icons: IIcons, mode: GeneratorMode
           // adjacent runs of constant-fill paths, which would render identically
           // anyway. Constant-fill elements aren't in the FILLS/STROKES lookup so
           // their disappearance doesn't break the index→color mapping.
-          const remergeSvgo = getPictogramRemergeSvgo();
-          const { data: remergedPlaceholderSvg } = await remergeSvgo.optimize(result.analysis.placeholderSvg);
-          const placeholderJsx = transformers.readyForJSX(remergedPlaceholderSvg as string);
+          const { data: remergedPlaceholderSvg } = optimize(result.analysis.placeholderSvg, getPictogramRemergeSvgo());
+          const placeholderJsx = transformers.readyForJSX(remergedPlaceholderSvg);
           const jsxBody = injectFillStrokeLookups(placeholderJsx);
           const fillsLiteral = serializeLookup(result.analysis.fillsByVariant);
           const strokesLiteral = serializeLookup(result.analysis.strokesByVariant);
@@ -800,11 +801,10 @@ export async function generateReactComponents(icons: IIcons, mode: GeneratorMode
           // already failed), we can safely run each variant SVG through a
           // `mergePaths`/`collapseGroups` pass to recover the size win that was
           // disabled in `getSvgo` for the analysis stage.
-          const remergeSvgo = getPictogramRemergeSvgo();
           const variantBodies: Record<string, string> = {};
           for (const variant of variantNames) {
-            const { data: remerged } = await remergeSvgo.optimize(svgsByVariant[variant]);
-            variantBodies[variant] = transformers.readyForJSX(remerged as string);
+            const { data: remerged } = optimize(svgsByVariant[variant], getPictogramRemergeSvgo());
+            variantBodies[variant] = transformers.readyForJSX(remerged);
           }
           console.warn(
             `[pictograms] ${icon.jsxName}: variants couldn't be merged (${result.reason}). ` +
@@ -826,7 +826,7 @@ export async function generateReactComponents(icons: IIcons, mode: GeneratorMode
         });
       }
 
-      const iconSource = prettier.format(iconSourceRaw, {
+      const iconSource = await prettier.format(iconSourceRaw, {
         ...prettierOptions,
         parser: 'typescript',
       });
@@ -862,7 +862,7 @@ sizes: ${sizeList}
     icons: iconsWithVariants,
     ...templateHelpers,
   });
-  const entrySource = prettier.format(entrySourceRaw, {
+  const entrySource = await prettier.format(entrySourceRaw, {
     ...prettierOptions,
     parser: 'typescript',
   });
@@ -893,8 +893,8 @@ export async function generateIconManifest(icons: IIcons, mode: GeneratorMode = 
   const iconManifestFilePath = path.resolve(currentTempDir, manifestPath);
   const iconManifest = iconsToManifest(icons, mode);
   let iconManifestRaw = JSON.stringify(iconManifest);
-  const prettierOptions = prettier.resolveConfig.sync(process.cwd());
-  iconManifestRaw = prettier.format(iconManifestRaw, {
+  const prettierOptions = await prettier.resolveConfig(process.cwd());
+  iconManifestRaw = await prettier.format(iconManifestRaw, {
     ...prettierOptions,
     parser: 'json',
   });
@@ -958,7 +958,7 @@ export async function swapGeneratedFiles(
   /* Copy our freshly-generated tree on top of whatever's left. */
   await fs.copy(currentTempDir, cwd);
 
-  return [].concat(topLevelDirs, FILE_PATH_MANIFEST);
+  return [...topLevelDirs, FILE_PATH_MANIFEST];
 }
 
 export async function getGitCustomDiff(touchedPaths: string[], mode: GeneratorMode = 'icons'): Promise<IDiffSummary[]> {

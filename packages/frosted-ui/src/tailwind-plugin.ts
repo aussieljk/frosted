@@ -1,6 +1,5 @@
 // Forked from https://github.com/needim/frosted-ui-themes-with-tailwind
-// @ts-expect-error -- TODO: fix this
-import plugin from 'tailwindcss/plugin';
+import plugin, { type PluginAPI } from 'tailwindcss/plugin';
 import { semanticColors, themeAccentColorsGrouped, themeGrayColorsGrouped } from './theme-options';
 
 export const accentColorNames: string[] = [];
@@ -42,11 +41,10 @@ export const getColorDefinitions = (color: string, alpha?: boolean) => {
   return colors;
 };
 
-export const frostedThemePlugin = plugin.withOptions(
+export const frostedThemePlugin: ReturnType<typeof plugin.withOptions> = plugin.withOptions(
   () => {
     // TODO: make sure font styles are in sync with Text and Heading style
-    // @ts-expect-error -- TODO: fix this
-    return ({ addBase }) => {
+    return ({ addBase }: PluginAPI) => {
       addBase({
         '*': {
           outlineColor: 'currentColor',

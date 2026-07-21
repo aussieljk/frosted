@@ -9,8 +9,10 @@
   --otp-focus-color: var(--color-focus-root);
 }
 
+/* Slots are real <input> elements (Base UI OTPField.Input) */
 .fui-OTPFieldSlot {
   position: relative;
+  box-sizing: border-box;
 
   display: flex;
   align-items: center;
@@ -19,11 +21,20 @@
   height: 40px;
   width: 40px;
 
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  border-style: solid;
+  border-width: 0;
   border-top-width: 1px;
   border-bottom-width: 1px;
   border-right-width: 1px;
 
+  font-family: inherit;
   font-size: 0.875rem;
+  color: inherit;
+  caret-color: var(--gray-a10);
+  outline: none;
   transition-property: outline;
   transition-duration: 0.2s;
   transition-timing-function: ease;
@@ -42,36 +53,9 @@
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
   }
-  &:where([data-otp-active='true']) {
+  &:where(:focus, [data-otp-active='true']) {
     outline: 2px solid var(--otp-focus-color);
     z-index: 1;
-  }
-}
-
-.fui-OTPFieldCaret {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.fui-OTPFieldCaret::before {
-  content: '';
-  height: 16px;
-  width: 1px;
-  border-radius: 1px;
-  background-color: var(--gray-a10);
-  animation: fui-otp-caret-blink 1.25s ease-out infinite;
-}
-@keyframes fui-otp-caret-blink {
-  0%,
-  70%,
-  100% {
-    opacity: 1;
-  }
-  20%,
-  50% {
-    opacity: 0;
   }
 }
 

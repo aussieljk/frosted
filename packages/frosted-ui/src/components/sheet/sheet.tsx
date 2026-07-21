@@ -1,37 +1,79 @@
 'use client';
 
-import * as React from 'react';
-import { Drawer as DrawerPrimitive } from 'vaul-base';
-
+import { Drawer as DrawerPrimitive } from '@base-ui/react/drawer';
 import classNames from 'classnames';
+import * as React from 'react';
 import { Theme } from '../../theme';
 import { Heading } from '../heading';
 import { Text, type TextProps } from '../text';
 
-type SheetRootProps = Omit<
-  React.ComponentProps<typeof DrawerPrimitive.Root>,
-  | 'direction'
-  // TODO: add support for snap points
-  | 'shouldScaleBackground'
-  | 'fadeFromIndex'
-  | 'snapPoints'
-  | 'activeSnapPoint'
->;
+type PrimitiveRootProps = React.ComponentProps<typeof DrawerPrimitive.Root>;
 
-const SheetRoot = ({ ...props }: SheetRootProps) => <DrawerPrimitive.Root {...props} />;
+/** Close reasons that count as a "dismissal" (blocked when `dismissible={false}`). */
+const DISMISS_REASONS = new Set(['escape-key', 'outside-press', 'swipe', 'focus-out', 'close-watcher']);
+
+interface SheetRootProps
+  extends Omit<
+    PrimitiveRootProps,
+    | 'onOpenChange'
+    | 'onOpenChangeComplete'
+    | 'disablePointerDismissal'
+    | 'handle'
+    | 'swipeDirection'
+    // TODO: add support for snap points
+    | 'snapPoints'
+    | 'snapToSequentialPoints'
+    | 'snapPoint'
+    | 'defaultSnapPoint'
+    | 'onSnapPointChange'
+  > {
+  onOpenChange?: (open: boolean) => void;
+  /**
+   * When `false`, swiping, clicking outside and pressing Escape will not close the sheet.
+   * @default true
+   */
+  dismissible?: boolean;
+  /** Fired after the open or close animation ends, with the sheet's `open` state. */
+  onAnimationEnd?: (open: boolean) => void;
+  /** Fired when the sheet closes. */
+  onClose?: () => void;
+  /**
+   * Legacy prop kept for API compatibility with the previous vaul-based implementation.
+   * The sheet content is now always focused when opened.
+   */
+  autoFocus?: boolean;
+}
+
+const SheetRoot = ({
+  dismissible = true,
+  onOpenChange,
+  onAnimationEnd,
+  onClose,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  autoFocus,
+  ...props
+}: SheetRootProps) => (
+  <DrawerPrimitive.Root
+    disablePointerDismissal={!dismissible}
+    onOpenChange={(open, eventDetails) => {
+      if (!dismissible && !open && DISMISS_REASONS.has(eventDetails.reason)) {
+        eventDetails.cancel();
+        return;
+      }
+      onOpenChange?.(open);
+      if (!open) onClose?.();
+    }}
+    onOpenChangeComplete={onAnimationEnd}
+    {...props}
+  />
+);
 SheetRoot.displayName = 'SheetRoot';
 
-type SheetNestedRootProps = Omit<
-  React.ComponentProps<typeof DrawerPrimitive.NestedRoot>,
-  | 'direction'
-  // TODO: add support for snap points
-  | 'shouldScaleBackground'
-  | 'fadeFromIndex'
-  | 'snapPoints'
-  | 'activeSnapPoint'
->;
+// With Base UI, nested sheets are created by simply nesting a Root inside a parent
+// sheet's content. `NestedRoot` is kept as an alias for API compatibility.
+type SheetNestedRootProps = SheetRootProps;
 
-const SheetNestedRoot = ({ ...props }: SheetNestedRootProps) => <DrawerPrimitive.NestedRoot {...props} />;
+const SheetNestedRoot = (props: SheetNestedRootProps) => <SheetRoot {...props} />;
 SheetNestedRoot.displayName = 'SheetNestedRoot';
 
 interface SheetTriggerProps extends Omit<React.ComponentProps<typeof DrawerPrimitive.Trigger>, 'render' | 'className'> {
@@ -52,15 +94,15 @@ SheetClose.displayName = 'SheetClose';
 
 const SheetPortal = DrawerPrimitive.Portal as React.ComponentType<{ children?: React.ReactNode }>;
 
-interface SheetOverlayProps extends React.ComponentProps<typeof DrawerPrimitive.Overlay> {}
+interface SheetOverlayProps extends React.ComponentProps<typeof DrawerPrimitive.Backdrop> {}
 
 const SheetOverlay = ({ className, ...props }: SheetOverlayProps) => (
-  <DrawerPrimitive.Overlay className={classNames('fui-SheetOverlay', className)} {...props} />
+  <DrawerPrimitive.Backdrop className={classNames('fui-SheetOverlay', className)} {...props} />
 );
 SheetOverlay.displayName = 'SheetOverlay';
 
 interface SheetContentProps
-  extends Omit<React.ComponentProps<typeof DrawerPrimitive.Content>, 'className' | 'render' | 'style'> {
+  extends Omit<React.ComponentProps<typeof DrawerPrimitive.Popup>, 'className' | 'render' | 'style'> {
   className?: string;
   style?: React.CSSProperties;
 }
@@ -76,15 +118,17 @@ const SheetContent = ({ className, children, ...props }: SheetContentProps) => {
     <SheetPortal>
       <>
         <Theme render={<SheetOverlay />} />
-        <Theme
-          render={<DrawerPrimitive.Content />}
-          className={classNames('fui-SheetContent', className)}
-          onKeyDownCapture={handleKeyDown}
-          {...props}
-        >
-          <div className="fui-SheetContentHandle" />
-          {children}
-        </Theme>
+        <DrawerPrimitive.Viewport className="fui-SheetViewport">
+          <Theme
+            render={<DrawerPrimitive.Popup />}
+            className={classNames('fui-SheetContent', className)}
+            onKeyDownCapture={handleKeyDown}
+            {...props}
+          >
+            <div className="fui-SheetContentHandle" />
+            {children}
+          </Theme>
+        </DrawerPrimitive.Viewport>
       </>
     </SheetPortal>
   );
