@@ -1,6 +1,12 @@
 // LAYOUT
 //------------------------------------------------------------------------------
+export * from './grid';
+export * from './h-stack';
 export * from './inset';
+export * from './overlay';
+export * from './spacer';
+export * from './v-stack';
+export * from './z-stack';
 
 // TYPOGRAPHY
 //------------------------------------------------------------------------------

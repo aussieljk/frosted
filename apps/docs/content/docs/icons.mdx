@@ -1,0 +1,82 @@
+---
+title: Icons
+description: Pluggable icon sets via adapter subpaths and IconProvider.
+icon: Shapes
+---
+
+Frosted UI ships icon **adapters** so your whole app can use one icon API while you pick the
+icon set: Phosphor, Lucide, Hugeicons, Heroicons, Tabler, or the original Frosted set.
+
+<Demo id="icons" />
+
+## Register an icon set globally
+
+Import the adapter for the set you want, once, at your app root. Each adapter lives on its own
+subpath so only the set you use ends up in your bundle:
+
+```tsx
+// pick ONE:
+import '@aussieljk/frosted/icons/lucide';
+import '@aussieljk/frosted/icons/phosphor';
+import '@aussieljk/frosted/icons/hugeicons';
+import '@aussieljk/frosted/icons/heroicons';
+import '@aussieljk/frosted/icons/tabler';
+import '@aussieljk/frosted/icons/frosted';
+```
+
+The underlying icon library is an optional peer dependency — install the one that matches your
+adapter (`lucide-react`, `@phosphor-icons/react`, `@hugeicons/react` +
+`@hugeicons/core-free-icons`, `@heroicons/react`, `@tabler/icons-react`, or
+`@frosted-ui/icons`).
+
+## Use icons
+
+Icons are consumed through the `Icons` namespace using **canonical names** that are normalized
+across sets — swapping Lucide for Phosphor is a one-line change of the adapter import, with no
+component changes:
+
+```tsx
+import { Button, Icons } from '@aussieljk/frosted';
+
+export function SearchButton() {
+  return (
+    <Button variant="surface">
+      <Icons.Search />
+      Search
+    </Button>
+  );
+}
+```
+
+Canonical names include `Search`, `Settings`, `Bell`, `Calendar`, `Check`, `Close`, `Copy`,
+`Download`, `Upload`, `Edit`, `Trash`, `Heart`, `Star`, `Home`, `Mail`, `Menu`, `Plus`,
+`Minus`, `User`, `Users`, `Warning`, arrow/chevron directions, and more — the full list is
+exported as `CANONICAL_ICON_NAMES`.
+
+## Scoped sets with `IconProvider`
+
+To use an icon set in just a subtree (it takes precedence over the global registration), pass
+the adapter object to `IconProvider`:
+
+```tsx
+import { IconProvider } from '@aussieljk/frosted';
+import { lucideAdapter } from '@aussieljk/frosted/icons/lucide';
+
+<IconProvider library={lucideAdapter}>
+  <Sidebar />
+</IconProvider>;
+```
+
+Every adapter subpath exports its adapter object: `lucideAdapter`, `phosphorAdapter`,
+`hugeiconsAdapter`, `heroiconsAdapter`, `tablerAdapter`, `frostedAdapter`.
+
+## Supported sets
+
+| Set       | Adapter subpath                      | Icon library                                    |
+| --------- | ------------------------------------ | ----------------------------------------------- |
+| Phosphor  | `@aussieljk/frosted/icons/phosphor`  | `@phosphor-icons/react`                         |
+| Lucide    | `@aussieljk/frosted/icons/lucide`    | `lucide-react`                                  |
+| Hugeicons | `@aussieljk/frosted/icons/hugeicons` | `@hugeicons/react` + `@hugeicons/core-free-icons` |
+| Heroicons | `@aussieljk/frosted/icons/heroicons` | `@heroicons/react`                              |
+| Tabler    | `@aussieljk/frosted/icons/tabler`    | `@tabler/icons-react`                           |
+| Frosted   | `@aussieljk/frosted/icons/frosted`   | `@frosted-ui/icons`                             |

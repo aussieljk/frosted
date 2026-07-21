@@ -38,6 +38,8 @@
     scrollbar-width: thin;
   }
   &::-webkit-scrollbar {
+    /* Native scrollbars are hidden globally (scrollbars.css); re-enable it here */
+    display: block;
     width: var(--space-3);
     height: var(--space-3);
   }

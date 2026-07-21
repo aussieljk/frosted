@@ -40,10 +40,11 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "../../packages/frosted-ui/src/tailwindPlugin.ts",
-    "tailwind.config.js",
+    "tailwind.config.ts",
     ".next/dev/types/**/*.ts"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "eslint.config.ts"
   ]
 }

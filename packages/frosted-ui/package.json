@@ -29,6 +29,76 @@
       "require": "./styles.lite.css",
       "default": "./styles.lite.css"
     },
+    "./icons": {
+      "import": {
+        "types": "./dist/icons/index.d.mts",
+        "default": "./dist/icons/index.mjs"
+      },
+      "require": {
+        "types": "./dist/icons/index.d.ts",
+        "default": "./dist/icons/index.js"
+      }
+    },
+    "./icons/frosted": {
+      "import": {
+        "types": "./dist/icons/adapters/frosted.d.mts",
+        "default": "./dist/icons/adapters/frosted.mjs"
+      },
+      "require": {
+        "types": "./dist/icons/adapters/frosted.d.ts",
+        "default": "./dist/icons/adapters/frosted.js"
+      }
+    },
+    "./icons/heroicons": {
+      "import": {
+        "types": "./dist/icons/adapters/heroicons.d.mts",
+        "default": "./dist/icons/adapters/heroicons.mjs"
+      },
+      "require": {
+        "types": "./dist/icons/adapters/heroicons.d.ts",
+        "default": "./dist/icons/adapters/heroicons.js"
+      }
+    },
+    "./icons/hugeicons": {
+      "import": {
+        "types": "./dist/icons/adapters/hugeicons.d.mts",
+        "default": "./dist/icons/adapters/hugeicons.mjs"
+      },
+      "require": {
+        "types": "./dist/icons/adapters/hugeicons.d.ts",
+        "default": "./dist/icons/adapters/hugeicons.js"
+      }
+    },
+    "./icons/lucide": {
+      "import": {
+        "types": "./dist/icons/adapters/lucide.d.mts",
+        "default": "./dist/icons/adapters/lucide.mjs"
+      },
+      "require": {
+        "types": "./dist/icons/adapters/lucide.d.ts",
+        "default": "./dist/icons/adapters/lucide.js"
+      }
+    },
+    "./icons/phosphor": {
+      "import": {
+        "types": "./dist/icons/adapters/phosphor.d.mts",
+        "default": "./dist/icons/adapters/phosphor.mjs"
+      },
+      "require": {
+        "types": "./dist/icons/adapters/phosphor.d.ts",
+        "default": "./dist/icons/adapters/phosphor.js"
+      }
+    },
+    "./icons/tabler": {
+      "import": {
+        "types": "./dist/icons/adapters/tabler.d.mts",
+        "default": "./dist/icons/adapters/tabler.mjs"
+      },
+      "require": {
+        "types": "./dist/icons/adapters/tabler.d.ts",
+        "default": "./dist/icons/adapters/tabler.js"
+      }
+    },
     "./*": {
       "import": {
         "types": "./dist/*.d.mts",
@@ -40,7 +110,9 @@
       }
     }
   },
-  "sideEffects": false,
+  "sideEffects": [
+    "./dist/icons/adapters/*"
+  ],
   "license": "MIT",
   "files": [
     "dist/**",
@@ -49,8 +121,8 @@
   ],
   "scripts": {
     "build": "bun run build:js && bun run build:css",
-    "build:js": "tsdown --config tsdown.config.mts && node scripts/fix-namespace-exports.mjs",
-    "build:css": "postcss src/styles/index.css -o styles.css && node scripts/build-lite-css.js src/styles/index.css -o styles.lite.css",
+    "build:js": "tsdown --config tsdown.config.mts && bun scripts/fix-namespace-exports.ts",
+    "build:css": "postcss src/styles/index.css -o styles.css && bun scripts/build-lite-css.ts src/styles/index.css -o styles.lite.css",
     "dev": "bun run dev:js & bun run dev:css",
     "dev:js": "tsdown --watch",
     "dev:css": "postcss src/styles/index.css -o styles.css --watch",
@@ -60,6 +132,7 @@
     "lint:js": "eslint \"src/**/*.ts*\"",
     "lint:css": "stylelint \"src/**/*.css\"",
     "generate:emoji-colors": "tsx scripts/emoji-colors/generate.ts",
+    "generate:tailwind-colors": "bun scripts/generate-tailwind-colors.ts",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist && rm -rf styles.css && rm -rf styles.lite.css",
     "prepublishOnly": "bun run lint && bun run build",
     "storybook": "bun run dev:css & storybook dev -p 6006",
@@ -83,12 +156,40 @@
     "tslib": "^2.8.1"
   },
   "peerDependencies": {
+    "@frosted-ui/icons": "*",
+    "@heroicons/react": "^2.0.0",
+    "@hugeicons/core-free-icons": ">=1.0.0",
+    "@hugeicons/react": ">=1.0.0",
+    "@phosphor-icons/react": "^2.0.0",
+    "@tabler/icons-react": ">=2.0.0",
     "@types/react": "*",
     "@types/react-dom": "*",
-    "react": "^16.8 || ^17.0 || ^18.0 || ^19.0",
-    "react-dom": "^16.8 || ^17.0 || ^18.0 || ^19.0"
+    "lucide-react": ">=0.300.0",
+    "react": "^17.0 || ^18.0 || ^19.0",
+    "react-dom": "^17.0 || ^18.0 || ^19.0"
   },
   "peerDependenciesMeta": {
+    "@frosted-ui/icons": {
+      "optional": true
+    },
+    "@heroicons/react": {
+      "optional": true
+    },
+    "@hugeicons/core-free-icons": {
+      "optional": true
+    },
+    "@hugeicons/react": {
+      "optional": true
+    },
+    "@phosphor-icons/react": {
+      "optional": true
+    },
+    "@tabler/icons-react": {
+      "optional": true
+    },
+    "lucide-react": {
+      "optional": true
+    },
     "@types/react": {
       "optional": true
     },
@@ -99,11 +200,16 @@
   "devDependencies": {
     "@frosted-ui/colors": "workspace:*",
     "@frosted-ui/icons": "workspace:*",
+    "@heroicons/react": "^2.2.0",
+    "@hugeicons/core-free-icons": "^4.2.3",
+    "@hugeicons/react": "^1.1.9",
     "@napi-rs/canvas": "^1.0.2",
+    "@phosphor-icons/react": "^2.1.10",
     "@storybook/addon-docs": "^10.5.3",
     "@storybook/addon-links": "^10.5.3",
     "@storybook/react": "^10.5.3",
     "@storybook/react-vite": "^10.5.3",
+    "@tabler/icons-react": "^3.45.0",
     "@tanstack/react-form": "^1.33.2",
     "@tanstack/react-table": "^8.21.3",
     "@testing-library/jest-dom": "^7.0.0",
@@ -120,6 +226,7 @@
     "eslint-config-custom": "workspace:*",
     "eslint-plugin-react-hooks": "^7.1.1",
     "jsdom": "^29.1.1",
+    "lucide-react": "^1.25.0",
     "node-vibrant": "^4.0.4",
     "postcss": "^8.5.21",
     "postcss-cli": "^11.0.1",

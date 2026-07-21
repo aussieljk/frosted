@@ -1,0 +1,37 @@
+---
+title: Text Field
+description: A single-line text input, with optional leading/trailing slots.
+---
+
+<Demo id="text-field" />
+
+## Usage
+
+```tsx
+import { TextField } from '@aussieljk/frosted';
+
+<TextField.Root>
+  <TextField.Slot>
+    <SearchIcon />
+  </TextField.Slot>
+  <TextField.Input placeholder="Search the docs…" />
+</TextField.Root>;
+```
+
+## Parts
+
+| Part              | Purpose                                                     |
+| ----------------- | ----------------------------------------------------------- |
+| `TextField.Root`  | Container — `size`, `variant`, `color`                      |
+| `TextField.Input` | The native input                                            |
+| `TextField.Slot`  | Decorations (icons, buttons) before or after the input      |
+
+## Root props
+
+| Prop      | Type                              | Default     |
+| --------- | --------------------------------- | ----------- |
+| `size`    | `'1' \| '2' \| '3' \| '4'`        | `'2'`       |
+| `variant` | `'surface' \| 'soft'`             | `'surface'` |
+| `color`   | theme accent color name           | `'gray'`    |
+
+Related: `TextArea` for multi-line input, `NumberField`, `OTPField`, and `Autocomplete`.

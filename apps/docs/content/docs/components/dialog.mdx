@@ -1,0 +1,41 @@
+---
+title: Dialog
+description: A modal window overlaid on the page.
+---
+
+<Demo id="dialog" />
+
+## Usage
+
+```tsx
+import { Button, Dialog } from '@aussieljk/frosted';
+
+<Dialog.Root>
+  <Dialog.Trigger nativeButton>
+    <Button>Open</Button>
+  </Dialog.Trigger>
+  <Dialog.Content style={{ maxWidth: 450 }}>
+    <Dialog.Title>Title</Dialog.Title>
+    <Dialog.Description>Description text.</Dialog.Description>
+    <Dialog.Close>
+      <Button variant="soft" color="gray">
+        Close
+      </Button>
+    </Dialog.Close>
+  </Dialog.Content>
+</Dialog.Root>;
+```
+
+## Parts
+
+| Part                 | Purpose                                                     |
+| -------------------- | ----------------------------------------------------------- |
+| `Dialog.Root`        | State container — `open`, `defaultOpen`, `onOpenChange`     |
+| `Dialog.Trigger`     | Opens the dialog; wraps your own element (`nativeButton` when the child is a button) |
+| `Dialog.Content`     | The modal panel — `size`, `align`                           |
+| `Dialog.Title`       | Accessible title                                            |
+| `Dialog.Description` | Accessible description                                      |
+| `Dialog.Close`       | Closes the dialog; wraps your own element                   |
+
+Related: `AlertDialog` for confirmations that interrupt the user, `Sheet` and `Drawer` for
+edge-anchored panels.

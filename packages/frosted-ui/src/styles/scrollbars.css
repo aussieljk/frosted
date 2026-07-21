@@ -1,20 +1,40 @@
+/*
+ * Native scrollbars are hidden by default everywhere (scrolling still works).
+ * Opt in to a visible scrollbar by adding `.fui-scrollbar-thin` to the scrolling
+ * element: an ultra-thin (4px), rounded, subtle thumb using the theme grays.
+ */
+
+* {
+  scrollbar-width: none;
+}
+
 *::-webkit-scrollbar {
+  display: none;
+}
+
+.fui-scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: var(--gray-a8) transparent;
+}
+
+.fui-scrollbar-thin::-webkit-scrollbar {
+  display: block;
   width: var(--space-1);
   height: var(--space-1);
 }
-*::-webkit-scrollbar-track {
-  background-color: var(--gray-a3);
+
+.fui-scrollbar-thin::-webkit-scrollbar-track,
+.fui-scrollbar-thin::-webkit-scrollbar-corner {
+  background-color: transparent;
 }
 
-*::-webkit-scrollbar-corner {
-  background-color: var(--gray-a3);
-}
-*::-webkit-scrollbar-thumb {
+.fui-scrollbar-thin::-webkit-scrollbar-thumb {
   border-radius: var(--space-1);
   background-color: var(--gray-a8);
 }
+
 @media (hover: hover) {
-  :hover::-webkit-scrollbar-thumb:hover {
+  .fui-scrollbar-thin::-webkit-scrollbar-thumb:hover {
     background-color: var(--gray-a9);
   }
 }

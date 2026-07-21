@@ -1,0 +1,73 @@
+---
+title: Getting Started
+description: Install and set up the Frosted UI design system.
+icon: Rocket
+---
+
+Frosted UI (`@aussieljk/frosted`) is a React design system — a fork of
+[whopio/frosted-ui](https://github.com/whopio/frosted-ui) — with a themeable component library,
+SwiftUI-style layout primitives, and pluggable icon sets.
+
+## Installation
+
+Install the package:
+
+```bash
+bun add @aussieljk/frosted
+```
+
+React 16.8+ (up to React 19) is supported as a peer dependency.
+
+## Set up styles
+
+Import the stylesheet once, at the root of your app:
+
+```tsx
+import '@aussieljk/frosted/styles.css';
+```
+
+A lighter bundle without some optional component styles is also available as
+`@aussieljk/frosted/styles.lite.css`.
+
+## Wrap your app in `Theme`
+
+All components must render inside a `Theme`, which provides the design tokens
+(colors, radii, typography):
+
+```tsx
+import { Theme } from '@aussieljk/frosted';
+
+export function App({ children }: { children: React.ReactNode }) {
+  return (
+    <Theme accentColor="blue" grayColor="gray" appearance="inherit">
+      {children}
+    </Theme>
+  );
+}
+```
+
+- `appearance="inherit"` follows a `light`/`dark` class on a parent element (e.g. set by your
+  theme switcher). You can also force `appearance="light"` or `appearance="dark"`.
+- See [Theming](/docs/theming) for accent colors, custom palettes, fonts, and more.
+
+## Use components
+
+```tsx
+import { Button, Card, Text } from '@aussieljk/frosted';
+
+export function Example() {
+  return (
+    <Card size="2">
+      <Text size="2">Ready to go.</Text>
+      <Button variant="classic">Get started</Button>
+    </Card>
+  );
+}
+```
+
+<Cards>
+  <Card title="Theming" href="/docs/theming" description="Accent colors, palettes, fonts and scrollbars" />
+  <Card title="Layout" href="/docs/layout" description="HStack, VStack, ZStack, Grid, Spacer, Overlay" />
+  <Card title="Icons" href="/docs/icons" description="Pluggable icon sets via adapter subpaths" />
+  <Card title="Components" href="/docs/components/button" description="Buttons, dialogs, forms and more" />
+</Cards>

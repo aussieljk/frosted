@@ -1,0 +1,73 @@
+.fui-Grid {
+  display: grid;
+  /* Default cell spacing, akin to SwiftUI's platform-default grid spacing. */
+  gap: 8px;
+  --grid-justify-items: center;
+  --grid-align-items: center;
+  justify-items: var(--grid-justify-items);
+  align-items: var(--grid-align-items);
+
+  /* Direct children (rows, and views that are not rows) span every column, like SwiftUI. */
+  & > :where(*) {
+    grid-column: 1 / -1;
+  }
+
+  &:where(.fui-r-alignment-leading) {
+    --grid-justify-items: start;
+  }
+  &:where(.fui-r-alignment-trailing) {
+    --grid-justify-items: end;
+  }
+  &:where(.fui-r-alignment-top) {
+    --grid-align-items: start;
+  }
+  &:where(.fui-r-alignment-bottom) {
+    --grid-align-items: end;
+  }
+  &:where(.fui-r-alignment-topLeading) {
+    --grid-justify-items: start;
+    --grid-align-items: start;
+  }
+  &:where(.fui-r-alignment-topTrailing) {
+    --grid-justify-items: end;
+    --grid-align-items: start;
+  }
+  &:where(.fui-r-alignment-bottomLeading) {
+    --grid-justify-items: start;
+    --grid-align-items: end;
+  }
+  &:where(.fui-r-alignment-bottomTrailing) {
+    --grid-justify-items: end;
+    --grid-align-items: end;
+  }
+  &:where(.fui-r-alignment-centerFirstTextBaseline) {
+    --grid-align-items: first baseline;
+  }
+  &:where(.fui-r-alignment-centerLastTextBaseline) {
+    --grid-align-items: last baseline;
+  }
+  &:where(.fui-r-alignment-leadingFirstTextBaseline) {
+    --grid-justify-items: start;
+    --grid-align-items: first baseline;
+  }
+  &:where(.fui-r-alignment-leadingLastTextBaseline) {
+    --grid-justify-items: start;
+    --grid-align-items: last baseline;
+  }
+  &:where(.fui-r-alignment-trailingFirstTextBaseline) {
+    --grid-justify-items: end;
+    --grid-align-items: first baseline;
+  }
+  &:where(.fui-r-alignment-trailingLastTextBaseline) {
+    --grid-justify-items: end;
+    --grid-align-items: last baseline;
+  }
+}
+
+.fui-GridRow {
+  /* Each row lays its cells out on the parent Grid's shared column tracks. */
+  display: grid;
+  grid-template-columns: subgrid;
+  justify-items: var(--grid-justify-items, center);
+  align-items: var(--grid-align-items, center);
+}

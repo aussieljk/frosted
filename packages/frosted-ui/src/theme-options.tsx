@@ -11,12 +11,18 @@ import {
   radixGrayScales,
   radixGrayScalesDesaturated,
 } from './helpers/radix-colors';
+import {
+  isTailwindColorScale,
+  tailwindColorScales,
+  tailwindGetMatchingGrayScale,
+  tailwindGrayScales,
+} from './helpers/tailwind-colors';
 
 const colorPanelElevationColors = ['color-panel-elevation'] as const;
 const semanticColors = ['danger', 'warning', 'success', 'info'] as const;
 const appearances = ['inherit', 'light', 'dark'] as const;
-const accentColors = [...radixColorScales, 'gray'] as const;
-const grayColors = [...radixGrayScales, 'auto'] as const;
+const accentColors = [...radixColorScales, 'gray', ...tailwindColorScales] as const;
+const grayColors = [...radixGrayScales, ...tailwindGrayScales, 'auto'] as const;
 const dangerColors = ['tomato', 'red', 'ruby'] as const;
 const warningColors = ['yellow', 'amber'] as const;
 const successColors = ['teal', 'jade', 'green', 'grass'] as const;
@@ -73,6 +79,7 @@ const themeAccentColorsGrouped = [
   },
   { label: 'Metals', values: [...radixColorScalesMetal] as ThemeAccentColor[] },
   { label: 'Gray', values: ['gray'] as ThemeAccentColor[] },
+  { label: 'Tailwind', values: [...tailwindColorScales] as ThemeAccentColor[] },
 ];
 
 const themeAccentColorsOrdered = [
@@ -105,6 +112,8 @@ const themeAccentColorsOrdered = [
   'magenta',
   'lemon',
   'lime',
+  // Tailwind CSS v4 palettes
+  ...tailwindColorScales,
 ] as ThemeAccentColor[];
 
 const themeGrayColorsGrouped = [
@@ -113,10 +122,14 @@ const themeGrayColorsGrouped = [
     label: 'Desaturated',
     values: ['auto', ...radixGrayScalesDesaturated] as ThemeGrayColor[],
   },
+  { label: 'Tailwind', values: [...tailwindGrayScales] as ThemeGrayColor[] },
 ];
 
-function getMatchingGrayColor(accentColor: ThemeAccentColor): (typeof radixGrayScales)[number] {
+function getMatchingGrayColor(
+  accentColor: ThemeAccentColor,
+): (typeof radixGrayScales)[number] | (typeof tailwindGrayScales)[number] {
   if (accentColor === 'gray') return 'gray';
+  if (isTailwindColorScale(accentColor)) return tailwindGetMatchingGrayScale(accentColor);
   return radixGetMatchingGrayScale(accentColor);
 }
 

@@ -1,0 +1,22 @@
+.fui-HStack {
+  display: flex;
+  flex-direction: row;
+  /* Default spacing, akin to SwiftUI's platform-default stack spacing. */
+  gap: 8px;
+
+  &:where(.fui-r-alignment-top) {
+    align-items: flex-start;
+  }
+  &:where(.fui-r-alignment-center) {
+    align-items: center;
+  }
+  &:where(.fui-r-alignment-bottom) {
+    align-items: flex-end;
+  }
+  &:where(.fui-r-alignment-firstTextBaseline) {
+    align-items: first baseline;
+  }
+  &:where(.fui-r-alignment-lastTextBaseline) {
+    align-items: last baseline;
+  }
+}

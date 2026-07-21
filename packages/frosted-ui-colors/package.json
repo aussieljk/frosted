@@ -9,7 +9,7 @@
   "types": "./index.d.ts",
   "scripts": {
     "build": "bun run clean && tsdown && bun run build-css-modules",
-    "build-css-modules": "node ./scripts/build-css-modules.js",
+    "build-css-modules": "bun ./scripts/build-css-modules.ts",
     "clean": "rm -f *.css index.js index.mjs",
     "typecheck": "tsc --noEmit"
   },

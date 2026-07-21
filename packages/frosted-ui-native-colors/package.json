@@ -8,7 +8,7 @@
   "types": "types/index.d.ts",
   "scripts": {
     "build": "bun run clean && bun run generate-colors && cd ./colors && zip -r ../frosted-ui-swift-colors.zip ./",
-    "generate-colors": "node ./scripts/generate-colors.js",
+    "generate-colors": "bun ./scripts/generate-colors.ts",
     "prepublishOnly": "bun run build",
     "postpublish": "bun run clean",
     "clean": "rimraf colors"

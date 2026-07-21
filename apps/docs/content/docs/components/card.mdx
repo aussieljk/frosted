@@ -1,0 +1,25 @@
+---
+title: Card
+description: A container that groups related content.
+---
+
+<Demo id="card" />
+
+## Usage
+
+```tsx
+import { Card, Text } from '@aussieljk/frosted';
+
+<Card size="2" variant="surface">
+  <Text size="2">Card content</Text>
+</Card>;
+```
+
+## Props
+
+Card extends the native `div` element.
+
+| Prop      | Type                                        | Default     |
+| --------- | ------------------------------------------- | ----------- |
+| `size`    | `'1' \| '2' \| '3' \| '4' \| '5'`           | `'1'`       |
+| `variant` | `'surface' \| 'outline' \| 'ghost' \| 'soft'` | `'surface'` |

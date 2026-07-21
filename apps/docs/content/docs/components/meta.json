@@ -1,0 +1,16 @@
+{
+  "title": "Components",
+  "pages": [
+    "button",
+    "badge",
+    "avatar",
+    "card",
+    "checkbox",
+    "switch",
+    "select",
+    "tabs",
+    "dialog",
+    "tooltip",
+    "text-field"
+  ]
+}

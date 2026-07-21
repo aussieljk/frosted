@@ -1,0 +1,70 @@
+.fui-ZStack {
+  display: grid;
+
+  /* Stack every child in the same cell so they overlap, back to front. */
+  & > :where(*) {
+    grid-row: 1;
+    grid-column: 1;
+  }
+
+  &:where(.fui-r-alignment-center) {
+    justify-items: center;
+    align-items: center;
+  }
+  &:where(.fui-r-alignment-leading) {
+    justify-items: start;
+    align-items: center;
+  }
+  &:where(.fui-r-alignment-trailing) {
+    justify-items: end;
+    align-items: center;
+  }
+  &:where(.fui-r-alignment-top) {
+    justify-items: center;
+    align-items: start;
+  }
+  &:where(.fui-r-alignment-bottom) {
+    justify-items: center;
+    align-items: end;
+  }
+  &:where(.fui-r-alignment-topLeading) {
+    justify-items: start;
+    align-items: start;
+  }
+  &:where(.fui-r-alignment-topTrailing) {
+    justify-items: end;
+    align-items: start;
+  }
+  &:where(.fui-r-alignment-bottomLeading) {
+    justify-items: start;
+    align-items: end;
+  }
+  &:where(.fui-r-alignment-bottomTrailing) {
+    justify-items: end;
+    align-items: end;
+  }
+  &:where(.fui-r-alignment-centerFirstTextBaseline) {
+    justify-items: center;
+    align-items: first baseline;
+  }
+  &:where(.fui-r-alignment-centerLastTextBaseline) {
+    justify-items: center;
+    align-items: last baseline;
+  }
+  &:where(.fui-r-alignment-leadingFirstTextBaseline) {
+    justify-items: start;
+    align-items: first baseline;
+  }
+  &:where(.fui-r-alignment-leadingLastTextBaseline) {
+    justify-items: start;
+    align-items: last baseline;
+  }
+  &:where(.fui-r-alignment-trailingFirstTextBaseline) {
+    justify-items: end;
+    align-items: first baseline;
+  }
+  &:where(.fui-r-alignment-trailingLastTextBaseline) {
+    justify-items: end;
+    align-items: last baseline;
+  }
+}

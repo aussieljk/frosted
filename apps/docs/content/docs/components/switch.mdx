@@ -1,0 +1,25 @@
+---
+title: Switch
+description: A toggle for on/off state.
+---
+
+<Demo id="switch" />
+
+## Usage
+
+```tsx
+import { Switch } from '@aussieljk/frosted';
+
+<Switch defaultChecked color="orange" />;
+```
+
+Supports controlled usage via `checked` / `onCheckedChange`, plus `defaultChecked` and
+`disabled`.
+
+## Props
+
+| Prop           | Type                    | Default |
+| -------------- | ----------------------- | ------- |
+| `size`         | `'1' \| '2' \| '3'`     | `'2'`   |
+| `color`        | theme accent color name | theme accent |
+| `highContrast` | `boolean`               | `false` |

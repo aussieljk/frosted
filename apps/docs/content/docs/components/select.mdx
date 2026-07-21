@@ -1,0 +1,39 @@
+---
+title: Select
+description: A dropdown for picking a value from a list.
+---
+
+<Demo id="select" />
+
+## Usage
+
+Select is a compound component:
+
+```tsx
+import { Select } from '@aussieljk/frosted';
+
+<Select.Root defaultValue="apple" size="2">
+  <Select.Trigger />
+  <Select.Content>
+    <Select.Group>
+      <Select.GroupLabel>Fruits</Select.GroupLabel>
+      <Select.Item value="apple">Apple</Select.Item>
+      <Select.Item value="orange">Orange</Select.Item>
+    </Select.Group>
+    <Select.Separator />
+    <Select.Item value="carrot">Carrot</Select.Item>
+  </Select.Content>
+</Select.Root>;
+```
+
+## Parts
+
+| Part                | Purpose                                                    |
+| ------------------- | ---------------------------------------------------------- |
+| `Select.Root`       | State container — `value`, `defaultValue`, `size`, `disabled` |
+| `Select.Trigger`    | The button that opens the menu — `variant`, `color`, `placeholder` |
+| `Select.Content`    | The popup listbox                                          |
+| `Select.Group`      | Groups items                                               |
+| `Select.GroupLabel` | Label for a group                                          |
+| `Select.Item`       | A selectable option — `value`, `disabled`                  |
+| `Select.Separator`  | Visual divider                                             |

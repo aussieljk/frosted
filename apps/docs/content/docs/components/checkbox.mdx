@@ -1,0 +1,27 @@
+---
+title: Checkbox
+description: A control for selecting one or more options.
+---
+
+<Demo id="checkbox" />
+
+## Usage
+
+```tsx
+import { Checkbox, Text } from '@aussieljk/frosted';
+
+<Text render={<label />} size="2">
+  <Checkbox defaultChecked /> Agree to terms
+</Text>;
+```
+
+Supports controlled usage via `checked` / `onCheckedChange`, plus `defaultChecked` and
+`disabled`.
+
+## Props
+
+| Prop           | Type                    | Default |
+| -------------- | ----------------------- | ------- |
+| `size`         | `'1' \| '2' \| '3'`     | `'2'`   |
+| `color`        | theme accent color name | theme accent |
+| `highContrast` | `boolean`               | `false` |

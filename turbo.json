@@ -43,6 +43,21 @@
         "src/**"
       ]
     },
+    "docs#build": {
+      "dependsOn": [
+        "^build"
+      ],
+      "outputs": [
+        ".output/**",
+        "dist/**"
+      ],
+      "inputs": [
+        "src/**",
+        "content/**",
+        "source.config.ts",
+        "vite.config.ts"
+      ]
+    },
     "@aussieljk/frosted#build-storybook": {
       "dependsOn": [
         "@frosted-ui/icons#build",

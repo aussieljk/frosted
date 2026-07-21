@@ -4,3 +4,5 @@ export * from './tailwind-plugin';
 export { Theme, updateThemeAppearanceClass, useThemeContext } from './theme';
 export * from './theme-options';
 export { ThemePanel } from './theme-panel';
+export { IconProvider, Icons, registerIconAdapter } from './icons/registry';
+export type { CanonicalIconName, IconAdapter } from './icons/types';

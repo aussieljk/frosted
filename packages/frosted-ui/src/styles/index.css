@@ -4,6 +4,7 @@
 @import './scrollbars.css';
 
 @import './tokens/color.css';
+@import './tokens/tailwind-color.css';
 @import './tokens/semantic-color.css';
 @import './tokens/cursor.css';
 @import './tokens/radius.css';
@@ -91,6 +92,14 @@ because Autocomplete overrides base-menu content transitions.
 @import './utilities/leading-trim.css';
 @import './utilities/text-align.css';
 @import './utilities/vertical-align.css';
+
+/* SwiftUI-style layout */
+@import '../components/grid/grid.css';
+@import '../components/h-stack/h-stack.css';
+@import '../components/overlay/overlay.css';
+@import '../components/spacer/spacer.css';
+@import '../components/v-stack/v-stack.css';
+@import '../components/z-stack/z-stack.css';
 
 @import '../theme-panel.css';
 

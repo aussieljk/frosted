@@ -1,0 +1,16 @@
+.fui-VStack {
+  display: flex;
+  flex-direction: column;
+  /* Default spacing, akin to SwiftUI's platform-default stack spacing. */
+  gap: 8px;
+
+  &:where(.fui-r-alignment-leading) {
+    align-items: flex-start;
+  }
+  &:where(.fui-r-alignment-center) {
+    align-items: center;
+  }
+  &:where(.fui-r-alignment-trailing) {
+    align-items: flex-end;
+  }
+}

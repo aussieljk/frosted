@@ -1,0 +1,38 @@
+---
+title: Button
+description: Trigger an action or event.
+---
+
+<Demo id="button" />
+
+## Usage
+
+```tsx
+import { Button } from '@aussieljk/frosted';
+
+<Button variant="classic" size="2">
+  Get started
+</Button>;
+```
+
+## Props
+
+Button extends the native `button` element.
+
+| Prop           | Type                                                     | Default     |
+| -------------- | -------------------------------------------------------- | ----------- |
+| `size`         | `'1' \| '2' \| '3' \| '4'`                               | `'2'`       |
+| `variant`      | `'classic' \| 'solid' \| 'soft' \| 'surface' \| 'ghost'` | `'surface'` |
+| `color`        | theme accent color name                                  | theme accent |
+| `highContrast` | `boolean`                                                | `false`     |
+
+See also [IconButton](/docs/components/button#iconbutton) for square, icon-only buttons — it
+shares the same sizes, variants, and colors:
+
+```tsx
+import { IconButton } from '@aussieljk/frosted';
+
+<IconButton variant="soft" aria-label="Search">
+  <SearchIcon />
+</IconButton>;
+```

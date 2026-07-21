@@ -1,0 +1,6 @@
+.fui-Spacer {
+  /* Expands along the main axis of an HStack/VStack, pushing siblings apart. */
+  flex-grow: 1;
+  flex-shrink: 0;
+  align-self: stretch;
+}

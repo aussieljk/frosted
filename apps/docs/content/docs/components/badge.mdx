@@ -1,0 +1,25 @@
+---
+title: Badge
+description: A stylized label for statuses and counts.
+---
+
+<Demo id="badge" />
+
+## Usage
+
+```tsx
+import { Badge } from '@aussieljk/frosted';
+
+<Badge color="green" variant="soft">
+  Active
+</Badge>;
+```
+
+## Props
+
+| Prop           | Type                                          | Default  |
+| -------------- | --------------------------------------------- | -------- |
+| `size`         | `'1' \| '2'`                                  | `'1'`    |
+| `variant`      | `'solid' \| 'soft' \| 'surface' \| 'outline'` | `'soft'` |
+| `color`        | theme accent color name                       | theme accent |
+| `highContrast` | `boolean`                                     | `false`  |

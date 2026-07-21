@@ -1,0 +1,29 @@
+---
+title: Avatar
+description: A profile image with an automatic fallback.
+---
+
+<Demo id="avatar" />
+
+## Usage
+
+```tsx
+import { Avatar } from '@aussieljk/frosted';
+
+<Avatar size="4" src="https://example.com/me.jpg" fallback="LK" />;
+```
+
+The `fallback` (required) renders while the image loads or when `src` is missing/broken.
+
+## Props
+
+| Prop           | Type                                | Default    |
+| -------------- | ----------------------------------- | ---------- |
+| `size`         | `'0'`–`'9'`                         | `'3'`      |
+| `shape`        | `'circle' \| 'square'`              | `'circle'` |
+| `fallback`     | `ReactNode` (required)              | —          |
+| `src`          | `string`                            | —          |
+| `color`        | theme accent color name             | theme accent |
+| `highContrast` | `boolean`                           | `false`    |
+
+Related: `AvatarGroup` and `AvatarStack` for overlapping collections of avatars.

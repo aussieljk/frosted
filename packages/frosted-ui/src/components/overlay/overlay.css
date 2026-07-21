@@ -1,0 +1,70 @@
+.fui-Overlay {
+  position: relative;
+  --overlay-justify: center;
+  --overlay-align: center;
+
+  &:where(.fui-r-alignment-leading) {
+    --overlay-justify: flex-start;
+  }
+  &:where(.fui-r-alignment-trailing) {
+    --overlay-justify: flex-end;
+  }
+  &:where(.fui-r-alignment-top) {
+    --overlay-align: flex-start;
+  }
+  &:where(.fui-r-alignment-bottom) {
+    --overlay-align: flex-end;
+  }
+  &:where(.fui-r-alignment-topLeading) {
+    --overlay-justify: flex-start;
+    --overlay-align: flex-start;
+  }
+  &:where(.fui-r-alignment-topTrailing) {
+    --overlay-justify: flex-end;
+    --overlay-align: flex-start;
+  }
+  &:where(.fui-r-alignment-bottomLeading) {
+    --overlay-justify: flex-start;
+    --overlay-align: flex-end;
+  }
+  &:where(.fui-r-alignment-bottomTrailing) {
+    --overlay-justify: flex-end;
+    --overlay-align: flex-end;
+  }
+  &:where(.fui-r-alignment-centerFirstTextBaseline) {
+    --overlay-align: first baseline;
+  }
+  &:where(.fui-r-alignment-centerLastTextBaseline) {
+    --overlay-align: last baseline;
+  }
+  &:where(.fui-r-alignment-leadingFirstTextBaseline) {
+    --overlay-justify: flex-start;
+    --overlay-align: first baseline;
+  }
+  &:where(.fui-r-alignment-leadingLastTextBaseline) {
+    --overlay-justify: flex-start;
+    --overlay-align: last baseline;
+  }
+  &:where(.fui-r-alignment-trailingFirstTextBaseline) {
+    --overlay-justify: flex-end;
+    --overlay-align: first baseline;
+  }
+  &:where(.fui-r-alignment-trailingLastTextBaseline) {
+    --overlay-justify: flex-end;
+    --overlay-align: last baseline;
+  }
+}
+
+.fui-OverlayContent {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: var(--overlay-justify, center);
+  align-items: var(--overlay-align, center);
+  /* Let clicks pass through the full-size layer, but not through the overlaid content itself. */
+  pointer-events: none;
+
+  & > :where(*) {
+    pointer-events: auto;
+  }
+}
