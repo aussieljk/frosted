@@ -9,9 +9,28 @@ type BaseAccordionRootProps = React.ComponentProps<typeof AccordionPrimitive.Roo
 interface AccordionRootProps extends Omit<BaseAccordionRootProps, 'multiple'> {
   /** @deprecated Use `multiple` instead. Kept for backwards compatibility with radix-ui API. */
   type?: 'single' | 'multiple';
+  /**
+   * Whether multiple items can be open at the same time. When omitted, falls back to the deprecated
+   * `type` prop (`type="multiple"`).
+   * @default false
+   */
   multiple?: boolean;
 }
 
+/**
+ * Groups a set of vertically stacked, collapsible items. Can be controlled via `value`/`onValueChange`
+ * or left uncontrolled.
+ *
+ * @example
+ * ```tsx
+ * <Accordion.Root>
+ *   <Accordion.Item value="shipping">
+ *     <Accordion.Trigger>Shipping</Accordion.Trigger>
+ *     <Accordion.Content>Free shipping on orders over $50.</Accordion.Content>
+ *   </Accordion.Item>
+ * </Accordion.Root>
+ * ```
+ */
 const AccordionRoot = (props: AccordionRootProps) => {
   const { className, type, multiple, ...accordionRootProps } = props;
   // Support radix-ui's `type` prop for backwards compatibility
@@ -29,6 +48,7 @@ AccordionRoot.displayName = 'Root';
 
 interface AccordionItemProps extends PropsWithoutColor<typeof AccordionPrimitive.Item> {}
 
+/** A single collapsible section within `Accordion.Root`, identified by its `value`. */
 const AccordionItem = (props: AccordionItemProps) => {
   const { className, ...accordionItemProps } = props;
 
@@ -37,6 +57,11 @@ const AccordionItem = (props: AccordionItemProps) => {
 AccordionItem.displayName = 'Item';
 
 type AccordionTriggerProps = React.ComponentProps<typeof AccordionPrimitive.Trigger>;
+
+/**
+ * The button that toggles its item open and closed. Rendered inside an accordion header element and
+ * prefixed with a rotating chevron icon.
+ */
 const AccordionTrigger = (props: AccordionTriggerProps) => {
   const { className, children, ...accordionTriggerProps } = props;
   return (
@@ -69,6 +94,11 @@ const AccordionTrigger = (props: AccordionTriggerProps) => {
 AccordionTrigger.displayName = 'AccordionTrigger';
 
 type AccordionContentProps = React.ComponentProps<typeof AccordionPrimitive.Panel>;
+
+/**
+ * The collapsible panel of an item. Stays mounted while closed by default (`keepMounted` defaults to
+ * `true`) so its height can be animated.
+ */
 const AccordionContent = ({ className, children, keepMounted = true, ...props }: AccordionContentProps) => (
   <AccordionPrimitive.Panel className="fui-AccordionContent" keepMounted={keepMounted} {...props}>
     <div className={classNames('fui-AccordionContentInner', className)}>{children}</div>

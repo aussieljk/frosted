@@ -8,6 +8,14 @@ import type { GetPropDefTypes, PropsWithoutColor } from '../../helpers';
 type BadgeOwnProps = GetPropDefTypes<typeof badgePropDefs>;
 interface BadgeProps extends PropsWithoutColor<'span'>, BadgeOwnProps {}
 
+/**
+ * A stylized inline label for statuses, counts, and categories.
+ *
+ * @example
+ * ```tsx
+ * <Badge color="success">Active</Badge>
+ * ```
+ */
 const Badge = (props: BadgeProps) => {
   const {
     className,

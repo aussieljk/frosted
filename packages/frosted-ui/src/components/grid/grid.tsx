@@ -7,6 +7,7 @@ import type { GetPropDefTypes } from '../../helpers';
 
 interface GridRowProps extends React.ComponentProps<'div'> {}
 
+/** One row of a `Grid`; each child becomes a cell. */
 const GridRow = (props: GridRowProps) => {
   const { className, ...rowProps } = props;
   return <div {...rowProps} className={classNames('fui-GridRow', className)} />;
@@ -21,6 +22,24 @@ interface GridProps extends React.ComponentProps<'div'>, GridOwnProps {
   verticalSpacing?: number;
 }
 
+/**
+ * A SwiftUI-style grid layout composed of `Grid.Row` children. The column count is derived from the
+ * row with the most cells.
+ *
+ * @example
+ * ```tsx
+ * <Grid horizontalSpacing={16} verticalSpacing={8}>
+ *   <Grid.Row>
+ *     <Text>Name</Text>
+ *     <Text>Jane</Text>
+ *   </Grid.Row>
+ *   <Grid.Row>
+ *     <Text>Role</Text>
+ *     <Text>Engineer</Text>
+ *   </Grid.Row>
+ * </Grid>
+ * ```
+ */
 const GridComponent = (props: GridProps) => {
   const {
     className,

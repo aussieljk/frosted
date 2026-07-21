@@ -71,6 +71,23 @@ interface ToasterProps {
   onToast?: (toast: ToastEventData) => void;
 }
 
+/**
+ * Renders the toast viewports; mount once near the root of the app, then create
+ * toasts imperatively with the `toast` function.
+ *
+ * Built on Base UI's Toast primitive. A portalled viewport is mounted for each
+ * of the six screen positions, so individual toasts can target any position.
+ * Auto-dismiss timers pause while a viewport is hovered or focused.
+ *
+ * @example
+ * ```tsx
+ * // In your app root:
+ * <Toaster position="bottom-right" />
+ *
+ * // Anywhere else:
+ * toast.success('Changes saved');
+ * ```
+ */
 const Toaster = (props: ToasterProps) => {
   const {
     timeout = toastProviderPropDefs.timeout.default,

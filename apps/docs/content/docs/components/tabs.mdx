@@ -20,14 +20,33 @@ import { Tabs } from '@aussieljk/frosted';
 </Tabs.Root>;
 ```
 
-## Parts
+## API reference
 
-| Part           | Purpose                                             |
-| -------------- | --------------------------------------------------- |
-| `Tabs.Root`    | State container — `value`, `defaultValue`, `onValueChange` |
-| `Tabs.List`    | Row of triggers                                     |
-| `Tabs.Trigger` | Activates a tab — `value`                           |
-| `Tabs.Content` | Panel shown for the matching `value`                |
+### Tabs.Root
 
-Related: `TabsNav` for link-based (routing) tab bars and `SegmentedControl` for a filled toggle
+State container for the tabs.
+
+<PropsTable component="Tabs.Root" />
+
+### Tabs.List
+
+Row of triggers.
+
+<PropsTable component="Tabs.List" />
+
+### Tabs.Trigger
+
+Activates the tab with the matching `value`.
+
+<PropsTable component="Tabs.Trigger" />
+
+### Tabs.Content
+
+Panel shown for the matching `value`.
+
+<PropsTable component="Tabs.Content" />
+
+## Related
+
+`TabsNav` for link-based (routing) tab bars and `SegmentedControl` for a filled toggle
 group.

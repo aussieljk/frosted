@@ -11,16 +11,27 @@ import { useZoomGestures, type ZoomGestureActions, type ZoomGestureConfig } from
 // Types
 // ---------------------------------------------------------------------------
 
+/** Snapshot of the current zoom state, passed to `children`/`overlay` render functions. */
 interface LightboxZoomState {
+  /** Current zoom level (1 = unzoomed). */
   zoom: number;
+  /** Effective maximum zoom level (explicit prop or auto-calculated). */
   maxZoom: number;
+  /** Current horizontal pan offset in px (pre-scale coordinate space). */
   offsetX: number;
+  /** Current vertical pan offset in px (pre-scale coordinate space). */
   offsetY: number;
+  /** Whether the zoom level can be increased further. */
   canZoomIn: boolean;
+  /** Whether the zoom level can be decreased further. */
   canZoomOut: boolean;
 }
 
 interface LightboxZoomProps {
+  /**
+   * The zoomable content. Can be a ReactNode or a render function that
+   * receives the current zoom state.
+   */
   children: React.ReactNode | ((state: LightboxZoomState) => React.ReactNode);
   /**
    * Content rendered inside the zoom context but NOT affected by the zoom
@@ -61,14 +72,26 @@ interface LightboxZoomProps {
   wrapperClassName?: string;
 }
 
+/** Imperative handle exposed by Lightbox.Zoom for programmatic zoom control. */
 interface LightboxZoomRef {
+  /** Current zoom level (1 = unzoomed). */
   zoom: number;
+  /** Effective maximum zoom level. */
   maxZoom: number;
+  /** Current horizontal pan offset in px. */
   offsetX: number;
+  /** Current vertical pan offset in px. */
   offsetY: number;
+  /** Zooms in by one `zoomStep`. */
   zoomIn: () => void;
+  /** Zooms out by one `zoomStep`. */
   zoomOut: () => void;
+  /**
+   * Zooms to a specific level, clamped to min/max. `rapid` skips the smooth
+   * animation; `dx`/`dy` anchor the zoom around a point offset from center.
+   */
   zoomTo: (target: number, options?: { rapid?: boolean; dx?: number; dy?: number }) => void;
+  /** Resets zoom and pan to their initial values. `rapid` skips the smooth animation. */
   reset: (rapid?: boolean) => void;
 }
 
@@ -118,6 +141,16 @@ function elasticClamp(value: number, min: number, max: number): number {
 // Component
 // ---------------------------------------------------------------------------
 
+/**
+ * Zoom/pan wrapper for lightbox item content. Applies a CSS scale/translate
+ * transform to its children and provides ZoomContext to ZoomIn/ZoomOut
+ * buttons and the `overlay` slot.
+ *
+ * Gestures: pinch (touch and trackpad), Ctrl+wheel (or bare scroll with
+ * `scrollToZoom`), double-click/tap to step zoom, drag and arrow keys to
+ * pan when zoomed, with elastic overscroll and snap-back. Zoom resets
+ * whenever the active item changes.
+ */
 const LightboxZoom = React.forwardRef<LightboxZoomRef, LightboxZoomProps>(
   function LightboxZoom(props, forwardedRef) {
     const {

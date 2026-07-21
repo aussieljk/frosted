@@ -1,4 +1,4 @@
-module.exports = () => ({
+const postcssFrostedUi = () => ({
   postcssPlugin: 'postcss-frosted-ui',
   Comment(comment) {
     // Remove all comments from CSS source
@@ -6,4 +6,6 @@ module.exports = () => ({
   },
 });
 
-module.exports.postcss = true;
+postcssFrostedUi.postcss = true;
+
+export default postcssFrostedUi;

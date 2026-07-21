@@ -17,13 +17,8 @@ The `fallback` (required) renders while the image loads or when `src` is missing
 
 ## Props
 
-| Prop           | Type                                | Default    |
-| -------------- | ----------------------------------- | ---------- |
-| `size`         | `'0'`–`'9'`                         | `'3'`      |
-| `shape`        | `'circle' \| 'square'`              | `'circle'` |
-| `fallback`     | `ReactNode` (required)              | —          |
-| `src`          | `string`                            | —          |
-| `color`        | theme accent color name             | theme accent |
-| `highContrast` | `boolean`                           | `false`    |
+Avatar also accepts the native `img` attributes (`src`, `alt`, …).
+
+<PropsTable component="Avatar" />
 
 Related: `AvatarGroup` and `AvatarStack` for overlapping collections of avatars.

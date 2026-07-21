@@ -41,6 +41,16 @@ const viewportStateAttributesMapping = {
     value ? { 'data-scrolling': '' } : null,
 };
 
+/**
+ * The scrollable container holding the gallery items. Renders a `div` by
+ * default (customizable via `render`).
+ *
+ * Tracks native scrolling to derive the active item (per the CSS Overflow 5
+ * active-marker algorithm) and the can-scroll boundary state, and handles
+ * Arrow/Home/End/PageUp/PageDown keyboard navigation. Exposes
+ * `data-active-index`, `data-can-scroll-prev`, `data-can-scroll-next` and
+ * `data-scrolling` attributes for styling.
+ */
 const ScrollGalleryViewport = React.forwardRef<
   HTMLDivElement,
   ScrollGalleryViewportProps

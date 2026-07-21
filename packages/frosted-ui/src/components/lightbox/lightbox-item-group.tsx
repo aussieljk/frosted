@@ -24,11 +24,6 @@ const itemGroupStateAttributesMapping = {
   direction: (value: unknown) => ({ 'data-direction': String(value) }),
 };
 
-/**
- * Provides the item group context that tracks which items should render.
- * Only mounts active item + `preload` adjacent items (swap-based rendering).
- */
-
 interface LightboxItemGroupContextValue {
   activeIndex: number;
   preload: number;
@@ -49,6 +44,13 @@ function useLightboxItemGroupContext(): LightboxItemGroupContextValue {
   return React.useContext(LightboxItemGroupContext);
 }
 
+/**
+ * Container for Lightbox.Item elements. Provides the item group context
+ * that tracks which items should render: only the active item plus
+ * `preload` adjacent items are mounted (swap-based rendering), and the
+ * navigation direction is exposed via the `data-direction` attribute
+ * for CSS transitions.
+ */
 const LightboxItemGroup = React.forwardRef<HTMLDivElement, LightboxItemGroupProps>(
   function LightboxItemGroup(props, forwardedRef) {
     const { render, preload = 1, ...elementProps } = props;

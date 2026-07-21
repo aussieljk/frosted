@@ -12,6 +12,24 @@ const TextFieldContext = React.createContext<TextFieldContextValue | undefined>(
 
 interface TextFieldRootProps extends PropsWithoutColor<'div'>, TextFieldContextValue {}
 
+/**
+ * The container for a text field, composing an `Input` with optional `Slot`s
+ * for icons or buttons on either side.
+ *
+ * Clicking anywhere on the field (outside interactive children) focuses the
+ * input and places the caret at the nearest end. `size`, `variant` and `color`
+ * set here are shared with children via context.
+ *
+ * @example
+ * ```tsx
+ * <TextField.Root>
+ *   <TextField.Slot>
+ *     <MagnifyingGlassIcon />
+ *   </TextField.Slot>
+ *   <TextField.Input placeholder="Search…" />
+ * </TextField.Root>
+ * ```
+ */
 const TextFieldRoot = (props: TextFieldRootProps) => {
   const {
     children,
@@ -55,6 +73,10 @@ TextFieldRoot.displayName = 'TextFieldRoot';
 type TextFieldSlotElement = React.ElementRef<'div'>;
 type TextFieldSlotOwnProps = GetPropDefTypes<typeof textFieldSlotPropDefs>;
 interface TextFieldSlotProps extends PropsWithoutColor<'div'>, TextFieldSlotOwnProps {}
+/**
+ * Decorative or interactive content (icons, buttons) placed before or after the
+ * input, inside `TextField.Root`.
+ */
 const TextFieldSlot = React.forwardRef<TextFieldSlotElement, TextFieldSlotProps>((props, forwardedRef) => {
   const { className, color = textFieldSlotPropDefs.color.default, ...slotProps } = props;
   const context = React.useContext(TextFieldContext);
@@ -75,6 +97,13 @@ interface TextFieldInputProps
   extends Omit<PropsWithoutColor<typeof Input>, 'size' | 'className'>, TextFieldInputOwnProps {
   className?: string;
 }
+/**
+ * The `<input>` element of a text field, wrapping Base UI's Input primitive.
+ *
+ * Can be used standalone — when rendered outside a `TextField.Root` it wraps
+ * itself in one automatically; inside a Root it inherits the Root's `size`,
+ * `variant` and `color`.
+ */
 const TextFieldInput = React.forwardRef<TextFieldInputElement, TextFieldInputProps>((props, forwardedRef) => {
   const context = React.useContext(TextFieldContext);
   const hasRoot = context !== undefined;

@@ -45,6 +45,16 @@ type CalendarProps = Omit<CalendarStateOptions, 'locale' | 'createCalendar'> & {
   className?: string;
 };
 
+/**
+ * A month-view calendar for picking a single date, with month/year dropdowns and previous/next
+ * navigation. Built on React Aria, so it accepts its calendar state options (`value`, `onChange`,
+ * `minValue`, `maxValue`, ...) using `@internationalized/date` values, and is localized automatically.
+ *
+ * @example
+ * ```tsx
+ * <Calendar value={date} onChange={setDate} minValue={today(getLocalTimeZone())} />
+ * ```
+ */
 function Calendar({ className, ...props }: CalendarProps) {
   const { locale } = useLocale();
   const state = useCalendarState({
@@ -113,6 +123,16 @@ type RangeCalendarProps = Omit<RangeCalendarStateOptions, 'locale' | 'createCale
   className?: string;
 };
 
+/**
+ * A month-view calendar for picking a start/end date range. Built on React Aria, so it accepts its
+ * range calendar state options (`value`, `onChange`, `minValue`, `maxValue`, ...) using
+ * `@internationalized/date` values, and is localized automatically.
+ *
+ * @example
+ * ```tsx
+ * <RangeCalendar value={range} onChange={setRange} />
+ * ```
+ */
 function RangeCalendar({ className, ...props }: RangeCalendarProps) {
   const { locale } = useLocale();
   const state = useRangeCalendarState({

@@ -12,9 +12,21 @@ type FilterChipOwnProps = GetPropDefTypes<typeof filterChipPropDefs>;
 type FilterChipProps = Omit<PropsWithoutColor<typeof CheckboxPrimitive.Root>, 'className' | 'render' | 'nativeButton'> &
   Omit<React.HTMLAttributes<HTMLButtonElement>, 'color'> &
   FilterChipOwnProps & {
+    /** The chip's label content. */
     children: React.ReactNode;
   };
 
+/**
+ * A toggleable pill-shaped chip for filtering, backed by a checkbox. Can be controlled via
+ * `checked`/`onCheckedChange` or left uncontrolled with `defaultChecked`.
+ *
+ * @example
+ * ```tsx
+ * <FilterChip checked={showArchived} onCheckedChange={setShowArchived}>
+ *   Archived
+ * </FilterChip>
+ * ```
+ */
 const FilterChip = (props: FilterChipProps) => {
   const {
     children,

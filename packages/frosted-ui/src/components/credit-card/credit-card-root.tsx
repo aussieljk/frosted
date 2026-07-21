@@ -33,6 +33,26 @@ interface CreditCardRootProps {
   onFaceChange?: (face: CardFace) => void;
 }
 
+/**
+ * The renderless provider for a flippable credit card UI. Manages the active face (front/back) in
+ * controlled (`face`/`onFaceChange`) or uncontrolled (`defaultFace`) mode and shares detected card
+ * brand info with descendants.
+ *
+ * @example
+ * ```tsx
+ * <CreditCard.Root>
+ *   <CreditCard.Content color="blue">
+ *     <CreditCard.Front>
+ *       <CreditCard.NumberField readOnly value="4242 4242 4242 4242" />
+ *     </CreditCard.Front>
+ *     <CreditCard.Back>
+ *       <CreditCard.MagStripe />
+ *     </CreditCard.Back>
+ *   </CreditCard.Content>
+ *   <CreditCard.Trigger>Flip</CreditCard.Trigger>
+ * </CreditCard.Root>
+ * ```
+ */
 function CreditCardRoot(props: CreditCardRootProps) {
   const {
     children,

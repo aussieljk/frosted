@@ -20,6 +20,11 @@ interface ScrollGalleryPreviousProps
   step?: number;
 }
 
+/**
+ * Button that scrolls the gallery backward — by ~one page, or by `step` items.
+ * Automatically disabled at the start of the scroll range unless the Root has
+ * `loop`, in which case it wraps around to the last item.
+ */
 const ScrollGalleryPrevious = React.forwardRef<
   HTMLButtonElement,
   ScrollGalleryPreviousProps

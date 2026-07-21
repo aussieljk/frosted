@@ -9,9 +9,24 @@ import type { GetPropDefTypes, PropsWithoutColor } from '../../helpers';
 type TextOwnProps = GetPropDefTypes<typeof textPropDefs>;
 
 interface TextProps extends TextOwnProps, PropsWithoutColor<'span'> {
+  /** Replaces the rendered `<span>` with a custom element or render function (Base UI render prop). */
   render?: useRender.ComponentProps<'span'>['render'];
 }
 
+/**
+ * The base typography component for a piece of text.
+ *
+ * Renders a `<span>` by default; use `render` to output another element
+ * (e.g. `render={<p />}`). Size, weight, alignment, trim and color all inherit
+ * from the surrounding text when not set.
+ *
+ * @example
+ * ```tsx
+ * <Text size="3" weight="medium" color="gray">
+ *   A short description
+ * </Text>
+ * ```
+ */
 const Text = (props: TextProps) => {
   const {
     children,

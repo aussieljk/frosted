@@ -18,6 +18,21 @@ type SegmentedControlRadioGroupRootProps<Value = unknown> = Omit<
     onValueChange?: (value: Value, eventDetails: RadioGroup.ChangeEventDetails) => void;
   };
 
+/**
+ * A segmented control that behaves as a single form value chooser (radio group).
+ *
+ * Wraps Base UI's RadioGroup primitive, so it participates in forms and has
+ * radio a11y semantics — unlike `SegmentedControl`, there are no content panels.
+ * Supports controlled (`value`) and uncontrolled (`defaultValue`) usage.
+ *
+ * @example
+ * ```tsx
+ * <SegmentedControlRadioGroup.Root defaultValue="light" onValueChange={setTheme}>
+ *   <SegmentedControlRadioGroup.Item value="light">Light</SegmentedControlRadioGroup.Item>
+ *   <SegmentedControlRadioGroup.Item value="dark">Dark</SegmentedControlRadioGroup.Item>
+ * </SegmentedControlRadioGroup.Root>
+ * ```
+ */
 function SegmentedControlRadioGroupRoot<Value = unknown>(props: SegmentedControlRadioGroupRootProps<Value>) {
   const { className, children, ...rootProps } = props;
   return (
@@ -40,6 +55,9 @@ type SegmentedControlRadioGroupItemProps<Value = unknown> = Omit<
     value: Value;
   };
 
+/**
+ * A single selectable option (radio) rendered as a segment.
+ */
 function SegmentedControlRadioGroupItem<Value = unknown>(props: SegmentedControlRadioGroupItemProps<Value>) {
   const { children, className, style, ...itemProps } = props;
 

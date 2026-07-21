@@ -3,6 +3,10 @@ import { type PropDef } from '../../helpers';
 const sizes = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'] as const;
 
 const avatarStackPropDefs = {
+  /**
+   * The size of the stack's avatars.
+   * @default '3'
+   */
   size: { type: 'enum', values: sizes, default: '3' },
 } satisfies {
   size: PropDef<(typeof sizes)[number]>;

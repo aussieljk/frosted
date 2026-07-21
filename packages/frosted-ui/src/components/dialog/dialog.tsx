@@ -12,6 +12,7 @@ import type { GetPropDefTypes } from '../../helpers';
 import type { TextProps } from '../text';
 
 // Re-export createHandle for detached triggers
+/** Creates a detached handle for opening a dialog imperatively, optionally with a typed payload. */
 const createHandle = DialogPrimitive.createHandle;
 
 // Types from Base UI
@@ -24,9 +25,32 @@ type DialogHandle<T = unknown> = ReturnType<typeof DialogPrimitive.createHandle<
 
 // Root - generic to infer payload type from handle
 interface DialogRootProps<T = unknown> extends Omit<RootProps, 'modal' | 'children' | 'handle'> {
+  /** Dialog content, or a render function that receives the `payload` passed by the opening trigger or handle. */
   children?: React.ReactNode | ((props: { payload: T | undefined }) => React.ReactNode);
+  /** A handle created with `Dialog.createHandle()` for opening the dialog imperatively with a typed payload. */
   handle?: DialogHandle<T>;
 }
+
+/**
+ * A modal dialog overlaying the page. Always rendered as modal; can be controlled via
+ * `open`/`onOpenChange` or left uncontrolled.
+ *
+ * @example
+ * ```tsx
+ * <Dialog.Root>
+ *   <Dialog.Trigger>
+ *     <Button>Edit profile</Button>
+ *   </Dialog.Trigger>
+ *   <Dialog.Content>
+ *     <Dialog.Title>Edit profile</Dialog.Title>
+ *     <Dialog.Description>Update your details below.</Dialog.Description>
+ *     <Dialog.Close>
+ *       <Button variant="soft">Done</Button>
+ *     </Dialog.Close>
+ *   </Dialog.Content>
+ * </Dialog.Root>
+ * ```
+ */
 function DialogRoot<T = unknown>(props: DialogRootProps<T>) {
   return <DialogPrimitive.Root {...(props as RootProps)} modal />;
 }
@@ -38,10 +62,15 @@ interface DialogTriggerProps<T = unknown> extends Omit<
   'render' | 'handle' | 'payload'
 > {
   className?: string;
+  /** The single element rendered as the trigger button, e.g. a `Button`. */
   children: React.ReactElement;
+  /** A handle created with `Dialog.createHandle()`, for opening a dialog rendered elsewhere. */
   handle?: DialogHandle<T>;
+  /** Data passed to the dialog's `children` render function when this trigger opens it. */
   payload?: T;
 }
+
+/** The button that opens the dialog. Renders its child element as the trigger, so pass exactly one element. */
 function DialogTrigger<T = unknown>({ children, ...props }: DialogTriggerProps<T>) {
   return (
     <DialogPrimitive.Trigger
@@ -63,10 +92,17 @@ const DialogContentContext = React.createContext<DialogContentContextValue>({
 interface DialogContentProps extends Omit<PopupProps, 'className' | 'render' | 'style'>, DialogContentOwnProps {
   className?: string;
   style?: React.CSSProperties;
+  /** The element the dialog portal is appended to. Defaults to the document body. */
   container?: PortalProps['container'];
+  /** Keeps the portal content mounted in the DOM while the dialog is closed. */
   keepMounted?: PortalProps['keepMounted'];
 }
 
+/**
+ * The dialog panel. Rendered in a portal with a backdrop, and re-wrapped in the current `Theme`.
+ * Keyboard events do not propagate past it, so parent floating components (e.g. menus) ignore typing
+ * inside the dialog.
+ */
 const DialogContent = (props: DialogContentProps) => {
   const {
     className,
@@ -105,6 +141,10 @@ DialogContent.displayName = 'DialogContent';
 // Title
 type DialogTitleProps = React.ComponentProps<typeof Heading>;
 
+/**
+ * The dialog's accessible title, rendered as a `Heading`. Its size is derived from the `Content` size
+ * unless overridden with the `size` prop.
+ */
 const DialogTitle = ({ size: sizeProp, className, ...props }: DialogTitleProps) => {
   const { size: contextSize } = React.useContext(DialogContentContext);
   let size: DialogTitleProps['size'];
@@ -133,6 +173,10 @@ DialogTitle.displayName = 'DialogTitle';
 // Description
 type DialogDescriptionProps = TextProps;
 
+/**
+ * The dialog's accessible description, rendered as a paragraph of `Text`. Its size is derived from the
+ * `Content` size unless overridden with the `size` prop.
+ */
 const DialogDescription = ({ size: sizeProp, className, ...props }: DialogDescriptionProps) => {
   const { size: contextSize } = React.useContext(DialogContentContext);
   let size: DialogDescriptionProps['size'];
@@ -166,8 +210,11 @@ DialogDescription.displayName = 'DialogDescription';
 // Close
 interface DialogCloseProps extends Omit<React.ComponentProps<typeof DialogPrimitive.Close>, 'render'> {
   className?: string;
+  /** The single element rendered as the close button, e.g. a `Button`. */
   children: React.ReactElement;
 }
+
+/** Closes the dialog when activated. Renders its child element as the close button, so pass exactly one element. */
 const DialogClose = ({ children, ...props }: DialogCloseProps) => (
   <DialogPrimitive.Close {...props} render={children as React.ReactElement} />
 );

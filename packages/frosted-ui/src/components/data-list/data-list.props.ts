@@ -5,16 +5,25 @@ const orientationValues = ['horizontal', 'vertical'] as const;
 const sizes = ['1', '2', '3'] as const;
 
 const dataListRootPropDefs = {
+  /**
+   * Whether labels and values are laid out side by side or stacked.
+   * @default 'horizontal'
+   */
   orientation: {
     type: 'enum',
     values: orientationValues,
     default: 'horizontal',
   },
+  /**
+   * The size of the list text and spacing.
+   * @default '2'
+   */
   size: {
     type: 'enum',
     values: sizes,
     default: '2',
   },
+  /** Trims the leading (whitespace above/below the text box) from the start, end, or both sides. */
   trim: {
     ...trimProp,
   },
@@ -25,6 +34,7 @@ const dataListRootPropDefs = {
 };
 
 const dataListItemPropDefs = {
+  /** How the label and value are vertically aligned within the row. */
   align: {
     type: 'enum',
     values: alignValues,
@@ -35,7 +45,9 @@ const dataListItemPropDefs = {
 };
 
 const dataListLabelPropDefs = {
+  /** The color of the label text. Inherits the low-contrast gray label styling when not set. */
   color: colorProp,
+  /** Increases color contrast with the background for better legibility. */
   highContrast: highContrastProp,
 };
 

@@ -23,6 +23,13 @@ interface ScrollGalleryScrollMarkerProps
   index: number;
 }
 
+/**
+ * Button that scrolls the gallery to the item at `index`, reflecting whether
+ * that item is active via `data-active` and `aria-selected`.
+ *
+ * Rendered as a `role="tab"` with roving tabindex inside the marker group's
+ * tablist. No `aria-label` is set — provide one for each marker.
+ */
 const ScrollGalleryScrollMarker = React.forwardRef<
   HTMLButtonElement,
   ScrollGalleryScrollMarkerProps

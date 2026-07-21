@@ -15,6 +15,15 @@ interface AvatarProps extends Omit<PropsWithoutColor<typeof AvatarPrimitive.Imag
   style?: React.CSSProperties;
 }
 
+/**
+ * A user or entity image with an automatic fallback. While `src` loads (or if it fails), the `fallback`
+ * content is shown instead; string fallbacks are converted to initials.
+ *
+ * @example
+ * ```tsx
+ * <Avatar src="https://example.com/jane.png" fallback="Jane Doe" />
+ * ```
+ */
 const Avatar = (props: AvatarProps) => {
   const {
     className,

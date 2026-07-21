@@ -11,6 +11,17 @@ import type { GetPropDefTypes, PropsWithoutColor } from '../../helpers';
 type SeparatorOwnProps = GetPropDefTypes<typeof separatorPropDefs>;
 interface SeparatorProps extends PropsWithoutColor<typeof SeparatorPrimitive>, SeparatorOwnProps {}
 
+/**
+ * A visual divider between sections of content or groups of items.
+ *
+ * Wraps Base UI's Separator primitive (rendered with `role="separator"`);
+ * pass `orientation="vertical"` for a vertical line.
+ *
+ * @example
+ * ```tsx
+ * <Separator size="4" />
+ * ```
+ */
 const Separator = (props: SeparatorProps) => {
   const {
     className,

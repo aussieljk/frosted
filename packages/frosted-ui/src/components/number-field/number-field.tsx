@@ -22,6 +22,21 @@ interface NumberFieldRootProps
   className?: string;
 }
 
+/**
+ * Groups all parts of the number field and provides its value state. Wraps Base UI's
+ * `NumberField.Root` and, based on `buttonLayout`, automatically renders increment/decrement
+ * buttons around the children. Clicking empty space inside the field focuses the input.
+ *
+ * Supports controlled (`value` + `onValueChange`) and uncontrolled (`defaultValue`) usage
+ * via the underlying Base UI props.
+ *
+ * @example
+ * ```tsx
+ * <NumberField.Root defaultValue={5} min={0} max={10}>
+ *   <NumberField.Input />
+ * </NumberField.Root>
+ * ```
+ */
 const NumberFieldRoot = (props: NumberFieldRootProps) => {
   const {
     children,
@@ -99,6 +114,10 @@ type NumberFieldSlotElement = React.ElementRef<'div'>;
 type NumberFieldSlotOwnProps = GetPropDefTypes<typeof numberFieldSlotPropDefs>;
 interface NumberFieldSlotProps extends PropsWithoutColor<'div'>, NumberFieldSlotOwnProps {}
 
+/**
+ * Decorative container for icons or affixes rendered inside the field, sized to match the
+ * root's `size`.
+ */
 const NumberFieldSlot = React.forwardRef<NumberFieldSlotElement, NumberFieldSlotProps>((props, forwardedRef) => {
   const { className, color = numberFieldSlotPropDefs.color.default, ...slotProps } = props;
   const context = React.useContext(NumberFieldContext);
@@ -120,6 +139,10 @@ interface NumberFieldInputProps
   className?: string;
 }
 
+/**
+ * The text input of the number field. Wraps Base UI's `NumberField.Input`; `size`, `variant`
+ * and `color` are inherited from the surrounding Root but can be overridden per input.
+ */
 const NumberFieldInput = React.forwardRef<HTMLInputElement, NumberFieldInputProps>((props, forwardedRef) => {
   const context = React.useContext(NumberFieldContext);
   const {
@@ -154,6 +177,10 @@ interface NumberFieldDecrementProps extends Omit<
   className?: string;
 }
 
+/**
+ * Button that decrements the field's value. Rendered automatically by Root unless
+ * `buttonLayout` is 'none'; renders a minus icon by default, replaceable via `children`.
+ */
 const NumberFieldDecrement = (props: NumberFieldDecrementProps) => {
   const { className, children, ...decrementProps } = props;
   const context = React.useContext(NumberFieldContext);
@@ -194,6 +221,10 @@ interface NumberFieldIncrementProps extends Omit<
   className?: string;
 }
 
+/**
+ * Button that increments the field's value. Rendered automatically by Root unless
+ * `buttonLayout` is 'none'; renders a plus icon by default, replaceable via `children`.
+ */
 const NumberFieldIncrement = (props: NumberFieldIncrementProps) => {
   const { className, children, ...incrementProps } = props;
   const context = React.useContext(NumberFieldContext);

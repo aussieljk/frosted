@@ -16,6 +16,16 @@ type SwitchProps = Omit<
   Omit<React.HTMLAttributes<HTMLSpanElement>, 'color'> &
   SwitchOwnProps;
 
+/**
+ * A toggle control for switching between checked and unchecked states. Wraps Base UI's
+ * `Switch` (renders a `role="switch"` button); supports controlled (`checked` +
+ * `onCheckedChange`) and uncontrolled (`defaultChecked`) usage.
+ *
+ * @example
+ * ```tsx
+ * <Switch defaultChecked onCheckedChange={(checked) => setEnabled(checked)} />
+ * ```
+ */
 const Switch = (props: SwitchProps) => {
   const {
     className,

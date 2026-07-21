@@ -24,6 +24,8 @@ import { Badge, Button, HStack } from '@aussieljk/frosted';
 </HStack>;
 ```
 
+<PropsTable component="HStack" />
+
 ## VStack
 
 Lays children out vertically. `alignment` controls the cross-axis: `leading`, `center`
@@ -39,6 +41,8 @@ import { Heading, Text, VStack } from '@aussieljk/frosted';
   </Text>
 </VStack>;
 ```
+
+<PropsTable component="VStack" />
 
 ## ZStack
 
@@ -56,6 +60,8 @@ import { Avatar, Badge, ZStack } from '@aussieljk/frosted';
   </Badge>
 </ZStack>;
 ```
+
+<PropsTable component="ZStack" />
 
 ## Grid and Grid.Row
 
@@ -77,8 +83,9 @@ import { Grid, Text } from '@aussieljk/frosted';
 </Grid>;
 ```
 
-Grid also accepts an `alignment` prop (same values as ZStack) that aligns cells within their
-tracks.
+<PropsTable component="Grid" />
+
+`Grid.Row` takes no extra props beyond the standard `div` attributes.
 
 ## Spacer
 
@@ -95,6 +102,8 @@ import { Button, Heading, HStack, Spacer } from '@aussieljk/frosted';
 </HStack>;
 ```
 
+<PropsTable component="Spacer" />
+
 ## Overlay
 
 Layers `Overlay.Content` children in front of the remaining children, matching SwiftUI's
@@ -110,6 +119,10 @@ import { Card, Overlay, Spinner } from '@aussieljk/frosted';
   </Overlay.Content>
 </Overlay>;
 ```
+
+<PropsTable component="Overlay" />
+
+`Overlay.Content` takes no extra props beyond the standard `div` attributes.
 
 ## Escape hatches
 

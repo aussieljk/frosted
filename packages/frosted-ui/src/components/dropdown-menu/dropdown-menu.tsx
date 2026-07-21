@@ -15,6 +15,7 @@ import {
 import type { GetPropDefTypes } from '../../helpers';
 
 // Re-export createHandle for detached triggers
+/** Creates a detached handle for opening a dropdown menu imperatively, optionally with a typed payload. */
 const createHandle = MenuPrimitive.createHandle;
 
 // Types from Base UI
@@ -25,9 +26,30 @@ type DropdownMenuHandle<T = unknown> = ReturnType<typeof MenuPrimitive.createHan
 
 // Root - generic to infer payload type from handle
 interface DropdownMenuRootProps<T = unknown> extends Omit<RootProps, 'className' | 'render' | 'children' | 'handle'> {
+  /** Menu parts, or a render function that receives the `payload` passed by the opening trigger or handle. */
   children?: React.ReactNode | ((props: { payload: T | undefined }) => React.ReactNode);
+  /** A handle created with `DropdownMenu.createHandle()` for opening the menu imperatively with a typed payload. */
   handle?: DropdownMenuHandle<T>;
 }
+
+/**
+ * A menu of actions opened from a trigger button. Can be controlled via `open`/`onOpenChange` or left
+ * uncontrolled.
+ *
+ * @example
+ * ```tsx
+ * <DropdownMenu.Root>
+ *   <DropdownMenu.Trigger>
+ *     <Button variant="soft">Options</Button>
+ *   </DropdownMenu.Trigger>
+ *   <DropdownMenu.Content>
+ *     <DropdownMenu.Item onClick={rename}>Rename</DropdownMenu.Item>
+ *     <DropdownMenu.Separator />
+ *     <DropdownMenu.Item color="danger" onClick={remove}>Delete</DropdownMenu.Item>
+ *   </DropdownMenu.Content>
+ * </DropdownMenu.Root>
+ * ```
+ */
 function DropdownMenuRoot<T = unknown>(props: DropdownMenuRootProps<T>) {
   return <MenuPrimitive.Root {...(props as RootProps)} />;
 }
@@ -39,9 +61,16 @@ interface DropdownMenuTriggerProps<T = unknown> extends Omit<
   'render' | 'className' | 'handle' | 'payload'
 > {
   className?: string;
+  /** A handle created with `DropdownMenu.createHandle()`, for opening a menu rendered elsewhere. */
   handle?: DropdownMenuHandle<T>;
+  /** Data passed to the menu's `children` render function when this trigger opens it. */
   payload?: T;
 }
+
+/**
+ * The button that opens the menu. Renders its child element as the trigger, so pass exactly one element
+ * (e.g. a `Button`).
+ */
 function DropdownMenuTrigger<T = unknown>({ children, ...props }: DropdownMenuTriggerProps<T>) {
   return (
     <MenuPrimitive.Trigger
@@ -62,16 +91,39 @@ interface DropdownMenuContentProps
     DropdownMenuContentContextValue {
   className?: string;
   style?: React.CSSProperties;
+  /** The element the menu portal is appended to. Defaults to the document body. */
   container?: React.ComponentProps<typeof MenuPrimitive.Portal>['container'];
+  /** Keeps the portal content mounted in the DOM while the menu is closed. */
   keepMounted?: React.ComponentProps<typeof MenuPrimitive.Portal>['keepMounted'];
   // Positioner props
+  /**
+   * The side of the trigger the menu is placed on.
+   * @default 'bottom'
+   */
   side?: React.ComponentProps<typeof MenuPrimitive.Positioner>['side'];
+  /**
+   * Distance in pixels between the menu and the trigger.
+   * @default 4
+   */
   sideOffset?: React.ComponentProps<typeof MenuPrimitive.Positioner>['sideOffset'];
+  /**
+   * How the menu is aligned along the trigger.
+   * @default 'start'
+   */
   align?: React.ComponentProps<typeof MenuPrimitive.Positioner>['align'];
+  /** Additional offset in pixels along the alignment axis. */
   alignOffset?: React.ComponentProps<typeof MenuPrimitive.Positioner>['alignOffset'];
+  /**
+   * Minimum distance in pixels kept from the viewport edges when avoiding collisions.
+   * @default 10
+   */
   collisionPadding?: React.ComponentProps<typeof MenuPrimitive.Positioner>['collisionPadding'];
 }
 
+/**
+ * The menu popup. Rendered in a portal with a scrollable viewport, positioned against the trigger, and
+ * re-wrapped in the current `Theme`. Its `size`, `color` and `variant` are shared with items and submenus.
+ */
 const DropdownMenuContent = (props: DropdownMenuContentProps) => {
   const themeContext = useThemeContext();
   const {
@@ -90,7 +142,7 @@ const DropdownMenuContent = (props: DropdownMenuContentProps) => {
     collisionPadding = 10,
     ...popupProps
   } = props;
-  const resolvedColor = color ?? themeContext.accentColor;
+  const resolvedColor = color ?? (themeContext.accentColor as NonNullable<typeof color>); // custom accents only feed data-accent-color
   return (
     <MenuPrimitive.Portal container={container} keepMounted={keepMounted}>
       <MenuPrimitive.Positioner
@@ -136,6 +188,7 @@ interface DropdownMenuGroupLabelProps extends Omit<
   className?: string;
 }
 
+/** An accessible label for a `Group` of items. Must be rendered inside `Group`. */
 const DropdownMenuGroupLabel = (props: DropdownMenuGroupLabelProps) => (
   <MenuPrimitive.GroupLabel
     {...props}
@@ -150,6 +203,7 @@ interface DropdownMenuItemProps
   className?: string;
 }
 
+/** A clickable menu action. Use `color` for emphasis (e.g. destructive) and `shortcut` for a hint label. */
 const DropdownMenuItem = (props: DropdownMenuItemProps) => {
   const { className, children, color = dropdownMenuItemPropDefs.color.default, shortcut, ...itemProps } = props;
   return (
@@ -172,6 +226,7 @@ interface DropdownMenuGroupProps extends Omit<
   className?: string;
 }
 
+/** Groups related items, typically labelled with `GroupLabel`. */
 const DropdownMenuGroup = (props: DropdownMenuGroupProps) => (
   <MenuPrimitive.Group
     {...props}
@@ -187,6 +242,7 @@ interface DropdownMenuRadioGroupProps extends Omit<
   className?: string;
 }
 
+/** A single-selection group of `RadioItem`s, controlled via `value`/`onValueChange`. */
 const DropdownMenuRadioGroup = (props: DropdownMenuRadioGroupProps) => (
   <MenuPrimitive.RadioGroup
     {...props}
@@ -202,6 +258,7 @@ interface DropdownMenuRadioItemProps extends Omit<
   className?: string;
 }
 
+/** A selectable option within a `RadioGroup`, showing a check indicator when selected. */
 const DropdownMenuRadioItem = (props: DropdownMenuRadioItemProps) => {
   const { children, className, ...itemProps } = props;
   return (
@@ -232,6 +289,7 @@ interface DropdownMenuCheckboxItemProps
   className?: string;
 }
 
+/** A toggleable menu item with a check indicator, controlled via `checked`/`onCheckedChange`. */
 const DropdownMenuCheckboxItem = (props: DropdownMenuCheckboxItemProps) => {
   const { children, className, shortcut, ...itemProps } = props;
   return (
@@ -256,6 +314,7 @@ const DropdownMenuCheckboxItem = (props: DropdownMenuCheckboxItemProps) => {
 DropdownMenuCheckboxItem.displayName = 'DropdownMenuCheckboxItem';
 
 interface DropdownMenuSubProps extends Omit<React.ComponentProps<typeof MenuPrimitive.SubmenuRoot>, 'className'> {}
+/** Groups a `SubTrigger` and `SubContent` into a nested submenu. */
 const DropdownMenuSub: React.FC<DropdownMenuSubProps> = (props) => <MenuPrimitive.SubmenuRoot {...props} />;
 DropdownMenuSub.displayName = 'DropdownMenuSub';
 
@@ -266,6 +325,7 @@ interface DropdownMenuSubTriggerProps extends Omit<
   className?: string;
 }
 
+/** The item that opens a submenu on hover or arrow-key navigation, suffixed with a chevron. */
 const DropdownMenuSubTrigger = (props: DropdownMenuSubTriggerProps) => {
   const { className, children, ...subTriggerProps } = props;
   return (
@@ -294,14 +354,29 @@ interface DropdownMenuSubContentProps extends Omit<
 > {
   className?: string;
   style?: React.CSSProperties;
+  /** The element the submenu portal is appended to. Defaults to the document body. */
   container?: React.ComponentProps<typeof MenuPrimitive.Portal>['container'];
+  /** Keeps the portal content mounted in the DOM while the submenu is closed. */
   keepMounted?: React.ComponentProps<typeof MenuPrimitive.Portal>['keepMounted'];
   // Positioner props
+  /**
+   * Distance in pixels between the submenu and its trigger.
+   * @default 2
+   */
   sideOffset?: React.ComponentProps<typeof MenuPrimitive.Positioner>['sideOffset'];
+  /**
+   * Additional offset in pixels along the alignment axis.
+   * @default -4
+   */
   alignOffset?: React.ComponentProps<typeof MenuPrimitive.Positioner>['alignOffset'];
+  /**
+   * Minimum distance in pixels kept from the viewport edges when avoiding collisions.
+   * @default 10
+   */
   collisionPadding?: React.ComponentProps<typeof MenuPrimitive.Positioner>['collisionPadding'];
 }
 
+/** The submenu popup. Inherits `size`, `color` and `variant` from the parent `Content`. */
 const DropdownMenuSubContent = (props: DropdownMenuSubContentProps) => {
   const {
     className,
@@ -353,6 +428,7 @@ interface DropdownMenuSeparatorProps extends Omit<
   className?: string;
 }
 
+/** A visual divider between items or groups. */
 const DropdownMenuSeparator = (props: DropdownMenuSeparatorProps) => (
   <MenuPrimitive.Separator
     {...props}

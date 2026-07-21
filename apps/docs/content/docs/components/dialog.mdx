@@ -26,16 +26,45 @@ import { Button, Dialog } from '@aussieljk/frosted';
 </Dialog.Root>;
 ```
 
-## Parts
+## API reference
 
-| Part                 | Purpose                                                     |
-| -------------------- | ----------------------------------------------------------- |
-| `Dialog.Root`        | State container — `open`, `defaultOpen`, `onOpenChange`     |
-| `Dialog.Trigger`     | Opens the dialog; wraps your own element (`nativeButton` when the child is a button) |
-| `Dialog.Content`     | The modal panel — `size`, `align`                           |
-| `Dialog.Title`       | Accessible title                                            |
-| `Dialog.Description` | Accessible description                                      |
-| `Dialog.Close`       | Closes the dialog; wraps your own element                   |
+### Dialog.Root
 
-Related: `AlertDialog` for confirmations that interrupt the user, `Sheet` and `Drawer` for
+State container for the dialog.
+
+<PropsTable component="Dialog.Root" />
+
+### Dialog.Trigger
+
+Opens the dialog; wraps your own element (set `nativeButton` when the child is a button).
+
+<PropsTable component="Dialog.Trigger" />
+
+### Dialog.Content
+
+The modal panel.
+
+<PropsTable component="Dialog.Content" />
+
+### Dialog.Title
+
+Accessible title, rendered as a `Heading`.
+
+<PropsTable component="Dialog.Title" />
+
+### Dialog.Description
+
+Accessible description, rendered as a `Text`.
+
+<PropsTable component="Dialog.Description" />
+
+### Dialog.Close
+
+Closes the dialog; wraps your own element.
+
+<PropsTable component="Dialog.Close" />
+
+## Related
+
+`AlertDialog` for confirmations that interrupt the user, `Sheet` and `Drawer` for
 edge-anchored panels.

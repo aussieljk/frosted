@@ -71,6 +71,18 @@ type CheckboxProps = Omit<PropsWithoutColor<typeof CheckboxPrimitive.Root>, 'cla
   Omit<React.HTMLAttributes<HTMLSpanElement>, 'color'> &
   CheckboxOwnProps;
 
+/**
+ * A checkbox with checked, unchecked and indeterminate states. Can be controlled via
+ * `checked`/`onCheckedChange` or left uncontrolled with `defaultChecked`. When given children, they are
+ * rendered as a clickable label next to the box.
+ *
+ * @example
+ * ```tsx
+ * <Checkbox defaultChecked onCheckedChange={setAgreed}>
+ *   I agree to the terms
+ * </Checkbox>
+ * ```
+ */
 const Checkbox = (props: CheckboxProps) => {
   const {
     children,

@@ -20,9 +20,35 @@ type AlertDialogRootOwnProps = Omit<
   'className' | 'render' | 'children' | 'handle'
 >;
 interface AlertDialogRootProps<T = unknown> extends AlertDialogRootOwnProps {
+  /** Dialog content, or a render function that receives the `payload` passed by the opening trigger or handle. */
   children?: React.ReactNode | ((props: { payload: T | undefined }) => React.ReactNode);
+  /** A handle created with `AlertDialog.createHandle()` for opening the dialog imperatively with a typed payload. */
   handle?: AlertDialogHandle<T>;
 }
+
+/**
+ * A modal dialog for interrupting confirmations that require a response. Unlike `Dialog`, it cannot be
+ * dismissed by clicking outside. Can be controlled via `open`/`onOpenChange` or left uncontrolled.
+ *
+ * @example
+ * ```tsx
+ * <AlertDialog.Root>
+ *   <AlertDialog.Trigger>
+ *     <Button color="danger">Delete</Button>
+ *   </AlertDialog.Trigger>
+ *   <AlertDialog.Content>
+ *     <AlertDialog.Title>Delete post?</AlertDialog.Title>
+ *     <AlertDialog.Description>This action cannot be undone.</AlertDialog.Description>
+ *     <AlertDialog.Cancel>
+ *       <Button variant="soft">Cancel</Button>
+ *     </AlertDialog.Cancel>
+ *     <AlertDialog.Action>
+ *       <Button color="danger">Delete</Button>
+ *     </AlertDialog.Action>
+ *   </AlertDialog.Content>
+ * </AlertDialog.Root>
+ * ```
+ */
 function AlertDialogRoot<T = unknown>(props: AlertDialogRootProps<T>) {
   return <AlertDialogPrimitive.Root {...(props as React.ComponentProps<typeof AlertDialogPrimitive.Root>)} />;
 }
@@ -34,10 +60,16 @@ interface AlertDialogTriggerProps<T = unknown> extends Omit<
   'render' | 'className' | 'handle' | 'payload'
 > {
   className?: string;
+  /** A handle created with `AlertDialog.createHandle()`, for opening a dialog rendered elsewhere. */
   handle?: AlertDialogHandle<T>;
+  /** Data passed to the dialog's `children` render function when this trigger opens it. */
   payload?: T;
 }
 
+/**
+ * The button that opens the alert dialog. Renders its child element as the trigger, so pass exactly one
+ * element (e.g. a `Button`).
+ */
 function AlertDialogTrigger<T = unknown>({ children, ...props }: AlertDialogTriggerProps<T>) {
   return (
     <AlertDialogPrimitive.Trigger
@@ -66,10 +98,17 @@ interface AlertDialogContentProps
     AlertDialogContentOwnProps {
   className?: string;
   style?: React.CSSProperties;
+  /** The element the dialog portal is appended to. Defaults to the document body. */
   container?: PortalProps['container'];
+  /** Keeps the portal content mounted in the DOM while the dialog is closed. */
   keepMounted?: PortalProps['keepMounted'];
 }
 
+/**
+ * The alert dialog panel. Rendered in a portal with a backdrop, and re-wrapped in the current `Theme`.
+ * Keyboard events do not propagate past it, so parent floating components (e.g. menus) ignore typing
+ * inside the dialog.
+ */
 const AlertDialogContent = (props: AlertDialogContentProps) => {
   const {
     className,
@@ -108,6 +147,10 @@ AlertDialogContent.displayName = 'AlertDialogContent';
 // Title
 type AlertDialogTitleProps = React.ComponentProps<typeof Heading>;
 
+/**
+ * The dialog's accessible title, rendered as a `Heading`. Its size is derived from the `Content` size
+ * unless overridden with the `size` prop.
+ */
 const AlertDialogTitle = ({ size: sizeProp, className, ...props }: AlertDialogTitleProps) => {
   const { size: contextSize } = React.useContext(AlertDialogContentContext);
   let size: AlertDialogTitleProps['size'];
@@ -136,6 +179,10 @@ AlertDialogTitle.displayName = 'AlertDialogTitle';
 // Description
 type AlertDialogDescriptionProps = TextProps;
 
+/**
+ * The dialog's accessible description, rendered as a paragraph of `Text`. Its size is derived from the
+ * `Content` size unless overridden with the `size` prop.
+ */
 const AlertDialogDescription = ({ size: sizeProp, className, ...props }: AlertDialogDescriptionProps) => {
   const { size: contextSize } = React.useContext(AlertDialogContentContext);
   let size: AlertDialogDescriptionProps['size'];
@@ -174,6 +221,7 @@ interface AlertDialogCloseProps extends Omit<
   className?: string;
 }
 
+/** Closes the dialog when activated. Renders its child element as the close button, so pass exactly one element. */
 const AlertDialogClose = ({ children, ...props }: AlertDialogCloseProps) => (
   <AlertDialogPrimitive.Close {...props} render={children as React.ReactElement} />
 );
@@ -181,15 +229,18 @@ AlertDialogClose.displayName = 'AlertDialogClose';
 
 // Action (backwards compatibility alias for Close)
 interface AlertDialogActionProps extends AlertDialogCloseProps {}
+/** The confirming action button. Alias of `Close`, kept for radix-ui API compatibility. */
 const AlertDialogAction = AlertDialogClose;
 AlertDialogAction.displayName = 'AlertDialogAction';
 
 // Cancel (backwards compatibility alias for Close)
 interface AlertDialogCancelProps extends AlertDialogCloseProps {}
+/** The cancelling action button. Alias of `Close`, kept for radix-ui API compatibility. */
 const AlertDialogCancel = AlertDialogClose;
 AlertDialogCancel.displayName = 'AlertDialogCancel';
 
 // createHandle export
+/** Creates a detached handle for opening an alert dialog imperatively, optionally with a typed payload. */
 const createHandle = AlertDialogPrimitive.createHandle;
 
 export {

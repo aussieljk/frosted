@@ -16,6 +16,16 @@ type SliderProps = Omit<PropsWithoutColor<typeof SliderPrimitive.Root>, 'childre
     inputRef?: React.Ref<HTMLInputElement>;
   };
 
+/**
+ * A control for selecting a value — or a range — by dragging thumbs along a
+ * track. Wraps the Base UI Slider primitive.
+ *
+ * Pass a number as `value`/`defaultValue` for a single thumb, or an array to
+ * render one thumb per entry. Supports controlled and uncontrolled usage.
+ *
+ * @example
+ * <Slider defaultValue={50} onValueChange={handleChange} />
+ */
 const Slider = (props: SliderProps) => {
   const {
     className,

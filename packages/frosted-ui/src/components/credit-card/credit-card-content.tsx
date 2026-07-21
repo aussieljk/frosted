@@ -19,6 +19,10 @@ const stateAttributesMapping = {
   face: (value: unknown) => ({ 'data-face': String(value) }),
 };
 
+/**
+ * The card container that performs the 3D flip between `Front` and `Back`, driven by a `data-face`
+ * attribute (falls back to an opacity swap under reduced motion).
+ */
 const CreditCardContent = React.forwardRef<HTMLDivElement, CreditCardContentProps>(
   function CreditCardContent(props, forwardedRef) {
     const { render, color, ...elementProps } = props;

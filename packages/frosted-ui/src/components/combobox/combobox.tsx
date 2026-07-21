@@ -18,6 +18,7 @@ import {
 import type { GetPropDefTypes } from '../../helpers';
 
 // Re-export useFilter from Base UI (useFilteredItems may be added in a later Base UI version)
+/** Returns locale-aware string matchers (`contains`, `startsWith`, ...) for filtering combobox items. */
 const { useFilter } = ComboboxPrimitive;
 export { useFilter };
 
@@ -66,6 +67,17 @@ type ComboboxRootProps<Value = unknown, Multiple extends boolean | undefined = f
  *
  * All Base UI Combobox Root props are forwarded, including `name`, `required`,
  * `readOnly`, `disabled`, `autoHighlight`, `openOnInputClick`, `filter`, etc.
+ *
+ * @example
+ * ```tsx
+ * <Combobox.Root items={['Apple', 'Banana', 'Cherry']}>
+ *   <Combobox.Input placeholder="Pick a fruit..." />
+ *   <Combobox.Content>
+ *     <Combobox.Empty>No results</Combobox.Empty>
+ *     <Combobox.List>{(item: string) => <Combobox.Item key={item} value={item}>{item}</Combobox.Item>}</Combobox.List>
+ *   </Combobox.Content>
+ * </Combobox.Root>
+ * ```
  */
 function ComboboxRoot<Value = unknown, Multiple extends boolean | undefined = false>(
   props: ComboboxRootProps<Value, Multiple>,
@@ -173,6 +185,7 @@ ComboboxInputRoot.displayName = 'ComboboxInputRoot';
 // InputSlot (re-export of TextFieldSlot for custom slots)
 // ============================================================================
 
+/** A `TextField.Slot` alias for placing custom leading/trailing content inside `Combobox.InputRoot`. */
 const ComboboxInputSlot = TextFieldSlot;
 
 // ============================================================================
@@ -215,6 +228,7 @@ interface ComboboxChipsInputProps extends Omit<React.ComponentProps<typeof Combo
   className?: string;
 }
 
+/** The text input used inside `Combobox.Chips` for typing while multi-selecting. */
 const ComboboxChipsInput = React.forwardRef<HTMLInputElement, ComboboxChipsInputProps>((props, forwardedRef) => {
   const { className, ...rest } = props;
   return (
@@ -232,9 +246,11 @@ ComboboxChipsInput.displayName = 'ComboboxChipsInput';
 // ============================================================================
 
 interface ComboboxTriggerProps extends Omit<React.ComponentProps<typeof ComboboxPrimitive.Trigger>, 'className'> {
+  /** The element rendered as the trigger, e.g. `<Button><Combobox.Value /></Button>`. */
   render: React.ReactElement;
 }
 
+/** A button that opens the popup, for select-like usage without a free-text input. */
 const ComboboxTrigger = (props: ComboboxTriggerProps) => {
   const { render, ...triggerProps } = props;
   return <ComboboxPrimitive.Trigger render={render} {...triggerProps} />;
@@ -252,6 +268,7 @@ interface ComboboxValueProps extends Omit<
   className?: string;
 }
 
+/** Displays the currently selected value (or a placeholder), typically inside `Combobox.Trigger`. */
 const ComboboxValue = (props: ComboboxValueProps) => {
   const { className, ...valueProps } = props;
   return (
@@ -270,6 +287,7 @@ interface ComboboxIconProps extends Omit<React.ComponentProps<typeof ComboboxPri
   className?: string;
 }
 
+/** A decorative icon slot, e.g. a dropdown chevron inside a custom trigger. */
 const ComboboxIcon = React.forwardRef<HTMLDivElement, ComboboxIconProps>((props, forwardedRef) => {
   const { className, ...iconProps } = props;
   return (
@@ -293,6 +311,7 @@ interface ComboboxClearProps extends Omit<
   className?: string;
 }
 
+/** Clears the combobox value when activated. Renders its child element as the clear button. */
 function ComboboxClear({ children, ...props }: ComboboxClearProps) {
   return <ComboboxPrimitive.Clear {...props} render={children as React.ReactElement} />;
 }
@@ -307,13 +326,33 @@ interface ComboboxContentProps
     ComboboxContentOwnProps {
   className?: string;
   style?: React.CSSProperties;
+  /** The element the popup portal is appended to. Defaults to the document body. */
   container?: React.ComponentProps<typeof ComboboxPrimitive.Portal>['container'];
+  /** Keeps the portal content mounted in the DOM while the popup is closed. */
   keepMounted?: React.ComponentProps<typeof ComboboxPrimitive.Portal>['keepMounted'];
+  /** The element or area the popup is positioned against. Defaults to the `InputRoot`/`Chips` element. */
   anchor?: React.ComponentProps<typeof ComboboxPrimitive.Positioner>['anchor'];
+  /**
+   * The side of the anchor the popup is placed on.
+   * @default 'bottom'
+   */
   side?: React.ComponentProps<typeof ComboboxPrimitive.Positioner>['side'];
+  /**
+   * Distance in pixels between the popup and the anchor.
+   * @default 4
+   */
   sideOffset?: React.ComponentProps<typeof ComboboxPrimitive.Positioner>['sideOffset'];
+  /**
+   * How the popup is aligned along the anchor.
+   * @default 'start'
+   */
   align?: React.ComponentProps<typeof ComboboxPrimitive.Positioner>['align'];
+  /** Additional offset in pixels along the alignment axis. */
   alignOffset?: React.ComponentProps<typeof ComboboxPrimitive.Positioner>['alignOffset'];
+  /**
+   * Minimum distance in pixels kept from the viewport edges when avoiding collisions.
+   * @default 10
+   */
   collisionPadding?: React.ComponentProps<typeof ComboboxPrimitive.Positioner>['collisionPadding'];
 }
 
@@ -342,7 +381,7 @@ const ComboboxContent = (props: ComboboxContentProps) => {
     collisionPadding = 10,
     ...contentProps
   } = props;
-  const resolvedColor = color ?? themeContext.accentColor;
+  const resolvedColor = color ?? (themeContext.accentColor as NonNullable<typeof color>); // custom accents only feed data-accent-color
 
   return (
     <ComboboxPrimitive.Portal container={container} keepMounted={keepMounted}>
@@ -391,6 +430,7 @@ interface ComboboxListProps extends Omit<React.ComponentProps<typeof ComboboxPri
   className?: string;
 }
 
+/** The scrollable list of options. Accepts a render function child to map each item to an `Item`. */
 const ComboboxList = (props: ComboboxListProps) => {
   const { className, ...listProps } = props;
   return <ComboboxPrimitive.List {...listProps} className={classNames('fui-ComboboxList', className)} />;
@@ -406,6 +446,7 @@ interface ComboboxItemProps
   className?: string;
 }
 
+/** A selectable option identified by its `value`. Shows a check indicator when selected. */
 const ComboboxItem = React.forwardRef<HTMLDivElement, ComboboxItemProps>((props, forwardedRef) => {
   const { className, color, children, ...itemProps } = props;
   return (
@@ -435,6 +476,7 @@ interface ComboboxItemIndicatorProps extends Omit<
   className?: string;
 }
 
+/** The selected-state indicator of an item. Defaults to a check icon when no children are given. */
 const ComboboxItemIndicator = (props: ComboboxItemIndicatorProps) => {
   const { className, children, ...indicatorProps } = props;
   return (
@@ -456,6 +498,7 @@ interface ComboboxEmptyProps extends Omit<
   className?: string;
 }
 
+/** Rendered inside the popup only when the query produces no matching items. */
 const ComboboxEmpty = (props: ComboboxEmptyProps) => {
   const { className, ...emptyProps } = props;
   return <ComboboxPrimitive.Empty {...emptyProps} className={classNames('fui-ComboboxEmpty', className)} />;
@@ -473,6 +516,7 @@ interface ComboboxGroupProps extends Omit<
   className?: string;
 }
 
+/** Groups related items, typically labelled with `GroupLabel`. */
 const ComboboxGroup = (props: ComboboxGroupProps) => {
   const { className, ...groupProps } = props;
   return (
@@ -495,6 +539,7 @@ interface ComboboxGroupLabelProps extends Omit<
   className?: string;
 }
 
+/** An accessible label for a `Group` of items. */
 const ComboboxGroupLabel = (props: ComboboxGroupLabelProps) => {
   const { className, ...groupLabelProps } = props;
   return (
@@ -511,9 +556,11 @@ ComboboxGroupLabel.displayName = 'ComboboxGroupLabel';
 // ============================================================================
 
 interface ComboboxCollectionProps {
+  /** Render function called for each item in the enclosing group's collection. */
   children: (item: unknown, index: number) => React.ReactNode;
 }
 
+/** Iterates the items of a grouped list without rendering an element of its own. Use inside `Group`. */
 const ComboboxCollection = (props: ComboboxCollectionProps) => {
   return <ComboboxPrimitive.Collection {...props} />;
 };
@@ -530,6 +577,7 @@ interface ComboboxSeparatorProps extends Omit<
   className?: string;
 }
 
+/** A visual divider between items or groups. */
 const ComboboxSeparator = (props: ComboboxSeparatorProps) => {
   const { className, ...separatorProps } = props;
   return (
@@ -613,6 +661,7 @@ ComboboxChips.displayName = 'ComboboxChips';
 // useComboboxAnchor – ref to attach to Chips and pass to Content anchor for positioning
 // ============================================================================
 
+/** Creates a ref to attach to `Combobox.Chips` and pass as the `Content` anchor for custom positioning. */
 function useComboboxAnchor() {
   return React.useRef<HTMLDivElement | null>(null);
 }
@@ -630,6 +679,7 @@ interface ComboboxChipProps
   showRemove?: boolean;
 }
 
+/** A removable chip representing one selected value in a multi-select combobox. */
 const ComboboxChip = (props: ComboboxChipProps) => {
   const {
     className,

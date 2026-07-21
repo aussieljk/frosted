@@ -24,9 +24,20 @@ type DateRangePickerFUIProps = GetPropDefTypes<typeof datePickerPropDefs>;
 
 interface DateRangePickerProps<T extends DateValue> extends AriaDateRangePickerProps<T>, DateRangePickerFUIProps {
   className?: string;
+  /** Called with the new `{ start, end }` range when both dates are set, or `null` when cleared. */
   onChange?: (value: RangeValue<MappedDateValue<T>> | null) => void;
 }
 
+/**
+ * Two `DateField`s (start and end) combined with a calendar button that opens a `RangeCalendar` in a
+ * popover. Built on React Aria, so it accepts its date range picker props (`value`, `onChange`,
+ * `minValue`, ...) using `@internationalized/date` values.
+ *
+ * @example
+ * ```tsx
+ * <DateRangePicker value={range} onChange={setRange} aria-label="Booking dates" />
+ * ```
+ */
 export function DateRangePicker<T extends DateValue>(props: DateRangePickerProps<T>) {
   const { className, ...otherProps } = props;
 

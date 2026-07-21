@@ -4,7 +4,12 @@ import { DirectionProvider, mergeProps, useRender } from '@base-ui/react';
 import { Tooltip as TooltipPrimitive } from '@base-ui/react/tooltip';
 import classNames from 'classnames';
 import * as React from 'react';
-import { getMatchingGrayColor, themePropDefs } from './theme-options';
+import {
+  createAccentSeedStyle,
+  createGraySeedStyle,
+  darkPageBackgroundFromColor,
+} from './helpers/tailwind-palette';
+import { getMatchingGrayColor, isCustomAccentColor, isCustomGrayColor, themePropDefs } from './theme-options';
 
 import type { ThemeOptions } from './theme-options';
 import { WithThemeEvents } from './use-theme-events';
@@ -104,6 +109,17 @@ const ThemeRoot = (props: ThemeRootProps) => {
 
   const resolvedGrayColor = grayColor === 'auto' ? getMatchingGrayColor(accentColor) : grayColor;
 
+  // Custom gray colors have no global `--{name}-1` token, so compute the dark page
+  // background directly (it is applied to <body>, outside any theme scope).
+  let darkPageBackground = `var(--${resolvedGrayColor}-1)`;
+  if (isCustomGrayColor(resolvedGrayColor)) {
+    try {
+      darkPageBackground = darkPageBackgroundFromColor(resolvedGrayColor);
+    } catch {
+      darkPageBackground = 'var(--gray-1)';
+    }
+  }
+
   return (
     <>
       {appearance !== 'inherit' && (
@@ -118,7 +134,7 @@ const ThemeRoot = (props: ThemeRootProps) => {
           dangerouslySetInnerHTML={{
             __html: `
 :root, .light, .light-theme { --color-page-background: white; }
-.dark, .dark-theme { --color-page-background: var(--${resolvedGrayColor}-1); }
+.dark, .dark-theme { --color-page-background: ${darkPageBackground}; }
 body { background-color: var(--color-page-background); }
 `,
           }}
@@ -206,18 +222,46 @@ const ThemeImpl = (props: ThemeImplProps) => {
   const shouldHaveBackground =
     !isRoot && (hasBackground === true || (hasBackground !== false && (isExplicitAppearance || isExplicitGrayColor)));
 
+  // Custom (non-named) colors render as data-*-color="custom" plus inline seed vars;
+  // the runtime blocks in tailwind-color.css expand them into the full scales.
+  const custom = React.useMemo(() => {
+    const style: Record<string, string> = {};
+    let accentAttr = accentColor;
+    let grayAttr = resolvedGrayColor;
+    if (isCustomAccentColor(accentColor)) {
+      try {
+        Object.assign(style, createAccentSeedStyle(accentColor));
+        accentAttr = 'custom';
+      } catch {
+        console.warn(`frosted-ui: unsupported accentColor "${accentColor}". Use #hex, rgb() or oklch().`);
+        accentAttr = themePropDefs.accentColor.default;
+      }
+    }
+    if (isCustomGrayColor(resolvedGrayColor)) {
+      try {
+        Object.assign(style, createGraySeedStyle(resolvedGrayColor));
+        grayAttr = 'custom';
+      } catch {
+        console.warn(`frosted-ui: unsupported grayColor "${resolvedGrayColor}". Use #hex, rgb() or oklch().`);
+        grayAttr = themePropDefs.grayColor.default;
+      }
+    }
+    return { style: Object.keys(style).length > 0 ? style : undefined, accentAttr, grayAttr };
+  }, [accentColor, resolvedGrayColor]);
+
   const element = useRender({
     render,
     props: mergeProps(
       themeProps as React.ComponentProps<'div'>,
       {
         'data-is-root-theme': isRoot ? 'true' : 'false',
-        'data-accent-color': accentColor,
+        'data-accent-color': custom.accentAttr,
         'data-danger-color': dangerColor,
         'data-warning-color': warningColor,
         'data-success-color': successColor,
         'data-info-color': infoColor,
-        'data-gray-color': resolvedGrayColor,
+        'data-gray-color': custom.grayAttr,
+        ...(custom.style ? { style: custom.style as React.CSSProperties } : null),
         // for nested `Theme` background
         'data-has-background': shouldHaveBackground ? 'true' : 'false',
         className: classNames(

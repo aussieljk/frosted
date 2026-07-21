@@ -56,6 +56,25 @@ interface OTPFieldRootOwnProps extends Omit<PrimitiveRootProps, 'render' | 'leng
 }
 type OTPFieldRootProps = OTPFieldRootOwnProps & OTPFieldContextValue;
 
+/**
+ * One-time password input split into individual character slots. Wraps Base UI's
+ * `OTPField.Root` while keeping the legacy `input-otp`-style API (`maxLength`, `onChange`,
+ * `onComplete`, `pattern`, `render`).
+ *
+ * Supports controlled (`value` + `onValueChange`) and uncontrolled (`defaultValue`) usage
+ * via the underlying Base UI props.
+ *
+ * @example
+ * ```tsx
+ * <OtpField.Root maxLength={6} onComplete={(code) => verify(code)}>
+ *   <OtpField.Group>
+ *     {Array.from({ length: 6 }, (_, i) => (
+ *       <OtpField.Slot key={i} />
+ *     ))}
+ *   </OtpField.Group>
+ * </OtpField.Root>
+ * ```
+ */
 const OTPFieldRoot = ({
   containerClassName,
   className,
@@ -118,6 +137,10 @@ OTPFieldRoot.displayName = 'OTPFieldRoot';
 
 type OTPFieldGroupProps = PropsWithoutColor<'div'> & Partial<OTPFieldContextValue>;
 
+/**
+ * Visually groups adjacent slots and applies the accent color from the surrounding Root
+ * (overridable via its own `color` prop).
+ */
 const OTPFieldGroup = ({ className, color, ...props }: OTPFieldGroupProps) => {
   const context = React.useContext(OTPFieldContext);
   const resolvedColor = color ?? context?.color ?? otpFieldPropDefs.color.default;
@@ -131,6 +154,11 @@ interface OTPFieldSlotProps
   className?: string;
 }
 
+/**
+ * A single character input of the OTP field. Wraps Base UI's `OTPField.Input`, so each slot is
+ * a real `<input>` with a native caret. Legacy `input-otp` slot-state props (`char`, `isActive`,
+ * `placeholderChar`, `hasFakeCaret`) are accepted for backwards compatibility but ignored.
+ */
 // The legacy slot state props are intentionally destructured away: slots now render their own character.
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const OTPFieldSlot = ({ char, hasFakeCaret, isActive, placeholderChar, className, ...props }: OTPFieldSlotProps) => {
@@ -140,6 +168,7 @@ OTPFieldSlot.displayName = 'OTPFieldSlot';
 
 type OTPFieldSeparatorProps = React.ComponentProps<'div'>;
 
+/** Decorative separator (with `role="separator"`) rendered between slot groups. */
 const OTPFieldSeparator = ({ ...props }: OTPFieldSeparatorProps) => (
   <div role="separator" className="fui-OTPFieldSeparator" {...props}></div>
 );

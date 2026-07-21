@@ -85,7 +85,8 @@ interface EmptyStateMediaProps extends Omit<React.ComponentProps<'div'>, 'color'
    */
   variant?: EmptyStateMediaVariant;
   /**
-   * The accent color for the media container (only applies to 'icon' variant).
+   * The accent color of the media container background (visible with the 'soft' variant).
+   * @default 'gray'
    */
   color?: EmptyStateMediaColor;
 }
@@ -95,13 +96,10 @@ interface EmptyStateMediaProps extends Omit<React.ComponentProps<'div'>, 'color'
  *
  * @example
  * ```tsx
- * <EmptyState.Media variant="icon" color="blue">
+ * <EmptyState.Media color="blue">
  *   <SearchIcon />
  * </EmptyState.Media>
  * ```
- *
- * @param variant - Visual variant ('ghost' or 'soft'). Defaults to 'soft'.
- * @param color - Accent color for the icon variant.
  */
 const EmptyStateMedia = React.forwardRef<HTMLDivElement, EmptyStateMediaProps>((props, forwardedRef) => {
   const { className, variant = 'soft', color = 'gray', ...mediaProps } = props;
@@ -123,16 +121,13 @@ EmptyStateMedia.displayName = 'EmptyStateMedia';
 type EmptyStateTitleProps = TextProps;
 
 /**
- * The title of an empty state. Renders a `<div>` element styled with `<Text>`.
+ * The title of an empty state. Renders a `<div>` element styled with `<Text>`, defaulting to size '4'
+ * and semi-bold weight.
  *
  * @example
  * ```tsx
  * <EmptyState.Title>No items found</EmptyState.Title>
  * ```
- *
- * @param size - Text size ('1' - '9'). Defaults to '2'.
- * @param weight - Font weight. Defaults to 'medium'.
- * @param color - Text color.
  */
 const EmptyStateTitle = (props: EmptyStateTitleProps) => {
   const { className, size = '4', weight = 'semi-bold', ...titleProps } = props;
@@ -155,7 +150,8 @@ EmptyStateTitle.displayName = 'EmptyStateTitle';
 type EmptyStateDescriptionProps = TextProps;
 
 /**
- * The description text of an empty state. Renders a `<p>` element styled with `<Text>`.
+ * The description text of an empty state. Renders a `<p>` element styled with `<Text>`, defaulting to
+ * size '2' and gray color.
  *
  * @example
  * ```tsx
@@ -163,10 +159,6 @@ type EmptyStateDescriptionProps = TextProps;
  *   Get started by creating your first item.
  * </EmptyState.Description>
  * ```
- *
- * @param size - Text size ('1' - '9'). Defaults to '2'.
- * @param weight - Font weight.
- * @param color - Text color. Defaults to 'gray'.
  */
 const EmptyStateDescription = (props: EmptyStateDescriptionProps) => {
   const { className, size = '2', color = 'gray', ...descriptionProps } = props;

@@ -1,4 +1,4 @@
-module.exports = () => ({
+const postcssRemoveP3 = () => ({
   postcssPlugin: 'postcss-remove-p3',
   OnceExit(root) {
     const toRemove = [];
@@ -38,4 +38,6 @@ module.exports = () => ({
   },
 });
 
-module.exports.postcss = true;
+postcssRemoveP3.postcss = true;
+
+export default postcssRemoveP3;

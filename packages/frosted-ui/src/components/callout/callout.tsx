@@ -18,6 +18,21 @@ const CalloutContext = React.createContext<CalloutContextValue>({});
 
 interface CalloutRootProps extends PropsWithoutColor<'div'>, CalloutContextValue {}
 
+/**
+ * A short attention-drawing message, e.g. a warning or info banner. Compose with `Callout.Icon`,
+ * `Callout.Title`, `Callout.Description` and `Callout.Actions`; the root's `color` is shared with all parts.
+ *
+ * @example
+ * ```tsx
+ * <Callout.Root color="warning">
+ *   <Callout.Icon>
+ *     <ExclamationTriangleIcon />
+ *   </Callout.Icon>
+ *   <Callout.Title>Your trial ends soon</Callout.Title>
+ *   <Callout.Description>Upgrade to keep access to premium features.</Callout.Description>
+ * </Callout.Root>
+ * ```
+ */
 const CalloutRoot = (props: CalloutRootProps) => {
   const { children, className, color = calloutRootPropDefs.color.default, ...rootProps } = props;
   return (
@@ -30,6 +45,7 @@ CalloutRoot.displayName = 'CalloutRoot';
 
 interface CalloutIconProps extends PropsWithoutColor<'div'> {}
 
+/** A slot for the callout's leading icon, colored to match the callout. */
 const CalloutIcon = (props: CalloutIconProps) => {
   const { color } = React.useContext(CalloutContext);
   return (
@@ -46,6 +62,7 @@ CalloutIcon.displayName = 'CalloutIcon';
 
 type CalloutTitleProps = TextProps;
 
+/** The callout's title, rendered as semi-bold high-contrast text. */
 const CalloutTitle = (props: CalloutTitleProps) => {
   const { color } = React.useContext(CalloutContext);
   return (
@@ -64,6 +81,7 @@ CalloutTitle.displayName = 'CalloutTitle';
 
 type CalloutDescriptionProps = TextProps;
 
+/** The callout's supporting text, rendered as a paragraph in the callout color. */
 const CalloutDescription = (props: CalloutDescriptionProps) => {
   const { color } = React.useContext(CalloutContext);
   return (
@@ -80,6 +98,7 @@ CalloutDescription.displayName = 'CalloutDescription';
 
 interface CalloutActionsProps extends PropsWithoutColor<'div'> {}
 
+/** A layout container for one or more `Callout.Action` buttons. */
 const CalloutActions = (props: CalloutActionsProps) => {
   return <div {...props} className={classNames('fui-CalloutActions', props.className)} />;
 };
@@ -89,11 +108,24 @@ type CalloutActionVariant = 'primary' | 'secondary';
 
 type CalloutActionProps = Omit<PropsWithoutColor<typeof Button>, 'className'> &
   Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'color' | 'disabled'> & {
+    /**
+     * The visual prominence of the action.
+     * @default 'primary'
+     */
     variant?: CalloutActionVariant;
+    /**
+     * Shows a centered spinner and hides the button content (kept accessible via a visually hidden copy).
+     * Also disables the button unless `disabled` is set explicitly.
+     * @default false
+     */
     loading?: boolean;
     className?: string;
   };
 
+/**
+ * An action button inside `Callout.Actions`, with a built-in `loading` state. Use `render` to compose
+ * it with another element, e.g. `render={<a href="..." />}`.
+ */
 const CalloutAction = (props: CalloutActionProps) => {
   const {
     children,

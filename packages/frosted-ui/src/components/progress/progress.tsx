@@ -9,6 +9,16 @@ import { progressPropDefs } from './progress.props';
 type ProgressOwnProps = GetPropDefTypes<typeof progressPropDefs>;
 interface ProgressProps extends Omit<PropsWithoutColor<typeof Meter.Root>, 'children'>, ProgressOwnProps {}
 
+/**
+ * Horizontal bar that visualizes a value against a maximum. Built on Base UI's `Meter`
+ * (rendered with meter/graphical semantics, not `role="progressbar"`); the indicator width
+ * is clamped to 0-100% of `max`. `value` defaults to 0 and `max` to 100.
+ *
+ * @example
+ * ```tsx
+ * <Progress value={40} max={100} />
+ * ```
+ */
 const Progress = (props: ProgressProps) => {
   const {
     className,

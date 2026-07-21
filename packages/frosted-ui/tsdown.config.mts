@@ -2,7 +2,7 @@ import { defineConfig } from 'tsdown';
 
 export default defineConfig({
   entry: ['src/**/*.{ts,tsx}', '!src/**/*.stories.*', '!src/**/*.test.*', '!src/test-setup.ts'],
-  format: ['esm', 'cjs'],
+  format: ['esm'],
   outDir: 'dist',
   unbundle: true,
   dts: true,

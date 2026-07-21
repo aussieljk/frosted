@@ -21,6 +21,27 @@ interface RadioButtonGroupRootProps<Value = unknown>
   style?: React.CSSProperties;
 }
 
+/**
+ * A single-select group whose options render as card/button-like elements instead of small
+ * radio circles. Wraps Base UI's `RadioGroup`; supports controlled (`value` + `onValueChange`)
+ * and uncontrolled (`defaultValue`) usage.
+ *
+ * @example
+ * ```tsx
+ * <RadioButtonGroup.Root defaultValue="monthly">
+ *   <RadioButtonGroup.Item value="monthly">
+ *     <div>
+ *       Monthly <RadioButtonGroup.Icon />
+ *     </div>
+ *   </RadioButtonGroup.Item>
+ *   <RadioButtonGroup.Item value="yearly">
+ *     <div>
+ *       Yearly <RadioButtonGroup.Icon />
+ *     </div>
+ *   </RadioButtonGroup.Item>
+ * </RadioButtonGroup.Root>
+ * ```
+ */
 function RadioButtonGroupRoot<Value = unknown>(props: RadioButtonGroupRootProps<Value>) {
   const {
     className,
@@ -51,6 +72,11 @@ interface RadioButtonGroupItemProps extends Omit<
   style?: React.CSSProperties;
 }
 
+/**
+ * A selectable option in the group. Wraps Base UI's `Radio.Root` and merges radio behavior
+ * onto its single child element; a selection-outline overlay matching the child's border is
+ * appended to that child automatically.
+ */
 const RadioButtonGroupItem = (props: RadioButtonGroupItemProps) => {
   const { children, className, style, ...itemProps } = props;
 
@@ -68,6 +94,10 @@ RadioButtonGroupItem.displayName = 'RadioButtonGroupItem';
 
 interface RadioButtonGroupIconProps extends Omit<React.ComponentProps<'div'>, 'children' | 'color'> {}
 
+/**
+ * Decorative checkmark indicator (hidden from assistive technology) shown inside an item
+ * when it is selected, colored with the group's accent color.
+ */
 const RadioButtonGroupIcon = (props: RadioButtonGroupIconProps) => {
   const { color, highContrast } = React.useContext(RadioButtonGroupContext);
 

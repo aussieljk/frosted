@@ -27,11 +27,20 @@ function clearOwnershipForPosition(position: ToastPosition) {
 // The provider sets this on mount so imperative calls use the right default
 let _defaultPosition: ToastPosition = 'bottom-right';
 
+/**
+ * The kind of toast, which determines its status icon (and rendering for 'custom').
+ */
 type ToastType = 'success' | 'error' | 'warning' | 'loading' | 'info' | 'default' | 'custom';
 
+/**
+ * Props passed to the render function given to `toast.custom()`.
+ */
 interface CustomToastRenderProps {
+  /** Dismisses this toast. */
   close: () => void;
+  /** The toast's unique id. */
   id: string;
+  /** Pre-styled building blocks (Root, Content, Title, Description) for composing the toast. */
   Toast: {
     Root: React.FC<
       { className?: string; style?: React.CSSProperties; children?: React.ReactNode } & Record<string, unknown>
@@ -48,22 +57,41 @@ interface CustomToastRenderProps {
   };
 }
 
+/**
+ * Options accepted by `toast()` and its type-specific methods.
+ */
 interface ToastOptions {
+  /** Custom id for the toast. Reusing an existing toast's id updates that toast in place. */
   id?: string;
+  /** Secondary text shown below the title. */
   description?: React.ReactNode;
+  /** Auto-dismiss duration in milliseconds. Pass Infinity to keep the toast until dismissed. */
   duration?: number;
+  /** Screen position for this toast, overriding the Toaster's default position. */
   position?: ToastPosition;
+  /** Callback fired when the toast is closed (before its exit animation finishes). */
   onClose?: () => void;
+  /** Callback fired when the toast is removed from the DOM. */
   onRemove?: () => void;
+  /** Props for an action button rendered inside the toast (use `children` for its label). */
   actionProps?: React.ComponentPropsWithRef<'button'>;
+  /** Arbitrary data attached to the toast. */
   data?: Record<string, unknown>;
 }
 
+/**
+ * Options accepted by `toast.promise()`.
+ */
 interface ToastPromiseOptions<T> {
+  /** Title shown while the promise is pending. Omit to skip the loading toast. */
   loading?: React.ReactNode | (() => React.ReactNode);
+  /** Title shown when the promise resolves (or a function of the resolved value). Omit to dismiss instead. */
   success?: React.ReactNode | ((data: T) => React.ReactNode);
+  /** Title shown when the promise rejects (or a function of the error). Omit to dismiss instead. */
   error?: React.ReactNode | ((err: unknown) => React.ReactNode);
+  /** Callback fired after the promise settles, regardless of outcome. */
   finally?: () => void;
+  /** Screen position for the toast, overriding the Toaster's default position. */
   position?: ToastPosition;
 }
 
@@ -71,6 +99,9 @@ function setDefaultPosition(pos: ToastPosition) {
   _defaultPosition = pos;
 }
 
+/**
+ * Payload passed to the Toaster's `onToast` callback when a toast is created.
+ */
 type ToastEventData = { id: string; type: ToastType; title: React.ReactNode; description?: React.ReactNode };
 type ToastListener = (toast: ToastEventData) => void;
 
@@ -352,6 +383,10 @@ function update(
   });
 }
 
+/**
+ * Render function passed to `toast.custom()`; receives the toast id, a `close`
+ * callback and pre-styled `Toast` building blocks.
+ */
 type CustomToastRenderFn = (props: CustomToastRenderProps) => React.ReactNode;
 
 function custom(render: CustomToastRenderFn, options?: Omit<ToastOptions, 'description' | 'actionProps'>) {
@@ -362,6 +397,27 @@ function custom(render: CustomToastRenderFn, options?: Omit<ToastOptions, 'descr
   });
 }
 
+/**
+ * Creates a toast notification imperatively; requires a mounted `Toaster`.
+ *
+ * Calling `toast(title, options?)` shows a plain toast and returns its id.
+ * Type-specific variants (`toast.success`, `toast.error`, `toast.warning`,
+ * `toast.info`, `toast.loading`) add a status icon; `toast.loading` persists
+ * until updated or dismissed. Also exposes `toast.promise` (loading → success /
+ * error tracking a promise), `toast.custom` (fully custom rendering),
+ * `toast.update`, `toast.dismiss` and `toast.dismissAll`.
+ *
+ * @example
+ * ```tsx
+ * toast.success('Changes saved');
+ *
+ * toast.promise(saveSettings(), {
+ *   loading: 'Saving…',
+ *   success: 'Settings saved',
+ *   error: 'Could not save settings',
+ * });
+ * ```
+ */
 const toast = Object.assign(
   (titleOrJsx: React.ReactNode, options?: ToastOptions) => {
     return addOrUpdate(titleOrJsx, 'default', options);

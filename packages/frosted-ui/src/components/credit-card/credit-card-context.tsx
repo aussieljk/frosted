@@ -40,6 +40,10 @@ interface UseCreditCardResult {
   cardNiceType: string | null;
 }
 
+/**
+ * Returns the credit card's face state (`face`, `setFace`, `toggle`) and detected brand info. Must be
+ * called from within `CreditCard.Root`.
+ */
 function useCreditCard(): UseCreditCardResult {
   const ctx = useCreditCardContext();
   return {

@@ -1,113 +1,51 @@
 {
   "name": "@aussieljk/frosted",
   "version": "0.0.1",
-  "type": "commonjs",
+  "type": "module",
   "description": "Frosted UI design system (fork of whopio/frosted-ui)",
   "private": false,
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "module": "./dist/index.mjs",
   "style": "./styles.css",
   "exports": {
     ".": {
-      "import": {
-        "types": "./dist/index.d.mts",
-        "default": "./dist/index.mjs"
-      },
-      "require": {
-        "types": "./dist/index.d.ts",
-        "default": "./dist/index.js"
-      }
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
     },
-    "./styles.css": {
-      "import": "./styles.css",
-      "require": "./styles.css",
-      "default": "./styles.css"
-    },
-    "./styles.lite.css": {
-      "import": "./styles.lite.css",
-      "require": "./styles.lite.css",
-      "default": "./styles.lite.css"
-    },
+    "./styles.css": "./styles.css",
+    "./styles.lite.css": "./styles.lite.css",
+    "./theme.css": "./theme.css",
     "./icons": {
-      "import": {
-        "types": "./dist/icons/index.d.mts",
-        "default": "./dist/icons/index.mjs"
-      },
-      "require": {
-        "types": "./dist/icons/index.d.ts",
-        "default": "./dist/icons/index.js"
-      }
+      "types": "./dist/icons/index.d.ts",
+      "import": "./dist/icons/index.js"
     },
     "./icons/frosted": {
-      "import": {
-        "types": "./dist/icons/adapters/frosted.d.mts",
-        "default": "./dist/icons/adapters/frosted.mjs"
-      },
-      "require": {
-        "types": "./dist/icons/adapters/frosted.d.ts",
-        "default": "./dist/icons/adapters/frosted.js"
-      }
+      "types": "./dist/icons/adapters/frosted.d.ts",
+      "import": "./dist/icons/adapters/frosted.js"
     },
     "./icons/heroicons": {
-      "import": {
-        "types": "./dist/icons/adapters/heroicons.d.mts",
-        "default": "./dist/icons/adapters/heroicons.mjs"
-      },
-      "require": {
-        "types": "./dist/icons/adapters/heroicons.d.ts",
-        "default": "./dist/icons/adapters/heroicons.js"
-      }
+      "types": "./dist/icons/adapters/heroicons.d.ts",
+      "import": "./dist/icons/adapters/heroicons.js"
     },
     "./icons/hugeicons": {
-      "import": {
-        "types": "./dist/icons/adapters/hugeicons.d.mts",
-        "default": "./dist/icons/adapters/hugeicons.mjs"
-      },
-      "require": {
-        "types": "./dist/icons/adapters/hugeicons.d.ts",
-        "default": "./dist/icons/adapters/hugeicons.js"
-      }
+      "types": "./dist/icons/adapters/hugeicons.d.ts",
+      "import": "./dist/icons/adapters/hugeicons.js"
     },
     "./icons/lucide": {
-      "import": {
-        "types": "./dist/icons/adapters/lucide.d.mts",
-        "default": "./dist/icons/adapters/lucide.mjs"
-      },
-      "require": {
-        "types": "./dist/icons/adapters/lucide.d.ts",
-        "default": "./dist/icons/adapters/lucide.js"
-      }
+      "types": "./dist/icons/adapters/lucide.d.ts",
+      "import": "./dist/icons/adapters/lucide.js"
     },
     "./icons/phosphor": {
-      "import": {
-        "types": "./dist/icons/adapters/phosphor.d.mts",
-        "default": "./dist/icons/adapters/phosphor.mjs"
-      },
-      "require": {
-        "types": "./dist/icons/adapters/phosphor.d.ts",
-        "default": "./dist/icons/adapters/phosphor.js"
-      }
+      "types": "./dist/icons/adapters/phosphor.d.ts",
+      "import": "./dist/icons/adapters/phosphor.js"
     },
     "./icons/tabler": {
-      "import": {
-        "types": "./dist/icons/adapters/tabler.d.mts",
-        "default": "./dist/icons/adapters/tabler.mjs"
-      },
-      "require": {
-        "types": "./dist/icons/adapters/tabler.d.ts",
-        "default": "./dist/icons/adapters/tabler.js"
-      }
+      "types": "./dist/icons/adapters/tabler.d.ts",
+      "import": "./dist/icons/adapters/tabler.js"
     },
     "./*": {
-      "import": {
-        "types": "./dist/*.d.mts",
-        "default": "./dist/*.mjs"
-      },
-      "require": {
-        "types": "./dist/*.d.ts",
-        "default": "./dist/*.js"
-      }
+      "types": "./dist/*.d.ts",
+      "import": "./dist/*.js"
     }
   },
   "sideEffects": [
@@ -117,12 +55,13 @@
   "files": [
     "dist/**",
     "styles.css",
-    "styles.lite.css"
+    "styles.lite.css",
+    "theme.css"
   ],
   "scripts": {
     "build": "bun run build:js && bun run build:css",
     "build:js": "tsdown --config tsdown.config.mts && bun scripts/fix-namespace-exports.ts",
-    "build:css": "postcss src/styles/index.css -o styles.css && bun scripts/build-lite-css.ts src/styles/index.css -o styles.lite.css",
+    "build:css": "postcss src/styles/index.css -o styles.css && postcss src/styles/theme.css -o theme.css && bun scripts/build-lite-css.ts src/styles/index.css -o styles.lite.css",
     "dev": "bun run dev:js & bun run dev:css",
     "dev:js": "tsdown --watch",
     "dev:css": "postcss src/styles/index.css -o styles.css --watch",
@@ -132,8 +71,8 @@
     "lint:js": "eslint \"src/**/*.ts*\"",
     "lint:css": "stylelint \"src/**/*.css\"",
     "generate:emoji-colors": "tsx scripts/emoji-colors/generate.ts",
-    "generate:tailwind-colors": "bun scripts/generate-tailwind-colors.ts",
-    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist && rm -rf styles.css && rm -rf styles.lite.css",
+    "generate:icon-adapters": "bun scripts/generate-icon-adapters.ts",
+    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist && rm -rf styles.css && rm -rf styles.lite.css && rm -rf theme.css",
     "prepublishOnly": "bun run lint && bun run build",
     "storybook": "bun run dev:css & storybook dev -p 6006",
     "build-storybook": "storybook build",

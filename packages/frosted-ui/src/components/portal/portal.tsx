@@ -20,6 +20,20 @@ interface PortalProps extends React.ComponentPropsWithoutRef<'div'> {
   render?: useRender.ComponentProps<'div'>['render'];
 }
 
+/**
+ * Renders its children into a different part of the DOM via `ReactDOM.createPortal`.
+ *
+ * SSR-safe: renders nothing until mounted on the client, then appends to
+ * `document.body` unless a `container` is provided. Children are wrapped in
+ * a `<div>` by default (override via the `render` prop).
+ *
+ * @example
+ * ```tsx
+ * <Portal>
+ *   <Toast>Saved!</Toast>
+ * </Portal>
+ * ```
+ */
 const Portal = React.forwardRef<HTMLDivElement, PortalProps>((props, forwardedRef) => {
   const { container: containerProp, render, ...portalProps } = props;
   const [mounted, setMounted] = React.useState(false);

@@ -1,11 +1,26 @@
 import React from 'react';
 
+/**
+ * Applies an interactive specular highlight to its children, using an inline
+ * SVG lighting filter whose light source follows the pointer across the page.
+ *
+ * @example
+ * <Shine puffyness="1.5">
+ *   <Badge color="gold">Premium</Badge>
+ * </Shine>
+ */
 const Shine = ({
   children,
   puffyness = '1',
   ...otherProps
 }: {
+  /** The content the shine effect is applied to. */
   children: React.ReactNode;
+  /**
+   * Blur radius fed into the lighting filter. Higher values spread the
+   * highlight over softer, "puffier" edges.
+   * @default '1'
+   */
   puffyness?: '0.5' | '0.75' | '1' | '1.25' | '1.5' | '1.75' | '2';
 } & React.ComponentProps<'div'>) => {
   const filterId = React.useId();

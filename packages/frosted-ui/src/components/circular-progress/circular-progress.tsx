@@ -23,6 +23,15 @@ const sizeConfig: Record<string, { diameter: number; strokeWidth: number }> = {
   '9': { diameter: 72, strokeWidth: 10 },
 };
 
+/**
+ * A circular (ring) progress indicator. Rendered as an accessible meter; pass `value` (and optionally
+ * `max`, default 100) to control the filled arc.
+ *
+ * @example
+ * ```tsx
+ * <CircularProgress value={65} aria-label="Upload progress" />
+ * ```
+ */
 const CircularProgress = (props: CircularProgressProps) => {
   const {
     className,

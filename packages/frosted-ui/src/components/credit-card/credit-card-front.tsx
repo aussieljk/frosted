@@ -21,6 +21,7 @@ const stateAttributesMapping = {
   active: (value: unknown) => (value ? { 'data-active': '' } : null),
 };
 
+/** The front face of the card. Marked `inert` (non-interactive) while the back face is showing. */
 const CreditCardFront = React.forwardRef<HTMLDivElement, CreditCardFrontProps>(
   function CreditCardFront(props, forwardedRef) {
     const { render, color, ...elementProps } = props;

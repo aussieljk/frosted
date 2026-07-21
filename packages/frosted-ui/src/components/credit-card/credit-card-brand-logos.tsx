@@ -156,6 +156,10 @@ interface CreditCardBrandLogoProps extends React.ComponentPropsWithoutRef<'svg'>
   brand?: CreditCardTypeCardBrandId;
 }
 
+/**
+ * The monochrome SVG logo of the detected card brand (from the number typed into `NumberField`), with
+ * an accessible label. Renders nothing when no brand is detected; use `brand` to force a specific logo.
+ */
 const CreditCardBrandLogo = React.forwardRef<SVGSVGElement, CreditCardBrandLogoProps>(
   function CreditCardBrandLogo(props, forwardedRef) {
     const { brand: brandProp, className, ...rest } = props;

@@ -91,6 +91,7 @@ interface CreditCardLogoState extends Record<string, unknown> {}
 interface CreditCardLogoProps
   extends useRender.ComponentProps<'div', CreditCardLogoState> {}
 
+/** A slot for the card issuer or organisation logo, typically inside `FrontHeader`. */
 const CreditCardLogo = React.forwardRef<HTMLDivElement, CreditCardLogoProps>(
   function CreditCardLogo(props, forwardedRef) {
     const { render, ...elementProps } = props;
@@ -119,6 +120,7 @@ interface CreditCardBrandState extends Record<string, unknown> {}
 interface CreditCardBrandProps
   extends useRender.ComponentProps<'span', CreditCardBrandState> {}
 
+/** Text for the card network and tier (e.g. "Visa Platinum"), typically inside `FrontHeader`. */
 const CreditCardBrand = React.forwardRef<HTMLSpanElement, CreditCardBrandProps>(
   function CreditCardBrand(props, forwardedRef) {
     const { render, ...elementProps } = props;
@@ -147,6 +149,7 @@ interface CreditCardTitleState extends Record<string, unknown> {}
 interface CreditCardTitleProps
   extends useRender.ComponentProps<'span', CreditCardTitleState> {}
 
+/** The card's name or description text (e.g. the holder or product name). */
 const CreditCardTitle = React.forwardRef<HTMLSpanElement, CreditCardTitleProps>(
   function CreditCardTitle(props, forwardedRef) {
     const { render, ...elementProps } = props;
@@ -175,6 +178,7 @@ interface CreditCardLastFourState extends Record<string, unknown> {}
 interface CreditCardLastFourProps
   extends useRender.ComponentProps<'span', CreditCardLastFourState> {}
 
+/** The masked card number shown on the front face (e.g. "•••• 0991"). */
 const CreditCardLastFour = React.forwardRef<HTMLSpanElement, CreditCardLastFourProps>(
   function CreditCardLastFour(props, forwardedRef) {
     const { render, ...elementProps } = props;
@@ -203,6 +207,7 @@ interface CreditCardMagStripeState extends Record<string, unknown> {}
 interface CreditCardMagStripeProps
   extends useRender.ComponentProps<'div', CreditCardMagStripeState> {}
 
+/** The decorative magnetic stripe bar on the back face. */
 const CreditCardMagStripe = React.forwardRef<HTMLDivElement, CreditCardMagStripeProps>(
   function CreditCardMagStripe(props, forwardedRef) {
     const { render, ...elementProps } = props;
@@ -231,6 +236,7 @@ interface CreditCardFrontHeaderState extends Record<string, unknown> {}
 interface CreditCardFrontHeaderProps
   extends useRender.ComponentProps<'div', CreditCardFrontHeaderState> {}
 
+/** The top row of the front face, laying out `Logo` (left) and `Brand` (right). */
 const CreditCardFrontHeader = React.forwardRef<HTMLDivElement, CreditCardFrontHeaderProps>(
   function CreditCardFrontHeader(props, forwardedRef) {
     const { render, ...elementProps } = props;
@@ -259,6 +265,7 @@ interface CreditCardFrontFooterState extends Record<string, unknown> {}
 interface CreditCardFrontFooterProps
   extends useRender.ComponentProps<'div', CreditCardFrontFooterState> {}
 
+/** The bottom row of the front face, laying out `Title` (left) and `LastFour` (right). */
 const CreditCardFrontFooter = React.forwardRef<HTMLDivElement, CreditCardFrontFooterProps>(
   function CreditCardFrontFooter(props, forwardedRef) {
     const { render, ...elementProps } = props;
@@ -287,6 +294,7 @@ interface CreditCardBackContentState extends Record<string, unknown> {}
 interface CreditCardBackContentProps
   extends useRender.ComponentProps<'div', CreditCardBackContentState> {}
 
+/** The main content area of the back face, below the magnetic stripe. */
 const CreditCardBackContent = React.forwardRef<HTMLDivElement, CreditCardBackContentProps>(
   function CreditCardBackContent(props, forwardedRef) {
     const { render, ...elementProps } = props;
@@ -313,6 +321,7 @@ CreditCardBackContent.displayName = 'CreditCardBackContent';
 interface CreditCardFieldsetProps
   extends React.ComponentProps<typeof FieldsetPrimitive.Root> {}
 
+/** A semantic `<fieldset>` grouping all card input fields, built on Base UI Fieldset. */
 const CreditCardFieldset = React.forwardRef<HTMLFieldSetElement, CreditCardFieldsetProps>(
   function CreditCardFieldset(props, forwardedRef) {
     const { className, ...rootProps } = props;
@@ -334,6 +343,7 @@ CreditCardFieldset.displayName = 'CreditCardFieldset';
 interface CreditCardFieldProps
   extends React.ComponentProps<typeof FieldPrimitive.Root> {}
 
+/** Wraps a single label + input pair, wiring up accessibility and validation via Base UI Field. */
 const CreditCardField = React.forwardRef<HTMLDivElement, CreditCardFieldProps>(
   function CreditCardField(props, forwardedRef) {
     const { className, ...rootProps } = props;
@@ -357,6 +367,7 @@ interface CreditCardFieldGroupState extends Record<string, unknown> {}
 interface CreditCardFieldGroupProps
   extends useRender.ComponentProps<'div', CreditCardFieldGroupState> {}
 
+/** A horizontal row layout for related fields, e.g. `ExpiryField` next to `CVVField`. */
 const CreditCardFieldGroup = React.forwardRef<HTMLDivElement, CreditCardFieldGroupProps>(
   function CreditCardFieldGroup(props, forwardedRef) {
     const { render, ...elementProps } = props;
@@ -385,6 +396,7 @@ interface CreditCardFieldLabelProps
     Omit<React.ComponentProps<typeof FieldPrimitive.Label>, 'color'>,
     Pick<TextProps, 'size' | 'weight' | 'align' | 'trim' | 'color' | 'highContrast'> {}
 
+/** An accessible label automatically associated with its field's input. Accepts `Text` styling props. */
 const CreditCardFieldLabel = React.forwardRef<HTMLLabelElement, CreditCardFieldLabelProps>(
   function CreditCardFieldLabel(props, forwardedRef) {
     const {
@@ -429,6 +441,10 @@ CreditCardFieldLabel.displayName = 'CreditCardFieldLabel';
 
 interface CreditCardErrorsProps extends React.ComponentPropsWithRef<'div'> {}
 
+/**
+ * A polite live-region target rendered outside the card; any `FieldError` messages portal into it when
+ * it is present.
+ */
 const CreditCardErrors = React.forwardRef<HTMLDivElement, CreditCardErrorsProps>(
   function CreditCardErrors(props, forwardedRef) {
     const { className, ...divProps } = props;
@@ -464,6 +480,10 @@ interface CreditCardFieldErrorProps
     Omit<React.ComponentProps<typeof FieldPrimitive.Error>, 'color'>,
     Pick<TextProps, 'size' | 'weight' | 'align' | 'trim' | 'color' | 'highContrast'> {}
 
+/**
+ * The validation error message for a `Field`. Portals into the `Errors` container when one is rendered;
+ * otherwise renders in place. Accepts `Text` styling props.
+ */
 const CreditCardFieldError = React.forwardRef<HTMLDivElement, CreditCardFieldErrorProps>(
   function CreditCardFieldError(props, forwardedRef) {
     const {
@@ -521,6 +541,7 @@ interface CreditCardTextFieldProps
 
 type CreditCardTextFieldChangeHandler = NonNullable<CreditCardTextFieldProps['onChange']>;
 
+/** The base input for card fields: a soft-styled input when editable, plain text when `readOnly`. */
 const CreditCardTextField = React.forwardRef<HTMLInputElement, CreditCardTextFieldProps>(
   function CreditCardTextField(props, forwardedRef) {
     const { className, ...inputProps } = props;
@@ -542,6 +563,10 @@ CreditCardTextField.displayName = 'CreditCardTextField';
 
 interface CreditCardNumberFieldProps extends CreditCardTextFieldProps {}
 
+/**
+ * The card number input. Formats digits with brand-appropriate gaps as the user types, preserves the
+ * cursor position, and updates the detected card brand in context. Use `readOnly` for display-only cards.
+ */
 const CreditCardNumberField = React.forwardRef<HTMLInputElement, CreditCardNumberFieldProps>(
   function CreditCardNumberField(props, forwardedRef) {
     const { onChange, defaultValue, value, ...rest } = props;
@@ -629,6 +654,7 @@ CreditCardNumberField.displayName = 'CreditCardNumberField';
 
 interface CreditCardExpiryFieldProps extends CreditCardTextFieldProps {}
 
+/** The expiration date input, auto-formatted as `MM/YY` while typing. Use `readOnly` for display-only cards. */
 const CreditCardExpiryField = React.forwardRef<HTMLInputElement, CreditCardExpiryFieldProps>(
   function CreditCardExpiryField(props, forwardedRef) {
     const { onChange, defaultValue, value, ...rest } = props;
@@ -693,6 +719,10 @@ CreditCardExpiryField.displayName = 'CreditCardExpiryField';
 
 interface CreditCardCVVFieldProps extends CreditCardTextFieldProps {}
 
+/**
+ * The security code input, masked as a password. Its length and placeholder adapt to the detected card
+ * brand (e.g. 4 digits for American Express).
+ */
 const CreditCardCVVField = React.forwardRef<HTMLInputElement, CreditCardCVVFieldProps>(
   function CreditCardCVVField(props, forwardedRef) {
     const { cardType } = useCreditCardContext();

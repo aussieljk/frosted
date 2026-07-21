@@ -39,6 +39,24 @@ type SelectRootProps<Value = unknown, Multiple extends boolean | undefined = fal
   Multiple
 >;
 
+/**
+ * A dropdown for picking a value (or multiple values) from a list of options.
+ *
+ * Wraps Base UI's Select primitive. Supports controlled (`value`) and uncontrolled
+ * (`defaultValue`) usage, generic item values, and `multiple` selection; the
+ * `size` set here is shared with `Trigger` and `Content` via context.
+ *
+ * @example
+ * ```tsx
+ * <Select.Root defaultValue="apple">
+ *   <Select.Trigger placeholder="Pick a fruit" />
+ *   <Select.Content>
+ *     <Select.Item value="apple">Apple</Select.Item>
+ *     <Select.Item value="orange">Orange</Select.Item>
+ *   </Select.Content>
+ * </Select.Root>
+ * ```
+ */
 function SelectRoot<Value = unknown, Multiple extends boolean | undefined = false>(
   props: SelectRootProps<Value, Multiple>,
 ) {
@@ -72,11 +90,18 @@ interface SelectTriggerProps
     Omit<PropsWithoutColor<typeof SelectPrimitive.Trigger>, 'render' | 'className' | 'children'>,
     SelectTriggerOwnProps {
   className?: string;
+  /** Content shown in the trigger while no value is selected. */
   placeholder?: React.ReactNode;
   /** Custom render function for the selected value. Useful for multiple selection. */
   renderValue?: React.ComponentProps<typeof SelectPrimitive.Value>['children'];
 }
 
+/**
+ * The button that opens the dropdown and displays the currently selected value.
+ *
+ * Shows `placeholder` while empty, resolving selected-value labels from the
+ * Root's `items` / `itemToStringLabel` when provided.
+ */
 const SelectTrigger = (props: SelectTriggerProps) => {
   const {
     className,
@@ -160,18 +185,46 @@ interface SelectContentProps
     SelectContentOwnProps {
   className?: string;
   style?: React.CSSProperties;
+  /** Element the portalled dropdown is appended to (defaults to the document body). */
   container?: React.ComponentProps<typeof SelectPrimitive.Portal>['container'];
   /** @deprecated Use alignItemWithTrigger={false} instead */
   position?: 'item-aligned' | 'popper';
-  /** Whether to align the selected item with the trigger (native select-like behavior). Default: true */
+  /**
+   * Whether to align the selected item with the trigger (native select-like behavior).
+   * @default true
+   */
   alignItemWithTrigger?: boolean;
+  /**
+   * Side of the trigger the dropdown is placed on when not aligning with the trigger.
+   * @default 'bottom'
+   */
   side?: React.ComponentProps<typeof SelectPrimitive.Positioner>['side'];
+  /**
+   * Distance in pixels between the trigger and the dropdown.
+   * @default 4
+   */
   sideOffset?: React.ComponentProps<typeof SelectPrimitive.Positioner>['sideOffset'];
+  /**
+   * Alignment of the dropdown against the trigger.
+   * @default 'start'
+   */
   align?: React.ComponentProps<typeof SelectPrimitive.Positioner>['align'];
+  /** Additional offset in pixels along the alignment axis. */
   alignOffset?: React.ComponentProps<typeof SelectPrimitive.Positioner>['alignOffset'];
+  /**
+   * Minimum distance in pixels kept from the viewport edges when avoiding collisions.
+   * @default 10
+   */
   collisionPadding?: React.ComponentProps<typeof SelectPrimitive.Positioner>['collisionPadding'];
 }
 
+/**
+ * The dropdown popup containing the select's options.
+ *
+ * Rendered in a portal with its own scroll area. By default the selected item is
+ * aligned over the trigger like a native `<select>`; pass
+ * `alignItemWithTrigger={false}` for regular popover-style positioning.
+ */
 const SelectContent = (props: SelectContentProps) => {
   const {
     className,
@@ -241,6 +294,9 @@ interface SelectItemProps extends Omit<React.ComponentProps<typeof SelectPrimiti
   className?: string;
 }
 
+/**
+ * A selectable option; shows a check indicator when it is the selected value.
+ */
 const SelectItem = (props: SelectItemProps) => {
   const { className, children, ...itemProps } = props;
   return (
@@ -258,6 +314,9 @@ interface SelectGroupProps extends Omit<React.ComponentProps<typeof SelectPrimit
   className?: string;
 }
 
+/**
+ * Groups related options, typically together with a `GroupLabel`.
+ */
 const SelectGroup = (props: SelectGroupProps) => (
   <SelectPrimitive.Group {...props} className={classNames('fui-SelectGroup', props.className)} />
 );
@@ -270,6 +329,9 @@ interface SelectGroupLabelProps extends Omit<
   className?: string;
 }
 
+/**
+ * A non-selectable heading for a `Group` of options.
+ */
 const SelectGroupLabel = (props: SelectGroupLabelProps) => (
   <SelectPrimitive.GroupLabel {...props} className={classNames('fui-SelectLabel', props.className)} />
 );
@@ -282,6 +344,9 @@ interface SelectSeparatorProps extends Omit<
   className?: string;
 }
 
+/**
+ * A visual divider between options or groups in the dropdown.
+ */
 const SelectSeparator = (props: SelectSeparatorProps) => (
   <SelectPrimitive.Separator {...props} className={classNames('fui-SelectSeparator', props.className)} />
 );

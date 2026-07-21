@@ -12,6 +12,7 @@ coverage
 dist/
 packages/frosted-ui/styles.css
 packages/frosted-ui/styles.lite.css
+packages/frosted-ui/theme.css
 
 # misc
 .DS_Store

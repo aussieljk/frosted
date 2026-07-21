@@ -8,6 +8,14 @@ import type { GetPropDefTypes, PropsWithoutColor } from '../../helpers';
 type CodeOwnProps = GetPropDefTypes<typeof codePropDefs>;
 interface CodeProps extends PropsWithoutColor<'code'>, CodeOwnProps {}
 
+/**
+ * An inline code snippet, rendered as a `<code>` element in the monospace font.
+ *
+ * @example
+ * ```tsx
+ * <Code>console.log()</Code>
+ * ```
+ */
 const Code = (props: CodeProps) => {
   const {
     className,

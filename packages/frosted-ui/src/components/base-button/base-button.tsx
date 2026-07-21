@@ -13,9 +13,18 @@ type BaseButtonOwnProps = GetPropDefTypes<typeof baseButtonPropDefs>;
 type BaseButtonProps = Omit<PropsWithoutColor<typeof Button>, 'className'> &
   Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'color' | 'disabled'> &
   BaseButtonOwnProps & {
+    /**
+     * Shows a centered spinner and hides the button content (kept accessible via a visually hidden copy).
+     * Also disables the button unless `disabled` is set explicitly.
+     * @default false
+     */
     loading?: boolean;
   };
 
+/**
+ * The unstyled-markup base shared by `Button` and `IconButton`: renders a Base UI button with the
+ * frosted-ui size, variant and color classes, plus loading-state handling.
+ */
 const BaseButton = (props: BaseButtonProps) => {
   const {
     children,

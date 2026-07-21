@@ -5,23 +5,6 @@ let mockManagerAdd: ReturnType<typeof vi.fn>;
 let mockManagerUpdate: ReturnType<typeof vi.fn>;
 let mockManagerClose: ReturnType<typeof vi.fn>;
 
-vi.mock('@base-ui/react/toast', () => {
-  let idCounter = 0;
-  return {
-    Toast: {
-      createToastManager: () => {
-        mockManagerAdd = vi.fn((opts) => {
-          const id = opts?.id ?? `toast-${++idCounter}`;
-          return id;
-        });
-        mockManagerUpdate = vi.fn();
-        mockManagerClose = vi.fn();
-        return { add: mockManagerAdd, update: mockManagerUpdate, close: mockManagerClose };
-      },
-    },
-  };
-});
-
 let toast: typeof import('./toast-manager').toast;
 
 beforeEach(async () => {

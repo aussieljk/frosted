@@ -54,8 +54,10 @@
       "inputs": [
         "src/**",
         "content/**",
+        "scripts/**",
         "source.config.ts",
-        "vite.config.ts"
+        "vite.config.ts",
+        "$TURBO_ROOT$/packages/frosted-ui/src/**"
       ]
     },
     "@aussieljk/frosted#build-storybook": {

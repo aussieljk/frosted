@@ -4,13 +4,14 @@
   "type": "module",
   "sideEffects": false,
   "scripts": {
-    "dev": "vite dev",
-    "build": "vite build",
+    "dev": "bun run generate:props && vite dev",
+    "build": "bun run generate:props && vite build",
+    "generate:props": "bun scripts/generate-props.ts",
     "start": "vite preview",
     "preview": "vite preview",
     "lint": "eslint .",
-    "typecheck": "fumadocs-mdx && tsc --noEmit",
-    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist && rm -rf .output && rm -rf .source && rm -rf .nitro && rm -rf .tanstack",
+    "typecheck": "bun run generate:props && fumadocs-mdx && tsc --noEmit",
+    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist && rm -rf .output && rm -rf .source && rm -rf .nitro && rm -rf .tanstack && rm -rf src/generated",
     "postinstall": "fumadocs-mdx"
   },
   "dependencies": {

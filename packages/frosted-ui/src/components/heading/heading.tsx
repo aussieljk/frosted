@@ -9,9 +9,21 @@ import type { GetPropDefTypes, PropsWithoutColor } from '../../helpers';
 type HeadingOwnProps = GetPropDefTypes<typeof headingPropDefs>;
 
 interface HeadingProps extends HeadingOwnProps, PropsWithoutColor<'h1'> {
+  /** Renders the heading as a different element or component, e.g. `render={<h2 />}`. Defaults to `<h1>`. */
   render?: useRender.ComponentProps<'h1'>['render'];
 }
 
+/**
+ * A semantic heading with size, weight, alignment and color options. Renders an `<h1>` by default;
+ * use `render` to change the heading level.
+ *
+ * @example
+ * ```tsx
+ * <Heading size="8" render={<h2 />}>
+ *   Account settings
+ * </Heading>
+ * ```
+ */
 const Heading = (props: HeadingProps) => {
   const {
     children,

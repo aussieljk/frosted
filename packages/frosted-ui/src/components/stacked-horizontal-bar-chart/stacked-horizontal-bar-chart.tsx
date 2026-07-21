@@ -7,17 +7,43 @@ import { colorProp } from '../../helpers';
 import { Tooltip } from '../tooltip';
 
 type StackedHorizontalBarChartData = {
-  label: string | ((value: number, percent: string) => string); // label or function to generate label
-  value: number; // Numeric value for the bar
-  color: (typeof colorProp.values)[number]; // Color for the bar
+  /**
+   * Tooltip label for the segment: a plain string (the computed percentage is appended for
+   * the aria-label), or a function of `(value, percent)` returning the full label.
+   */
+  label: string | ((value: number, percent: string) => string);
+  /** Numeric value of the segment; its share of the total across all segments sets the bar width. */
+  value: number;
+  /** Theme accent color used to fill the segment. */
+  color: (typeof colorProp.values)[number];
 };
 
 interface StackedHorizontalBarChartOwnProps extends React.ComponentProps<'div'> {}
 
 interface StackedHorizontalBarChartProps extends React.ComponentProps<'div'>, StackedHorizontalBarChartOwnProps {
+  /**
+   * Segments to render, in order. Each segment's width is its `value` as a percentage of the
+   * sum of all segment values (rounded to 2 decimal places).
+   */
   data: StackedHorizontalBarChartData[];
 }
 
+/**
+ * A single horizontal bar divided into colored segments proportional to their values.
+ * Hovering a segment shows a tooltip with its label; each segment also carries an
+ * `aria-label` combining the label and percentage.
+ *
+ * @example
+ * ```tsx
+ * <StackedHorizontalBarChart
+ *   data={[
+ *     { label: 'Completed', value: 60, color: 'green' },
+ *     { label: 'In progress', value: 25, color: 'blue' },
+ *     { label: 'Failed', value: 15, color: 'red' },
+ *   ]}
+ * />
+ * ```
+ */
 const StackedHorizontalBarChart = (props: StackedHorizontalBarChartProps) => {
   const { className, data, ...rootProps } = props;
 

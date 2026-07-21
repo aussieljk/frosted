@@ -67,6 +67,32 @@ interface ScrollGalleryRootRef {
   scrollTo: (index: number, behavior?: ScrollBehavior) => void;
 }
 
+/**
+ * Groups the parts of a scroll gallery and owns the active-item state.
+ * Renders no DOM element — it only provides context to its parts.
+ *
+ * Supports uncontrolled (`defaultValue`) and controlled (`value` +
+ * `onValueChange`) usage, and exposes an imperative `scrollTo(index)`
+ * through its `ref`.
+ *
+ * @example
+ * <ScrollGallery.Root loop>
+ *   <ScrollGallery.Viewport>
+ *     {images.map((src) => (
+ *       <ScrollGallery.Item key={src}>
+ *         <img src={src} alt="" />
+ *       </ScrollGallery.Item>
+ *     ))}
+ *   </ScrollGallery.Viewport>
+ *   <ScrollGallery.Previous>Prev</ScrollGallery.Previous>
+ *   <ScrollGallery.Next>Next</ScrollGallery.Next>
+ *   <ScrollGallery.ScrollMarkerGroup>
+ *     {images.map((src, i) => (
+ *       <ScrollGallery.ScrollMarker key={src} index={i} aria-label={`Go to item ${i + 1}`} />
+ *     ))}
+ *   </ScrollGallery.ScrollMarkerGroup>
+ * </ScrollGallery.Root>
+ */
 const ScrollGalleryRoot = React.forwardRef<
   ScrollGalleryRootRef,
   ScrollGalleryRootProps

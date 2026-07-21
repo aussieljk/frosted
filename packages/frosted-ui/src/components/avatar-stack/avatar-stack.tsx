@@ -16,6 +16,18 @@ type AvatarStackRootOwnProps = GetPropDefTypes<typeof avatarStackPropDefs>;
 
 interface AvatarStackRootProps extends PropsWithoutColor<'div'>, AvatarStackRootOwnProps {}
 
+/**
+ * A stack of overlapping avatars where the first child appears on top. Children are rendered in reverse
+ * DOM order so that stacking follows source order visually.
+ *
+ * @example
+ * ```tsx
+ * <AvatarStack.Root>
+ *   <AvatarStack.Avatar src="/a.png" fallback="Ada Lovelace" />
+ *   <AvatarStack.Avatar src="/b.png" fallback="Grace Hopper" />
+ * </AvatarStack.Root>
+ * ```
+ */
 const AvatarStackRoot = (props: AvatarStackRootProps) => {
   const {
     className,
@@ -47,6 +59,7 @@ AvatarStackRoot.displayName = 'AvatarStackRoot';
 
 type AvatarStackAvatarProps = Omit<React.ComponentProps<typeof Avatar>, 'size'>;
 
+/** An avatar within `AvatarStack.Root`. Its `size` is inherited from the stack. */
 const AvatarStackAvatar = ({ className, ...props }: AvatarStackAvatarProps) => {
   const { size } = React.useContext(AvatarStackContext);
   return <Avatar size={size}  className={classNames('fui-AvatarStackAvatar', className)} {...props} />;

@@ -11,6 +11,17 @@ interface HStackProps extends React.ComponentProps<'div'>, HStackOwnProps {
   spacing?: number;
 }
 
+/**
+ * A horizontal flex row that lays out its children side by side, in the style of SwiftUI's HStack.
+ *
+ * @example
+ * ```tsx
+ * <HStack spacing={8} alignment="center">
+ *   <Avatar fallback="JD" />
+ *   <Text>Jane Doe</Text>
+ * </HStack>
+ * ```
+ */
 const HStack = (props: HStackProps) => {
   const { className, style, spacing, alignment = hStackPropDefs.alignment.default, ...stackProps } = props;
   return (

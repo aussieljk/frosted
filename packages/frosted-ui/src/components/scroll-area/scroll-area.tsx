@@ -14,9 +14,13 @@ interface ScrollAreaProps
   extends
     Omit<React.ComponentPropsWithRef<typeof ScrollAreaPrimitive.Root>, 'className' | 'style' | 'ref'>,
     ScrollAreaOwnProps {
+  /** The content to scroll. */
   children?: React.ReactNode;
+  /** Class applied to the root element (not the viewport). */
   className?: string;
+  /** Styles applied to the root element (not the viewport). */
   style?: React.CSSProperties;
+  /** Ref to the scrollable viewport element — use it for programmatic scrolling. */
   ref?: React.Ref<HTMLDivElement>;
 }
 
@@ -26,6 +30,19 @@ const viewportOverflowStyle = {
   horizontal: 'scroll hidden',
 } as const;
 
+/**
+ * A scrollable container with themed overlay scrollbars, built on the Base UI
+ * ScrollArea primitive.
+ *
+ * Unlike the primitive, the viewport is not forced into the tab order — modern
+ * browsers make it keyboard-focusable automatically only when it has no
+ * focusable children.
+ *
+ * @example
+ * <ScrollArea scrollbars="vertical" type="always" style={{ height: 200 }}>
+ *   <Text>Long content…</Text>
+ * </ScrollArea>
+ */
 function ScrollArea(props: ScrollAreaProps) {
   const {
     className,

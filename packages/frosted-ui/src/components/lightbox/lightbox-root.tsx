@@ -58,6 +58,7 @@ function waitForImageDecode(target: HTMLElement | null): Promise<void> {
 }
 
 interface LightboxRootProps {
+  /** The lightbox parts: Trigger, Content and any other Lightbox sub-components. */
   children?: React.ReactNode;
   /** Uncontrolled initial open state. @default false */
   defaultOpen?: boolean;
@@ -134,9 +135,13 @@ interface LightboxRootProps {
   awaitImageDecode?: boolean;
 }
 
+/** Imperative handle exposed by Lightbox.Root for programmatic control. */
 interface LightboxRootRef {
+  /** Opens the lightbox, optionally jumping to the given item index first. */
   open: (index?: number) => void;
+  /** Closes the lightbox. */
   close: () => void;
+  /** Navigates to the item at the given index. */
   goTo: (index: number) => void;
 }
 
@@ -169,6 +174,31 @@ function resolveTriggerIndex(
   return best >= 0 ? best : activeIndex;
 }
 
+/**
+ * State provider for the Lightbox compound component. Renders no DOM of
+ * its own — it holds the open state and active item index (each usable
+ * controlled or uncontrolled) and provides them to all Lightbox parts.
+ *
+ * Also exposes an imperative ref (`open`, `close`, `goTo`) and optionally
+ * drives a View Transitions morph between trigger and lightbox item.
+ *
+ * @example
+ * ```tsx
+ * <Lightbox.Root>
+ *   <Lightbox.Trigger index={0} render={<img src="thumb.jpg" alt="" />} />
+ *   <Lightbox.Content>
+ *     <Lightbox.Close />
+ *     <Lightbox.ItemGroup>
+ *       <Lightbox.Item index={0}>
+ *         <img src="photo.jpg" alt="A photo" />
+ *       </Lightbox.Item>
+ *     </Lightbox.ItemGroup>
+ *     <Lightbox.Previous />
+ *     <Lightbox.Next />
+ *   </Lightbox.Content>
+ * </Lightbox.Root>
+ * ```
+ */
 const LightboxRoot = React.forwardRef<LightboxRootRef, LightboxRootProps>(function LightboxRoot(props, forwardedRef) {
   const {
     children,

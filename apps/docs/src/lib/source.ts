@@ -2,6 +2,7 @@ import { loader } from 'fumadocs-core/source';
 import { docs } from 'collections/server';
 import { lucideIconsPlugin } from 'fumadocs-core/source/lucide-icons';
 import { getDemo } from '@/demos';
+import { getComponentProps } from '@/components/props-table';
 import { docsRoute } from './shared';
 
 export const source = loader({
@@ -38,7 +39,7 @@ export async function getLLMText(page: (typeof source)['$inferPage']) {
 
   return `# ${page.data.title} (${page.url})
 
-${inlineDemoSources(processed)}`;
+${inlinePropsTables(inlineDemoSources(processed))}`;
 }
 
 /** Replace `<Demo id="…" />` placeholders with the demo's actual source code. */
@@ -48,5 +49,26 @@ function inlineDemoSources(markdown: string) {
     if (!demo) return match;
 
     return ['Live example:', '', '```tsx', demo.source.trimEnd(), '```'].join('\n');
+  });
+}
+
+/** Replace `<PropsTable component="…" />` placeholders with a markdown props table. */
+function inlinePropsTables(markdown: string) {
+  return markdown.replace(/<PropsTable\s+component="([^"]+)"\s*\/>/g, (match, component: string) => {
+    const entry = getComponentProps(component);
+    if (!entry) return match;
+
+    const cell = (text: string) => text.replace(/\|/g, '\\|').replace(/\s+/g, ' ').trim();
+    const rows = entry.props.map((prop) => {
+      const cells = [
+        `\`${prop.name}\`${prop.required ? ' *(required)*' : ''}${prop.deprecated ? ' *(deprecated)*' : ''}`,
+        `\`${cell(prop.type)}\``,
+        prop.default ? `\`${cell(prop.default)}\`` : '—',
+        prop.description ? cell(prop.description) : '',
+      ];
+      return `| ${cells.join(' | ')} |`;
+    });
+
+    return ['| Prop | Type | Default | Description |', '| --- | --- | --- | --- |', ...rows].join('\n');
   });
 }

@@ -8,10 +8,21 @@ import type { GetPropDefTypes } from '../../helpers';
 
 type CardOwnProps = GetPropDefTypes<typeof cardPropDefs>;
 interface CardProps extends Omit<React.ComponentProps<'div'>, 'children'>, CardOwnProps {
+  /** Renders the card as a different element or component, e.g. `render={<a href="..." />}`. Defaults to `<div>`. */
   render?: useRender.ComponentProps<'div'>['render'];
   children?: React.ReactNode;
 }
 
+/**
+ * A content container with padding, rounded corners and a surface background.
+ *
+ * @example
+ * ```tsx
+ * <Card size="2">
+ *   <Text>Card content</Text>
+ * </Card>
+ * ```
+ */
 const Card = (props: CardProps) => {
   const {
     render,

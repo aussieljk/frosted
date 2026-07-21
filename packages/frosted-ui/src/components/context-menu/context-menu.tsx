@@ -19,6 +19,25 @@ type RootProps = React.ComponentProps<typeof ContextMenuPrimitive.Root>;
 
 // Root
 interface ContextMenuRootProps extends Omit<RootProps, 'className' | 'render'> {}
+
+/**
+ * A menu opened by right-clicking (or long-pressing) its trigger area. Can be controlled via
+ * `open`/`onOpenChange` or left uncontrolled.
+ *
+ * @example
+ * ```tsx
+ * <ContextMenu.Root>
+ *   <ContextMenu.Trigger>
+ *     <div>Right-click me</div>
+ *   </ContextMenu.Trigger>
+ *   <ContextMenu.Content>
+ *     <ContextMenu.Item onClick={rename}>Rename</ContextMenu.Item>
+ *     <ContextMenu.Separator />
+ *     <ContextMenu.Item color="danger" onClick={remove}>Delete</ContextMenu.Item>
+ *   </ContextMenu.Content>
+ * </ContextMenu.Root>
+ * ```
+ */
 function ContextMenuRoot(props: ContextMenuRootProps) {
   return <ContextMenuPrimitive.Root {...props} />;
 }
@@ -31,6 +50,10 @@ interface ContextMenuTriggerProps extends Omit<
 > {
   className?: string;
 }
+/**
+ * The area that opens the menu on right-click. Renders its child element as the trigger, so pass
+ * exactly one element.
+ */
 function ContextMenuTrigger({ children, ...props }: ContextMenuTriggerProps) {
   return <ContextMenuPrimitive.Trigger {...props} render={children as React.ReactElement} />;
 }
@@ -47,16 +70,30 @@ interface ContextMenuContentProps
     ContextMenuContentContextValue {
   className?: string;
   style?: React.CSSProperties;
+  /** The element the menu portal is appended to. Defaults to the document body. */
   container?: React.ComponentProps<typeof ContextMenuPrimitive.Portal>['container'];
+  /** Keeps the portal content mounted in the DOM while the menu is closed. */
   keepMounted?: React.ComponentProps<typeof ContextMenuPrimitive.Portal>['keepMounted'];
   // Positioner props
+  /** The side of the pointer location the menu is placed on. */
   side?: React.ComponentProps<typeof ContextMenuPrimitive.Positioner>['side'];
+  /** Distance in pixels between the menu and its anchor point. */
   sideOffset?: React.ComponentProps<typeof ContextMenuPrimitive.Positioner>['sideOffset'];
+  /** How the menu is aligned relative to its anchor point. */
   align?: React.ComponentProps<typeof ContextMenuPrimitive.Positioner>['align'];
+  /** Additional offset in pixels along the alignment axis. */
   alignOffset?: React.ComponentProps<typeof ContextMenuPrimitive.Positioner>['alignOffset'];
+  /**
+   * Minimum distance in pixels kept from the viewport edges when avoiding collisions.
+   * @default 10
+   */
   collisionPadding?: React.ComponentProps<typeof ContextMenuPrimitive.Positioner>['collisionPadding'];
 }
 
+/**
+ * The menu popup, positioned at the pointer location. Rendered in a portal with a scrollable viewport,
+ * and re-wrapped in the current `Theme`. Its `size`, `color` and `variant` are shared with items and submenus.
+ */
 const ContextMenuContent = (props: ContextMenuContentProps) => {
   const themeContext = useThemeContext();
   const {
@@ -75,7 +112,7 @@ const ContextMenuContent = (props: ContextMenuContentProps) => {
     collisionPadding = 10,
     ...popupProps
   } = props;
-  const resolvedColor = color ?? themeContext.accentColor;
+  const resolvedColor = color ?? (themeContext.accentColor as NonNullable<typeof color>); // custom accents only feed data-accent-color
   return (
     <ContextMenuPrimitive.Portal container={container} keepMounted={keepMounted}>
       <ContextMenuPrimitive.Positioner
@@ -121,6 +158,7 @@ interface ContextMenuGroupLabelProps extends Omit<
 > {
   className?: string;
 }
+/** An accessible label for a `Group` of items. Must be rendered inside `Group`. */
 const ContextMenuGroupLabel = (props: ContextMenuGroupLabelProps) => (
   <ContextMenuPrimitive.GroupLabel
     {...props}
@@ -135,6 +173,7 @@ interface ContextMenuItemProps
   extends Omit<React.ComponentProps<typeof ContextMenuPrimitive.Item>, 'className' | 'color'>, ContextMenuItemOwnProps {
   className?: string;
 }
+/** A clickable menu action. Use `color` for emphasis (e.g. destructive) and `shortcut` for a hint label. */
 const ContextMenuItem = (props: ContextMenuItemProps) => {
   const { className, children, color = contextMenuItemPropDefs.color.default, shortcut, ...itemProps } = props;
   return (
@@ -157,6 +196,7 @@ interface ContextMenuGroupProps extends Omit<
 > {
   className?: string;
 }
+/** Groups related items, typically labelled with `GroupLabel`. */
 const ContextMenuGroup = (props: ContextMenuGroupProps) => (
   <ContextMenuPrimitive.Group
     {...props}
@@ -172,6 +212,7 @@ interface ContextMenuRadioGroupProps extends Omit<
 > {
   className?: string;
 }
+/** A single-selection group of `RadioItem`s, controlled via `value`/`onValueChange`. */
 const ContextMenuRadioGroup = (props: ContextMenuRadioGroupProps) => (
   <ContextMenuPrimitive.RadioGroup
     {...props}
@@ -187,6 +228,7 @@ interface ContextMenuRadioItemProps extends Omit<
 > {
   className?: string;
 }
+/** A selectable option within a `RadioGroup`, showing a check indicator when selected. */
 const ContextMenuRadioItem = (props: ContextMenuRadioItemProps) => {
   const { children, className, ...itemProps } = props;
   return (
@@ -217,6 +259,7 @@ interface ContextMenuCheckboxItemProps
     ContextMenuCheckboxItemOwnProps {
   className?: string;
 }
+/** A toggleable menu item with a check indicator, controlled via `checked`/`onCheckedChange`. */
 const ContextMenuCheckboxItem = (props: ContextMenuCheckboxItemProps) => {
   const { children, className, shortcut, ...itemProps } = props;
   return (
@@ -245,6 +288,7 @@ interface ContextMenuSubProps extends Omit<
   React.ComponentProps<typeof ContextMenuPrimitive.SubmenuRoot>,
   'className'
 > {}
+/** Groups a `SubTrigger` and `SubContent` into a nested submenu. */
 const ContextMenuSub: React.FC<ContextMenuSubProps> = (props) => <ContextMenuPrimitive.SubmenuRoot {...props} />;
 ContextMenuSub.displayName = 'ContextMenuSub';
 
@@ -255,6 +299,7 @@ interface ContextMenuSubTriggerProps extends Omit<
 > {
   className?: string;
 }
+/** The item that opens a submenu on hover or arrow-key navigation, suffixed with a chevron. */
 const ContextMenuSubTrigger = (props: ContextMenuSubTriggerProps) => {
   const { className, children, ...subTriggerProps } = props;
   return (
@@ -284,13 +329,29 @@ interface ContextMenuSubContentProps extends Omit<
 > {
   className?: string;
   style?: React.CSSProperties;
+  /** The element the submenu portal is appended to. Defaults to the document body. */
   container?: React.ComponentProps<typeof ContextMenuPrimitive.Portal>['container'];
+  /** Keeps the portal content mounted in the DOM while the submenu is closed. */
   keepMounted?: React.ComponentProps<typeof ContextMenuPrimitive.Portal>['keepMounted'];
   // Positioner props
+  /**
+   * Distance in pixels between the submenu and its trigger.
+   * @default 2
+   */
   sideOffset?: React.ComponentProps<typeof ContextMenuPrimitive.Positioner>['sideOffset'];
+  /**
+   * Additional offset in pixels along the alignment axis.
+   * @default -4
+   */
   alignOffset?: React.ComponentProps<typeof ContextMenuPrimitive.Positioner>['alignOffset'];
+  /**
+   * Minimum distance in pixels kept from the viewport edges when avoiding collisions.
+   * @default 10
+   */
   collisionPadding?: React.ComponentProps<typeof ContextMenuPrimitive.Positioner>['collisionPadding'];
 }
+
+/** The submenu popup. Inherits `size`, `color` and `variant` from the parent `Content`. */
 const ContextMenuSubContent = (props: ContextMenuSubContentProps) => {
   const {
     className,
@@ -342,6 +403,7 @@ interface ContextMenuSeparatorProps extends Omit<
 > {
   className?: string;
 }
+/** A visual divider between items or groups. */
 const ContextMenuSeparator = (props: ContextMenuSeparatorProps) => (
   <ContextMenuPrimitive.Separator
     {...props}

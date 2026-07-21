@@ -8,6 +8,7 @@ import { Theme, useThemeContext } from '../../theme';
 import { autocompleteContentPropDefs, autocompleteItemPropDefs } from './autocomplete.props';
 
 // Re-export useFilter hook from Base UI
+/** Returns locale-aware string matchers (`contains`, `startsWith`, ...) for filtering autocomplete items. */
 const { useFilter } = AutocompletePrimitive;
 export { useFilter };
 
@@ -35,6 +36,23 @@ const AutocompleteContentContext = React.createContext<AutocompleteContentContex
 
 interface AutocompleteRootProps extends React.ComponentProps<typeof AutocompletePrimitive.Root> {}
 
+/**
+ * A text input that suggests matching items in a popup as the user types. Provide the data via `items`
+ * and control filtering with `value`/`onValueChange` or the built-in filtering.
+ *
+ * @example
+ * ```tsx
+ * <Autocomplete.Root items={['Apple', 'Banana', 'Cherry']}>
+ *   <Autocomplete.Input render={<TextField.Root placeholder="Search fruit..." />} />
+ *   <Autocomplete.Content>
+ *     <Autocomplete.Empty>No results</Autocomplete.Empty>
+ *     <Autocomplete.List>
+ *       {(item: string) => <Autocomplete.Item key={item} value={item}>{item}</Autocomplete.Item>}
+ *     </Autocomplete.List>
+ *   </Autocomplete.Content>
+ * </Autocomplete.Root>
+ * ```
+ */
 function AutocompleteRoot(props: AutocompleteRootProps) {
   return <AutocompletePrimitive.Root {...props} />;
 }
@@ -46,6 +64,7 @@ AutocompleteRoot.displayName = 'AutocompleteRoot';
 
 interface AutocompleteInputProps extends React.ComponentProps<typeof AutocompletePrimitive.Input> {}
 
+/** The text input that drives the autocomplete. Compose it with a styled field via `render`, e.g. `TextField.Root`. */
 const AutocompleteInput = React.forwardRef<HTMLInputElement, AutocompleteInputProps>((props, forwardedRef) => {
   return <AutocompletePrimitive.Input {...props} ref={forwardedRef} />;
 });
@@ -62,6 +81,7 @@ interface AutocompleteTriggerProps extends Omit<
   className?: string;
 }
 
+/** A button that opens the popup. Renders its child element as the trigger, so pass exactly one element. */
 function AutocompleteTrigger({ children, ...props }: AutocompleteTriggerProps) {
   return <AutocompletePrimitive.Trigger {...props} render={children as React.ReactElement} />;
 }
@@ -78,6 +98,7 @@ interface AutocompleteIconProps extends Omit<
   className?: string;
 }
 
+/** A decorative icon slot displayed inside the input, e.g. a magnifying glass. */
 const AutocompleteIcon = React.forwardRef<HTMLDivElement, AutocompleteIconProps>((props, forwardedRef) => {
   const { className, ...iconProps } = props;
   return (
@@ -101,6 +122,7 @@ interface AutocompleteClearProps extends Omit<
   className?: string;
 }
 
+/** Clears the input value when activated. Renders its child element as the clear button. */
 function AutocompleteClear({ children, ...props }: AutocompleteClearProps) {
   return <AutocompletePrimitive.Clear {...props} render={children as React.ReactElement} />;
 }
@@ -116,17 +138,41 @@ interface AutocompleteContentProps
     AutocompleteContentOwnProps {
   className?: string;
   style?: React.CSSProperties;
+  /** The element the popup portal is appended to. Defaults to the document body. */
   container?: React.ComponentProps<typeof AutocompletePrimitive.Portal>['container'];
+  /** Keeps the portal content mounted in the DOM while the popup is closed. */
   keepMounted?: React.ComponentProps<typeof AutocompletePrimitive.Portal>['keepMounted'];
   // Positioner props
+  /** The element or area the popup is positioned against. Defaults to the input. */
   anchor?: React.ComponentProps<typeof AutocompletePrimitive.Positioner>['anchor'];
+  /**
+   * The side of the anchor the popup is placed on.
+   * @default 'bottom'
+   */
   side?: React.ComponentProps<typeof AutocompletePrimitive.Positioner>['side'];
+  /**
+   * Distance in pixels between the popup and the anchor.
+   * @default 4
+   */
   sideOffset?: React.ComponentProps<typeof AutocompletePrimitive.Positioner>['sideOffset'];
+  /**
+   * How the popup is aligned along the anchor.
+   * @default 'start'
+   */
   align?: React.ComponentProps<typeof AutocompletePrimitive.Positioner>['align'];
+  /** Additional offset in pixels along the alignment axis. */
   alignOffset?: React.ComponentProps<typeof AutocompletePrimitive.Positioner>['alignOffset'];
+  /**
+   * Minimum distance in pixels kept from the viewport edges when avoiding collisions.
+   * @default 10
+   */
   collisionPadding?: React.ComponentProps<typeof AutocompletePrimitive.Positioner>['collisionPadding'];
 }
 
+/**
+ * The popup that displays the suggestion list. Rendered in a portal, positioned against the input, and
+ * re-wrapped in the current `Theme`.
+ */
 const AutocompleteContent = (props: AutocompleteContentProps) => {
   const themeContext = useThemeContext();
   const {
@@ -146,7 +192,7 @@ const AutocompleteContent = (props: AutocompleteContentProps) => {
     collisionPadding = 10,
     ...contentProps
   } = props;
-  const resolvedColor = color ?? themeContext.accentColor;
+  const resolvedColor = color ?? (themeContext.accentColor as NonNullable<typeof color>); // custom accents only feed data-accent-color
 
   return (
     <AutocompletePrimitive.Portal container={container} keepMounted={keepMounted}>
@@ -194,6 +240,7 @@ interface AutocompleteListProps extends Omit<
   className?: string;
 }
 
+/** The scrollable list of suggestions. Accepts a render function child to map each item to an `Item`. */
 const AutocompleteList = (props: AutocompleteListProps) => {
   const { className, ...listProps } = props;
   return <AutocompletePrimitive.List {...listProps} className={classNames('fui-AutocompleteList', className)} />;
@@ -211,6 +258,7 @@ interface AutocompleteItemProps
   className?: string;
 }
 
+/** A single selectable suggestion. Selecting it fills the input with its `value`. */
 const AutocompleteItem = React.forwardRef<HTMLDivElement, AutocompleteItemProps>((props, forwardedRef) => {
   const { className, color, ...itemProps } = props;
   return (
@@ -235,6 +283,7 @@ interface AutocompleteGroupProps extends Omit<
   className?: string;
 }
 
+/** Groups related items, typically labelled with `GroupLabel`. */
 const AutocompleteGroup = (props: AutocompleteGroupProps) => {
   const { className, ...groupProps } = props;
   return (
@@ -257,6 +306,7 @@ interface AutocompleteGroupLabelProps extends Omit<
   className?: string;
 }
 
+/** An accessible label for a `Group` of items. */
 const AutocompleteGroupLabel = (props: AutocompleteGroupLabelProps) => {
   const { className, ...groupLabelProps } = props;
   return (
@@ -279,6 +329,7 @@ interface AutocompleteSeparatorProps extends Omit<
   className?: string;
 }
 
+/** A visual divider between items or groups. */
 const AutocompleteSeparator = (props: AutocompleteSeparatorProps) => {
   const { className, ...separatorProps } = props;
   return (
@@ -301,6 +352,7 @@ interface AutocompleteRowProps extends Omit<
   className?: string;
 }
 
+/** A row wrapper for arranging items in a grid layout (e.g. emoji pickers). */
 const AutocompleteRow = React.forwardRef<HTMLDivElement, AutocompleteRowProps>((props, forwardedRef) => {
   const { className, ...rowProps } = props;
   return (
@@ -324,6 +376,7 @@ interface AutocompleteEmptyProps extends Omit<
   className?: string;
 }
 
+/** Rendered inside the popup only when the query produces no matching items. */
 const AutocompleteEmpty = (props: AutocompleteEmptyProps) => {
   const { className, ...emptyProps } = props;
   return <AutocompletePrimitive.Empty {...emptyProps} className={classNames('fui-AutocompleteEmpty', className)} />;
@@ -341,6 +394,7 @@ interface AutocompleteStatusProps extends Omit<
   className?: string;
 }
 
+/** A live-region status message inside the popup, e.g. loading or result-count announcements. */
 const AutocompleteStatus = (props: AutocompleteStatusProps) => {
   const { className, ...statusProps } = props;
   return <AutocompletePrimitive.Status {...statusProps} className={classNames('fui-AutocompleteStatus', className)} />;

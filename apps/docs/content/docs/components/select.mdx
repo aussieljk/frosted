@@ -26,14 +26,39 @@ import { Select } from '@aussieljk/frosted';
 </Select.Root>;
 ```
 
-## Parts
+## API reference
 
-| Part                | Purpose                                                    |
-| ------------------- | ---------------------------------------------------------- |
-| `Select.Root`       | State container — `value`, `defaultValue`, `size`, `disabled` |
-| `Select.Trigger`    | The button that opens the menu — `variant`, `color`, `placeholder` |
-| `Select.Content`    | The popup listbox                                          |
-| `Select.Group`      | Groups items                                               |
-| `Select.GroupLabel` | Label for a group                                          |
-| `Select.Item`       | A selectable option — `value`, `disabled`                  |
-| `Select.Separator`  | Visual divider                                             |
+### Select.Root
+
+State container for the select.
+
+<PropsTable component="Select.Root" />
+
+### Select.Trigger
+
+The button that opens the menu.
+
+<PropsTable component="Select.Trigger" />
+
+### Select.Content
+
+The popup listbox.
+
+<PropsTable component="Select.Content" />
+
+### Select.Group and Select.GroupLabel
+
+`Select.Group` groups items and `Select.GroupLabel` labels the group. Both take only standard
+element props.
+
+### Select.Item
+
+A selectable option.
+
+<PropsTable component="Select.Item" />
+
+### Select.Separator
+
+Visual divider between items or groups.
+
+<PropsTable component="Select.Separator" />

@@ -20,6 +20,11 @@ interface ScrollGalleryNextProps
   step?: number;
 }
 
+/**
+ * Button that scrolls the gallery forward — by ~one page, or by `step` items.
+ * Automatically disabled at the end of the scroll range unless the Root has
+ * `loop`, in which case it wraps back to the first item.
+ */
 const ScrollGalleryNext = React.forwardRef<
   HTMLButtonElement,
   ScrollGalleryNextProps

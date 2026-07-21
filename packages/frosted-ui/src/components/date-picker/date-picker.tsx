@@ -19,6 +19,16 @@ interface DatePickerProps<T extends DateValue> extends AriaDatePickerProps<T>, D
   className?: string;
 }
 
+/**
+ * A `DateField` combined with a calendar button: typing and picking from the popover calendar both
+ * update the same value. Built on React Aria, so it accepts its date picker props (`value`, `onChange`,
+ * `minValue`, ...) using `@internationalized/date` values.
+ *
+ * @example
+ * ```tsx
+ * <DatePicker value={date} onChange={setDate} aria-label="Due date" />
+ * ```
+ */
 export function DatePicker<T extends DateValue>(props: DatePickerProps<T>) {
   const {
     className,

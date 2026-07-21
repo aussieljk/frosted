@@ -17,17 +17,13 @@ import { Button } from '@aussieljk/frosted';
 
 ## Props
 
-Button extends the native `button` element.
+Button extends the native `button` element — standard button attributes are also supported.
 
-| Prop           | Type                                                     | Default     |
-| -------------- | -------------------------------------------------------- | ----------- |
-| `size`         | `'1' \| '2' \| '3' \| '4'`                               | `'2'`       |
-| `variant`      | `'classic' \| 'solid' \| 'soft' \| 'surface' \| 'ghost'` | `'surface'` |
-| `color`        | theme accent color name                                  | theme accent |
-| `highContrast` | `boolean`                                                | `false`     |
+<PropsTable component="Button" />
 
-See also [IconButton](/docs/components/button#iconbutton) for square, icon-only buttons — it
-shares the same sizes, variants, and colors:
+## IconButton
+
+IconButton is a square, icon-only button — it shares the same sizes, variants, and colors:
 
 ```tsx
 import { IconButton } from '@aussieljk/frosted';
@@ -36,3 +32,5 @@ import { IconButton } from '@aussieljk/frosted';
   <SearchIcon />
 </IconButton>;
 ```
+
+<PropsTable component="IconButton" />

@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   rules: {
     // Disallow element type selector. View-transition names (counted as type
     // selectors since stylelint 16) are legitimate custom idents, not elements.

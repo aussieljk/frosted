@@ -9,6 +9,21 @@ import { PropsWithoutColor, type GetPropDefTypes } from '../../helpers';
 type DataListRootOwnProps = GetPropDefTypes<typeof dataListRootPropDefs>;
 interface DataListRootProps extends PropsWithoutColor<'dl'>, DataListRootOwnProps {}
 
+/**
+ * A definition list (`<dl>`) of label/value rows, e.g. for metadata panels.
+ *
+ * @example
+ * ```tsx
+ * <DataList.Root>
+ *   <DataList.Item>
+ *     <DataList.Label>Status</DataList.Label>
+ *     <DataList.Value>
+ *       <Badge color="success">Active</Badge>
+ *     </DataList.Value>
+ *   </DataList.Item>
+ * </DataList.Root>
+ * ```
+ */
 const DataListRoot = (props: DataListRootProps) => {
   const {
     className,
@@ -37,6 +52,7 @@ DataListRoot.displayName = 'DataList.Root';
 type DataListItemOwnProps = GetPropDefTypes<typeof dataListItemPropDefs>;
 interface DataListItemProps extends PropsWithoutColor<'div'>, DataListItemOwnProps {}
 
+/** One row of the list, containing a `Label` and a `Value`. */
 const DataListItem = (props: DataListItemProps) => {
   const { className, align = dataListItemPropDefs.align.default, ...dataListItemProps } = props;
 
@@ -52,6 +68,7 @@ DataListItem.displayName = 'DataList.Item';
 type DataListLabelOwnProps = GetPropDefTypes<typeof dataListLabelPropDefs>;
 interface DataListLabelProps extends PropsWithoutColor<'dt'>, DataListLabelOwnProps {}
 
+/** The term (`<dt>`) of a row, rendered as a muted label. */
 const DataListLabel = (props: DataListLabelProps) => {
   const {
     className,
@@ -72,6 +89,7 @@ DataListLabel.displayName = 'DataList.Label';
 
 interface DataListValueProps extends React.ComponentProps<'dd'> {}
 
+/** The description (`<dd>`) of a row, holding the value content. */
 const DataListValue = ({ children, className, ...props }: DataListValueProps) => (
   <dd {...props} className={classNames(className, 'fui-DataListValue')}>
     {children}

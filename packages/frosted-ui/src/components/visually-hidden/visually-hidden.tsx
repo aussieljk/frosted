@@ -8,6 +8,11 @@ import * as React from 'react';
  * -----------------------------------------------------------------------------------------------*/
 
 // See: https://github.com/twbs/bootstrap/blob/main/scss/mixins/_visually-hidden.scss
+/**
+ * Inline styles that hide an element visually while keeping it accessible
+ * to assistive technology. Applied by `VisuallyHidden`; can also be spread
+ * onto any element directly.
+ */
 const VISUALLY_HIDDEN_STYLES = Object.freeze({
   position: 'absolute',
   border: 0,
@@ -28,6 +33,20 @@ interface VisuallyHiddenProps extends React.ComponentPropsWithoutRef<'span'> {
   render?: useRender.ComponentProps<'span'>['render'];
 }
 
+/**
+ * Hides its content visually while keeping it available to screen readers,
+ * e.g. for accessible labels on icon-only buttons. Renders a `<span>` by
+ * default (override via the `render` prop); custom `style` is merged on
+ * top of the hiding styles.
+ *
+ * @example
+ * ```tsx
+ * <IconButton>
+ *   <MagnifyingGlassIcon />
+ *   <VisuallyHidden>Search</VisuallyHidden>
+ * </IconButton>
+ * ```
+ */
 const VisuallyHidden = React.forwardRef<HTMLSpanElement, VisuallyHiddenProps>((props, forwardedRef) => {
   const { render, style, ...rest } = props;
 

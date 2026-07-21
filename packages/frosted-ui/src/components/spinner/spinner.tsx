@@ -8,6 +8,18 @@ import type { GetPropDefTypes, PropsWithoutColor } from '../../helpers/index';
 type SpinnerOwnProps = GetPropDefTypes<typeof spinnerPropDefs>;
 interface SpinnerProps extends PropsWithoutColor<'span'>, SpinnerOwnProps {}
 
+/**
+ * An animated loading indicator.
+ *
+ * When given children, `loading` toggles between showing them and replacing
+ * them with a centered spinner — the children stay mounted but hidden and
+ * inert, so the layout keeps their size.
+ *
+ * @example
+ * <Spinner loading={isSaving}>
+ *   <IconButton>…</IconButton>
+ * </Spinner>
+ */
 const Spinner = (props: SpinnerProps) => {
   const {
     children,

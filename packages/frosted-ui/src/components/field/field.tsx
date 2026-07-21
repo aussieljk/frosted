@@ -177,7 +177,7 @@ interface FieldDescriptionProps
  * </Field.Root>
  * ```
  *
- * @param size - Text size ('1' - '9'). Defaults to '1'.
+ * @param size - Text size ('1' - '9'). Defaults to '2'.
  * @param weight - Font weight ('light', 'regular', 'medium', 'bold').
  * @param color - Text color. Defaults to 'gray'.
  *
@@ -288,7 +288,7 @@ interface FieldErrorProps
  * </Field.Root>
  * ```
  *
- * @param size - Text size ('1' - '9'). Defaults to '1'.
+ * @param size - Text size ('1' - '9'). Defaults to '2'.
  * @param weight - Font weight ('light', 'regular', 'medium', 'bold').
  * @param color - Text color. Defaults to 'danger'.
  * @param match - Determines whether to show the error message according to the field's `ValidityState`.

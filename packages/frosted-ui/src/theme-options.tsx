@@ -17,6 +17,7 @@ import {
   tailwindGetMatchingGrayScale,
   tailwindGrayScales,
 } from './helpers/tailwind-colors';
+import { matchingGrayFromColor } from './helpers/tailwind-palette';
 
 const colorPanelElevationColors = ['color-panel-elevation'] as const;
 const semanticColors = ['danger', 'warning', 'success', 'info'] as const;
@@ -51,8 +52,10 @@ const themePropDefs = {
 type ThemeProps = GetPropDefTypes<typeof themePropDefs>;
 
 type ThemeAppearance = NonNullable<ThemeProps['appearance']>;
-type ThemeAccentColor = NonNullable<ThemeProps['accentColor']>;
-type ThemeGrayColor = NonNullable<ThemeProps['grayColor']>;
+/** A named scale, or any CSS color string (`#hex`, `rgb()`, `oklch()`) for a custom accent. */
+type ThemeAccentColor = NonNullable<ThemeProps['accentColor']> | (string & {});
+/** A named gray scale, `'auto'`, or any CSS color string for a custom gray. */
+type ThemeGrayColor = NonNullable<ThemeProps['grayColor']> | (string & {});
 type ThemeDangerColor = NonNullable<ThemeProps['dangerColor']>;
 type ThemeWarningColor = NonNullable<ThemeProps['warningColor']>;
 type ThemeSuccessColor = NonNullable<ThemeProps['successColor']>;
@@ -125,12 +128,23 @@ const themeGrayColorsGrouped = [
   { label: 'Tailwind', values: [...tailwindGrayScales] as ThemeGrayColor[] },
 ];
 
+/** `true` when the value is not one of the named accent scales, i.e. a custom CSS color. */
+function isCustomAccentColor(accentColor: ThemeAccentColor): boolean {
+  return !(accentColors as readonly string[]).includes(accentColor);
+}
+
+/** `true` when the value is not `'auto'` or a named gray scale, i.e. a custom CSS color. */
+function isCustomGrayColor(grayColor: ThemeGrayColor): boolean {
+  return !(grayColors as readonly string[]).includes(grayColor);
+}
+
 function getMatchingGrayColor(
   accentColor: ThemeAccentColor,
 ): (typeof radixGrayScales)[number] | (typeof tailwindGrayScales)[number] {
   if (accentColor === 'gray') return 'gray';
   if (isTailwindColorScale(accentColor)) return tailwindGetMatchingGrayScale(accentColor);
-  return radixGetMatchingGrayScale(accentColor);
+  if (isCustomAccentColor(accentColor)) return matchingGrayFromColor(accentColor);
+  return radixGetMatchingGrayScale(accentColor as (typeof radixColorScales)[number]);
 }
 
 export {
@@ -138,6 +152,8 @@ export {
   dangerColors,
   getMatchingGrayColor,
   infoColors,
+  isCustomAccentColor,
+  isCustomGrayColor,
   semanticColors,
   successColors,
   //

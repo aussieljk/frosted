@@ -16,6 +16,7 @@ const stateAttributesMapping = {
   face: (value: unknown) => ({ 'data-face': String(value) }),
 };
 
+/** A button that flips the card between its front and back faces. */
 const CreditCardTrigger = React.forwardRef<HTMLButtonElement, CreditCardTriggerProps>(
   function CreditCardTrigger(props, forwardedRef) {
     const { render, ...elementProps } = props;

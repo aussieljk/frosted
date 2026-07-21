@@ -9,6 +9,18 @@ interface SpacerProps extends React.ComponentProps<'div'> {
   minLength?: number;
 }
 
+/**
+ * A flexible, invisible element that expands along its stack's main axis to
+ * push siblings apart, like SwiftUI's `Spacer`. Use `minLength` to guarantee
+ * a minimum amount of space.
+ *
+ * @example
+ * <HStack>
+ *   <Logo />
+ *   <Spacer minLength={16} />
+ *   <Button>Sign in</Button>
+ * </HStack>
+ */
 const Spacer = (props: SpacerProps) => {
   const { className, style, minLength, ...spacerProps } = props;
   return (

@@ -7,6 +7,20 @@ import type { GetPropDefTypes } from '../../helpers';
 type InsetOwnProps = GetPropDefTypes<typeof insetPropDefs>;
 interface InsetProps extends React.ComponentProps<'div'>, InsetOwnProps {}
 
+/**
+ * Makes its content bleed into the padding of a parent container (typically a `Card`), e.g. for
+ * edge-to-edge images.
+ *
+ * @example
+ * ```tsx
+ * <Card>
+ *   <Inset side="top" pb="current">
+ *     <img src="/cover.png" alt="" />
+ *   </Inset>
+ *   <Text>Card text with normal padding.</Text>
+ * </Card>
+ * ```
+ */
 const Inset = (props: InsetProps) => {
   const {
     className,

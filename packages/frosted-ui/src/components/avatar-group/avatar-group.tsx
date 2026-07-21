@@ -10,6 +10,18 @@ type AvatarGroupRootOwnProps = GetPropDefTypes<typeof avatarGroupPropDefs>;
 
 interface AvatarGroupRootProps extends PropsWithoutColor<'div'>, AvatarGroupRootOwnProps {}
 
+/**
+ * A row of overlapping avatars, e.g. for showing members of a group. Size, shape and color are set on
+ * the root and applied to every `AvatarGroup.Avatar` inside.
+ *
+ * @example
+ * ```tsx
+ * <AvatarGroup.Root>
+ *   <AvatarGroup.Avatar src="/a.png" fallback="Ada Lovelace" />
+ *   <AvatarGroup.Avatar src="/b.png" fallback="Grace Hopper" />
+ * </AvatarGroup.Root>
+ * ```
+ */
 const AvatarGroupRoot = (props: AvatarGroupRootProps) => {
   const {
     className,
@@ -35,6 +47,7 @@ AvatarGroupRoot.displayName = 'AvatarGroupRoot';
 
 type AvatarGroupAvatarProps = Omit<React.ComponentProps<typeof Avatar>, 'size' | 'shape'>;
 
+/** An avatar within `AvatarGroup.Root`. Its `size` and `shape` come from the group's CSS, not per-avatar props. */
 const AvatarGroupAvatar = ({ className, ...props }: AvatarGroupAvatarProps) => {
   return <Avatar size="3" className={classNames('fui-AvatarGroupAvatar', className)} {...props} />;
 };

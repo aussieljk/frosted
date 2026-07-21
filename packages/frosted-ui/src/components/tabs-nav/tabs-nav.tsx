@@ -11,6 +11,23 @@ type TabsNavRootProps = Omit<React.ComponentProps<typeof NavigationMenu.Root>, '
   React.ComponentProps<'nav'> &
   TabsNavOwnProps;
 
+/**
+ * A tabs-styled navigation bar for linking between pages.
+ *
+ * Wraps Base UI's NavigationMenu primitive and renders a `<nav>` landmark; unlike
+ * `Tabs`, selection is driven by links (mark the current one with `active` on
+ * `Link`) rather than internal tab state.
+ *
+ * @example
+ * ```tsx
+ * <TabsNav.Root>
+ *   <TabsNav.Link href="/overview" active>
+ *     Overview
+ *   </TabsNav.Link>
+ *   <TabsNav.Link href="/analytics">Analytics</TabsNav.Link>
+ * </TabsNav.Root>
+ * ```
+ */
 const TabsNavRoot = (props: TabsNavRootProps) => {
   const {
     children,
@@ -46,12 +63,19 @@ const TabsNavRoot = (props: TabsNavRootProps) => {
 TabsNavRoot.displayName = 'TabsNavRoot';
 
 interface TabsNavLinkOwnProps {
+  /** Additional CSS class name */
   className?: string;
 }
 type TabsNavLinkProps = Omit<React.ComponentProps<typeof NavigationMenu.Link>, 'className'> &
   Omit<React.ComponentProps<'a'>, 'className'> &
   TabsNavLinkOwnProps;
 
+/**
+ * A navigation link rendered as a tab.
+ *
+ * Renders an anchor by default; pass `render` to integrate with a router's link
+ * component and `active` (from the Base UI primitive) to mark the current page.
+ */
 const TabsNavLink = (props: TabsNavLinkProps) => {
   const { render, children, className, ...linkProps } = props;
 

@@ -8,6 +8,7 @@ import { hoverCardContentPropDefs } from './hover-card.props';
 
 import type { GetPropDefTypes } from '../../helpers';
 
+/** Creates a detached handle for opening a hover card imperatively, optionally with a typed payload. */
 const createHandle = PreviewCardPrimitive.createHandle;
 
 type HoverCardHandle<T = unknown> = ReturnType<typeof PreviewCardPrimitive.createHandle<T>>;
@@ -16,9 +17,28 @@ interface HoverCardRootProps<T = unknown> extends Omit<
   React.ComponentProps<typeof PreviewCardPrimitive.Root>,
   'className' | 'render' | 'children' | 'handle'
 > {
+  /** Card parts, or a render function that receives the `payload` passed by the opening trigger or handle. */
   children?: React.ReactNode | ((props: { payload: T | undefined }) => React.ReactNode);
+  /** A handle created with `HoverCard.createHandle()` for opening the card imperatively with a typed payload. */
   handle?: HoverCardHandle<T>;
 }
+
+/**
+ * A rich preview card that opens when hovering or focusing a trigger, e.g. a user profile preview on a
+ * mention. Can be controlled via `open`/`onOpenChange` or left uncontrolled.
+ *
+ * @example
+ * ```tsx
+ * <HoverCard.Root>
+ *   <HoverCard.Trigger>
+ *     <Link href="/users/jane">@jane</Link>
+ *   </HoverCard.Trigger>
+ *   <HoverCard.Content>
+ *     <Text>Jane Doe, Engineer</Text>
+ *   </HoverCard.Content>
+ * </HoverCard.Root>
+ * ```
+ */
 function HoverCardRoot<T = unknown>(props: HoverCardRootProps<T>) {
   return <PreviewCardPrimitive.Root {...(props as React.ComponentProps<typeof PreviewCardPrimitive.Root>)} />;
 }
@@ -29,14 +49,28 @@ interface HoverCardTriggerProps<T = unknown> extends Omit<
   'render' | 'className' | 'handle' | 'payload'
 > {
   className?: string;
+  /** The single element rendered as the trigger, e.g. a `Link`. */
   children: React.ReactElement;
+  /** A handle created with `HoverCard.createHandle()`, for opening a card rendered elsewhere. */
   handle?: HoverCardHandle<T>;
+  /** Data passed to the card's `children` render function when this trigger opens it. */
   payload?: T;
-  /** How long to wait before the preview card opens. Specified in milliseconds. */
+  /**
+   * How long to wait before the preview card opens. Specified in milliseconds.
+   * @default 200
+   */
   delay?: number;
-  /** How long to wait before closing the preview card. Specified in milliseconds. */
+  /**
+   * How long to wait before closing the preview card. Specified in milliseconds.
+   * @default 150
+   */
   closeDelay?: number;
 }
+
+/**
+ * The element that opens the card on hover or keyboard focus. Renders its child element as the trigger,
+ * so pass exactly one element.
+ */
 function HoverCardTrigger<T = unknown>(props: HoverCardTriggerProps<T>) {
   const { children, delay = 200, closeDelay = 150, ...rest } = props;
   return (
@@ -74,13 +108,23 @@ interface HoverCardContentProps
     HoverCardContentOwnProps {
   className?: string;
   style?: React.CSSProperties;
+  /** The element the card portal is appended to. Defaults to the document body. */
   container?: PortalProps['container'];
+  /** Keeps the portal content mounted in the DOM while the card is closed. */
   keepMounted?: PortalProps['keepMounted'];
-  /** The alignment of the content relative to the trigger. */
+  /**
+   * The alignment of the content relative to the trigger.
+   * @default 'center'
+   */
   align?: PositionerProps['align'];
   /** The offset from the alignment edge in pixels. */
   alignOffset?: PositionerProps['alignOffset'];
 }
+
+/**
+ * The floating card panel. Rendered in a portal, positioned against the trigger, and re-wrapped in the
+ * current `Theme`.
+ */
 const HoverCardContent = (props: HoverCardContentProps) => {
   const {
     className,

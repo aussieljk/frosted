@@ -15,6 +15,11 @@ const stateAttributesMapping = {
   disabled: (value: unknown) => (value ? { 'data-disabled': '' } : null),
 };
 
+/**
+ * A button that zooms in by one step. Must be rendered inside
+ * Lightbox.Zoom (e.g. via its `overlay` slot); auto-disables at the
+ * maximum zoom level or when no zoom context is present.
+ */
 const LightboxZoomIn = React.forwardRef<HTMLButtonElement, LightboxZoomInProps>(
   function LightboxZoomIn(props, forwardedRef) {
     const { render, ...elementProps } = props;

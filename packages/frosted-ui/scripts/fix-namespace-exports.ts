@@ -11,7 +11,7 @@ const DIST = new URL('../dist', import.meta.url).pathname;
 function walk(dir) {
   return readdirSync(dir).flatMap((name) => {
     const p = join(dir, name);
-    return statSync(p).isDirectory() ? walk(p) : p.endsWith('.mjs') ? [p] : [];
+    return statSync(p).isDirectory() ? walk(p) : p.endsWith('.js') ? [p] : [];
   });
 }
 
@@ -50,7 +50,7 @@ for (const file of walk(DIST)) {
 
   // Drop the helper import when nothing uses it anymore.
   if (!src.includes('__exportAll(')) {
-    src = src.replace(/import \{ __exportAll \} from "[^"]*_rolldown\/runtime.mjs";\n/, '');
+    src = src.replace(/import \{ __exportAll \} from "[^"]*_rolldown\/runtime.js";\n/, '');
   }
 
   if (src !== original) writeFileSync(file, src);

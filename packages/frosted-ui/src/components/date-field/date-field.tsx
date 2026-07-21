@@ -16,6 +16,16 @@ interface DateFieldProps<T extends AriaDateValue> extends AriaDateFieldProps<T>,
   className?: string;
 }
 
+/**
+ * A segmented date input where each part (day, month, year) is edited and stepped individually with the
+ * keyboard. Built on React Aria, so it accepts its date field props (`value`, `onChange`, `minValue`,
+ * `granularity`, ...) using `@internationalized/date` values.
+ *
+ * @example
+ * ```tsx
+ * <DateField value={date} onChange={setDate} aria-label="Birth date" />
+ * ```
+ */
 function DateField<T extends AriaDateValue>(props: DateFieldProps<T>) {
   const {
     className,

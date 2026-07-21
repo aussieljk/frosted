@@ -54,6 +54,12 @@ function _useWidgetStack() {
   return context;
 }
 
+/**
+ * Returns the surrounding WidgetStack's state (`currentWidgetIndex`, `widgetsCount`,
+ * `nextDisabled`, `prevDisabled`) and navigation `controls` (`next`, `prev`,
+ * `scrollToIndex`). Calling any control also disables auto-play. Must be used within a
+ * `WidgetStack.Root`.
+ */
 export function useWidgetStack() {
   const context = React.useContext(WidgetStackContext);
   if (context === undefined) {
@@ -90,8 +96,30 @@ export function useWidgetStack() {
 }
 interface WidgetStackRootProps extends GetPropDefTypes<typeof widgetStackRootPropDefs> {
   children: React.ReactNode;
+  /**
+   * Interval in milliseconds between automatic advances through the widgets (ping-pong:
+   * forward to the end, then backward). Auto-play pauses while hovering the stack and stops
+   * permanently once the user navigates manually. Omit to disable auto-play.
+   */
   autoPlay?: number;
 }
+/**
+ * Carousel-like stack of widgets scrolled one at a time. Root renders no DOM element; it only
+ * provides shared state (current index, navigation controls, auto-play) to the other parts
+ * and the `useWidgetStack` hook.
+ *
+ * @example
+ * ```tsx
+ * <WidgetStack.Root orientation="horizontal" autoPlay={5000}>
+ *   <WidgetStack.Stack>
+ *     <WidgetStack.Item>First widget</WidgetStack.Item>
+ *     <WidgetStack.Item>Second widget</WidgetStack.Item>
+ *   </WidgetStack.Stack>
+ *   <WidgetStack.Prev>Previous</WidgetStack.Prev>
+ *   <WidgetStack.Next>Next</WidgetStack.Next>
+ * </WidgetStack.Root>
+ * ```
+ */
 const WidgetStackRoot: React.FC<WidgetStackRootProps> = ({
   children,
   orientation = widgetStackRootPropDefs.orientation.default,
@@ -132,9 +160,16 @@ const WidgetStackRoot: React.FC<WidgetStackRootProps> = ({
 WidgetStackRoot.displayName = 'WidgetStackRoot';
 
 interface WidgetStackStackProps extends PropsWithoutColor<'div'> {
+  /** Base UI render prop for replacing the default `<div>` element. */
   render?: useRender.ComponentProps<'div'>['render'];
 }
 
+/**
+ * The scrollable viewport containing the widgets. Tracks the visible widget with an
+ * IntersectionObserver to update the current index and enable/disable the Prev/Next
+ * buttons, drives smooth scrolling and auto-play, and exposes each item's visibility as a
+ * `--intersection-ratio` CSS variable for transition effects.
+ */
 const WidgetStackStack = (props: WidgetStackStackProps) => {
   const { className, children, ...rootProps } = props;
 
@@ -352,6 +387,11 @@ const WidgetStackItemContext = React.createContext<{
   isFullyVisible: false,
 });
 
+/**
+ * Returns `{ isFullyVisible }` for the surrounding `WidgetStack.Item`, indicating whether
+ * the item is fully in view within the stack's viewport. Must be used within a
+ * `WidgetStack.Item`.
+ */
 export function useWidgetStackItem() {
   const context = React.useContext(WidgetStackItemContext);
   if (context === undefined) {
@@ -362,6 +402,11 @@ export function useWidgetStackItem() {
 
 interface WidgetStackItemProps extends React.ComponentProps<'div'> {}
 
+/**
+ * A single widget in the stack, exposed as a slide (`role="group"`,
+ * `aria-roledescription="slide"`). Observes its own visibility; while not fully visible it
+ * is made `inert` so partially visible widgets cannot be interacted with.
+ */
 const WidgetStackItem = (props: WidgetStackItemProps) => {
   const { className, children, ...rootProps } = props;
   const ref = React.useRef<HTMLDivElement>(null);
@@ -413,9 +458,14 @@ const WidgetStackItem = (props: WidgetStackItemProps) => {
 WidgetStackItem.displayName = 'WidgetStackItem';
 
 interface WidgetStackNextProps extends Omit<React.ComponentProps<'button'>, 'disabled' | 'onClick'> {
+  /** Base UI render prop for replacing the default `<button>` element. */
   render?: useRender.ComponentProps<'button'>['render'];
 }
 
+/**
+ * Button that scrolls to the next widget and stops auto-play. Automatically disabled when
+ * the last widget is in view.
+ */
 const WidgetStackNext = (props: WidgetStackNextProps) => {
   const { render, ...rest } = props;
   const { nextDisabled, controls } = useWidgetStack();
@@ -436,9 +486,14 @@ const WidgetStackNext = (props: WidgetStackNextProps) => {
 WidgetStackNext.displayName = 'WidgetStackNext';
 
 interface WidgetStackPrevProps extends Omit<React.ComponentProps<'button'>, 'disabled' | 'onClick'> {
+  /** Base UI render prop for replacing the default `<button>` element. */
   render?: useRender.ComponentProps<'button'>['render'];
 }
 
+/**
+ * Button that scrolls to the previous widget and stops auto-play. Automatically disabled
+ * when the first widget is in view.
+ */
 const WidgetStackPrev = (props: WidgetStackPrevProps) => {
   const { render, ...rest } = props;
   const { prevDisabled, controls } = useWidgetStack();

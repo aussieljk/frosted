@@ -13,14 +13,17 @@ const toastPositions = [
 const toastProviderPropDefs = {
   /**
    * Default auto-dismiss duration in milliseconds.
+   * @default 5000
    */
   timeout: { type: 'enum' as const, values: [3000, 5000, 8000, 10000] as const, default: 5000 },
   /**
    * Maximum number of toasts visible at once.
+   * @default 3
    */
   limit: { type: 'enum' as const, values: [1, 3, 5, 10] as const, default: 3 },
   /**
    * Position of the toast viewport on screen.
+   * @default 'bottom-right'
    */
   position: { type: 'enum' as const, values: toastPositions, default: 'bottom-right' as const },
 } satisfies {

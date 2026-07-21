@@ -17,6 +17,18 @@ interface RadioGroupRootProps<Value = unknown>
   style?: React.CSSProperties;
 }
 
+/**
+ * A set of mutually exclusive radio buttons. Wraps Base UI's `RadioGroup`; supports
+ * controlled (`value` + `onValueChange`) and uncontrolled (`defaultValue`) usage.
+ *
+ * @example
+ * ```tsx
+ * <RadioGroup.Root defaultValue="1">
+ *   <RadioGroup.Item value="1">Option one</RadioGroup.Item>
+ *   <RadioGroup.Item value="2">Option two</RadioGroup.Item>
+ * </RadioGroup.Root>
+ * ```
+ */
 function RadioGroupRoot<Value = unknown>(props: RadioGroupRootProps<Value>) {
   const {
     className,
@@ -47,6 +59,10 @@ interface RadioGroupItemProps extends Omit<
   style?: React.CSSProperties;
 }
 
+/**
+ * A single radio button within the group. Wraps Base UI's `Radio.Root`; when `children` is
+ * provided the item renders as a `<label>` so clicking the label selects the radio.
+ */
 const RadioGroupItem = (props: RadioGroupItemProps) => {
   const { children, className, style, ...itemProps } = props;
 

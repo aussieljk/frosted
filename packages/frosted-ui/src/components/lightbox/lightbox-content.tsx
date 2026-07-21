@@ -41,7 +41,9 @@ const focusGuardStyle: React.CSSProperties = {
 };
 
 interface LightboxContentProps extends React.ComponentPropsWithRef<'div'> {
+  /** Additional class applied to the dialog element. */
   className?: string;
+  /** The lightbox UI: ItemGroup, navigation buttons, counter, caption, thumbnails, etc. */
   children?: React.ReactNode;
   /** Container element for the portal. Defaults to `document.body`. */
   container?: Element | DocumentFragment | null;
@@ -49,6 +51,16 @@ interface LightboxContentProps extends React.ComponentPropsWithRef<'div'> {
   pullToClose?: boolean;
 }
 
+/**
+ * The modal surface of the lightbox: a portalled backdrop plus a
+ * `role="dialog"` container, rendered only while the lightbox is mounted
+ * and wrapped in a dark `Theme`.
+ *
+ * Behavior: locks document scroll, traps Tab focus with edge guards,
+ * closes on Escape and backdrop click, navigates items with arrow
+ * keys/Home/End (arrows pan instead when zoomed), blocks native
+ * pinch-zoom, and supports pull-to-dismiss on touch devices.
+ */
 const LightboxContent = React.forwardRef<HTMLDivElement, LightboxContentProps>(
   function LightboxContent(props, forwardedRef) {
     const { className, children, container, pullToClose = true, ...rest } = props;

@@ -18,20 +18,26 @@ import { TextField } from '@aussieljk/frosted';
 </TextField.Root>;
 ```
 
-## Parts
+## API reference
 
-| Part              | Purpose                                                     |
-| ----------------- | ----------------------------------------------------------- |
-| `TextField.Root`  | Container — `size`, `variant`, `color`                      |
-| `TextField.Input` | The native input                                            |
-| `TextField.Slot`  | Decorations (icons, buttons) before or after the input      |
+### TextField.Root
 
-## Root props
+Container that provides the field's visual style.
 
-| Prop      | Type                              | Default     |
-| --------- | --------------------------------- | ----------- |
-| `size`    | `'1' \| '2' \| '3' \| '4'`        | `'2'`       |
-| `variant` | `'surface' \| 'soft'`             | `'surface'` |
-| `color`   | theme accent color name           | `'gray'`    |
+<PropsTable component="TextField.Root" />
 
-Related: `TextArea` for multi-line input, `NumberField`, `OTPField`, and `Autocomplete`.
+### TextField.Input
+
+The native input. Also accepts all standard `input` attributes (`placeholder`, `type`, …).
+
+<PropsTable component="TextField.Input" />
+
+### TextField.Slot
+
+Decorations (icons, buttons) before or after the input.
+
+<PropsTable component="TextField.Slot" />
+
+## Related
+
+`TextArea` for multi-line input, `NumberField`, `OTPField`, and `Autocomplete`.

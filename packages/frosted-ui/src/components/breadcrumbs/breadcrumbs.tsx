@@ -11,9 +11,23 @@ type BreadcrumbsRootChildrenTypes = React.ReactElement<BreadcrumbsItemProps | Br
 
 type BreadcrumbsRootOwnProps = GetPropDefTypes<typeof breadcrumbsPropDefs>;
 interface BreadcrumbsRootProps extends PropsWithoutColor<'nav'>, BreadcrumbsRootOwnProps {
+  /** Renders the breadcrumbs as a different element or component. Defaults to `<nav>`. */
   render?: useRender.ComponentProps<'nav'>['render'];
 }
 
+/**
+ * A navigation trail of `Breadcrumbs.Item` (and optionally `Breadcrumbs.Dropdown`) children, separated
+ * by chevrons. The last child without an `onClick` is rendered as plain text for the current page.
+ *
+ * @example
+ * ```tsx
+ * <Breadcrumbs.Root>
+ *   <Breadcrumbs.Item onClick={() => navigate('/')}>Home</Breadcrumbs.Item>
+ *   <Breadcrumbs.Item onClick={() => navigate('/docs')}>Docs</Breadcrumbs.Item>
+ *   <Breadcrumbs.Item>Components</Breadcrumbs.Item>
+ * </Breadcrumbs.Root>
+ * ```
+ */
 const BreadcrumbsRoot = (props: BreadcrumbsRootProps) => {
   const { className, children, render, color = breadcrumbsPropDefs.color.default, ...baseButtonProps } = props;
   const count = React.Children.count(children);
@@ -66,6 +80,7 @@ BreadcrumbsRoot.displayName = 'BreadcrumbsRoot';
 
 interface BreadcrumbsItemProps extends Omit<React.ComponentProps<typeof Button>, 'variant' | 'size'> {}
 
+/** A single clickable crumb, rendered as a small ghost `Button`. */
 const BreadcrumbsItem = (props: BreadcrumbsItemProps) => (
   <Button {...props} size="1" variant={'ghost'} className={classNames('fui-BreadcrumbsItem', props.className)} />
 );
@@ -77,6 +92,7 @@ interface BreadcrumbsDropdownProps extends Omit<
   'variant' | 'size'
 > {}
 
+/** A collapsed "..." crumb that opens a dropdown menu of `Breadcrumbs.DropdownItem` children. */
 const BreadcrumbsDropdown = ({ color, ...props }: BreadcrumbsDropdownProps) => (
   <DropdownMenu.Root>
     <DropdownMenu.Trigger>
@@ -92,6 +108,7 @@ BreadcrumbsDropdown.displayName = 'BreadcrumbsDropdown';
 
 interface BreadcrumbsDropdownItemProps extends Omit<React.ComponentProps<typeof DropdownMenu.Item>, 'color'> {}
 
+/** A menu item inside `Breadcrumbs.Dropdown`. */
 const BreadcrumbsDropdownItem = (props: BreadcrumbsDropdownItemProps) => <DropdownMenu.Item {...props} />;
 
 BreadcrumbsDropdownItem.displayName = 'BreadcrumbsDropdownItem';

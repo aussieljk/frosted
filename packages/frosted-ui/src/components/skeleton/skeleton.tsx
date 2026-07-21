@@ -20,6 +20,13 @@ function useSkeletonAnimationSync(ref: React.RefObject<HTMLDivElement | null>) {
 type SkeletonAvatarOwnProps = GetPropDefTypes<typeof skeletonAvatarPropDefs>;
 
 interface SkeletonAvatarProps extends PropsWithoutColor<'div'>, SkeletonAvatarOwnProps {}
+/**
+ * A pulsing placeholder shaped like an Avatar of the same `size` and `shape`.
+ * All skeletons on the page pulse in phase, regardless of when they mount.
+ *
+ * @example
+ * <Skeleton.Avatar size="4" />
+ */
 const SkeletonAvatar = (props: SkeletonAvatarProps) => {
   const {
     className,
@@ -59,6 +66,10 @@ SkeletonAvatar.displayName = 'SkeletonAvatar';
 type SkeletonTextOwnProps = GetPropDefTypes<typeof skeletonTextPropDefs>;
 
 interface SkeletonTextProps extends PropsWithoutColor<'div'>, SkeletonTextOwnProps {}
+/**
+ * A pulsing placeholder for a line of Text of the same `size`.
+ * All skeletons on the page pulse in phase, regardless of when they mount.
+ */
 const SkeletonText = (props: SkeletonTextProps) => {
   const {
     className,
@@ -95,6 +106,10 @@ SkeletonText.displayName = 'SkeletonText';
 type SkeletonRectOwnProps = GetPropDefTypes<typeof skeletonRectPropDefs>;
 
 interface SkeletonRectProps extends PropsWithoutColor<'div'>, SkeletonRectOwnProps {}
+/**
+ * A pulsing rectangular placeholder; size it via `className` or `style`.
+ * All skeletons on the page pulse in phase, regardless of when they mount.
+ */
 const SkeletonRect = (props: SkeletonRectProps) => {
   const {
     className,
