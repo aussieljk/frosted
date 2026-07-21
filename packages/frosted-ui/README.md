@@ -1,11 +1,11 @@
-<h1 align="center">Frosted UI</h1>
+<h1 align="center">@aussieljk/frosted</h1>
 
-<p align="center">Design system used by <a href="https://whop.com/">Whop</a></p>
+<p align="center">A fork of <a href="https://github.com/whopio/frosted-ui">Frosted UI</a>, the design system used by <a href="https://whop.com/">Whop</a></p>
 
 <h3 align="center">
   <a href="https://storybook.whop.dev/">Storybook</a> -
   <a href="https://www.figma.com/design/pWs6edprYZNR54ZPwk0oRV">Figma UI kit</a> -
-  <a href="https://github.com/whopio/frosted-ui/tree/main/packages/frosted-ui">Source code</a>
+  <a href="https://github.com/aussieljk/frosted/tree/main/packages/frosted-ui">Source code</a>
 </h3>
 
 > [!WARNING]
@@ -18,19 +18,19 @@
 Install Frosted UI:
 
 ```sh
-$ pnpm add frosted-ui
+$ bun add @aussieljk/frosted
 ```
 
 Import the global CSS file at the root of your application:
 
 ```tsx
-import 'frosted-ui/styles.css';
+import '@aussieljk/frosted/styles.css';
 ```
 
 Add the Theme component:
 
 ```tsx
-import { Theme } from 'frosted-ui';
+import { Theme } from '@aussieljk/frosted';
 
 export default function () {
   return (

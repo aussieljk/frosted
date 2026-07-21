@@ -107,7 +107,7 @@ The emoji-to-color mappings are generated using a Node.js script located in `scr
 
 ```bash
 cd packages/frosted-ui
-pnpm generate:emoji-colors
+bun run generate:emoji-colors
 ```
 
 This will regenerate `src/helpers/emoji-colors.ts` with updated mappings.
@@ -271,14 +271,14 @@ To improve the detection, you can adjust the color extraction or matching logic 
 - `scripts/emoji-colors/utils/color-extractor.ts` - Color weighting and extraction
 - `scripts/emoji-colors/utils/color-matcher.ts` - Grayscale detection and color distance calculation
 
-Then regenerate the mappings: `pnpm generate:emoji-colors`
+Then regenerate the mappings: `bun run generate:emoji-colors`
 
 ### Generation script fails
 
 Make sure all dependencies are installed:
 
 ```bash
-pnpm install
+bun install
 ```
 
 Required packages:

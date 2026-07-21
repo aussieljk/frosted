@@ -13,7 +13,7 @@ npm install @frosted-ui/react-native
 # or
 yarn add @frosted-ui/react-native
 # or
-pnpm add @frosted-ui/react-native
+bun add @frosted-ui/react-native
 ```
 
 2. Install peer dependencies:
@@ -23,7 +23,7 @@ npm install react react-native react-native-reanimated react-native-safe-area-co
 # or
 yarn add react react-native react-native-reanimated react-native-safe-area-context react-native-screens react-native-svg lucide-react-native
 # or
-pnpm add react react-native react-native-reanimated react-native-safe-area-context react-native-screens react-native-svg lucide-react-native
+bun add react react-native react-native-reanimated react-native-safe-area-context react-native-screens react-native-svg lucide-react-native
 ```
 
 3. **Setup React Native Reanimated**: Follow the [React Native Reanimated installation guide](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started/).

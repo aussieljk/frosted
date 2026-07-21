@@ -7,10 +7,10 @@
   "module": "index.mjs",
   "types": "types/index.d.ts",
   "scripts": {
-    "build": "pnpm clean && pnpm generate-colors && cd ./colors && zip -r ../frosted-ui-swift-colors.zip ./",
+    "build": "bun run clean && bun run generate-colors && cd ./colors && zip -r ../frosted-ui-swift-colors.zip ./",
     "generate-colors": "node ./scripts/generate-colors.js",
-    "prepublishOnly": "pnpm build",
-    "postpublish": "pnpm clean",
+    "prepublishOnly": "bun run build",
+    "postpublish": "bun run clean",
     "clean": "rimraf colors"
   },
   "keywords": [

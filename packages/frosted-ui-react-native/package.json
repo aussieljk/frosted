@@ -34,10 +34,9 @@
     "android": "expo start -c --android",
     "ios": "expo start -c --ios",
     "web": "expo start -c --web",
-    "build": "pnpm clean:dist && tsc -p tsconfig.build.json && tsc-alias -p tsconfig.build.json",
+    "build": "bun run clean:dist && tsc -p tsconfig.build.json && tsc-alias -p tsconfig.build.json",
     "clean": "rm -rf .expo node_modules",
-    "clean:dist": "rm -rf dist",
-    "release": "turbo-module publish"
+    "clean:dist": "rm -rf dist"
   },
   "dependencies": {
     "@frosted-ui/colors": "0.0.1-canary.61",
@@ -71,7 +70,6 @@
   "devDependencies": {
     "@babel/core": "^7.26.0",
     "@types/react": "~19.1.10",
-    "@whop/turbo-module": "^0.1.0-canary.3",
     "expo": "^54.0.26",
     "expo-linking": "~8.0.9",
     "expo-router": "~6.0.16",

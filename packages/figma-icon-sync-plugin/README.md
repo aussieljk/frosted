@@ -48,9 +48,9 @@ You don't need to build anything or run any commands — the plugin ships prebui
 The `dist/` output is committed so designers can import without a build. **If you change anything in `src/`, rebuild and commit the updated `dist/`** so the shipped plugin stays in sync:
 
 ```bash
-pnpm --filter="@frosted-ui/figma-icon-sync-plugin" build
+bun run --filter="@frosted-ui/figma-icon-sync-plugin" build
 # or, while iterating:
-pnpm --filter="@frosted-ui/figma-icon-sync-plugin" dev
+bun run --filter="@frosted-ui/figma-icon-sync-plugin" dev
 ```
 
 This produces `dist/code.js` and `dist/ui.html`, which `manifest.json` points to.

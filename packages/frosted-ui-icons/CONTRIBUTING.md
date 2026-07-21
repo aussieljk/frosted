@@ -11,13 +11,13 @@ Available scripts:
 
 Both icons and pictograms now live in the same [Frosted Design System Figma file](https://www.figma.com/design/pWs6edprYZNR54ZPwk0oRV/), on separate pages ("Icons" and "Pictograms").
 
-- `pnpm generate-src` — sync monochromatic UI icons (from the `Icons` page)
-- `pnpm generate-pictograms` — sync colorful pictograms (from the `Pictograms` page)
-- `pnpm generate-all` — run both, in order
+- `bun run generate-src` — sync monochromatic UI icons (from the `Icons` page)
+- `bun run generate-pictograms` — sync colorful pictograms (from the `Pictograms` page)
+- `bun run generate-all` — run both, in order
 
 #### Vector Icons
 
-Access the [Figma file](https://www.figma.com/design/pWs6edprYZNR54ZPwk0oRV/), make changes on the `Icons` page, then run `pnpm generate-src` and open a PR.
+Access the [Figma file](https://www.figma.com/design/pWs6edprYZNR54ZPwk0oRV/), make changes on the `Icons` page, then run `bun run generate-src` and open a PR.
 
 There are a couple things to keep in mind when making changes:
 
@@ -29,7 +29,7 @@ _The [Figma file][figmafile] should contain additional guidelines for making cha
 
 #### Pictograms
 
-Access the [Figma file](https://www.figma.com/design/pWs6edprYZNR54ZPwk0oRV/), make changes on the `Pictograms` page, then run `pnpm generate-pictograms` and open a PR.
+Access the [Figma file](https://www.figma.com/design/pWs6edprYZNR54ZPwk0oRV/), make changes on the `Pictograms` page, then run `bun run generate-pictograms` and open a PR.
 
 There are a couple things to keep in mind when making changes:
 
@@ -44,9 +44,9 @@ There are a couple things to keep in mind when making changes:
 
 Have a look in `packages/generate-icon-lib/src/templates` for the templating code that drives the generators:
 
-- `named-icon.tsx.ejs` — used by `pnpm generate-src`
-- `pictogram-merged.tsx.ejs` — used by `pnpm generate-pictograms` for pictograms whose background variants share geometry (the typical case)
-- `pictogram-switched.tsx.ejs` — used by `pnpm generate-pictograms` as a fallback for pictograms whose backgrounds have differing geometry
+- `named-icon.tsx.ejs` — used by `bun run generate-src`
+- `pictogram-merged.tsx.ejs` — used by `bun run generate-pictograms` for pictograms whose background variants share geometry (the typical case)
+- `pictogram-switched.tsx.ejs` — used by `bun run generate-pictograms` as a fallback for pictograms whose backgrounds have differing geometry
 - `pictogram-types.tsx` — emits the shared `PictogramProps` / `PictogramVariant` types
 
 Makes changes to the CLI, then re-run the relevant generator, then open a PR. Try to keep commits separated between the CLI and files created in this package.

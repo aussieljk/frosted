@@ -38,7 +38,7 @@ import {
   Theme,
   ThemePanel,
   Tooltip,
-} from 'frosted-ui';
+} from '@aussieljk/frosted';
 // import { HideCursor } from './hide-cursor';
 /* Inter variable setup */
 import localFont from 'next/font/local';

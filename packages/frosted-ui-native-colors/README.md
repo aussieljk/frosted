@@ -12,5 +12,5 @@ The Kotlin color assets are in the `kotlin-colors/Color.kt` file.
 If you want to update the color assets (and generate new `zip` file) just run this command:
 
 ```bash
-pnpm build
+bun run build
 ```

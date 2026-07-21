@@ -51,13 +51,12 @@
   "scripts": {
     "generate-src": "generate-icon-lib && cd ./icons && zip -r ../frosted-ui-icons.zip ./",
     "generate-pictograms": "generate-icon-lib --type=pictograms && cd ./pictograms && zip -r ../frosted-ui-pictograms.zip ./",
-    "generate-all": "pnpm generate-src && pnpm generate-pictograms",
+    "generate-all": "bun run generate-src && bun run generate-pictograms",
     "clean": "rimraf dist",
-    "build": "pnpm clean && pnpm build:js",
-    "build:js": "pnpm build:js:cjs && pnpm build:js:esm",
+    "build": "bun run clean && bun run build:js",
+    "build:js": "bun run build:js:cjs && bun run build:js:esm",
     "build:js:cjs": "tsc --project tsconfig-cjs.json",
-    "build:js:esm": "tsc --project tsconfig-esm.json",
-    "release": "turbo-module publish"
+    "build:js:esm": "tsc --project tsconfig-esm.json"
   },
   "peerDependencies": {
     "@types/react": "*",
@@ -65,7 +64,6 @@
   },
   "devDependencies": {
     "@types/react": "^16.8.17",
-    "@whop/turbo-module": "^0.1.0-canary.3",
     "generate-icon-lib": "workspace:*",
     "react": "17.0.2",
     "rimraf": "^5.0.5",

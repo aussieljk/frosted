@@ -14,7 +14,7 @@ import {
   ThemePanel,
   Tooltip,
   getColorForEmoji,
-} from 'frosted-ui';
+} from '@aussieljk/frosted';
 import localFont from 'next/font/local';
 import WhopLogo from './WhopLogo';
 

@@ -9,14 +9,11 @@ import {
   DateSegment as AriaDateSegment,
 } from 'react-aria-components';
 import { type GetPropDefTypes } from '../../helpers';
-import { MappedDateValue } from '../calendar';
 import { dateFieldPropDefs } from './date-field.props';
 
 type DateFieldFUIProps = GetPropDefTypes<typeof dateFieldPropDefs>;
 interface DateFieldProps<T extends AriaDateValue> extends AriaDateFieldProps<T>, DateFieldFUIProps {
   className?: string;
-  // TODO: React Aria types for onChange are incorrect - missing UNDEFINED type
-  onChange?: (value: MappedDateValue<T> | undefined) => void;
 }
 
 function DateField<T extends AriaDateValue>(props: DateFieldProps<T>) {

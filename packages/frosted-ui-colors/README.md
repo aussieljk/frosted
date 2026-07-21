@@ -10,7 +10,7 @@ For full documentation, visit [storybook.whop.dev](https://storybook.whop.dev/?p
 
 ## Installation
 
-`pnpm add @frosted-ui/colors`
+`bun add @frosted-ui/colors`
 
 ## Acknowledgments
 

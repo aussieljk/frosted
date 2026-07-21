@@ -52,20 +52,8 @@ export function DateRangePicker<T extends DateValue>(props: DateRangePickerProps
 
   return (
     <div {...groupProps} ref={ref} className={classNames('fui-DateRangePickerRoot', className)}>
-      <DateField
-        {...startFieldProps}
-        color={color}
-        size={size}
-        // @ts-expect-error TODO: Aria onChange types exclude NULL which is wrong
-        onChange={onStartChange}
-      />
-      <DateField
-        {...endFieldProps}
-        color={color}
-        size={size}
-        // @ts-expect-error TODO: Aria onChange types exclude NULL which is wrong
-        onChange={onEndChange}
-      />
+      <DateField {...startFieldProps} color={color} size={size} onChange={onStartChange} />
+      <DateField {...endFieldProps} color={color} size={size} onChange={onEndChange} />
       <Popover.Root open={state.isOpen} onOpenChange={(open) => state.setOpen(open)}>
         <Popover.Trigger>
           <IconButton

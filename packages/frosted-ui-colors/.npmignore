@@ -4,5 +4,5 @@
 tsconfig.json
 rollup.config.js
 yarn.lock
-pnpm.lock
+bun.lock
 package-lock.json

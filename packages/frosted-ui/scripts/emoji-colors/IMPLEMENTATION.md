@@ -177,7 +177,7 @@ How to regenerate:
 
 ```bash
 cd packages/frosted-ui
-pnpm generate:emoji-colors
+bun run generate:emoji-colors
 ```
 
 ## 📁 Files Created/Modified

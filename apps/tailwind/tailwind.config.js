@@ -1,4 +1,4 @@
-import { frostedThemePlugin } from 'frosted-ui';
+import { frostedThemePlugin } from '@aussieljk/frosted';
 
 export default {
   darkMode: ['class'],

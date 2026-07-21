@@ -8,7 +8,7 @@ import React, { useRef } from 'react';
 import { Popover } from '../';
 import { GetPropDefTypes } from '../../helpers';
 import { CalendarIcon } from '../../icons';
-import { Calendar, MappedDateValue } from '../calendar';
+import { Calendar } from '../calendar';
 import { DateField } from '../date-field';
 import { IconButton } from '../icon-button';
 import { datePickerPropDefs } from './date-picker.props';
@@ -17,7 +17,6 @@ type DatePickerFUIProps = GetPropDefTypes<typeof datePickerPropDefs>;
 
 interface DatePickerProps<T extends DateValue> extends AriaDatePickerProps<T>, DatePickerFUIProps {
   className?: string;
-  onChange?: (value: MappedDateValue<T> | undefined) => void;
 }
 
 export function DatePicker<T extends DateValue>(props: DatePickerProps<T>) {
@@ -40,13 +39,7 @@ export function DatePicker<T extends DateValue>(props: DatePickerProps<T>) {
 
   return (
     <div {...groupProps} ref={ref} className={classNames('fui-DatePickerRoot', className)}>
-      <DateField
-        {...otherFieldProps}
-        color={color}
-        size={size}
-        // @ts-expect-error React Arias onChange type is incorrect - it's missing UNDEFINED
-        onChange={onChange}
-      />
+      <DateField {...otherFieldProps} color={color} size={size} onChange={onChange} />
       <Popover.Root open={state.isOpen} onOpenChange={(open) => state.setOpen(open)}>
         <Popover.Trigger
           {...buttonProps}
