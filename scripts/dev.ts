@@ -1,25 +1,31 @@
 /**
- * Dev orchestrator — replaces `turbo run dev`.
+ * Dev orchestrator — `bun dev [docs|sb] [--no-open] [--kill]`.
  *
- * Starts all five dev processes in parallel (no build barrier: tsdown --watch and
- * postcss --watch both do an initial build on startup), prefixes their output with
- * short colored labels, polls the three portless URLs, and opens each in Safari as
- * it becomes ready. `generate:props` only blocks startup when its output is missing;
- * otherwise it refreshes in the background and Vite hot-reloads the JSON.
+ * Starts the dev processes in parallel, prefixes their output with short colored
+ * labels, polls the portless URLs, and opens each in Safari as it becomes ready.
  *
- * Flags: --no-open (skip Safari).
+ * - No arguments starts everything; `bun dev docs` / `bun dev sb` starts one site
+ *   (the CSS watchers always run — both sites consume the built styles.css).
+ * - Docs consume frosted straight from src/ (vite alias), so no dist/ watch build
+ *   runs here at all; storybook reads src/ natively.
+ * - `generate:props` is skipped when frosted src is unchanged since the last run,
+ *   and refreshes in the background otherwise (Vite hot-reloads the JSON).
+ * - Stale dev processes from a previous session (they squat the portless routes)
+ *   are killed on startup; `--kill` does only that and exits.
  */
 import { spawn, type ChildProcess } from 'node:child_process';
-import { existsSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
 import { createInterface } from 'node:readline';
 import { join, resolve } from 'node:path';
 
 const root = resolve(import.meta.dir, '..');
 const frostedDir = join(root, 'packages/frosted-ui');
 const docsDir = join(root, 'apps/docs');
-const playDir = join(root, 'apps/tailwind');
 
-const noOpen = process.argv.includes('--no-open');
+const flags = process.argv.slice(2).filter((a) => a.startsWith('--'));
+const targets = process.argv.slice(2).filter((a) => !a.startsWith('--'));
+const noOpen = flags.includes('--no-open');
+const killOnly = flags.includes('--kill');
 const startedAt = Date.now();
 
 const c = {
@@ -28,14 +34,14 @@ const c = {
   green: (s: string) => `\x1b[32m${s}\x1b[0m`,
   red: (s: string) => `\x1b[31m${s}\x1b[0m`,
   cyan: (s: string) => `\x1b[36m${s}\x1b[0m`,
-  magenta: (s: string) => `\x1b[35m${s}\x1b[0m`,
   yellow: (s: string) => `\x1b[33m${s}\x1b[0m`,
   blue: (s: string) => `\x1b[34m${s}\x1b[0m`,
+  magenta: (s: string) => `\x1b[35m${s}\x1b[0m`,
 };
 
 const elapsed = () => `${((Date.now() - startedAt) / 1000).toFixed(1)}s`;
 
-// Lines nobody needs to see (banners, config dumps, telemetry notices).
+// Lines nobody needs to see (banners, route chatter, telemetry notices).
 // oxlint-disable-next-line no-control-regex
 const stripAnsi = (s: string) => s.replace(/\x1b\[[0-9;]*m/g, '');
 const NOISE = [
@@ -43,14 +49,8 @@ const NOISE = [
   /^portless$/, // portless prints its own banner…
   /^-- /, // …plus proxy/route status lines…
   /^-> |^Running: /, // …and the resolved command with its port mapping
-  /^\s*[╭│╰]/, // storybook banner box
+  /^\s*[╭│╰┌└]/, // storybook banner box
   /telemetry/i,
-  /^ℹ (entry|target|tsconfig|config file): /, // tsdown startup config dump
-  /^ℹ tsdown v/,
-  /^ℹ (Build start|Cleaning \d+ files|Emit types)/,
-  /^ℹ dist\//, // tsdown per-file size report (~800 lines per rebuild)
-  /^ℹ \d+ files, total:/,
-  /TypeScript 7\.0 does not yet have a stable API/,
 ];
 
 interface Proc {
@@ -60,35 +60,72 @@ interface Proc {
   cmd: string[];
 }
 
-const procs: Proc[] = [
-  { name: 'docs', paint: c.cyan, cwd: docsDir, cmd: ['portless', 'frosted', 'vite', 'dev', '--logLevel', 'warn'] },
-  {
-    name: 'play',
-    paint: c.magenta,
-    cwd: playDir,
-    cmd: ['portless', 'play.frosted', 'vite', 'dev', '--logLevel', 'warn'],
-  },
-  {
-    name: 'sb',
-    paint: c.yellow,
-    cwd: frostedDir,
-    cmd: ['portless', 'storybook.frosted', 'sh', '-c', 'storybook dev -p "$PORT" --no-open --quiet'],
-  },
-  // --no-clean: wiping dist/ on watch startup breaks the vite apps until the rebuild lands
-  { name: 'js', paint: c.blue, cwd: frostedDir, cmd: ['tsdown', '--watch', '--no-clean'] },
-  {
-    name: 'css',
-    paint: c.green,
-    cwd: frostedDir,
-    cmd: ['postcss', 'src/styles/index.css', '-o', 'styles.css', '--watch'],
-  },
-];
+const allProcs: Record<string, Proc[]> = {
+  docs: [
+    { name: 'docs', paint: c.cyan, cwd: docsDir, cmd: ['portless', 'frosted', 'vite', 'dev', '--logLevel', 'warn'] },
+  ],
+  sb: [
+    {
+      name: 'sb',
+      paint: c.yellow,
+      cwd: frostedDir,
+      cmd: ['portless', 'storybook.frosted', 'sh', '-c', 'storybook dev -p "$PORT" --no-open --quiet'],
+    },
+  ],
+  css: [
+    {
+      name: 'css',
+      paint: c.green,
+      cwd: frostedDir,
+      cmd: ['postcss', 'src/styles/index.css', '-o', 'styles.css', '--watch'],
+    },
+    {
+      name: 'thm',
+      paint: c.blue,
+      cwd: frostedDir,
+      cmd: ['postcss', 'src/styles/theme.css', '-o', 'theme.css', '--watch'],
+    },
+  ],
+};
 
-const servers = [
-  { name: 'docs', url: 'https://frosted.localhost' },
-  { name: 'play', url: 'https://play.frosted.localhost' },
-  { name: 'storybook', url: 'https://storybook.frosted.localhost' },
-];
+const allServers = {
+  docs: { name: 'docs', url: 'https://frosted.localhost' },
+  sb: { name: 'storybook', url: 'https://storybook.frosted.localhost' },
+};
+
+const aliases: Record<string, keyof typeof allServers> = { docs: 'docs', sb: 'sb', storybook: 'sb' };
+const selected = targets.length ? targets.map((t) => aliases[t]) : (['docs', 'sb'] as const);
+if (selected.some((s) => !s)) {
+  console.error(`usage: bun dev [docs|sb] [--no-open] [--kill]`);
+  process.exit(1);
+}
+const procs = [...selected.flatMap((s) => allProcs[s]), ...allProcs.css];
+const servers = selected.map((s) => allServers[s]);
+
+// --- stale sessions ---
+
+// A previous dev session left running (or orphaned) squats the portless routes and
+// the proxy then serves the old code — kill anything of ours before starting.
+function killStale(): number {
+  const ps = Bun.spawnSync(['ps', '-eo', 'pid=,command=']).stdout.toString();
+  const mine = new Set([process.pid, process.ppid]);
+  let killed = 0;
+  for (const line of ps.split('\n')) {
+    const match = line.match(/^\s*(\d+)\s+(.*)/);
+    if (!match) continue;
+    const [, pid, command] = match;
+    if (mine.has(Number(pid))) continue;
+    if (!command.includes(`${root}/node_modules/.bin/`)) continue; // never touches the global proxy
+    if (!/\.bin\/(portless|vite|storybook|tsdown|postcss|concurrently)/.test(command)) continue;
+    try {
+      process.kill(Number(pid), 'SIGTERM');
+      killed++;
+    } catch {}
+  }
+  return killed;
+}
+
+// --- process management ---
 
 const children: ChildProcess[] = [];
 let shuttingDown = false;
@@ -117,6 +154,7 @@ function start({ name, paint, cwd, cmd }: Proc) {
     env: {
       ...process.env,
       FORCE_COLOR: '1',
+      SB_DISABLE_TELEMETRY: '1',
       PATH: `${join(cwd, 'node_modules/.bin')}:${join(root, 'node_modules/.bin')}:${process.env.PATH}`,
     },
   });
@@ -148,34 +186,74 @@ async function waitAndOpen({ name, url }: { name: string; url: string }) {
   if (!noOpen) spawn('open', ['-a', 'Safari', url]);
 }
 
+// --- prop tables ---
+
+// Fingerprint of everything generate-props reads; when unchanged, skip the ~7s
+// regeneration entirely. Count catches deletions, max-mtime catches edits.
+function propsFingerprint(): string {
+  let maxMtime = statSync(join(docsDir, 'scripts/generate-props.ts')).mtimeMs;
+  let count = 0;
+  for (const entry of readdirSync(join(frostedDir, 'src'), { recursive: true, withFileTypes: true })) {
+    if (!entry.isFile()) continue;
+    count++;
+    const mtime = statSync(join(entry.parentPath, entry.name)).mtimeMs;
+    if (mtime > maxMtime) maxMtime = mtime;
+  }
+  return `${count}:${maxMtime}`;
+}
+
+async function refreshProps() {
+  const json = join(docsDir, 'src/generated/component-props.json');
+  const stampFile = join(docsDir, 'src/generated/.props-stamp');
+  const stamp = propsFingerprint();
+  const fresh = existsSync(json) && existsSync(stampFile) && readFileSync(stampFile, 'utf8') === stamp;
+  if (fresh) return;
+
+  const generate = () =>
+    new Promise<void>((done) => {
+      spawn('bun', ['scripts/generate-props.ts'], { cwd: docsDir, stdio: 'ignore' }).on('exit', (code) => {
+        if (code === 0) {
+          writeFileSync(stampFile, stamp);
+          if (!shuttingDown) console.log(`${c.green('✓')} ${c.bold('props')}     refreshed  ${c.dim(elapsed())}`);
+        }
+        done();
+      });
+    });
+
+  // Block only when docs can't start without the JSON; otherwise refresh behind vite.
+  if (!existsSync(json)) {
+    console.log(c.dim('generating prop tables…'));
+    await generate();
+  } else {
+    generate();
+  }
+}
+
 // --- go ---
 
-console.log(`\n${c.bold('❄ frosted dev')}\n`);
+const stale = killStale();
+if (killOnly) {
+  console.log(stale ? `killed ${stale} stale dev process${stale === 1 ? '' : 'es'}` : 'no stale dev processes');
+  process.exit(0);
+}
 
-// First run only: the apps consume dist/ and styles.css, and only a full build
-// applies fix-namespace-exports and produces theme.css.
-if (!existsSync(join(frostedDir, 'dist/index.js')) || !existsSync(join(frostedDir, 'theme.css'))) {
-  console.log(c.dim('first run — building @aussieljk/frosted…'));
-  const build = Bun.spawnSync(['bun', 'run', 'build'], { cwd: frostedDir, stdio: ['ignore', 'inherit', 'inherit'] });
+console.log(`\n${c.bold('❄ frosted dev')}\n`);
+if (stale) console.log(c.dim(`killed ${stale} stale dev process${stale === 1 ? '' : 'es'} from a previous session`));
+
+// The apps import the built styles.css/theme.css; the watchers recreate them, but
+// on a pristine checkout build once up-front so the very first request can't 404.
+if (!existsSync(join(frostedDir, 'styles.css')) || !existsSync(join(frostedDir, 'theme.css'))) {
+  console.log(c.dim('first run — building css…'));
+  const build = Bun.spawnSync(['bun', 'run', 'build:css'], {
+    cwd: frostedDir,
+    stdio: ['ignore', 'inherit', 'inherit'],
+  });
   if (build.exitCode !== 0) process.exit(build.exitCode);
 }
 
-// Prop tables: block only when missing, otherwise refresh in the background.
-const propsJson = join(docsDir, 'src/generated/component-props.json');
-const generateProps = () => spawn('bun', ['scripts/generate-props.ts'], { cwd: docsDir, stdio: 'ignore' });
-if (!existsSync(propsJson)) {
-  console.log(c.dim('generating prop tables…'));
-  await new Promise((done) => generateProps().on('exit', done));
-} else {
-  generateProps().on('exit', (code) => {
-    if (!shuttingDown && code === 0)
-      console.log(`${c.green('✓')} ${c.bold('props')}     refreshed  ${c.dim(elapsed())}`);
-  });
-}
+if (selected.includes('docs')) await refreshProps();
 
 procs.forEach(start);
-const ready = Promise.all(servers.map(waitAndOpen));
-
-ready.then(() => {
+Promise.all(servers.map(waitAndOpen)).then(() => {
   if (!shuttingDown) console.log(c.dim(`\nall ready in ${elapsed()} — ctrl-c to stop\n`));
 });

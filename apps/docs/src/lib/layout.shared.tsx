@@ -16,10 +16,6 @@ export function baseOptions(): BaseLayoutProps {
         text: 'Storybook',
         url: siteUrls.storybook,
       },
-      {
-        text: 'Playground',
-        url: siteUrls.playground,
-      },
     ],
     githubUrl: `https://github.com/${gitConfig.user}/${gitConfig.repo}`,
   };

@@ -4,8 +4,7 @@
 
 <h3 align="center">
   <a href="https://frosted.localhost">Docs</a> -
-  <a href="https://storybook.frosted.localhost">Storybook</a> -
-  <a href="https://play.frosted.localhost">Playground</a>
+  <a href="https://storybook.frosted.localhost">Storybook</a>
 </h3>
 
 > [!WARNING]

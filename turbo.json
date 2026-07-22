@@ -10,10 +10,6 @@
       "dependsOn": ["^build"],
       "outputs": ["dist/**", "styles.css", "styles.lite.css", "theme.css"]
     },
-    "tailwind#build": {
-      "dependsOn": ["^build"],
-      "outputs": ["dist/**"]
-    },
     "docs#build": {
       "dependsOn": ["^build"],
       "outputs": [".output/**", "dist/**"],
@@ -28,11 +24,6 @@
     },
     "lint:css": {
       "outputs": []
-    },
-    "dev": {
-      "cache": false,
-      "persistent": true,
-      "dependsOn": ["^build"]
     },
     "@aussieljk/frosted#build-storybook": {
       "dependsOn": ["build:css"],

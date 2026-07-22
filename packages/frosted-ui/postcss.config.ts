@@ -5,7 +5,7 @@ import postcssCustomMedia from 'postcss-custom-media';
 import postcssDiscardEmpty from 'postcss-discard-empty';
 import postcssImport from 'postcss-import';
 import postcssNesting from 'postcss-nesting';
-import postcssFrostedUi from './postcss-frosted-ui';
+import postcssFrostedUi from './postcss-frosted-ui.js';
 
 export default {
   plugins: [

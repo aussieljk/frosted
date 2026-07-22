@@ -7,7 +7,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ### Monorepo
 
 - **Install**: `bun install`
-- **Dev server**: `bun run dev` (docs + playground + storybook, all through [portless](https://www.npmjs.com/package/portless))
+- **Dev server**: `bun run dev [docs|sb] [--no-open] [--kill]` (`scripts/dev.ts`; docs + storybook through [portless](https://www.npmjs.com/package/portless), opens Safari when ready; `--kill` clears stale sessions)
 - **Build**: `bun run build --filter=<app>`
 - **Lint**: `bun run lint --filter=<app>`
 - **Typecheck**: `bun run typecheck` (turbo, all packages; TypeScript 7)
@@ -17,15 +17,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ### Dev URLs (portless, one tenant — no port numbers)
 
-Everything runs from this laptop under the `frosted.localhost` tenant; each site's header links to the others:
+Everything runs from this laptop under the `frosted.localhost` tenant; each site's header links to the other:
 
 - **Docs**: <https://frosted.localhost> (`apps/docs`, Vite + TanStack Start)
 - **Storybook**: <https://storybook.frosted.localhost> (`packages/frosted-ui`)
-- **Playground**: <https://play.frosted.localhost> (`apps/tailwind`, Vite; `/` dashboard, `/main.html` marketing)
 
 ### Frosted UI Package (`@aussieljk/frosted`, in `packages/frosted-ui`)
 
-- **Dev server**: `bun run --filter="@aussieljk/frosted" dev`
 - **Build**: `bun run --filter="@aussieljk/frosted" build`
 - **Lint**: `bun run --filter="@aussieljk/frosted" lint`
 - **Storybook**: `bun run --filter="@aussieljk/frosted" storybook`
@@ -48,7 +46,8 @@ The main package publishes to npm as `@aussieljk/frosted` (see `packages/frosted
 
 Non-obvious constraints — breaking any of these fails silently or in confusing ways:
 
-- **`scripts/fix-namespace-exports.ts` must run after every tsdown build** (wired into `build:js`). Rolldown lowers `export * as Tabs` into materialized getter objects, which break React Server Components (`<Tabs.Root>` renders undefined: "Element type is invalid … got: undefined"). Note `tsdown --watch` (dev) skips the fix, so a dev-built `dist/` may misbehave in consumers until you run a full `bun run build`.
+- **`scripts/fix-namespace-exports.ts` must run after every tsdown build** (wired into `build:js`). Rolldown lowers `export * as Tabs` into materialized getter objects, which break React Server Components (`<Tabs.Root>` renders undefined: "Element type is invalid … got: undefined").
+- **Dev never builds or watches `dist/`** — docs alias `@aussieljk/frosted` (and `/icons/*`) to `packages/frosted-ui/src` in `vite.config.ts` (serve only; builds use the real package), and storybook reads `src/` natively. Only the postcss watchers (`styles.css`, `theme.css`) run during dev. If you change the package's public entry points, check the vite aliases still cover them.
 - **`sideEffects` in `packages/frosted-ui/package.json` must stay `["./dist/icons/adapters/*"]`**, not `false`. The icon adapter subpaths (`@aussieljk/frosted/icons/lucide` etc.) register themselves on import; `sideEffects: false` silently tree-shakes them.
 - **TypeScript 7 (native compiler) is the repo default**, and it has no JS compiler API. The seemingly redundant classic-TS pin in `apps/docs` is load-bearing (prop-table generation needs the compiler API). Don't "clean up" that pin.
 - **`.stylelintrc.js` must stay `.js`** — stylelint's TS config loader calls classic-TS APIs that the TS7 native compiler doesn't export.
