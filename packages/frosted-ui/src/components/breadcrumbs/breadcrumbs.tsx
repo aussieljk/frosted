@@ -44,9 +44,10 @@ const BreadcrumbsRoot = (props: BreadcrumbsRootProps) => {
             render={<div />}
             data-accent-color={color}
             size={'1'}
-            children={child.props.children}
             className={classNames('fui-reset', 'fui-BreadcrumbsLastItem', child.props.className)}
-          />
+          >
+            {child.props.children}
+          </Text>
         </>
       );
     } else {

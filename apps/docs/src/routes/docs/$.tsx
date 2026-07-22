@@ -15,7 +15,7 @@ import { baseOptions } from '@/lib/layout.shared';
 import { gitConfig } from '@/lib/shared';
 import { useFumadocsLoader } from 'fumadocs-core/source/client';
 import { Suspense } from 'react';
-import { useMDXComponents } from '@/components/mdx';
+import { getMDXComponents } from '@/components/mdx';
 
 export const Route = createFileRoute('/docs/$')({
   component: Page,
@@ -66,7 +66,7 @@ const clientLoader = browserCollections.docs.createClientLoader({
           />
         </div>
         <DocsBody>
-          <MDX components={useMDXComponents()} />
+          <MDX components={getMDXComponents()} />
         </DocsBody>
       </DocsPage>
     );

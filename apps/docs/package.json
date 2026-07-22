@@ -9,7 +9,7 @@
     "generate:props": "bun scripts/generate-props.ts",
     "start": "vite preview",
     "preview": "vite preview",
-    "lint": "eslint .",
+    "lint": "bun x oxlint .",
     "typecheck": "bun run generate:props && fumadocs-mdx && tsc --noEmit",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist && rm -rf .output && rm -rf .source && rm -rf .nitro && rm -rf .tanstack && rm -rf src/generated",
     "postinstall": "fumadocs-mdx"
@@ -32,8 +32,6 @@
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.3",
-    "eslint": "^10.7.0",
-    "eslint-config-custom": "workspace:*",
     "nitro": "3.0.260610-beta",
     "tailwindcss": "^4.3.2",
     "typescript": "^6.0.3",

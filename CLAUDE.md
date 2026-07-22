@@ -38,7 +38,7 @@ Everything runs from this laptop under the `frosted.localhost` tenant; each site
 - **Formatting**: Single quotes, semicolons required, trailing commas in multiline
 - **Project**: Bun workspaces with Turborepo, Vite for all applications (no Next.js, no tests, no CI)
 - **Commits**: Semantic commit messages (feat, fix, docs, style, refactor, perf, test, chore)
-- **Quality**: ESLint + oxlint for linting, oxfmt for formatting (`bun run format`; lefthook pre-commit runs both on staged files), Storybook for component docs
+- **Quality**: oxlint for linting (root `.oxlintrc.json`), oxfmt for formatting (`bun run format`; lefthook pre-commit runs both on staged files), Storybook for component docs
 
 ## Publishing
 

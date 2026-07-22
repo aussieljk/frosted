@@ -46,7 +46,6 @@ export function DateRangePicker<T extends DateValue>(props: DateRangePickerProps
     size = datePickerPropDefs.size.default,
     ...datePickerProps
   } = otherProps;
-  datePickerProps.onChange;
   const state = useDateRangePickerState({
     ...datePickerProps,
     // shouldCloseOnSelect: false,

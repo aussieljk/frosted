@@ -1,0 +1,32 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["react", "typescript", "unicorn", "oxc"],
+  "categories": {
+    "correctness": "error"
+  },
+  "rules": {
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "no-unused-vars": "warn",
+    "typescript/no-explicit-any": "warn",
+    "typescript/no-empty-object-type": "off"
+  },
+  "overrides": [
+    {
+      "files": ["**/*.stories.ts", "**/*.stories.tsx", "**/widget-stack/widget-stack.tsx"],
+      "rules": {
+        "react-hooks/rules-of-hooks": "off"
+      }
+    }
+  ],
+  "ignorePatterns": [
+    "**/dist/**",
+    "**/.output/**",
+    "**/.source/**",
+    "**/.nitro/**",
+    "**/.tanstack/**",
+    "**/storybook-static/**",
+    "**/src/generated/**",
+    "**/*.gen.ts"
+  ]
+}

@@ -4,7 +4,7 @@ import type { MDXComponents } from 'mdx/types';
 import { Demo } from './demo';
 import { PropsTable } from './props-table';
 
-function getMDXComponents(components?: MDXComponents) {
+export function getMDXComponents(components?: MDXComponents) {
   return {
     ...defaultMdxComponents,
     Demo,
@@ -12,8 +12,6 @@ function getMDXComponents(components?: MDXComponents) {
     ...components,
   } satisfies MDXComponents;
 }
-
-export const useMDXComponents = getMDXComponents;
 
 declare global {
   type MDXProvidedComponents = ReturnType<typeof getMDXComponents>;

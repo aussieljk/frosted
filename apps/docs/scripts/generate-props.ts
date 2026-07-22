@@ -213,7 +213,7 @@ function addComponent(fullName: string, symbol: ts.Symbol, type: ts.Type) {
 
 for (const exported of checker.getExportsOfModule(entryModule)) {
   const name = exported.getName();
-  if (/PropDefs$/.test(name)) {
+  if (name.endsWith('PropDefs')) {
     collectPropDefs(name, resolveAlias(exported));
     continue;
   }

@@ -340,16 +340,16 @@ function CalendarGrid({ state, ...props }: { state: CalendarState | RangeCalenda
         </tr>
       </thead>
       <tbody>
-        {[...new Array(weeksInMonth).keys()].map((weekIndex) => (
+        {Array.from({ length: weeksInMonth }, (_, weekIndex) => (
           <tr key={weekIndex}>
             {state
               .getDatesInWeek(weekIndex)
               .map((date, i) => (date ? <CalendarCell key={i} state={state} date={date} /> : <td key={i} />))}
           </tr>
         ))}
-        {[...new Array(placeholderWeeks).keys()].map((_, index) => (
+        {Array.from({ length: placeholderWeeks }, (_, index) => (
           <tr key={`filler-${index}`}>
-            {[...new Array(7).keys()].map((_, i) => (
+            {Array.from({ length: 7 }, (_, i) => (
               <td key={i}>
                 <div aria-hidden className="fui-CalendarGridCellInner fui-CalendarGridCellInnerPlaceholder">
                   0
