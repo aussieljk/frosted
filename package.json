@@ -22,7 +22,7 @@
     "generate:props": "bun run --filter=props-gen generate",
     "lint": "turbo run lint",
     "new:component": "bun scripts/new-component.ts",
-    "prepare": "lefthook install",
+    "prepare": "lefthook install || true",
     "screenshot": "bun scripts/screenshot-demos.ts",
     "typecheck": "turbo run typecheck"
   },
