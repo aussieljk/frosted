@@ -21,35 +21,27 @@ import { Theme } from '@aussieljk/frosted';
 ## Accent colors
 
 `accentColor` selects the color scale used by interactive components (buttons, switches,
-checkboxes, badges, …). The built-in Radix-style scales are:
+checkboxes, badges, …). The scales are the Tailwind CSS v4 palettes — each one extended with an
+extra light shade (step 1) to form the 12-step scale components consume:
 
-`tomato`, `red`, `ruby`, `crimson`, `pink`, `plum`, `purple`, `violet`, `iris`, `cyan`, `teal`,
-`jade`, `green`, `grass`, `brown`, `blue`, `orange`, `indigo`, `sky`, `mint`, `yellow`, `amber`,
-`lime`, `lemon`, `magenta`, `gold`, `bronze` — plus `gray`.
-
-### Tailwind palettes
-
-**Every Tailwind CSS v4 palette is also available**, prefixed with `tw-` so it never collides
-with a built-in scale (`red` vs `tw-red`):
-
-`tw-red`, `tw-orange`, `tw-amber`, `tw-yellow`, `tw-lime`, `tw-green`, `tw-emerald`, `tw-teal`,
-`tw-cyan`, `tw-sky`, `tw-blue`, `tw-indigo`, `tw-violet`, `tw-purple`, `tw-fuchsia`, `tw-pink`,
-`tw-rose`, and the neutrals `tw-slate`, `tw-gray`, `tw-zinc`, `tw-neutral`, `tw-stone`.
+`red`, `orange`, `amber`, `yellow`, `lime`, `green`, `emerald`, `teal`, `cyan`, `sky`, `blue`,
+`indigo`, `violet`, `purple`, `fuchsia`, `pink`, `rose`, and the neutrals `slate`, `gray`,
+`zinc`, `neutral`, `stone`.
 
 ```tsx
-<Theme accentColor="tw-emerald">…</Theme>
+<Theme accentColor="emerald">…</Theme>
 ```
 
 Most components also accept a per-instance `color` prop that overrides the theme accent:
 
 ```tsx
-<Button color="crimson">Delete</Button>
-<Badge color="tw-emerald">New</Badge>
+<Button color="rose">Delete</Button>
+<Badge color="emerald">New</Badge>
 ```
 
 ## Custom palettes
 
-For brand colors not covered by the built-in or Tailwind palettes, generate a custom 12-step
+For brand colors not covered by the Tailwind palettes, generate a custom 12-step
 scale (light + dark + alpha variants) with the palette helpers:
 
 ```tsx
@@ -78,8 +70,7 @@ used as the Theme `grayColor`.
 
 ## Gray scale
 
-`grayColor` selects the neutral scale: `gray`, `mauve`, `slate`, `sage`, `olive`, `sand`, the
-Tailwind neutrals (`tw-slate`, `tw-gray`, `tw-zinc`, `tw-neutral`, `tw-stone`), or `auto`
+`grayColor` selects the neutral scale: `slate`, `gray`, `zinc`, `neutral`, `stone`, or `auto`
 (picks the gray that matches your accent).
 
 ## Light and dark

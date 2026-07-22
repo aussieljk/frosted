@@ -60,7 +60,7 @@ export const Color: Story = {
       <CircularProgress {...args} color="indigo" value={15} />
       <CircularProgress {...args} color="cyan" value={50} />
       <CircularProgress {...args} color="orange" value={95} />
-      <CircularProgress {...args} color="crimson" value={100} />
+      <CircularProgress {...args} color="rose" value={100} />
     </div>
   ),
 };

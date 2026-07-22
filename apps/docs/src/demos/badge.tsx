@@ -12,7 +12,7 @@ export default function BadgeDemo() {
       <Badge variant="surface" color="orange">
         Surface
       </Badge>
-      <Badge variant="outline" color="crimson">
+      <Badge variant="outline" color="rose">
         Outline
       </Badge>
       <Badge size="2" color="purple">

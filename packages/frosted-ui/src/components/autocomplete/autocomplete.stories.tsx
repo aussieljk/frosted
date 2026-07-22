@@ -1,19 +1,19 @@
 import {
-  Bell16,
-  Copy16,
-  Document16,
-  Download16,
-  Gear16,
-  Home16,
-  MagnifyingGlass16,
-  Moon16,
-  Plus16,
-  QuestionCircle16,
-  Sad24,
-  Trash16,
-  User16,
-  XCircleFilled16,
-} from '@frosted-ui/icons';
+  Bell,
+  CircleQuestionMark,
+  CircleX,
+  Copy as CopyIcon,
+  Download as DownloadIcon,
+  File as FileIcon,
+  Frown,
+  House,
+  Moon as MoonIcon,
+  Plus,
+  Search as SearchIcon,
+  Settings as SettingsIcon,
+  Trash2,
+  User,
+} from 'lucide-react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as React from 'react';
 import { getColorForEmoji } from '../../helpers/emoji-colors';
@@ -208,7 +208,7 @@ export const WithSlot: Story = {
         <Autocomplete.Root items={countries}>
           <TextField.Root ref={textFieldRef}>
             <TextField.Slot>
-              <MagnifyingGlass16 />
+              <SearchIcon size={16} />
             </TextField.Slot>
             <Autocomplete.Input render={<TextField.Input placeholder="Search countries..." />} />
           </TextField.Root>
@@ -394,13 +394,13 @@ export const WithClearButton: Story = {
         <Autocomplete.Root items={countries}>
           <TextField.Root ref={textFieldRef}>
             <TextField.Slot>
-              <MagnifyingGlass16 />
+              <SearchIcon size={16} />
             </TextField.Slot>
             <Autocomplete.Input render={<TextField.Input placeholder="Search countries..." />} />
             <TextField.Slot>
               <Autocomplete.Clear>
                 <IconButton variant="ghost" color="gray" size="1">
-                  <XCircleFilled16 />
+                  <CircleX size={16} />
                 </IconButton>
               </Autocomplete.Clear>
             </TextField.Slot>
@@ -812,7 +812,7 @@ const emojiCategories = [
     emojis: [
       { emoji: '🍎', name: 'red apple' },
       { emoji: '🍊', name: 'tangerine' },
-      { emoji: '🍋', name: 'lemon' },
+      { emoji: '🍋', name: 'lime' },
       { emoji: '🍌', name: 'banana' },
       { emoji: '🍉', name: 'watermelon' },
       { emoji: '🍇', name: 'grapes' },
@@ -918,14 +918,14 @@ export const GridLayout: Story = {
               <div style={{ padding: 8, borderBottom: '1px solid var(--color-stroke)' }}>
                 <TextField.Root size="3" variant="soft" color="gray">
                   <TextField.Slot>
-                    <MagnifyingGlass16 />
+                    <SearchIcon size={16} />
                   </TextField.Slot>
                   <Autocomplete.Input render={<TextField.Input placeholder="Search emojis…" />} />
 
                   <TextField.Slot style={{ padding: 4 }}>
                     <Autocomplete.Clear>
                       <IconButton variant="ghost" color="gray" style={{ borderRadius: '50%' }}>
-                        <XCircleFilled16 />
+                        <CircleX size={16} />
                       </IconButton>
                     </Autocomplete.Clear>
                   </TextField.Slot>
@@ -1049,28 +1049,28 @@ export const CommandPicker: Story = {
             {
               id: 'home',
               label: 'Go to Home',
-              icon: <Home16 />,
+              icon: <House size={16} />,
               shortcut: '⌘H',
               action: () => toast('Navigating to Home...'),
             },
             {
               id: 'files',
               label: 'Go to Files',
-              icon: <Document16 />,
+              icon: <FileIcon size={16} />,
               shortcut: '⌘F',
               action: () => toast('Navigating to Files...'),
             },
             {
               id: 'settings',
               label: 'Go to Settings',
-              icon: <Gear16 />,
+              icon: <SettingsIcon size={16} />,
               shortcut: '⌘,',
               action: () => toast('Opening Settings...'),
             },
             {
               id: 'profile',
               label: 'Go to Profile',
-              icon: <User16 />,
+              icon: <User size={16} />,
               shortcut: '⌘P',
               action: () => toast('Opening Profile...'),
             },
@@ -1082,28 +1082,28 @@ export const CommandPicker: Story = {
             {
               id: 'new',
               label: 'Create New Document',
-              icon: <Plus16 />,
+              icon: <Plus size={16} />,
               shortcut: '⌘N',
               action: () => toast('Creating new document...'),
             },
             {
               id: 'copy',
               label: 'Copy to Clipboard',
-              icon: <Copy16 />,
+              icon: <CopyIcon size={16} />,
               shortcut: '⌘C',
               action: () => toast('Copied to clipboard!'),
             },
             {
               id: 'download',
               label: 'Download File',
-              icon: <Download16 />,
+              icon: <DownloadIcon size={16} />,
               shortcut: '⌘D',
               action: () => toast('Downloading file...'),
             },
             {
               id: 'delete',
               label: 'Delete Item',
-              icon: <Trash16 />,
+              icon: <Trash2 size={16} />,
               shortcut: '⌘⌫',
               action: () => toast('Item deleted'),
             },
@@ -1115,20 +1115,20 @@ export const CommandPicker: Story = {
             {
               id: 'theme',
               label: 'Toggle Dark Mode',
-              icon: <Moon16 />,
+              icon: <MoonIcon size={16} />,
               shortcut: '⌘T',
               action: () => toast('Theme toggled!'),
             },
             {
               id: 'notifications',
               label: 'Notification Settings',
-              icon: <Bell16 />,
+              icon: <Bell size={16} />,
               action: () => toast('Opening notifications...'),
             },
             {
               id: 'help',
               label: 'Help & Documentation',
-              icon: <QuestionCircle16 />,
+              icon: <CircleQuestionMark size={16} />,
               shortcut: '⌘?',
               action: () => toast('Opening help center...'),
             },
@@ -1197,14 +1197,14 @@ export const CommandPicker: Story = {
             ref={textFieldRootRef}
           >
             <TextField.Slot>
-              <MagnifyingGlass16 />
+              <SearchIcon size={16} />
             </TextField.Slot>
             <Autocomplete.Input render={<TextField.Input placeholder="Type a command or search..." />} />
             {searchValue && (
               <TextField.Slot style={{ paddingRight: 4 }}>
                 <Autocomplete.Clear>
                   <IconButton variant="ghost" color="gray" size="2" style={{ borderRadius: '50%' }}>
-                    <XCircleFilled16 />
+                    <CircleX size={16} />
                   </IconButton>
                 </Autocomplete.Clear>
               </TextField.Slot>
@@ -1225,7 +1225,7 @@ export const CommandPicker: Story = {
                 <EmptyState.Root>
                   <EmptyState.Header>
                     <EmptyState.Media>
-                      <Sad24 />
+                      <Frown size={24} />
                     </EmptyState.Media>
                     <EmptyState.Title size="2" style={{ color: 'var(--gray-12)' }}>
                       No matching commands found

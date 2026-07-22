@@ -70,7 +70,7 @@ export const Color: Story = {
       <Badge {...args} color="indigo" />
       <Badge {...args} color="cyan" />
       <Badge {...args} color="orange" />
-      <Badge {...args} color="crimson" />
+      <Badge {...args} color="rose" />
     </div>
   ),
 };

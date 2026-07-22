@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-import { Download16 } from '@frosted-ui/icons';
+import { Download as DownloadIcon } from 'lucide-react';
 import React from 'react';
 import { Button, Code, Spinner, Text, buttonPropDefs } from '..';
 
@@ -86,7 +86,7 @@ export const Color: Story = {
       <Button {...args} color="indigo" />
       <Button {...args} color="cyan" />
       <Button {...args} color="orange" />
-      <Button {...args} color="crimson" />
+      <Button {...args} color="rose" />
     </div>
   ),
 };
@@ -180,13 +180,13 @@ export const Loading: Story = {
       <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)' }}>
         <Button {...args} loading={false} variant="classic">
           <Spinner loading={false}>
-            <Download16 />
+            <DownloadIcon size={16} />
           </Spinner>
           Download
         </Button>
         <Button {...args} loading={false} variant="classic" disabled>
           <Spinner loading>
-            <Download16 />
+            <DownloadIcon size={16} />
           </Spinner>
           Download
         </Button>
@@ -194,13 +194,13 @@ export const Loading: Story = {
       <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)' }}>
         <Button {...args} loading={false} variant="soft">
           <Spinner loading={false}>
-            <Download16 />
+            <DownloadIcon size={16} />
           </Spinner>
           Download
         </Button>
         <Button {...args} loading={false} variant="soft" disabled>
           <Spinner loading>
-            <Download16 />
+            <DownloadIcon size={16} />
           </Spinner>
           Download
         </Button>
@@ -208,13 +208,13 @@ export const Loading: Story = {
       <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)' }}>
         <Button {...args} loading={false} variant="solid">
           <Spinner loading={false}>
-            <Download16 />
+            <DownloadIcon size={16} />
           </Spinner>
           Download
         </Button>
         <Button {...args} loading={false} variant="solid" disabled>
           <Spinner loading>
-            <Download16 />
+            <DownloadIcon size={16} />
           </Spinner>
           Download
         </Button>
@@ -222,13 +222,13 @@ export const Loading: Story = {
       <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)' }}>
         <Button {...args} loading={false} variant="surface">
           <Spinner loading={false}>
-            <Download16 />
+            <DownloadIcon size={16} />
           </Spinner>
           Download
         </Button>
         <Button {...args} loading={false} variant="surface" disabled>
           <Spinner loading>
-            <Download16 />
+            <DownloadIcon size={16} />
           </Spinner>
           Download
         </Button>

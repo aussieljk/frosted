@@ -99,7 +99,7 @@ export const Color: Story = {
       <Text {...args} color="orange">
         The quick brown fox jumps over the lazy dog.
       </Text>
-      <Text {...args} color="crimson">
+      <Text {...args} color="rose">
         The quick brown fox jumps over the lazy dog.
       </Text>
     </div>
@@ -185,7 +185,7 @@ export const HighContrast: Story = {
       <Text {...args} highContrast color="orange">
         The quick brown fox jumps over the lazy dog.
       </Text>
-      <Text {...args} highContrast color="crimson">
+      <Text {...args} highContrast color="rose">
         The quick brown fox jumps over the lazy dog.
       </Text>
     </div>

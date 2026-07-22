@@ -92,7 +92,7 @@ export const Color: Story = {
       <IconButton {...args} color="indigo" />
       <IconButton {...args} color="cyan" />
       <IconButton {...args} color="orange" />
-      <IconButton {...args} color="crimson" />
+      <IconButton {...args} color="rose" />
     </div>
   ),
 };

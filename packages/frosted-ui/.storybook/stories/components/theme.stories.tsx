@@ -92,11 +92,11 @@ export const Colors: Story = {
       </Theme>
       <Theme
         grayColor="gray"
-        accentColor="plum"
+        accentColor="fuchsia"
         infoColor="blue"
-        successColor="grass"
+        successColor="green"
         warningColor="amber"
-        dangerColor="ruby"
+        dangerColor="rose"
       >
         <div
           style={{

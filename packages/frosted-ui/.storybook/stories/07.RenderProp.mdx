@@ -234,17 +234,17 @@ function ProductCard({ product }) {
 
 ```tsx
 import { WidgetStack, IconButton } from 'frosted-ui';
-import { ChevronLeftIcon, ChevronRightIcon } from 'frosted-ui/icons';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 <WidgetStack.Root>
   <WidgetStack.Prev render={<IconButton variant="soft" />}>
-    <ChevronLeftIcon />
+    <ChevronLeft size={16} />
   </WidgetStack.Prev>
 
   <WidgetStack.Content>{/* slides */}</WidgetStack.Content>
 
   <WidgetStack.Next render={<IconButton variant="soft" />}>
-    <ChevronRightIcon />
+    <ChevronRight size={16} />
   </WidgetStack.Next>
 </WidgetStack.Root>;
 ```

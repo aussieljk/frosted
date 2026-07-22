@@ -1,26 +1,35 @@
 import convert from 'color-convert';
-import * as lightColors from '../../../../frosted-ui-colors/src/light';
-import { radixColorScales } from '../../../src/helpers/radix-colors';
+import * as fs from 'fs';
+import * as path from 'path';
+import { tailwindColorScales } from '../../../src/helpers/tailwind-colors';
+import { cssColorToHex } from '../../../src/helpers/tailwind-palette';
 import type { RGBColor } from './emoji-renderer';
 
-// Color scales from radix-colors.ts
-const COLOR_SCALES = [...radixColorScales, 'gray'] as const;
+const COLOR_SCALES = tailwindColorScales;
 
 export type ColorScale = (typeof COLOR_SCALES)[number];
 
-// Dynamically build COLOR_9_VALUES from the light theme colors
-// These are the solid, vibrant colors (9th shade) from each scale
+// The most saturated stop (500) of each Tailwind palette, straight from the
+// installed tailwindcss package, converted to sRGB for the distance matching.
 const COLOR_9_VALUES: Record<ColorScale, string> = {} as Record<ColorScale, string>;
 
-for (const scale of COLOR_SCALES) {
-  const colorObj = lightColors[scale as keyof typeof lightColors];
-  const color9Key = `${scale}9` as keyof typeof colorObj;
-
-  if (colorObj && typeof colorObj === 'object' && color9Key in colorObj) {
-    COLOR_9_VALUES[scale] = (colorObj as Record<string, string>)[color9Key];
-  } else {
-    console.warn(`Could not find ${scale}9 in light colors`);
-    COLOR_9_VALUES[scale] = '#000000'; // fallback
+{
+  let dir = __dirname;
+  let themeCss = '';
+  while (true) {
+    const candidate = path.join(dir, 'node_modules', 'tailwindcss', 'theme.css');
+    if (fs.existsSync(candidate)) {
+      themeCss = fs.readFileSync(candidate, 'utf8');
+      break;
+    }
+    const parent = path.dirname(dir);
+    if (parent === dir) throw new Error('Could not find node_modules/tailwindcss/theme.css');
+    dir = parent;
+  }
+  for (const scale of COLOR_SCALES) {
+    const match = themeCss.match(new RegExp(`--color-${scale}-500:\\s*([^;]+);`));
+    if (!match) throw new Error(`Could not find --color-${scale}-500 in tailwindcss theme.css`);
+    COLOR_9_VALUES[scale] = cssColorToHex(match[1]);
   }
 }
 

@@ -200,7 +200,7 @@ export const Color: Story = {
       </Select.Root>
 
       <Select.Root defaultValue="Apple">
-        <Select.Trigger {...args} color="crimson" />
+        <Select.Trigger {...args} color="rose" />
         <Select.Content>
           <Select.Item value="Apple">Apple</Select.Item>
           <Select.Item value="Orange">Orange</Select.Item>

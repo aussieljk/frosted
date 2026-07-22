@@ -66,7 +66,7 @@ export const Color: Story = {
       <Separator {...args} color="indigo" size="3" />
       <Separator {...args} color="cyan" size="3" />
       <Separator {...args} color="orange" size="3" />
-      <Separator {...args} color="crimson" size="3" />
+      <Separator {...args} color="rose" size="3" />
     </div>
   ),
 };

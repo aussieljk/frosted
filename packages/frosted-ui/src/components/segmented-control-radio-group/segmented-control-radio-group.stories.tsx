@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-import { Monitor20, Moon20, Sun20 } from '@frosted-ui/icons';
+import { Monitor, Moon, Sun } from 'lucide-react';
 import React from 'react';
 import { Button, Code, SegmentedControlRadioGroup, Text } from '..';
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
@@ -27,13 +27,13 @@ export const Default: Story = {
       onValueChange={(value) => console.log('🟢 onValueChange ', value)}
     >
       <SegmentedControlRadioGroup.Item value="system">
-        <Monitor20 />
+        <Monitor size={20} />
       </SegmentedControlRadioGroup.Item>
       <SegmentedControlRadioGroup.Item value="light-mode">
-        <Sun20 />
+        <Sun size={20} />
       </SegmentedControlRadioGroup.Item>
       <SegmentedControlRadioGroup.Item value="dark-mode">
-        <Moon20 />
+        <Moon size={20} />
       </SegmentedControlRadioGroup.Item>
     </SegmentedControlRadioGroup.Root>
   ),
@@ -62,13 +62,13 @@ export const InputRef: Story = {
 
         <SegmentedControlRadioGroup.Root {...args} name="theme-preference" required inputRef={inputRef}>
           <SegmentedControlRadioGroup.Item value="system">
-            <Monitor20 />
+            <Monitor size={20} />
           </SegmentedControlRadioGroup.Item>
           <SegmentedControlRadioGroup.Item value="light-mode">
-            <Sun20 />
+            <Sun size={20} />
           </SegmentedControlRadioGroup.Item>
           <SegmentedControlRadioGroup.Item value="dark-mode">
-            <Moon20 />
+            <Moon size={20} />
           </SegmentedControlRadioGroup.Item>
         </SegmentedControlRadioGroup.Root>
 
@@ -103,13 +103,13 @@ export const Controlled: Story = {
 
         <SegmentedControlRadioGroup.Root value={theme} onValueChange={setTheme}>
           <SegmentedControlRadioGroup.Item value="system">
-            <Monitor20 />
+            <Monitor size={20} />
           </SegmentedControlRadioGroup.Item>
           <SegmentedControlRadioGroup.Item value="light">
-            <Sun20 />
+            <Sun size={20} />
           </SegmentedControlRadioGroup.Item>
           <SegmentedControlRadioGroup.Item value="dark">
-            <Moon20 />
+            <Moon size={20} />
           </SegmentedControlRadioGroup.Item>
         </SegmentedControlRadioGroup.Root>
 
@@ -136,13 +136,13 @@ export const TypeSafeValues: Story = {
 
         <SegmentedControlRadioGroup.Root<Theme> value={theme} onValueChange={setTheme}>
           <SegmentedControlRadioGroup.Item value="system">
-            <Monitor20 />
+            <Monitor size={20} />
           </SegmentedControlRadioGroup.Item>
           <SegmentedControlRadioGroup.Item value="light">
-            <Sun20 />
+            <Sun size={20} />
           </SegmentedControlRadioGroup.Item>
           <SegmentedControlRadioGroup.Item value="dark">
-            <Moon20 />
+            <Moon size={20} />
           </SegmentedControlRadioGroup.Item>
         </SegmentedControlRadioGroup.Root>
 

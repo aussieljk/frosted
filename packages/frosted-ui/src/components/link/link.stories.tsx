@@ -63,7 +63,7 @@ export const Color: Story = {
       <Link {...args} color="indigo" />
       <Link {...args} color="cyan" />
       <Link {...args} color="orange" />
-      <Link {...args} color="crimson" />
+      <Link {...args} color="rose" />
     </div>
   ),
 };

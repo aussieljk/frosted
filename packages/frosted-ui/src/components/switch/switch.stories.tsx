@@ -46,7 +46,7 @@ export const Color: Story = {
       <Switch {...args} color="indigo" defaultChecked />
       <Switch {...args} color="cyan" defaultChecked />
       <Switch {...args} color="orange" defaultChecked />
-      <Switch {...args} color="crimson" defaultChecked />
+      <Switch {...args} color="rose" defaultChecked />
     </div>
   ),
 };
@@ -68,8 +68,8 @@ export const HighContrast: Story = {
       <Switch {...args} color="cyan" defaultChecked highContrast />
       <Switch {...args} color="orange" defaultChecked />
       <Switch {...args} color="orange" defaultChecked highContrast />
-      <Switch {...args} color="crimson" defaultChecked />
-      <Switch {...args} color="crimson" defaultChecked highContrast />
+      <Switch {...args} color="rose" defaultChecked />
+      <Switch {...args} color="rose" defaultChecked highContrast />
     </div>
   ),
 };

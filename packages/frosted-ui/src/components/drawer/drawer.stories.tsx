@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 
-import { XMark16 } from '@frosted-ui/icons';
+import { X } from 'lucide-react';
 import {
   AlertDialog,
   Avatar,
@@ -58,7 +58,7 @@ export const Default: Story = {
           <Drawer.Title>Edit profile</Drawer.Title>
           <Drawer.Close>
             <IconButton size="1" color="gray" variant="ghost">
-              <XMark16 />
+              <X size={16} />
             </IconButton>
           </Drawer.Close>
         </Drawer.Header>
@@ -119,7 +119,7 @@ export const InsetContent: Story = {
           <Drawer.Title>Users</Drawer.Title>
           <Drawer.Close>
             <IconButton size="1" color="gray" variant="ghost">
-              <XMark16 />
+              <X size={16} />
             </IconButton>
           </Drawer.Close>
         </Drawer.Header>
@@ -221,7 +221,7 @@ export const DetachedTriggers: Story = {
             <Drawer.Title>Detached Drawer</Drawer.Title>
             <Drawer.Close>
               <IconButton size="1" color="gray" variant="ghost">
-                <XMark16 />
+                <X size={16} />
               </IconButton>
             </Drawer.Close>
           </Drawer.Header>
@@ -290,7 +290,7 @@ export const MultipleTriggers: Story = {
                 </Drawer.Title>
                 <Drawer.Close>
                   <IconButton size="1" color="gray" variant="ghost">
-                    <XMark16 />
+                    <X size={16} />
                   </IconButton>
                 </Drawer.Close>
               </Drawer.Header>
@@ -378,7 +378,7 @@ export const ControlledMode: Story = {
               <Drawer.Title>Controlled Drawer</Drawer.Title>
               <Drawer.Close>
                 <IconButton size="1" color="gray" variant="ghost">
-                  <XMark16 />
+                  <X size={16} />
                 </IconButton>
               </Drawer.Close>
             </Drawer.Header>
@@ -466,7 +466,7 @@ export const ActionsRef: Story = {
               <Drawer.Title>Submit Feedback</Drawer.Title>
               <Drawer.Close>
                 <IconButton size="1" color="gray" variant="ghost" disabled={isSubmitting}>
-                  <XMark16 />
+                  <X size={16} />
                 </IconButton>
               </Drawer.Close>
             </Drawer.Header>
@@ -529,7 +529,7 @@ export const InitialFocus: Story = {
               <Drawer.Title>Add New Item</Drawer.Title>
               <Drawer.Close>
                 <IconButton size="1" color="gray" variant="ghost">
-                  <XMark16 />
+                  <X size={16} />
                 </IconButton>
               </Drawer.Close>
             </Drawer.Header>
@@ -605,7 +605,7 @@ export const FinalFocus: Story = {
                 <Drawer.Title>Focus Demo</Drawer.Title>
                 <Drawer.Close>
                   <IconButton size="1" color="gray" variant="ghost">
-                    <XMark16 />
+                    <X size={16} />
                   </IconButton>
                 </Drawer.Close>
               </Drawer.Header>
@@ -677,7 +677,7 @@ export const OpenChangeComplete: Story = {
               <Drawer.Title>Callback Demo</Drawer.Title>
               <Drawer.Close>
                 <IconButton size="1" color="gray" variant="ghost">
-                  <XMark16 />
+                  <X size={16} />
                 </IconButton>
               </Drawer.Close>
             </Drawer.Header>
@@ -759,7 +759,7 @@ export const KeepMounted: Story = {
               <Drawer.Title>Keep Mounted Demo</Drawer.Title>
               <Drawer.Close>
                 <IconButton size="1" color="gray" variant="ghost">
-                  <XMark16 />
+                  <X size={16} />
                 </IconButton>
               </Drawer.Close>
             </Drawer.Header>
@@ -827,7 +827,7 @@ export const NestedDrawers: Story = {
               <Drawer.Title>Parent Drawer</Drawer.Title>
               <Drawer.Close>
                 <IconButton size="1" color="gray" variant="ghost">
-                  <XMark16 />
+                  <X size={16} />
                 </IconButton>
               </Drawer.Close>
             </Drawer.Header>
@@ -869,7 +869,7 @@ export const NestedDrawers: Story = {
                       <Drawer.Title>Settings</Drawer.Title>
                       <Drawer.Close>
                         <IconButton size="1" color="gray" variant="ghost">
-                          <XMark16 />
+                          <X size={16} />
                         </IconButton>
                       </Drawer.Close>
                     </Drawer.Header>
@@ -957,7 +957,7 @@ export const DeeplyNestedDrawers: Story = {
               <Drawer.Title>Level 1</Drawer.Title>
               <Drawer.Close>
                 <IconButton size="1" color="gray" variant="ghost">
-                  <XMark16 />
+                  <X size={16} />
                 </IconButton>
               </Drawer.Close>
             </Drawer.Header>
@@ -982,7 +982,7 @@ export const DeeplyNestedDrawers: Story = {
                       <Drawer.Title>Level 2</Drawer.Title>
                       <Drawer.Close>
                         <IconButton size="1" color="gray" variant="ghost">
-                          <XMark16 />
+                          <X size={16} />
                         </IconButton>
                       </Drawer.Close>
                     </Drawer.Header>
@@ -1007,7 +1007,7 @@ export const DeeplyNestedDrawers: Story = {
                               <Drawer.Title>Level 3</Drawer.Title>
                               <Drawer.Close>
                                 <IconButton size="1" color="gray" variant="ghost">
-                                  <XMark16 />
+                                  <X size={16} />
                                 </IconButton>
                               </Drawer.Close>
                             </Drawer.Header>
@@ -1072,7 +1072,7 @@ export const WithPopoverAndHoverCard: Story = {
               <Drawer.Title>User Settings</Drawer.Title>
               <Drawer.Close>
                 <IconButton size="1" color="gray" variant="ghost">
-                  <XMark16 />
+                  <X size={16} />
                 </IconButton>
               </Drawer.Close>
             </Drawer.Header>
@@ -1383,7 +1383,7 @@ export const WithDialog: Story = {
               <Drawer.Title>Edit Project</Drawer.Title>
               <Drawer.Close>
                 <IconButton size="1" color="gray" variant="ghost">
-                  <XMark16 />
+                  <X size={16} />
                 </IconButton>
               </Drawer.Close>
             </Drawer.Header>

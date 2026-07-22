@@ -95,7 +95,7 @@ export const Color: Story = {
       <Checkbox {...args} color="indigo" defaultChecked />
       <Checkbox {...args} color="cyan" defaultChecked />
       <Checkbox {...args} color="orange" defaultChecked />
-      <Checkbox {...args} color="crimson" defaultChecked />
+      <Checkbox {...args} color="rose" defaultChecked />
     </div>
   ),
 };
@@ -116,8 +116,8 @@ export const HighContrast: Story = {
       <Checkbox {...args} color="cyan" defaultChecked highContrast />
       <Checkbox {...args} color="orange" defaultChecked />
       <Checkbox {...args} color="orange" defaultChecked highContrast />
-      <Checkbox {...args} color="crimson" defaultChecked />
-      <Checkbox {...args} color="crimson" defaultChecked highContrast />
+      <Checkbox {...args} color="rose" defaultChecked />
+      <Checkbox {...args} color="rose" defaultChecked highContrast />
     </div>
   ),
 };

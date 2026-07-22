@@ -1,19 +1,8 @@
 import type { GetPropDefTypes, PropDef } from './helpers';
 import {
-  radixColorScales,
-  radixColorScalesBright,
-  radixColorScalesMetal,
-  radixColorScalesRegular,
-  //
-  radixGetMatchingGrayScale,
-  //
-  radixGrayScalePure,
-  radixGrayScales,
-  radixGrayScalesDesaturated,
-} from './helpers/radix-colors';
-import {
   isTailwindColorScale,
   tailwindColorScales,
+  tailwindColorScalesChromatic,
   tailwindGetMatchingGrayScale,
   tailwindGrayScales,
 } from './helpers/tailwind-colors';
@@ -22,12 +11,12 @@ import { matchingGrayFromColor } from './helpers/tailwind-palette';
 const colorPanelElevationColors = ['color-panel-elevation'] as const;
 const semanticColors = ['danger', 'warning', 'success', 'info'] as const;
 const appearances = ['inherit', 'light', 'dark'] as const;
-const accentColors = [...radixColorScales, 'gray', ...tailwindColorScales] as const;
-const grayColors = [...radixGrayScales, ...tailwindGrayScales, 'auto'] as const;
-const dangerColors = ['tomato', 'red', 'ruby'] as const;
-const warningColors = ['yellow', 'amber'] as const;
-const successColors = ['teal', 'jade', 'green', 'grass'] as const;
-const infoColors = ['blue', 'sky'] as const;
+const accentColors = tailwindColorScales;
+const grayColors = [...tailwindGrayScales, 'auto'] as const;
+const dangerColors = ['red', 'rose'] as const;
+const warningColors = ['amber', 'yellow', 'orange'] as const;
+const successColors = ['green', 'emerald', 'teal'] as const;
+const infoColors = ['sky', 'blue', 'cyan'] as const;
 
 const themePropDefs = {
   hasBackground: { type: 'boolean', default: true },
@@ -72,61 +61,13 @@ type ThemeOptions = {
 };
 
 const themeAccentColorsGrouped = [
-  {
-    label: 'Regulars',
-    values: [...radixColorScalesRegular] as ThemeAccentColor[],
-  },
-  {
-    label: 'Brights',
-    values: [...radixColorScalesBright] as ThemeAccentColor[],
-  },
-  { label: 'Metals', values: [...radixColorScalesMetal] as ThemeAccentColor[] },
-  { label: 'Gray', values: ['gray'] as ThemeAccentColor[] },
-  { label: 'Tailwind', values: [...tailwindColorScales] as ThemeAccentColor[] },
+  { label: 'Colors', values: [...tailwindColorScalesChromatic] as ThemeAccentColor[] },
+  { label: 'Grays', values: [...tailwindGrayScales] as ThemeAccentColor[] },
 ];
 
-const themeAccentColorsOrdered = [
-  'gray',
-  'gold',
-  'bronze',
-  'brown',
-  'yellow',
-  'amber',
-  'tomato',
-  'red',
-  'ruby',
-  'crimson',
-  'pink',
-  'plum',
-  'purple',
-  'violet',
-  'iris',
-  'cyan',
-  'teal',
-  'jade',
-  'green',
-  'grass',
-  'mint',
-  'sky',
-  // Whop Brand Colors
-  'blue',
-  'orange',
-  'indigo',
-  'magenta',
-  'lemon',
-  'lime',
-  // Tailwind CSS v4 palettes
-  ...tailwindColorScales,
-] as ThemeAccentColor[];
+const themeAccentColorsOrdered = [...tailwindColorScales] as ThemeAccentColor[];
 
-const themeGrayColorsGrouped = [
-  { label: 'Pure', values: [radixGrayScalePure] as ThemeGrayColor[] },
-  {
-    label: 'Desaturated',
-    values: ['auto', ...radixGrayScalesDesaturated] as ThemeGrayColor[],
-  },
-  { label: 'Tailwind', values: [...tailwindGrayScales] as ThemeGrayColor[] },
-];
+const themeGrayColorsGrouped = [{ label: 'Grays', values: ['auto', ...tailwindGrayScales] as ThemeGrayColor[] }];
 
 /** `true` when the value is not one of the named accent scales, i.e. a custom CSS color. */
 function isCustomAccentColor(accentColor: ThemeAccentColor): boolean {
@@ -138,13 +79,9 @@ function isCustomGrayColor(grayColor: ThemeGrayColor): boolean {
   return !(grayColors as readonly string[]).includes(grayColor);
 }
 
-function getMatchingGrayColor(
-  accentColor: ThemeAccentColor,
-): (typeof radixGrayScales)[number] | (typeof tailwindGrayScales)[number] {
-  if (accentColor === 'gray') return 'gray';
+function getMatchingGrayColor(accentColor: ThemeAccentColor): (typeof tailwindGrayScales)[number] {
   if (isTailwindColorScale(accentColor)) return tailwindGetMatchingGrayScale(accentColor);
-  if (isCustomAccentColor(accentColor)) return matchingGrayFromColor(accentColor);
-  return radixGetMatchingGrayScale(accentColor as (typeof radixColorScales)[number]);
+  return matchingGrayFromColor(accentColor);
 }
 
 export {

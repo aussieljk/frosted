@@ -1,32 +1,31 @@
 /**
- * Tailwind CSS v4 palettes exposed as frosted-ui scales. Every palette is prefixed
- * with `tw-` so it never collides with the built-in Radix scales (`red` vs `tw-red`).
- * The palettes are computed at runtime from per-palette oklch seeds in
- * src/styles/tokens/tailwind-color.css (see that file for the architecture).
+ * The Tailwind CSS v4 palettes exposed as frosted-ui scales. The 12-step
+ * light/dark scales are generated from the installed `tailwindcss` package
+ * into src/styles/tokens/palettes.css (see scripts/generate-palettes.ts).
  */
 
 // prettier-ignore
 const tailwindColorScalesChromatic = [
-  'tw-red',
-  'tw-orange',
-  'tw-amber',
-  'tw-yellow',
-  'tw-lime',
-  'tw-green',
-  'tw-emerald',
-  'tw-teal',
-  'tw-cyan',
-  'tw-sky',
-  'tw-blue',
-  'tw-indigo',
-  'tw-violet',
-  'tw-purple',
-  'tw-fuchsia',
-  'tw-pink',
-  'tw-rose',
+  'red',
+  'orange',
+  'amber',
+  'yellow',
+  'lime',
+  'green',
+  'emerald',
+  'teal',
+  'cyan',
+  'sky',
+  'blue',
+  'indigo',
+  'violet',
+  'purple',
+  'fuchsia',
+  'pink',
+  'rose',
 ] as const;
 
-const tailwindGrayScales = ['tw-slate', 'tw-gray', 'tw-zinc', 'tw-neutral', 'tw-stone'] as const;
+const tailwindGrayScales = ['slate', 'gray', 'zinc', 'neutral', 'stone'] as const;
 
 const tailwindColorScales = [...tailwindColorScalesChromatic, ...tailwindGrayScales] as const;
 
@@ -40,35 +39,35 @@ function isTailwindColorScale(color: string): color is TailwindColorScale {
 function tailwindGetMatchingGrayScale(colorScale: TailwindColorScale): TailwindGrayScale {
   switch (colorScale) {
     // Warm hues pair with the warm gray.
-    case 'tw-red':
-    case 'tw-orange':
-    case 'tw-amber':
-    case 'tw-yellow':
-      return 'tw-stone';
+    case 'red':
+    case 'orange':
+    case 'amber':
+    case 'yellow':
+      return 'stone';
     // Greens pair with the pure gray.
-    case 'tw-lime':
-    case 'tw-green':
-    case 'tw-emerald':
-    case 'tw-teal':
-      return 'tw-neutral';
+    case 'lime':
+    case 'green':
+    case 'emerald':
+    case 'teal':
+      return 'neutral';
     // Cool hues pair with the blue-tinted gray.
-    case 'tw-cyan':
-    case 'tw-sky':
-    case 'tw-blue':
-    case 'tw-indigo':
-      return 'tw-slate';
+    case 'cyan':
+    case 'sky':
+    case 'blue':
+    case 'indigo':
+      return 'slate';
     // Purples/pinks pair with the slightly cool gray.
-    case 'tw-violet':
-    case 'tw-purple':
-    case 'tw-fuchsia':
-    case 'tw-pink':
-    case 'tw-rose':
-      return 'tw-zinc';
-    case 'tw-slate':
-    case 'tw-gray':
-    case 'tw-zinc':
-    case 'tw-neutral':
-    case 'tw-stone':
+    case 'violet':
+    case 'purple':
+    case 'fuchsia':
+    case 'pink':
+    case 'rose':
+      return 'zinc';
+    case 'slate':
+    case 'gray':
+    case 'zinc':
+    case 'neutral':
+    case 'stone':
       return colorScale;
   }
 }

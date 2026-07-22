@@ -6,7 +6,7 @@ import React from 'react';
  *
  * @example
  * <Shine puffyness="1.5">
- *   <Badge color="gold">Premium</Badge>
+ *   <Badge color="yellow">Premium</Badge>
  * </Shine>
  */
 const Shine = ({

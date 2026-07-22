@@ -1,20 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-import {
-  Copy16,
-  Eye16,
-  EyeSlashed16,
-  Link16,
-  Lock16,
-  MagnifyingGlass12,
-  MagnifyingGlass16,
-  MagnifyingGlass20,
-  MagnifyingGlass24,
-  Mail16,
-  ThreeDotsHorizontal16,
-  ThreeDotsHorizontal20,
-  XMark16,
-} from '@frosted-ui/icons';
+import { Copy as CopyIcon, Ellipsis, Eye, EyeOff, Link, Lock, Mail, Search as SearchIcon, X } from 'lucide-react';
 import React from 'react';
 import { Button, Code, IconButton, Text, TextField, textFieldPropDefs } from '..';
 
@@ -44,7 +30,7 @@ export const Default: Story = {
     <div style={{ width: 300 }}>
       <TextField.Root {...args}>
         <TextField.Slot>
-          <MagnifyingGlass16 />
+          <SearchIcon size={16} />
         </TextField.Slot>
         <TextField.Input placeholder="Search the docs…" />
       </TextField.Root>
@@ -58,7 +44,7 @@ export const Size: Story = {
       <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
         <TextField.Root {...args} size="1">
           <TextField.Slot>
-            <MagnifyingGlass12 />
+            <SearchIcon size={12} />
           </TextField.Slot>
           <TextField.Input placeholder="Search the docs…" />
         </TextField.Root>
@@ -70,12 +56,12 @@ export const Size: Story = {
       <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
         <TextField.Root {...args} size="2">
           <TextField.Slot>
-            <MagnifyingGlass16 />
+            <SearchIcon size={16} />
           </TextField.Slot>
           <TextField.Input placeholder="Search the docs…" />
           <TextField.Slot>
             <IconButton color="gray" size="1" variant="ghost">
-              <ThreeDotsHorizontal16 />
+              <Ellipsis size={16} />
             </IconButton>
           </TextField.Slot>
         </TextField.Root>
@@ -87,12 +73,12 @@ export const Size: Story = {
       <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
         <TextField.Root {...args} size="3">
           <TextField.Slot>
-            <MagnifyingGlass20 />
+            <SearchIcon size={20} />
           </TextField.Slot>
           <TextField.Input placeholder="Search the docs…" />
           <TextField.Slot style={{ paddingRight: 'var(--space-3)' }}>
             <IconButton color="gray" size="2" variant="ghost">
-              <ThreeDotsHorizontal20 />
+              <Ellipsis size={20} />
             </IconButton>
           </TextField.Slot>
         </TextField.Root>
@@ -103,12 +89,12 @@ export const Size: Story = {
       <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
         <TextField.Root {...args} size="4">
           <TextField.Slot>
-            <MagnifyingGlass24 />
+            <SearchIcon size={24} />
           </TextField.Slot>
           <TextField.Input placeholder="Search the docs…" />
           <TextField.Slot style={{ paddingRight: 'var(--space-3)' }}>
             <IconButton color="gray" size="2" variant="ghost">
-              <ThreeDotsHorizontal20 />
+              <Ellipsis size={20} />
             </IconButton>
           </TextField.Slot>
         </TextField.Root>
@@ -171,7 +157,7 @@ export const WithSlot: Story = {
             </Text>
             <TextField.Root {...args}>
               <TextField.Slot>
-                <MagnifyingGlass16 />
+                <SearchIcon size={16} />
               </TextField.Slot>
               <TextField.Input placeholder="Search…" />
             </TextField.Root>
@@ -184,7 +170,7 @@ export const WithSlot: Story = {
             <TextField.Root {...args}>
               <TextField.Input placeholder="Enter URL…" />
               <TextField.Slot>
-                <Link16 />
+                <Link size={16} />
               </TextField.Slot>
             </TextField.Root>
           </div>
@@ -195,7 +181,7 @@ export const WithSlot: Story = {
             </Text>
             <TextField.Root {...args}>
               <TextField.Slot>
-                <Mail16 />
+                <Mail size={16} />
               </TextField.Slot>
               <TextField.Input placeholder="Email address" />
               <TextField.Slot>@company.com</TextField.Slot>
@@ -208,7 +194,7 @@ export const WithSlot: Story = {
             </Text>
             <TextField.Root {...args}>
               <TextField.Slot>
-                <Lock16 />
+                <Lock size={16} />
               </TextField.Slot>
               <TextField.Input type={showPassword ? 'text' : 'password'} placeholder="Password" defaultValue="secret" />
               <TextField.Slot>
@@ -219,7 +205,7 @@ export const WithSlot: Story = {
                   onClick={() => setShowPassword(!showPassword)}
                   aria-label={showPassword ? 'Hide password' : 'Show password'}
                 >
-                  {showPassword ? <EyeSlashed16 /> : <Eye16 />}
+                  {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                 </IconButton>
               </TextField.Slot>
             </TextField.Root>
@@ -231,7 +217,7 @@ export const WithSlot: Story = {
             </Text>
             <TextField.Root {...args}>
               <TextField.Slot>
-                <MagnifyingGlass16 />
+                <SearchIcon size={16} />
               </TextField.Slot>
               <TextField.Input
                 placeholder="Search…"
@@ -247,7 +233,7 @@ export const WithSlot: Story = {
                     onClick={() => setSearchValue('')}
                     aria-label="Clear search"
                   >
-                    <XMark16 />
+                    <X size={16} />
                   </IconButton>
                 </TextField.Slot>
               )}
@@ -268,7 +254,7 @@ export const WithSlot: Story = {
                   onClick={() => navigator.clipboard.writeText('https://example.com/share/abc123')}
                   aria-label="Copy to clipboard"
                 >
-                  <Copy16 />
+                  <CopyIcon size={16} />
                 </IconButton>
               </TextField.Slot>
             </TextField.Root>

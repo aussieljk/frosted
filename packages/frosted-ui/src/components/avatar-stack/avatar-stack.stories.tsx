@@ -46,7 +46,7 @@ const availableUsers: Array<{
   },
   {
     name: 'Guillermo',
-    color: 'bronze',
+    color: 'stone',
     src: '',
   },
   {
@@ -56,7 +56,7 @@ const availableUsers: Array<{
   },
   {
     name: 'FJ',
-    color: 'tomato',
+    color: 'red',
     src: '',
   },
 ];

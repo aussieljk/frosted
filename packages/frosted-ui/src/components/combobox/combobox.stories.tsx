@@ -1,4 +1,4 @@
-import { ChevronDown16, MagnifyingGlass16 } from '@frosted-ui/icons';
+import { ChevronDown, Search as SearchIcon } from 'lucide-react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as React from 'react';
 import { Avatar, Button, Callout, Dialog, Field, Form, ScrollArea, Spinner, Text, TextField } from '../index';
@@ -475,7 +475,7 @@ export const InputInsidePopup: Story = {
           render={
             <Button variant="soft" color="gray">
               <Combobox.Value>{(value) => (value != null ? String(value) : 'Select fruit')}</Combobox.Value>
-              <ChevronDown16 />
+              <ChevronDown size={16} />
             </Button>
           }
         />
@@ -483,7 +483,7 @@ export const InputInsidePopup: Story = {
           <div style={{ padding: 8, borderBottom: '1px solid var(--gray-a5)' }}>
             <Combobox.InputRoot>
               <Combobox.InputSlot>
-                <MagnifyingGlass16 />
+                <SearchIcon size={16} />
               </Combobox.InputSlot>
               <Combobox.Input placeholder="Search..." />
             </Combobox.InputRoot>
@@ -771,7 +771,7 @@ export const TriggerOnly: Story = {
             render={
               <Button variant="surface">
                 <Combobox.Value>{(value) => (value != null ? String(value) : 'Choose a fruit')}</Combobox.Value>
-                <ChevronDown16 />
+                <ChevronDown size={16} />
               </Button>
             }
           />
@@ -874,7 +874,7 @@ export const AsyncSearchSingle: Story = {
             isItemEqualToValue={(a, b) => (a as User).login === (b as User).login}
           >
             <Combobox.InputRoot showClear>
-              <Combobox.InputSlot>{loading ? <Spinner size="2" /> : <MagnifyingGlass16 />}</Combobox.InputSlot>
+              <Combobox.InputSlot>{loading ? <Spinner size="2" /> : <SearchIcon size={16} />}</Combobox.InputSlot>
               <Combobox.Input placeholder="Search users..." />
             </Combobox.InputRoot>
             <Combobox.Content>

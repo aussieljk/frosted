@@ -99,7 +99,7 @@ const DashboardCard = () => {
               <NotionLogoIcon width="20" height="20" className="text-blue-9" />
               <DiscordLogoIcon width="20" height="20" className="text-lime-9" />
               <LinkedInLogoIcon width="20" height="20" className="text-yellow-9" />
-              <GitHubLogoIcon width="20" height="20" className="text-tomato-9" />
+              <GitHubLogoIcon width="20" height="20" className="text-red-9" />
             </div>
           </div>
         </div>

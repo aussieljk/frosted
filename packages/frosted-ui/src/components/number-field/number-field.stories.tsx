@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-import { DollarSign16, Percentage16 } from '@frosted-ui/icons';
+import { DollarSign, Percent } from 'lucide-react';
 import React from 'react';
 import { Button, Code, Field, Form, NumberField, Text, TextField, numberFieldPropDefs } from '..';
 
@@ -187,7 +187,7 @@ export const WithSlot: Story = {
           </Text>
           <NumberField.Root {...args} defaultValue={99.99} step={0.01} format={{ minimumFractionDigits: 2 }}>
             <NumberField.Slot>
-              <DollarSign16 />
+              <DollarSign size={16} />
             </NumberField.Slot>
             <NumberField.Input />
           </NumberField.Root>
@@ -209,7 +209,7 @@ export const WithSlot: Story = {
           </Text>
           <NumberField.Root {...args} defaultValue={50} min={0} max={100}>
             <NumberField.Slot>
-              <Percentage16 />
+              <Percent size={16} />
             </NumberField.Slot>
             <NumberField.Input />
             <NumberField.Slot>off</NumberField.Slot>
@@ -242,7 +242,7 @@ export const WithSlot: Story = {
           </Text>
           <NumberField.Root {...args} defaultValue={100} color="green">
             <NumberField.Slot color="green">
-              <DollarSign16 />
+              <DollarSign size={16} />
             </NumberField.Slot>
             <NumberField.Input />
           </NumberField.Root>

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-import { InfoCircle16 } from '@frosted-ui/icons';
+import { Info } from 'lucide-react';
 import React from 'react';
 import { Callout, Code, Link, Text, calloutRootPropDefs } from '..';
 import { RootProps as CalloutRootProps } from '../../../src/components/callout/callout';
@@ -32,7 +32,7 @@ export const Default: Story = {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
       <Callout.Root {...args}>
         <Callout.Icon>
-          <InfoCircle16 />
+          <Info size={16} />
         </Callout.Icon>
         <Callout.Title>Your trial ends in 3 days</Callout.Title>
         <Callout.Description>
@@ -46,7 +46,7 @@ export const Default: Story = {
       </Callout.Root>
       <Callout.Root {...args}>
         <Callout.Icon>
-          <InfoCircle16 />
+          <Info size={16} />
         </Callout.Icon>
         <div style={{ display: 'flex', gap: 16, alignItems: 'center', justifyContent: 'space-between' }}>
           <div style={{ minWidth: 0, flex: 1 }}>
@@ -61,7 +61,7 @@ export const Default: Story = {
 
       <Callout.Root {...args}>
         <Callout.Icon>
-          <InfoCircle16 />
+          <Info size={16} />
         </Callout.Icon>
         <Callout.Title>
           Your domain was verified. <Link href="#">Manage DNS settings</Link>.
@@ -76,7 +76,7 @@ export const Color: Story = {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
       <Callout.Root {...args} color="blue">
         <Callout.Icon>
-          <InfoCircle16 />
+          <Info size={16} />
         </Callout.Icon>
         <Callout.Title>New feature available</Callout.Title>
         <Callout.Description>You can now accept crypto payments directly from your checkout page.</Callout.Description>
@@ -88,7 +88,7 @@ export const Color: Story = {
 
       <Callout.Root {...args} color="green">
         <Callout.Icon>
-          <InfoCircle16 />
+          <Info size={16} />
         </Callout.Icon>
         <Callout.Title>Payout sent</Callout.Title>
         <Callout.Description>
@@ -102,7 +102,7 @@ export const Color: Story = {
 
       <Callout.Root {...args} color="red">
         <Callout.Icon>
-          <InfoCircle16 />
+          <Info size={16} />
         </Callout.Icon>
         <Callout.Title>Payment failed</Callout.Title>
         <Callout.Description>
@@ -124,7 +124,7 @@ export const SemanticColor: Story = {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
       <Callout.Root {...args} color="info">
         <Callout.Icon>
-          <InfoCircle16 />
+          <Info size={16} />
         </Callout.Icon>
         <Callout.Title>API maintenance scheduled</Callout.Title>
         <Callout.Description>
@@ -139,7 +139,7 @@ export const SemanticColor: Story = {
 
       <Callout.Root {...args} color="success">
         <Callout.Icon>
-          <InfoCircle16 />
+          <Info size={16} />
         </Callout.Icon>
         <Callout.Title>Store connected</Callout.Title>
         <Callout.Description>Stripe is now linked and ready to accept payments.</Callout.Description>
@@ -151,7 +151,7 @@ export const SemanticColor: Story = {
 
       <Callout.Root {...args} color="warning">
         <Callout.Icon>
-          <InfoCircle16 />
+          <Info size={16} />
         </Callout.Icon>
         <Callout.Title>Action required</Callout.Title>
         <Callout.Description>
@@ -165,7 +165,7 @@ export const SemanticColor: Story = {
 
       <Callout.Root {...args} color="danger">
         <Callout.Icon>
-          <InfoCircle16 />
+          <Info size={16} />
         </Callout.Icon>
         <Callout.Title>Account restricted</Callout.Title>
         <Callout.Description>
@@ -192,7 +192,7 @@ export const ActionRenderProp: Story = {
       </div>
       <Callout.Root {...args}>
         <Callout.Icon>
-          <InfoCircle16 />
+          <Info size={16} />
         </Callout.Icon>
         <Callout.Title>Your trial ends in 3 days</Callout.Title>
         <Callout.Description>
@@ -222,7 +222,7 @@ export const ActionLoading: Story = {
         </div>
         <Callout.Root {...args}>
           <Callout.Icon>
-            <InfoCircle16 />
+            <Info size={16} />
           </Callout.Icon>
           <Callout.Title>Action required</Callout.Title>
           <Callout.Description>
@@ -258,7 +258,7 @@ export const ActionDisabled: Story = {
       </div>
       <Callout.Root {...args}>
         <Callout.Icon>
-          <InfoCircle16 />
+          <Info size={16} />
         </Callout.Icon>
         <Callout.Title>Finish setting up your store</Callout.Title>
         <Callout.Description>

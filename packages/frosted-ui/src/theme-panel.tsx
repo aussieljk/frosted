@@ -11,8 +11,8 @@ import {
   dangerColors,
   getMatchingGrayColor,
   infoColors,
-  radixGrayScalesDesaturated,
   successColors,
+  tailwindGrayScales,
   themeAccentColorsOrdered,
   // helpers
   themePropDefs,
@@ -282,7 +282,7 @@ const ThemePanelImpl = React.forwardRef<ThemePanelImplElement, ThemePanelImplPro
             role="group"
             aria-labelledby="gray-color-title"
           >
-            {['auto', 'gray', ...radixGrayScalesDesaturated].map((gray) => (
+            {['auto', ...tailwindGrayScales].map((gray) => (
               <label
                 key={gray}
                 className="fui-ThemePanelSwatch"

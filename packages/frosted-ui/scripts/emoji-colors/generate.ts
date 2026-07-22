@@ -6,7 +6,7 @@ import { findClosestColorScale, isGrayscale, type ColorScale } from './utils/col
 import { renderEmojiToBuffer } from './utils/emoji-renderer';
 
 // Deprioritized colors - we'll try to find more vibrant alternatives for these muted/earth tones
-const DEPRIORITIZED_COLORS: ColorScale[] = ['gray', 'brown', 'bronze', 'gold'];
+const DEPRIORITIZED_COLORS: ColorScale[] = ['gray', 'slate', 'zinc', 'neutral', 'stone'];
 
 interface EmojiEntry {
   unified: string;

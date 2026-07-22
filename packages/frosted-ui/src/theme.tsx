@@ -4,7 +4,7 @@ import { DirectionProvider, mergeProps, useRender } from '@base-ui/react';
 import { Tooltip as TooltipPrimitive } from '@base-ui/react/tooltip';
 import classNames from 'classnames';
 import * as React from 'react';
-import { createAccentSeedStyle, createGraySeedStyle, darkPageBackgroundFromColor } from './helpers/tailwind-palette';
+import { createAccentScaleStyle, createGrayScaleStyle, darkPageBackgroundFromColor } from './helpers/tailwind-palette';
 import { getMatchingGrayColor, isCustomAccentColor, isCustomGrayColor, themePropDefs } from './theme-options';
 
 import type { ThemeOptions } from './theme-options';
@@ -218,15 +218,15 @@ const ThemeImpl = (props: ThemeImplProps) => {
   const shouldHaveBackground =
     !isRoot && (hasBackground === true || (hasBackground !== false && (isExplicitAppearance || isExplicitGrayColor)));
 
-  // Custom (non-named) colors render as data-*-color="custom" plus inline seed vars;
-  // the runtime blocks in tailwind-color.css expand them into the full scales.
+  // Custom (non-named) colors render as data-*-color="custom" plus inline scale vars;
+  // the blocks in tokens/custom-color.css turn them into --accent-* / --gray-*.
   const custom = React.useMemo(() => {
     const style: Record<string, string> = {};
     let accentAttr = accentColor;
     let grayAttr = resolvedGrayColor;
     if (isCustomAccentColor(accentColor)) {
       try {
-        Object.assign(style, createAccentSeedStyle(accentColor));
+        Object.assign(style, createAccentScaleStyle(accentColor));
         accentAttr = 'custom';
       } catch {
         console.warn(`frosted-ui: unsupported accentColor "${accentColor}". Use #hex, rgb() or oklch().`);
@@ -235,7 +235,7 @@ const ThemeImpl = (props: ThemeImplProps) => {
     }
     if (isCustomGrayColor(resolvedGrayColor)) {
       try {
-        Object.assign(style, createGraySeedStyle(resolvedGrayColor));
+        Object.assign(style, createGrayScaleStyle(resolvedGrayColor));
         grayAttr = 'custom';
       } catch {
         console.warn(`frosted-ui: unsupported grayColor "${resolvedGrayColor}". Use #hex, rgb() or oklch().`);

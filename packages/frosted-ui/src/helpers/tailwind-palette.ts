@@ -1,18 +1,21 @@
 /**
  * Maps Tailwind CSS v4 style palettes (11 stops, 50–950) onto the 12-step
- * Radix-style scales that frosted-ui components consume.
+ * scales that frosted-ui components consume.
  *
- * The heavy lifting happens at runtime in CSS: the shared
- * `:where([data-accent-color])` / `:where([data-gray-color])` blocks in
- * src/styles/tokens/tailwind-color.css compute `--accent-1..12`,
- * `--accent-a1..a12`, surfaces and contrast from five oklch seed stops
- * (50/300/500/800/950) plus two scalars per palette.
+ * The mapping is static and verbatim:
+ * - light: step 1 is an extra light shade (stop 50 mixed 60% toward white),
+ *   steps 2–12 are the palette stops 50…950 unchanged.
+ * - dark: the same stops read in reverse for backgrounds and text, with the
+ *   solid steps anchored so buttons stay recognizable:
+ *   [50↦black 40%, 950, 900, 900·800, 800, 800·700, 700, 700·600, 600, 500, 300, 100]
+ *   (a·b means the OKLab midpoint of the two stops).
  *
- * This module produces those seeds:
- * - `createPaletteCss` emits a tiny seed block for a full custom palette
- * - `createPaletteFromColor` expands one CSS color into a Tailwind-style palette
- * - `createAccentSeedStyle` / `createGraySeedStyle` return inline-style var maps,
- *   used by `<Theme accentColor="#8b5cf6">` for arbitrary custom colors
+ * Alpha steps are the most transparent rgba() that composites back to the
+ * solid step over white (light) / black (dark), like Radix alpha scales.
+ *
+ * `scripts/generate-palettes.ts` uses this module to generate the checked-in
+ * scales for every Tailwind palette (src/styles/tokens/palettes.css), and
+ * `<Theme accentColor="#8b5cf6">` uses it at runtime for custom colors.
  */
 
 type TailwindPaletteStop = 50 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 950;
@@ -39,6 +42,7 @@ interface Rgb {
 }
 
 const WHITE: Oklab = { L: 1, a: 0, b: 0 };
+const BLACK: Oklab = { L: 0, a: 0, b: 0 };
 
 function srgbToLinear(c: number): number {
   return c <= 0.04045 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
@@ -175,74 +179,169 @@ function contrastWithWhite(c: Rgb): number {
   return 1.05 / (wcagLuminance(c) + 0.05);
 }
 
-/* * * * * * * * * * * * * * * * * * * */
-/*         Palette → seed vars         */
-/* * * * * * * * * * * * * * * * * * * */
-
-/** The five stops the runtime CSS interpolates the 12-step scales from. */
-const seedStops = [50, 300, 500, 800, 950] as const;
-
-interface PaletteSeeds {
-  /** Seed colors, verbatim from the palette. */
-  colors: Record<(typeof seedStops)[number], string>;
-  /** OKLab lightness of the 800 stop (used by the dark background formula). */
-  l800: number;
-  /** Step-9 text color: `white`, or a dark hex for bright palettes. */
-  contrast: string;
+/** Parse a CSS color (`#hex`, `rgb()`, `oklch()`) and return its sRGB hex, gamut-mapped. */
+function cssColorToHex(color: string): string {
+  return rgbToHex(oklabToRgb(parseColor(color)));
 }
 
-function paletteSeeds(palette: TailwindPalette): PaletteSeeds {
-  const stops = tailwindPaletteStops.map((stop) => {
+/* * * * * * * * * * * * * * * * * * * */
+/*        Stops → 12-step scales       */
+/* * * * * * * * * * * * * * * * * * * */
+
+interface ModeScale {
+  /** 12 solid steps as CSS colors (verbatim palette stops where possible). */
+  steps: string[];
+  /** The solid steps in sRGB (for the alpha/surface derivations). */
+  stepsRgb: Rgb[];
+  /** 12 alpha steps as #rrggbbaa. */
+  alphas: string[];
+  /** Step-9 text color. */
+  contrast: string;
+  /** Translucent surface (#rrggbbaa) that composites back to step 2 over the page. */
+  surface: string;
+  /** Dark-mode translucent panel color (#rrggbbaa), only meaningful for grays. */
+  translucent: string;
+}
+
+interface ScaleColors {
+  light: ModeScale;
+  dark: ModeScale;
+}
+
+/** The most transparent rgba() that composites back to `target` over white. */
+function alphaOverWhite(target: Rgb): string {
+  const alphaByte = Math.max(1, Math.ceil(255 - Math.min(target.r, target.g, target.b)));
+  const a = alphaByte / 255;
+  const solve = (t: number) => (t - (1 - a) * 255) / a;
+  return rgbToHex({ r: solve(target.r), g: solve(target.g), b: solve(target.b) }) + toHexByte(alphaByte);
+}
+
+/** The most transparent rgba() that composites back to `target` over black. */
+function alphaOverBlack(target: Rgb): string {
+  const alphaByte = Math.max(1, Math.max(target.r, target.g, target.b));
+  const solve = (t: number) => (t * 255) / alphaByte;
+  return rgbToHex({ r: solve(target.r), g: solve(target.g), b: solve(target.b) }) + toHexByte(alphaByte);
+}
+
+/**
+ * Expand an 11-stop palette into the light and dark 12-step scales, with
+ * alpha steps, step-9 contrast color and translucent surfaces.
+ */
+function computeScale(palette: TailwindPalette): ScaleColors {
+  const raw = {} as Record<TailwindPaletteStop, string>;
+  const ok = {} as Record<TailwindPaletteStop, Oklab>;
+  for (const stop of tailwindPaletteStops) {
     const value = palette[stop];
     if (typeof value !== 'string') throw new Error(`Palette is missing stop ${stop}.`);
-    return parseColor(value);
-  });
-  const p500 = stops[5];
-  const p800 = stops[8];
+    raw[stop] = value.trim();
+    ok[stop] = parseColor(value);
+  }
 
-  // Solid step 9 (= stop 500) is shared between modes, so one contrast var covers both.
-  // The threshold splits palettes the way Radix does: yellow/amber/lime get dark text.
-  const darkText = rgbToHex(oklabToRgb(mix(stops[9], stops[10], 0.6)));
-  const contrast = contrastWithWhite(oklabToRgb(p500)) >= 2.16 ? 'white' : darkText;
+  type Step = TailwindPaletteStop | Oklab;
+  const lightSteps: Step[] = [mix(ok[50], WHITE, 0.6), 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950];
+  const darkSteps: Step[] = [
+    mix(ok[950], BLACK, 0.4),
+    950,
+    900,
+    mix(ok[900], ok[800], 0.5),
+    800,
+    mix(ok[800], ok[700], 0.5),
+    700,
+    mix(ok[700], ok[600], 0.5),
+    600,
+    500,
+    300,
+    100,
+  ];
 
-  const colors = {} as PaletteSeeds['colors'];
-  for (const stop of seedStops) colors[stop] = palette[stop].trim();
-  return { colors, l800: Number(p800.L.toFixed(4)), contrast };
-}
+  // Step-9 text: white, or a near-black palette tint for palettes whose solid
+  // steps (light 700 / dark 600) are too light for white text.
+  const darkText = rgbToHex(oklabToRgb(mix(ok[900], ok[950], 0.6)));
+  const contrastFor = (step9: Rgb) => (contrastWithWhite(step9) >= 2.16 ? 'white' : darkText);
 
-function seedDeclarations(prefix: 'ftw-accent' | 'ftw-gray', seeds: PaletteSeeds): Record<string, string> {
-  const vars: Record<string, string> = {};
-  for (const stop of seedStops) vars[`--${prefix}-seed-${stop}`] = seeds.colors[stop];
-  vars[`--${prefix}-seed-l800`] = String(seeds.l800);
-  if (prefix === 'ftw-accent') vars[`--${prefix}-seed-contrast`] = seeds.contrast;
-  return vars;
-}
+  const build = (steps: Step[], mode: 'light' | 'dark'): ModeScale => {
+    const stepsRgb = steps.map((s) => oklabToRgb(typeof s === 'number' ? ok[s] : s));
+    const alpha = mode === 'light' ? alphaOverWhite : alphaOverBlack;
+    const step2 = stepsRgb[1];
+    const surface =
+      mode === 'light'
+        ? rgbToHex({ r: (step2.r - 51) / 0.8, g: (step2.g - 51) / 0.8, b: (step2.b - 51) / 0.8 }) + 'cc'
+        : rgbToHex({ r: step2.r * 2, g: step2.g * 2, b: step2.b * 2 }) + '80';
+    return {
+      steps: steps.map((s, i) => (typeof s === 'number' ? raw[s] : rgbToHex(stepsRgb[i]))),
+      stepsRgb,
+      alphas: stepsRgb.map(alpha),
+      contrast: contrastFor(stepsRgb[8]),
+      surface,
+      translucent: rgbToHex(step2) + 'd9',
+    };
+  };
 
-// Dark app-background steps: replicated from the --ftw-g-d1/-d2 formulas in
-// src/styles/tokens/tailwind-color.css (used where CSS can't, e.g. <body> background).
-const grayDark3Weight = 0.818;
-
-function darkBackgroundStep1(palette: TailwindPalette): Rgb {
-  const clamp = (v: number, min: number, max: number) => Math.min(max, Math.max(min, v));
-  const p950 = parseColor(palette[950]);
-  const l800 = parseColor(palette[800]).L;
-  const l = p950.L;
-  const l3 = (1 - grayDark3Weight) * l800 + grayDark3Weight * l;
-  const t2 = Math.min(clamp(0.87 * l, 0.16, 0.215), l3 - 0.012);
-  const t1 = Math.min(clamp(0.72 * l, 0.13, 0.185), t2 - 0.022);
-  const f = t1 / Math.max(l, 0.01);
-  return oklabToRgb({ L: p950.L * f, a: p950.a * f, b: p950.b * f });
+  return { light: build(lightSteps, 'light'), dark: build(darkSteps, 'dark') };
 }
 
 /* * * * * * * * * * * * * * * * * * * */
 /*            CSS generation           */
 /* * * * * * * * * * * * * * * * * * * */
 
+const LIGHT_SELECTOR = ':root,\n.light,\n.light-theme';
+const DARK_SELECTOR = '.dark,\n.dark-theme';
+
+function cssBlock(selector: string, lines: string[]): string {
+  return `${selector} {\n${lines.map((l) => `  ${l};`).join('\n')}\n}`;
+}
+
+function scaleDeclarations(name: string, scale: ModeScale, options: { gray?: boolean; dark?: boolean }): string[] {
+  return [
+    ...scale.steps.map((v, i) => `--${name}-${i + 1}: ${v}`),
+    ...scale.alphas.map((v, i) => `--${name}-a${i + 1}: ${v}`),
+    `--${name}-9-contrast: ${scale.contrast}`,
+    `--${name}-surface: ${scale.surface}`,
+    ...(options.gray && options.dark ? [`--${name}-2-translucent: ${scale.translucent}`] : []),
+  ];
+}
+
+/** The `:root`/`.dark` blocks defining the full `--{name}-*` scale. */
+function scaleCss(name: string, colors: ScaleColors, options: { gray?: boolean } = {}): string {
+  return [
+    cssBlock(LIGHT_SELECTOR, scaleDeclarations(name, colors.light, { ...options, dark: false })),
+    cssBlock(DARK_SELECTOR, scaleDeclarations(name, colors.dark, { ...options, dark: true })),
+  ].join('\n\n');
+}
+
+function mappingDeclarations(target: string, name: string): string[] {
+  return [
+    ...Array.from({ length: 12 }, (_, i) => `--${target}-${i + 1}: var(--${name}-${i + 1})`),
+    ...Array.from({ length: 12 }, (_, i) => `--${target}-a${i + 1}: var(--${name}-a${i + 1})`),
+    `--${target}-9-contrast: var(--${name}-9-contrast)`,
+  ];
+}
+
+/** The `[data-accent-color='{name}']` block pointing `--accent-*` at a scale. */
+function accentMappingCss(name: string): string {
+  return cssBlock(`[data-accent-color='${name}']`, [
+    `--color-surface-accent: var(--${name}-surface)`,
+    ...mappingDeclarations('accent', name),
+  ]);
+}
+
+/** The `[data-gray-color='{name}']` block pointing `--gray-*` at a scale. */
+function grayMappingCss(name: string): string {
+  return cssBlock(`.frosted-ui:where([data-gray-color='${name}'])`, [
+    `--gray-surface: var(--${name}-surface)`,
+    `--gray-2-translucent: var(--${name}-2-translucent)`,
+    ...mappingDeclarations('gray', name),
+  ]);
+}
+
+/** The `[data-{kind}-color='{name}']` block pointing a semantic scale at a palette. */
+function semanticMappingCss(kind: 'danger' | 'warning' | 'success' | 'info', name: string, isDefault: boolean): string {
+  const selector = isDefault ? `:root,\n[data-${kind}-color='${name}']` : `[data-${kind}-color='${name}']`;
+  return cssBlock(selector, [`--color-surface-${kind}: var(--${name}-surface)`, ...mappingDeclarations(kind, name)]);
+}
+
 interface CreatePaletteCssOptions {
-  /**
-   * Also emit a `[data-gray-color='{name}']` seed block (and `--{name}-1` page
-   * background tokens) so the palette can be used as the Theme `grayColor`.
-   */
+  /** Also emit a `[data-gray-color='{name}']` mapping so the palette can be the Theme `grayColor`. */
   gray?: boolean;
 }
 
@@ -251,58 +350,51 @@ interface CreatePaletteCssOptions {
  * self-contained: inject it once (a css file or a <style> tag) and `name` becomes usable
  * everywhere a scale name works, e.g. `<Theme accentColor={'my-brand' as never}>` or
  * `data-accent-color="my-brand"` on any subtree.
- *
- * It now emits only a small seed block per palette; the shared runtime blocks in
- * src/styles/tokens/tailwind-color.css (part of styles.css) expand the seeds into the
- * full 12-step light/dark scales with `color-mix()` and relative color syntax.
  */
 function createPaletteCss(name: string, palette: TailwindPalette, options: CreatePaletteCssOptions = {}): string {
   if (!/^[a-z][a-z0-9-]*$/.test(name)) {
     throw new Error(`Invalid palette name "${name}". Use lowercase letters, digits and dashes.`);
   }
 
-  const seeds = paletteSeeds(palette);
-  const block = (selector: string, vars: Record<string, string>) =>
-    `${selector} {\n${Object.entries(vars)
-      .map(([k, v]) => `  ${k}: ${v};`)
-      .join('\n')}\n}`;
-
-  const accentBlock = block(`[data-accent-color='${name}']`, seedDeclarations('ftw-accent', seeds));
-  if (!options.gray) return `${accentBlock}\n`;
-
-  // Step-1 tokens exist globally so theme.tsx can point the page background
-  // (`hasBackground`) at `var(--${name}-1)` from outside any [data-gray-color] scope.
-  const light1 = rgbToHex(oklabToRgb(mix(parseColor(palette[50]), WHITE, 0.6)));
-  const dark1 = rgbToHex(darkBackgroundStep1(palette));
-  return (
-    [
-      accentBlock,
-      block(`[data-gray-color='${name}']`, seedDeclarations('ftw-gray', seeds)),
-      block(':root,\n.light,\n.light-theme', { [`--${name}-1`]: light1 }),
-      block('.dark,\n.dark-theme', { [`--${name}-1`]: dark1 }),
-    ].join('\n\n') + '\n'
-  );
+  const colors = computeScale(palette);
+  const blocks = [scaleCss(name, colors, { gray: options.gray }), accentMappingCss(name)];
+  if (options.gray) blocks.push(grayMappingCss(name));
+  return blocks.join('\n\n') + '\n';
 }
 
 /* * * * * * * * * * * * * * * * * * * */
 /*      Custom colors for <Theme>      */
 /* * * * * * * * * * * * * * * * * * * */
 
+function customScaleStyle(prefix: 'fui-ca' | 'fui-cg', colors: ScaleColors): Record<string, string> {
+  const vars: Record<string, string> = {};
+  colors.light.steps.forEach((v, i) => (vars[`--${prefix}-l${i + 1}`] = v));
+  colors.dark.steps.forEach((v, i) => (vars[`--${prefix}-d${i + 1}`] = v));
+  colors.light.alphas.forEach((v, i) => (vars[`--${prefix}-la${i + 1}`] = v));
+  colors.dark.alphas.forEach((v, i) => (vars[`--${prefix}-da${i + 1}`] = v));
+  vars[`--${prefix}-contrast`] = colors.dark.contrast;
+  vars[`--${prefix}-ls`] = colors.light.surface;
+  vars[`--${prefix}-ds`] = colors.dark.surface;
+  if (prefix === 'fui-cg') vars[`--${prefix}-dt`] = colors.dark.translucent;
+  return vars;
+}
+
 /**
  * Inline-style custom properties that make an arbitrary CSS color usable as the
  * accent under `data-accent-color="custom"`. Used by `<Theme accentColor="#8b5cf6">`.
- * Supports `#hex`, `rgb()` and `oklch()` colors.
+ * The `[data-accent-color='custom']` block in tokens/custom-color.css turns them
+ * into the `--accent-*` scale. Supports `#hex`, `rgb()` and `oklch()` colors.
  */
-function createAccentSeedStyle(color: string): Record<string, string> {
-  return seedDeclarations('ftw-accent', paletteSeeds(createPaletteFromColor(color)));
+function createAccentScaleStyle(color: string): Record<string, string> {
+  return customScaleStyle('fui-ca', computeScale(createPaletteFromColor(color)));
 }
 
 /**
  * Inline-style custom properties that make an arbitrary CSS color usable as the
  * gray scale under `data-gray-color="custom"`. Used by `<Theme grayColor="#3f3f46">`.
  */
-function createGraySeedStyle(color: string): Record<string, string> {
-  return seedDeclarations('ftw-gray', paletteSeeds(createPaletteFromColor(color)));
+function createGrayScaleStyle(color: string): Record<string, string> {
+  return customScaleStyle('fui-cg', computeScale(createPaletteFromColor(color)));
 }
 
 /**
@@ -310,7 +402,8 @@ function createGraySeedStyle(color: string): Record<string, string> {
  * string. theme.tsx applies this to `<body>`, which no CSS scale scope reaches.
  */
 function darkPageBackgroundFromColor(color: string): string {
-  return rgbToHex(darkBackgroundStep1(createPaletteFromColor(color)));
+  const palette = createPaletteFromColor(color);
+  return rgbToHex(oklabToRgb(mix(parseColor(palette[950]), BLACK, 0.4)));
 }
 
 /**
@@ -318,15 +411,15 @@ function darkPageBackgroundFromColor(color: string): string {
  * `tailwindGetMatchingGrayScale`'s hue groupings. Falls back to `gray` for
  * achromatic or unparseable colors.
  */
-function matchingGrayFromColor(color: string): 'gray' | 'tw-stone' | 'tw-neutral' | 'tw-slate' | 'tw-zinc' {
+function matchingGrayFromColor(color: string): 'gray' | 'stone' | 'neutral' | 'slate' | 'zinc' {
   try {
     const c = parseColor(color);
     if (oklabChroma(c) < 0.02) return 'gray';
     const hue = ((oklabHueDeg(c) % 360) + 360) % 360;
-    if (hue >= 20 && hue < 115) return 'tw-stone'; // warm: red/orange/amber/yellow
-    if (hue >= 115 && hue < 190) return 'tw-neutral'; // greens
-    if (hue >= 190 && hue < 280) return 'tw-slate'; // cool: cyan/sky/blue/indigo
-    return 'tw-zinc'; // purples/pinks
+    if (hue >= 20 && hue < 115) return 'stone'; // warm: red/orange/amber/yellow
+    if (hue >= 115 && hue < 190) return 'neutral'; // greens
+    if (hue >= 190 && hue < 280) return 'slate'; // cool: cyan/sky/blue/indigo
+    return 'zinc'; // purples/pinks
   } catch {
     return 'gray';
   }
@@ -366,12 +459,18 @@ function createPaletteFromColor(color: string): TailwindPalette {
 }
 
 export {
-  createAccentSeedStyle,
-  createGraySeedStyle,
+  accentMappingCss,
+  computeScale,
+  createAccentScaleStyle,
+  createGrayScaleStyle,
   createPaletteCss,
   createPaletteFromColor,
+  cssColorToHex,
   darkPageBackgroundFromColor,
+  grayMappingCss,
   matchingGrayFromColor,
+  scaleCss,
+  semanticMappingCss,
   tailwindPaletteStops,
 };
-export type { CreatePaletteCssOptions, TailwindPalette, TailwindPaletteStop };
+export type { CreatePaletteCssOptions, ScaleColors, TailwindPalette, TailwindPaletteStop };

@@ -93,7 +93,7 @@ export const Color: Story = {
         <TabsNav.Link href="#">Reports</TabsNav.Link>
       </TabsNav.Root>
 
-      <TabsNav.Root {...args} color="crimson">
+      <TabsNav.Root {...args} color="rose">
         <TabsNav.Link active href="#">
           One
         </TabsNav.Link>

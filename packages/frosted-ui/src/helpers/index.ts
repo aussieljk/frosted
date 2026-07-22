@@ -7,7 +7,6 @@ export * from './get-subtree';
 export * from './has-own-property';
 export * from './nice-intersection';
 export * from './props';
-export * from './radix-colors';
 export * from './tailwind-colors';
 export * from './tailwind-palette';
 export * from './use-callback-ref';

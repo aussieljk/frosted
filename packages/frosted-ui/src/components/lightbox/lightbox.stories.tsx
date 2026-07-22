@@ -1,16 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-import {
-  ArrowUpFromBracket16,
-  ChevronLeft16,
-  ChevronRight16,
-  GlobePin16,
-  Heart16,
-  Mail16,
-  MessageBlank16,
-  PlayFilled20,
-  XMark16,
-} from '@frosted-ui/icons';
+import { ChevronLeft, ChevronRight, Globe, Heart, Mail, MessageSquare, Play, Upload, X } from 'lucide-react';
 import React, { useRef, useState } from 'react';
 import {
   Avatar,
@@ -97,7 +87,7 @@ const CloseButton = () => (
       <Lightbox.Close
         render={<IconButton size="2" variant="ghost" color="gray" highContrast style={{ color: 'white' }} />}
       >
-        <XMark16 />
+        <X size={16} />
       </Lightbox.Close>
     </Tooltip>
   </div>
@@ -109,7 +99,7 @@ const NavControls = () => (
       <Lightbox.Previous
         render={<IconButton size="2" variant="ghost" color="gray" highContrast style={{ color: 'white' }} />}
       >
-        <ChevronLeft16 />
+        <ChevronLeft size={16} />
       </Lightbox.Previous>
     </Tooltip>
 
@@ -133,7 +123,7 @@ const NavControls = () => (
       <Lightbox.Next
         render={<IconButton size="2" variant="ghost" color="gray" highContrast style={{ color: 'white' }} />}
       >
-        <ChevronRight16 />
+        <ChevronRight size={16} />
       </Lightbox.Next>
     </Tooltip>
   </div>
@@ -1076,9 +1066,9 @@ function ActionBar({ stats }: { stats: FeedPost['stats'] }) {
       }}
     >
       {[
-        { icon: <MessageBlank16 />, count: stats.replies },
-        { icon: <Heart16 />, count: stats.likes },
-        { icon: <ArrowUpFromBracket16 />, count: stats.shares },
+        { icon: <MessageSquare size={16} />, count: stats.replies },
+        { icon: <Heart size={16} />, count: stats.likes },
+        { icon: <Upload size={16} />, count: stats.shares },
       ].map((action, i) => (
         <Button key={i} size="2" variant="ghost" color="gray">
           {action.icon}
@@ -1754,7 +1744,7 @@ const colorPalette = [
     alt: 'Red autumn leaves on dark branches',
   },
   {
-    id: 'sage',
+    id: 'neutral',
     name: 'Sage',
     hex: '#7a9a6d',
     family: 'Green',
@@ -1770,7 +1760,7 @@ const colorPalette = [
     alt: 'Wet stone wall in the rain',
   },
   {
-    id: 'plum',
+    id: 'fuchsia',
     name: 'Plum',
     hex: '#7b3f72',
     family: 'Purple',
@@ -1925,7 +1915,7 @@ export const ColorPalette: Story = {
             <Lightbox.Previous
               render={<IconButton size="2" variant="ghost" color="gray" highContrast style={{ color: 'white' }} />}
             >
-              <ChevronLeft16 />
+              <ChevronLeft size={16} />
             </Lightbox.Previous>
           </Tooltip>
 
@@ -1967,7 +1957,7 @@ export const ColorPalette: Story = {
             <Lightbox.Next
               render={<IconButton size="2" variant="ghost" color="gray" highContrast style={{ color: 'white' }} />}
             >
-              <ChevronRight16 />
+              <ChevronRight size={16} />
             </Lightbox.Next>
           </Tooltip>
         </div>
@@ -2267,7 +2257,7 @@ function FilmCard({ film, index }: { film: (typeof films)[number]; index: number
               color: '#000',
             }}
           >
-            <PlayFilled20 />
+            <Play size={20} />
           </div>
         </div>
       </div>
@@ -2364,7 +2354,7 @@ export const FilmTrailers: Story = {
             >
               <Tooltip content="Close">
                 <Lightbox.Close render={<IconButton variant="ghost" color="gray" size="3" aria-label="Close" />}>
-                  <XMark16 />
+                  <X size={16} />
                 </Lightbox.Close>
               </Tooltip>
             </div>
@@ -2380,7 +2370,7 @@ export const FilmTrailers: Story = {
             >
               <Tooltip content="Previous">
                 <Lightbox.Previous render={<IconButton variant="ghost" color="gray" size="3" aria-label="Previous" />}>
-                  <ChevronLeft16 />
+                  <ChevronLeft size={16} />
                 </Lightbox.Previous>
               </Tooltip>
             </div>
@@ -2396,7 +2386,7 @@ export const FilmTrailers: Story = {
             >
               <Tooltip content="Next">
                 <Lightbox.Next render={<IconButton variant="ghost" color="gray" size="3" aria-label="Next" />}>
-                  <ChevronRight16 />
+                  <ChevronRight size={16} />
                 </Lightbox.Next>
               </Tooltip>
             </div>
@@ -2622,13 +2612,13 @@ function ProfileCard({ member }: { member: (typeof teamMembers)[number] }) {
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
-            <GlobePin16 style={{ color: 'var(--gray-a10)' }} />
+            <Globe size={16} style={{ color: 'var(--gray-a10)' }} />
             <Text size="2" color="gray">
               {member.location}
             </Text>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
-            <Mail16 style={{ color: 'var(--gray-a10)' }} />
+            <Mail size={16} style={{ color: 'var(--gray-a10)' }} />
             <Text size="2" color="gray">
               {member.email}
             </Text>
@@ -2729,7 +2719,7 @@ export const TeamDirectory: Story = {
             >
               <Tooltip content="Close">
                 <Lightbox.Close render={<IconButton variant="ghost" color="gray" size="3" aria-label="Close" />}>
-                  <XMark16 />
+                  <X size={16} />
                 </Lightbox.Close>
               </Tooltip>
             </div>
@@ -2745,7 +2735,7 @@ export const TeamDirectory: Story = {
             >
               <Tooltip content="Previous">
                 <Lightbox.Previous render={<IconButton variant="ghost" color="gray" size="3" aria-label="Previous" />}>
-                  <ChevronLeft16 />
+                  <ChevronLeft size={16} />
                 </Lightbox.Previous>
               </Tooltip>
             </div>
@@ -2761,7 +2751,7 @@ export const TeamDirectory: Story = {
             >
               <Tooltip content="Next">
                 <Lightbox.Next render={<IconButton variant="ghost" color="gray" size="3" aria-label="Next" />}>
-                  <ChevronRight16 />
+                  <ChevronRight size={16} />
                 </Lightbox.Next>
               </Tooltip>
             </div>
@@ -2994,7 +2984,7 @@ export const WithZoom: Story = {
                       </Tooltip>
                       <Tooltip content="Close">
                         <Lightbox.Close render={<IconButton variant="ghost" color="gray" size="2" />}>
-                          <XMark16 />
+                          <X size={16} />
                         </Lightbox.Close>
                       </Tooltip>
                     </div>
@@ -3028,13 +3018,13 @@ export const WithZoom: Story = {
             <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)', pointerEvents: 'auto' }}>
               <Tooltip content="Previous">
                 <Lightbox.Previous render={<IconButton variant="ghost" color="gray" size="2" />}>
-                  <ChevronLeft16 />
+                  <ChevronLeft size={16} />
                 </Lightbox.Previous>
               </Tooltip>
               <Lightbox.Counter />
               <Tooltip content="Next">
                 <Lightbox.Next render={<IconButton variant="ghost" color="gray" size="2" />}>
-                  <ChevronRight16 />
+                  <ChevronRight size={16} />
                 </Lightbox.Next>
               </Tooltip>
             </div>
@@ -3133,7 +3123,7 @@ export const ScrollGalleryWithZoom: Story = {
             >
               <Tooltip content="Close">
                 <Lightbox.Close render={<IconButton variant="ghost" color="gray" size="2" />}>
-                  <XMark16 />
+                  <X size={16} />
                 </Lightbox.Close>
               </Tooltip>
             </div>

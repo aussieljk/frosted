@@ -4,14 +4,15 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 # Color system
 
-The color palette system used in Frosted UI is the [Radix Colors](https://www.radix-ui.com/colors) system.
-
-There is a number of 12 step color scales available, each with their own light, dark and alpha variants.
+The color palettes in Frosted UI are the [Tailwind CSS v4 palettes](https://tailwindcss.com/docs/colors),
+each extended with an extra light shade to form a 12-step scale with light, dark and alpha variants.
 
 Colors are grouped into 3 categories: `accents`, `grays`, and `semantic` (info, success, warning, danger).
 All of these can be specified on your `<Theme />`, or per component where appropriate.
 
 ## Understanding the scale
 
-To understand how the scale works and what's the main use case for each color step,
-please refer to this detailed explanation of the [Radix Colors scale](https://www.radix-ui.com/colors/docs/palette-composition/understanding-the-scale) system.
+Each scale has 12 steps with dedicated roles — 1-2 backgrounds, 3-5 component backgrounds,
+6-8 borders, 9-10 solid colors, 11-12 text. In light mode the steps map to the Tailwind stops
+(an extra light shade, then 50 through 950); dark mode reads the same stops in reverse with the
+solid steps anchored near 500-600 so buttons stay recognizable.

@@ -10,10 +10,6 @@
       "dependsOn": ["^build"],
       "outputs": ["dist/**", "styles.css", "styles.lite.css", "theme.css"]
     },
-    "@frosted-ui/colors#build": {
-      "dependsOn": ["^build"],
-      "outputs": ["index.js", "index.mjs", "*.css"]
-    },
     "tailwind#build": {
       "dependsOn": ["^build"],
       "outputs": ["dist/**"]
@@ -39,7 +35,7 @@
       "dependsOn": ["^build"]
     },
     "@aussieljk/frosted#build-storybook": {
-      "dependsOn": ["@frosted-ui/icons#build", "build:css"],
+      "dependsOn": ["build:css"],
       "outputs": ["storybook-static/**"]
     },
     "typecheck": {

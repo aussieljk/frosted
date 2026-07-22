@@ -75,7 +75,7 @@ export const Color: Story = {
       <Heading {...args} color="orange">
         The quick brown fox jumps over the lazy dog.
       </Heading>
-      <Heading {...args} color="crimson">
+      <Heading {...args} color="rose">
         The quick brown fox jumps over the lazy dog.
       </Heading>
     </div>
@@ -140,7 +140,7 @@ export const HighContrast: Story = {
       <Heading {...args} highContrast color="orange">
         The quick brown fox jumps over the lazy dog.
       </Heading>
-      <Heading {...args} highContrast color="crimson">
+      <Heading {...args} highContrast color="rose">
         The quick brown fox jumps over the lazy dog.
       </Heading>
     </div>

@@ -1,4 +1,4 @@
-import { Checkmark12, XMarkSmall12 } from '@frosted-ui/icons';
+import { Check as CheckIcon, X } from 'lucide-react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import * as React from 'react';
@@ -1051,7 +1051,7 @@ export const CustomValidation: Story = {
         color={passed ? 'success' : 'gray'}
         style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}
       >
-        {passed ? <Checkmark12 /> : <XMarkSmall12 />}
+        {passed ? <CheckIcon size={12} /> : <X size={12} />}
         {children}
       </Text>
     );
@@ -1087,12 +1087,12 @@ export const CustomValidation: Story = {
                 {isChecking && <Spinner size="1" />}
                 {!isChecking && isValid && (
                   <Text color="success">
-                    <Checkmark12 />
+                    <CheckIcon size={12} />
                   </Text>
                 )}
                 {!isChecking && showError && (
                   <Text color="danger">
-                    <XMarkSmall12 />
+                    <X size={12} />
                   </Text>
                 )}
               </TextField.Slot>
@@ -1118,7 +1118,7 @@ export const CustomValidation: Story = {
           {allRulesPass && username.length >= 3 && (
             <Callout.Root color={isChecking ? 'gray' : isAvailable ? 'success' : 'danger'} style={{ marginTop: 12 }}>
               <Callout.Icon>
-                {isChecking ? <Spinner size="1" /> : isAvailable ? <Checkmark12 /> : <XMarkSmall12 />}
+                {isChecking ? <Spinner size="1" /> : isAvailable ? <CheckIcon size={12} /> : <X size={12} />}
               </Callout.Icon>
               <Callout.Title>
                 {isChecking
@@ -1271,7 +1271,7 @@ export const FormExample: Story = {
         {formData && (
           <Callout.Root color="success">
             <Callout.Icon>
-              <Checkmark12 />
+              <CheckIcon size={12} />
             </Callout.Icon>
             <Callout.Title>
               Form submitted successfully!

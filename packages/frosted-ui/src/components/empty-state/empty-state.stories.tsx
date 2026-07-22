@@ -1,24 +1,23 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import {
-  AddUser24,
-  Bell24,
-  CheckmarkCircleFilled16,
-  Document24,
-  DocumentLines24,
-  FolderAdd24,
-  Gear24,
-  HandWave24,
-  LightningFilled24,
-  MagnifyingGlass16,
-  MagnifyingGlass24,
-  Message16,
-  Plus16,
-  Sad24,
-  SparkleFilled24,
-  Upload16,
-  XCircleFilled24,
-} from '@frosted-ui/icons';
+  Bell,
+  CircleCheck,
+  CircleX,
+  File,
+  FileText,
+  FolderPlus,
+  Frown,
+  Hand,
+  MessageCircle,
+  Plus,
+  Search,
+  Settings,
+  Sparkles,
+  Upload as UploadIcon,
+  UserPlus,
+  Zap,
+} from 'lucide-react';
 import React from 'react';
 import {
   Avatar,
@@ -53,7 +52,7 @@ export const Default: Story = {
     <EmptyState.Root>
       <EmptyState.Header>
         <EmptyState.Media>
-          <FolderAdd24 />
+          <FolderPlus size={24} />
         </EmptyState.Media>
         <EmptyState.Title>No projects found</EmptyState.Title>
         <EmptyState.Description>
@@ -81,7 +80,7 @@ export const SearchResults: Story = {
     <EmptyState.Root>
       <EmptyState.Header>
         <EmptyState.Media>
-          <Sad24 />
+          <Frown size={24} />
         </EmptyState.Media>
         <EmptyState.Title>No results found</EmptyState.Title>
         <EmptyState.Description>
@@ -109,14 +108,14 @@ export const Colors: Story = {
       <EmptyState.Root>
         <EmptyState.Header>
           <EmptyState.Media color="blue">
-            <Document24 />
+            <File size={24} />
           </EmptyState.Media>
           <EmptyState.Title>No documents</EmptyState.Title>
           <EmptyState.Description>Create your first document to get started.</EmptyState.Description>
         </EmptyState.Header>
         <EmptyState.Actions>
           <Button variant="surface" color="blue">
-            <Plus16 />
+            <Plus size={16} />
             New document
           </Button>
         </EmptyState.Actions>
@@ -125,7 +124,7 @@ export const Colors: Story = {
       <EmptyState.Root>
         <EmptyState.Header>
           <EmptyState.Media color="green">
-            <Plus16 />
+            <Plus size={16} />
           </EmptyState.Media>
           <EmptyState.Title>No deployments</EmptyState.Title>
           <EmptyState.Description>Deploy your first app to see it here.</EmptyState.Description>
@@ -139,14 +138,14 @@ export const Colors: Story = {
 
       <EmptyState.Root>
         <EmptyState.Header>
-          <EmptyState.Media color="lemon">
-            <Bell24 />
+          <EmptyState.Media color="lime">
+            <Bell size={24} />
           </EmptyState.Media>
           <EmptyState.Title>No notifications</EmptyState.Title>
           <EmptyState.Description>Configure alerts to stay informed.</EmptyState.Description>
         </EmptyState.Header>
         <EmptyState.Actions>
-          <Button variant="solid" color="lemon">
+          <Button variant="solid" color="lime">
             Set up alerts
           </Button>
         </EmptyState.Actions>
@@ -155,7 +154,7 @@ export const Colors: Story = {
       <EmptyState.Root>
         <EmptyState.Header>
           <EmptyState.Media color="danger">
-            <Sad24 />
+            <Frown size={24} />
           </EmptyState.Media>
           <EmptyState.Title>Too many errors</EmptyState.Title>
           <EmptyState.Description>Your application has critical issues that need attention.</EmptyState.Description>
@@ -303,7 +302,7 @@ export const WithAvatar: Story = {
       </EmptyState.Header>
       <EmptyState.Actions>
         <Button>
-          <Message16 />
+          <MessageCircle size={16} />
           Leave Message
         </Button>
       </EmptyState.Actions>
@@ -331,7 +330,7 @@ export const WithAvatarStack: Story = {
       </EmptyState.Header>
       <EmptyState.Actions>
         <Button variant="solid">
-          <Plus16 />
+          <Plus size={16} />
           Invite Members
         </Button>
       </EmptyState.Actions>
@@ -344,7 +343,7 @@ export const WithTextFieldAndButton: Story = {
     <EmptyState.Root>
       <EmptyState.Header>
         <EmptyState.Media color="green">
-          <AddUser24 />
+          <UserPlus size={24} />
         </EmptyState.Media>
         <EmptyState.Title>Invite teammates</EmptyState.Title>
         <EmptyState.Description>Enter an email address to send an invitation.</EmptyState.Description>
@@ -368,7 +367,7 @@ export const WithCheckbox: Story = {
     <EmptyState.Root>
       <EmptyState.Header>
         <EmptyState.Media color="blue">
-          <HandWave24 />
+          <Hand size={24} />
         </EmptyState.Media>
         <EmptyState.Title>Welcome to the app!</EmptyState.Title>
         <EmptyState.Description>
@@ -401,14 +400,14 @@ export const FileDropHint: Story = {
     >
       <EmptyState.Header>
         <EmptyState.Media>
-          <DocumentLines24 />
+          <FileText size={24} />
         </EmptyState.Media>
         <EmptyState.Title>Cloud Storage empty</EmptyState.Title>
         <EmptyState.Description>Upload files to your cloud storage to access them anywhere.</EmptyState.Description>
       </EmptyState.Header>
       <EmptyState.Actions>
         <Button variant="surface">
-          <Upload16 />
+          <UploadIcon size={16} />
           Upload files
         </Button>
         <Text size="1" color="gray">
@@ -432,7 +431,7 @@ export const ErrorWithRetry: Story = {
       <EmptyState.Root>
         <EmptyState.Header>
           <EmptyState.Media color="danger">
-            <XCircleFilled24 />
+            <CircleX size={24} />
           </EmptyState.Media>
           <EmptyState.Title>Connection failed</EmptyState.Title>
           <EmptyState.Description>
@@ -481,7 +480,7 @@ export const WithKeyboardShortcut: Story = {
     <EmptyState.Root>
       <EmptyState.Header>
         <EmptyState.Media color="gray">
-          <MagnifyingGlass24 />
+          <Search size={24} />
         </EmptyState.Media>
         <EmptyState.Title>Quick search</EmptyState.Title>
         <EmptyState.Description>
@@ -509,7 +508,7 @@ export const WithOTPField: Story = {
     <EmptyState.Root>
       <EmptyState.Header>
         <EmptyState.Media color="green">
-          <Gear24 />
+          <Settings size={24} />
         </EmptyState.Media>
         <EmptyState.Title>Verify your device</EmptyState.Title>
         <EmptyState.Description>Enter the 6-digit code sent to your phone ending in ••••42.</EmptyState.Description>
@@ -556,7 +555,7 @@ export const NotFound404: Story = {
       <EmptyState.Actions>
         <TextField.Root size="3" style={{ width: '100%' }}>
           <TextField.Slot>
-            <MagnifyingGlass16 />
+            <Search size={16} />
           </TextField.Slot>
           <TextField.Input placeholder="Try searching for pages..." />
         </TextField.Root>
@@ -573,7 +572,7 @@ export const AIAssistant: Story = {
     <EmptyState.Root style={{ maxWidth: 420 }}>
       <EmptyState.Header>
         <EmptyState.Media>
-          <SparkleFilled24 />
+          <Sparkles size={24} />
         </EmptyState.Media>
         <EmptyState.Title>Start a conversation</EmptyState.Title>
         <EmptyState.Description>
@@ -623,7 +622,7 @@ export const UpgradeToPro: Story = {
     >
       <EmptyState.Header>
         <EmptyState.Media color="amber">
-          <LightningFilled24 />
+          <Zap size={24} />
         </EmptyState.Media>
         <EmptyState.Title>Unlock Pro features</EmptyState.Title>
         <EmptyState.Description>
@@ -643,7 +642,7 @@ export const UpgradeToPro: Story = {
       >
         {['Unlimited projects', 'Priority support', 'Advanced analytics', 'Custom integrations'].map((feature) => (
           <div key={feature} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-            <CheckmarkCircleFilled16 style={{ color: 'var(--green-a11)' }} />
+            <CircleCheck size={16} style={{ color: 'var(--green-a11)' }} />
             <Text size="2">{feature}</Text>
           </div>
         ))}

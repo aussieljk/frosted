@@ -641,7 +641,7 @@ export const Colors: Story = {
   render: function ColorsStory() {
     type InputState = 'default' | 'disabled' | 'readonly';
     const [inputState, setInputState] = useState<InputState>('default');
-    const colors = ['blue', 'orange', 'indigo', 'magenta', 'lemon', 'lime'] as const;
+    const colors = ['blue', 'orange', 'indigo', 'fuchsia', 'lime', 'lime'] as const;
 
     function ColoredBack({ state }: { state: InputState }) {
       const numberProps =
@@ -748,7 +748,7 @@ export const PerFaceColors: Story = {
       <div>
         <CreditCard.Root face={face} onFaceChange={setFace}>
           <CreditCard.Content>
-            <CreditCard.Front color="iris">
+            <CreditCard.Front color="indigo">
               <CreditCard.FrontHeader>
                 <CreditCard.Logo>
                   <WhopLogo />
@@ -800,17 +800,17 @@ export const PerFaceColors: Story = {
 
 const cardBrands = [
   { brandKey: 'visa', number: '4242 4242 4242 4242', cvv: '123', color: 'indigo' },
-  { brandKey: 'mastercard', number: '5425 2334 3010 9903', cvv: '012', color: 'tomato' },
-  { brandKey: 'american-express', number: '3782 822463 10005', cvv: '1234', color: 'jade' },
+  { brandKey: 'mastercard', number: '5425 2334 3010 9903', cvv: '012', color: 'red' },
+  { brandKey: 'american-express', number: '3782 822463 10005', cvv: '1234', color: 'emerald' },
   { brandKey: 'discover', number: '6011 1111 1111 1117', cvv: '123', color: 'amber' },
-  { brandKey: 'diners-club', number: '3056 9309 0259 04', cvv: '123', color: 'plum' },
+  { brandKey: 'diners-club', number: '3056 9309 0259 04', cvv: '123', color: 'fuchsia' },
   { brandKey: 'jcb', number: '3566 0020 2036 0505', cvv: '123', color: 'sky' },
-  { brandKey: 'unionpay', number: '6250 9470 0000 0014', cvv: '123', color: 'ruby' },
-  { brandKey: 'maestro', number: '6759 6498 2643 8453', cvv: '123', color: 'mint' },
-  { brandKey: 'mir', number: '2200 0000 0000 0053', cvv: '123', color: 'grass' },
+  { brandKey: 'unionpay', number: '6250 9470 0000 0014', cvv: '123', color: 'rose' },
+  { brandKey: 'maestro', number: '6759 6498 2643 8453', cvv: '123', color: 'teal' },
+  { brandKey: 'mir', number: '2200 0000 0000 0053', cvv: '123', color: 'green' },
   { brandKey: 'elo', number: '6362 9700 0457 0011', cvv: '123', color: 'violet' },
-  { brandKey: 'hiper', number: '6370 9503 0000 0007', cvv: '123', color: 'bronze' },
-  { brandKey: 'hipercard', number: '6062 8288 8866 6688', cvv: '123', color: 'iris' },
+  { brandKey: 'hiper', number: '6370 9503 0000 0007', cvv: '123', color: 'stone' },
+  { brandKey: 'hipercard', number: '6062 8288 8866 6688', cvv: '123', color: 'indigo' },
 ] as const;
 
 export const CardBrands: Story = {

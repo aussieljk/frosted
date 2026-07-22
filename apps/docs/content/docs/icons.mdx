@@ -5,7 +5,7 @@ icon: Shapes
 ---
 
 Frosted UI ships icon **adapters** so your whole app can use one icon API while you pick the
-icon set: Phosphor, Lucide, Hugeicons, Heroicons, Tabler, or the original Frosted set.
+icon set: Phosphor, Lucide, Hugeicons, Heroicons, or Tabler.
 
 <Demo id="icons" />
 
@@ -21,13 +21,11 @@ import '@aussieljk/frosted/icons/phosphor';
 import '@aussieljk/frosted/icons/hugeicons';
 import '@aussieljk/frosted/icons/heroicons';
 import '@aussieljk/frosted/icons/tabler';
-import '@aussieljk/frosted/icons/frosted';
 ```
 
 The underlying icon library is an optional peer dependency — install the one that matches your
 adapter (`lucide-react`, `@phosphor-icons/react`, `@hugeicons/react` +
-`@hugeicons/core-free-icons`, `@heroicons/react`, `@tabler/icons-react`, or
-`@frosted-ui/icons`).
+`@hugeicons/core-free-icons`, `@heroicons/react`, or `@tabler/icons-react`).
 
 ## Use icons
 
@@ -79,4 +77,3 @@ Every adapter subpath exports its adapter object: `lucideAdapter`, `phosphorAdap
 | Hugeicons | `@aussieljk/frosted/icons/hugeicons` | `@hugeicons/react` + `@hugeicons/core-free-icons` |
 | Heroicons | `@aussieljk/frosted/icons/heroicons` | `@heroicons/react`                                |
 | Tabler    | `@aussieljk/frosted/icons/tabler`    | `@tabler/icons-react`                             |
-| Frosted   | `@aussieljk/frosted/icons/frosted`   | `@frosted-ui/icons`                               |

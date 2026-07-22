@@ -96,7 +96,7 @@ export const Color: Story = {
         <RadioGroup.Item value="1" />
       </RadioGroup.Root>
 
-      <RadioGroup.Root {...args} color="crimson" defaultValue="1">
+      <RadioGroup.Root {...args} color="rose" defaultValue="1">
         <RadioGroup.Item value="1" />
       </RadioGroup.Root>
     </div>
@@ -138,11 +138,11 @@ export const HighContrast: Story = {
         <RadioGroup.Item value="1" />
       </RadioGroup.Root>
 
-      <RadioGroup.Root {...args} color="crimson" defaultValue="1">
+      <RadioGroup.Root {...args} color="rose" defaultValue="1">
         <RadioGroup.Item value="1" />
       </RadioGroup.Root>
 
-      <RadioGroup.Root {...args} color="crimson" defaultValue="1" highContrast>
+      <RadioGroup.Root {...args} color="rose" defaultValue="1" highContrast>
         <RadioGroup.Item value="1" />
       </RadioGroup.Root>
     </div>

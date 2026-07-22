@@ -49,7 +49,7 @@ export const Color: Story = {
       <Slider {...args} defaultValue={[20]} color="indigo" />
       <Slider {...args} defaultValue={[40]} color="cyan" />
       <Slider {...args} defaultValue={[60]} color="orange" />
-      <Slider {...args} defaultValue={[80]} color="crimson" />
+      <Slider {...args} defaultValue={[80]} color="rose" />
     </div>
   ),
 };

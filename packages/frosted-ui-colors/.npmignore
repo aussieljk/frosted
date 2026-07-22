@@ -1,8 +1,0 @@
-/src/
-/scripts/
-.gitignore
-tsconfig.json
-rollup.config.js
-yarn.lock
-bun.lock
-package-lock.json

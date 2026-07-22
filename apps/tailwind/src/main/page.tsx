@@ -149,7 +149,7 @@ export default function Main() {
                 </Text>
               </div>
               <div className="text-center">
-                <Heading size="7" color="magenta">
+                <Heading size="7" color="fuchsia">
                   #172,264,047
                 </Heading>
                 <Text size="2" color="gray">

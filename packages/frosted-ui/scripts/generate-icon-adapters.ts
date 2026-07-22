@@ -48,10 +48,6 @@ const LIBRARY_CONFIG: Record<IconLibrary, LibraryConfig> = {
     displayName: 'Hugeicons (@hugeicons/react + @hugeicons/core-free-icons)',
     adapterExport: 'hugeiconsAdapter',
   },
-  frosted: {
-    displayName: '@frosted-ui/icons (the original frosted-ui icon set, 16px cut)',
-    adapterExport: 'frostedAdapter',
-  },
 };
 
 /* -------------------------------------------------------------------------------------------------

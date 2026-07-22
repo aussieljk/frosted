@@ -95,7 +95,7 @@ export const Color: Story = {
       <Avatar {...args} color="indigo" />
       <Avatar {...args} color="cyan" />
       <Avatar {...args} color="orange" />
-      <Avatar {...args} color="crimson" />
+      <Avatar {...args} color="rose" />
     </div>
   ),
 };
@@ -112,8 +112,8 @@ export const HighContrast: Story = {
       <Avatar {...args} color="cyan" highContrast />
       <Avatar {...args} color="orange" />
       <Avatar {...args} color="orange" highContrast />
-      <Avatar {...args} color="crimson" />
-      <Avatar {...args} color="crimson" highContrast />
+      <Avatar {...args} color="rose" />
+      <Avatar {...args} color="rose" highContrast />
     </div>
   ),
 };

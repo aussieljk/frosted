@@ -63,7 +63,7 @@ export const Color: Story = {
       <Progress {...args} color="indigo" />
       <Progress {...args} color="cyan" />
       <Progress {...args} color="orange" />
-      <Progress {...args} color="crimson" />
+      <Progress {...args} color="rose" />
     </div>
   ),
 };

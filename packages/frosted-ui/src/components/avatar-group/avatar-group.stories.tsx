@@ -47,7 +47,7 @@ const availableUsers: Array<{
   },
   {
     name: 'Guillermo',
-    color: 'bronze',
+    color: 'stone',
     src: '',
   },
   {
@@ -57,7 +57,7 @@ const availableUsers: Array<{
   },
   {
     name: 'FJ',
-    color: 'tomato',
+    color: 'red',
     src: '',
   },
 ];
@@ -173,7 +173,7 @@ export const Color: Story = {
           <AvatarGroup.Avatar fallback={user.name} color={user.color} key={user.name} src={user.src} />
         ))}
       </AvatarGroup.Root>
-      <AvatarGroup.Root size="5" {...args} color="gold">
+      <AvatarGroup.Root size="5" {...args} color="yellow">
         {availableUsers.map((user) => (
           <AvatarGroup.Avatar fallback={user.name} color={user.color} key={user.name} src={user.src} />
         ))}

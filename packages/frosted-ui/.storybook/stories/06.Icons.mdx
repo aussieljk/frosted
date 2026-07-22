@@ -2,29 +2,51 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 <Meta title="Guides/6. Icons" />
 
-# Frosted UI Icons
+# Icons
 
-Frosted UI has a dedicated library of icons, some of them come in multiple sizes
+Frosted UI ships no icon set of its own — bring the icon library you already use.
+Components render a small set of built-in inline icons (checkmarks, chevrons, …)
+out of the box, and an icon adapter can swap those for your library so everything
+matches.
 
-### 1. Install Frosted UI Icons
+### 1. Install an icon library
 
-`bun add @frosted-ui/icons`
+Pick one of the supported libraries and install it:
 
-Import the icons into your React project:
+- `lucide-react`
+- `@phosphor-icons/react`
+- `@heroicons/react`
+- `@tabler/icons-react`
+- `@hugeicons/react` + `@hugeicons/core-free-icons`
+
+### 2. Register the adapter (optional)
+
+Import the matching adapter once (e.g. in your app entry) so the built-in
+component icons render from your library:
 
 ```tsx
-import { Shop16, Shop20 } from '@frosted-ui/icons';
-
-function MyComponent() {
-  return (
-    <div>
-      <Shop16 />
-      <Shop20 />
-    </div>
-  );
-}
+import '@aussieljk/frosted/icons/lucide';
 ```
 
-### Frosted UI Icons Figma File
+Or scope it to a subtree with `IconProvider`:
 
-To see all the icons available in Frosted UI, you can check out the [Figma file](https://www.figma.com/design/pWs6edprYZNR54ZPwk0oRV/)
+```tsx
+import { IconProvider } from '@aussieljk/frosted';
+import { lucideAdapter } from '@aussieljk/frosted/icons/lucide';
+
+<IconProvider library={lucideAdapter}>
+  <App />
+</IconProvider>;
+```
+
+### 3. Use icons directly
+
+For your own UI, import icons straight from the library:
+
+```tsx
+import { Store } from 'lucide-react';
+
+function MyComponent() {
+  return <Store size={16} />;
+}
+```

@@ -144,7 +144,7 @@ export const Color: Story = {
       </Tabs.Root>
 
       <Tabs.Root defaultValue="one">
-        <Tabs.List {...args} color="crimson">
+        <Tabs.List {...args} color="rose">
           <Tabs.Trigger value="one">One</Tabs.Trigger>
           <Tabs.Trigger value="two">Two</Tabs.Trigger>
         </Tabs.List>

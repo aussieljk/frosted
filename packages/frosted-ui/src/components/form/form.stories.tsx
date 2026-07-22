@@ -1,4 +1,4 @@
-import { Plus16 } from '@frosted-ui/icons';
+import { Plus } from 'lucide-react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useForm as useTanStackForm } from '@tanstack/react-form';
 import * as React from 'react';
@@ -780,7 +780,7 @@ export const DynamicFormFields: Story = {
           ))}
 
           <Button type="button" variant="surface" onClick={addMember} style={{ marginBottom: 16 }}>
-            <Plus16 /> Add Team Member
+            <Plus size={16} /> Add Team Member
           </Button>
 
           <Button type="submit" variant="solid" loading={loading} style={{ width: '100%' }}>

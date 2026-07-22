@@ -19,10 +19,6 @@
       "types": "./dist/icons/index.d.ts",
       "import": "./dist/icons/index.js"
     },
-    "./icons/frosted": {
-      "types": "./dist/icons/adapters/frosted.d.ts",
-      "import": "./dist/icons/adapters/frosted.js"
-    },
     "./icons/heroicons": {
       "types": "./dist/icons/adapters/heroicons.d.ts",
       "import": "./dist/icons/adapters/heroicons.js"
@@ -71,6 +67,7 @@
     "lint:css": "stylelint \"src/**/*.css\"",
     "generate:emoji-colors": "bun scripts/emoji-colors/generate.ts",
     "generate:icon-adapters": "bun scripts/generate-icon-adapters.ts",
+    "generate:palettes": "bun scripts/generate-palettes.ts",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist && rm -rf styles.css && rm -rf styles.lite.css && rm -rf theme.css",
     "prepublishOnly": "bun run lint && bun run build",
     "storybook": "concurrently -k -n css,sb \"bun run dev:css\" \"bun run storybook:serve\"",
@@ -95,7 +92,6 @@
     "tslib": "^2.8.1"
   },
   "peerDependencies": {
-    "@frosted-ui/icons": "*",
     "@heroicons/react": "^2.0.0",
     "@hugeicons/core-free-icons": ">=1.0.0",
     "@hugeicons/react": ">=1.0.0",
@@ -108,9 +104,6 @@
     "react-dom": "^17.0 || ^18.0 || ^19.0"
   },
   "peerDependenciesMeta": {
-    "@frosted-ui/icons": {
-      "optional": true
-    },
     "@heroicons/react": {
       "optional": true
     },
@@ -137,8 +130,6 @@
     }
   },
   "devDependencies": {
-    "@frosted-ui/colors": "workspace:*",
-    "@frosted-ui/icons": "workspace:*",
     "@heroicons/react": "^2.2.0",
     "@hugeicons/core-free-icons": "^4.2.3",
     "@hugeicons/react": "^1.1.9",

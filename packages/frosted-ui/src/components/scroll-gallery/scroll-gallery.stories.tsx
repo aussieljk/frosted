@@ -1,18 +1,18 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-import { ChevronDown16, ChevronLeft16, ChevronRight16, ChevronUp16 } from '@frosted-ui/icons';
+import { ChevronDown, ChevronLeft, ChevronRight, ChevronUp } from 'lucide-react';
 import React, { useRef, useState } from 'react';
 import { Avatar, Badge, Button, Card, Code, Heading, IconButton, ScrollGallery, Strong, Text } from '..';
 
 const people = [
-  { name: 'Olivia Chen', role: 'Design Lead', color: 'crimson' as const, initials: 'OC' },
+  { name: 'Olivia Chen', role: 'Design Lead', color: 'rose' as const, initials: 'OC' },
   { name: 'Marcus Johnson', role: 'Engineering', color: 'indigo' as const, initials: 'MJ' },
   { name: 'Sofia Andersson', role: 'Product', color: 'cyan' as const, initials: 'SA' },
   { name: 'James Wright', role: 'Marketing', color: 'orange' as const, initials: 'JW' },
-  { name: 'Priya Patel', role: 'Design', color: 'plum' as const, initials: 'PP' },
+  { name: 'Priya Patel', role: 'Design', color: 'fuchsia' as const, initials: 'PP' },
   { name: 'Alex Kim', role: 'Engineering', color: 'teal' as const, initials: 'AK' },
   { name: 'Emma Davis', role: 'Research', color: 'violet' as const, initials: 'ED' },
-  { name: 'Noah Garcia', role: 'Engineering', color: 'jade' as const, initials: 'NG' },
+  { name: 'Noah Garcia', role: 'Engineering', color: 'emerald' as const, initials: 'NG' },
 ];
 
 const meta = {
@@ -116,10 +116,10 @@ export const Default: Story = {
         >
           <div style={{ display: 'flex', gap: 'var(--space-2)' }}>
             <ScrollGallery.Previous aria-label="Previous" render={<IconButton variant="soft" size="2" color="gray" />}>
-              <ChevronLeft16 />
+              <ChevronLeft size={16} />
             </ScrollGallery.Previous>
             <ScrollGallery.Next aria-label="Next" render={<IconButton variant="soft" size="2" color="gray" />}>
-              <ChevronRight16 />
+              <ChevronRight size={16} />
             </ScrollGallery.Next>
           </div>
 
@@ -135,7 +135,7 @@ export const Default: Story = {
   ),
 };
 
-const colors = ['crimson', 'indigo', 'cyan', 'orange', 'plum', 'teal', 'violet', 'jade'] as const;
+const colors = ['rose', 'indigo', 'cyan', 'orange', 'fuchsia', 'teal', 'violet', 'emerald'] as const;
 
 function makeItem(id: number) {
   const color = colors[id % colors.length];
@@ -231,10 +231,10 @@ function DynamicItemsDemo() {
         >
           <div style={{ display: 'flex', gap: 'var(--space-2)' }}>
             <ScrollGallery.Previous aria-label="Previous" render={<IconButton variant="soft" size="2" color="gray" />}>
-              <ChevronLeft16 />
+              <ChevronLeft size={16} />
             </ScrollGallery.Previous>
             <ScrollGallery.Next aria-label="Next" render={<IconButton variant="soft" size="2" color="gray" />}>
-              <ChevronRight16 />
+              <ChevronRight size={16} />
             </ScrollGallery.Next>
           </div>
 
@@ -282,10 +282,10 @@ export const WithoutScrollSnap: Story = {
         >
           <div style={{ display: 'flex', gap: 'var(--space-2)' }}>
             <ScrollGallery.Previous aria-label="Previous" render={<IconButton variant="soft" size="2" color="gray" />}>
-              <ChevronLeft16 />
+              <ChevronLeft size={16} />
             </ScrollGallery.Previous>
             <ScrollGallery.Next aria-label="Next" render={<IconButton variant="soft" size="2" color="gray" />}>
-              <ChevronRight16 />
+              <ChevronRight size={16} />
             </ScrollGallery.Next>
           </div>
 
@@ -361,10 +361,10 @@ function ImperativeScrollToDemo() {
         >
           <div style={{ display: 'flex', gap: 'var(--space-2)' }}>
             <ScrollGallery.Previous aria-label="Previous" render={<IconButton variant="soft" size="2" color="gray" />}>
-              <ChevronLeft16 />
+              <ChevronLeft size={16} />
             </ScrollGallery.Previous>
             <ScrollGallery.Next aria-label="Next" render={<IconButton variant="soft" size="2" color="gray" />}>
-              <ChevronRight16 />
+              <ChevronRight size={16} />
             </ScrollGallery.Next>
           </div>
 
@@ -452,7 +452,7 @@ export const Vertical: Story = {
 
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'var(--space-2)' }}>
             <ScrollGallery.Previous aria-label="Previous" render={<IconButton variant="soft" size="1" color="gray" />}>
-              <ChevronUp16 />
+              <ChevronUp size={16} />
             </ScrollGallery.Previous>
 
             <ScrollGallery.ScrollMarkerGroup
@@ -463,7 +463,7 @@ export const Vertical: Story = {
             </ScrollGallery.ScrollMarkerGroup>
 
             <ScrollGallery.Next aria-label="Next" render={<IconButton variant="soft" size="1" color="gray" />}>
-              <ChevronDown16 />
+              <ChevronDown size={16} />
             </ScrollGallery.Next>
           </div>
         </div>
@@ -529,10 +529,10 @@ function DefaultValueDemo() {
         >
           <div style={{ display: 'flex', gap: 'var(--space-2)' }}>
             <ScrollGallery.Previous aria-label="Previous" render={<IconButton variant="soft" size="2" color="gray" />}>
-              <ChevronLeft16 />
+              <ChevronLeft size={16} />
             </ScrollGallery.Previous>
             <ScrollGallery.Next aria-label="Next" render={<IconButton variant="soft" size="2" color="gray" />}>
-              <ChevronRight16 />
+              <ChevronRight size={16} />
             </ScrollGallery.Next>
           </div>
 
@@ -629,14 +629,14 @@ export const StepByItem: Story = {
               aria-label="Previous item"
               render={<IconButton variant="soft" size="2" color="gray" />}
             >
-              <ChevronLeft16 />
+              <ChevronLeft size={16} />
             </ScrollGallery.Previous>
             <ScrollGallery.Next
               step={1}
               aria-label="Next item"
               render={<IconButton variant="soft" size="2" color="gray" />}
             >
-              <ChevronRight16 />
+              <ChevronRight size={16} />
             </ScrollGallery.Next>
           </div>
 
@@ -698,14 +698,14 @@ export const StepByItemNoSnap: Story = {
               aria-label="Previous item"
               render={<IconButton variant="soft" size="2" color="gray" />}
             >
-              <ChevronLeft16 />
+              <ChevronLeft size={16} />
             </ScrollGallery.Previous>
             <ScrollGallery.Next
               step={1}
               aria-label="Next item"
               render={<IconButton variant="soft" size="2" color="gray" />}
             >
-              <ChevronRight16 />
+              <ChevronRight size={16} />
             </ScrollGallery.Next>
           </div>
 
@@ -813,7 +813,7 @@ function ProductGalleryDemo() {
                   alignItems: 'center',
                 }}
               >
-                <ChevronLeft16 />
+                <ChevronLeft size={16} />
               </ScrollGallery.Previous>
 
               <ScrollGallery.Next
@@ -837,7 +837,7 @@ function ProductGalleryDemo() {
                   alignItems: 'center',
                 }}
               >
-                <ChevronRight16 />
+                <ChevronRight size={16} />
               </ScrollGallery.Next>
             </div>
 
@@ -969,10 +969,10 @@ export const Loop: Story = {
         >
           <div style={{ display: 'flex', gap: 'var(--space-2)' }}>
             <ScrollGallery.Previous aria-label="Previous" render={<IconButton variant="soft" size="2" color="gray" />}>
-              <ChevronLeft16 />
+              <ChevronLeft size={16} />
             </ScrollGallery.Previous>
             <ScrollGallery.Next aria-label="Next" render={<IconButton variant="soft" size="2" color="gray" />}>
-              <ChevronRight16 />
+              <ChevronRight size={16} />
             </ScrollGallery.Next>
           </div>
 
@@ -1034,14 +1034,14 @@ export const LoopStepByItem: Story = {
               aria-label="Previous item"
               render={<IconButton variant="soft" size="2" color="gray" />}
             >
-              <ChevronLeft16 />
+              <ChevronLeft size={16} />
             </ScrollGallery.Previous>
             <ScrollGallery.Next
               step={1}
               aria-label="Next item"
               render={<IconButton variant="soft" size="2" color="gray" />}
             >
-              <ChevronRight16 />
+              <ChevronRight size={16} />
             </ScrollGallery.Next>
           </div>
 
@@ -1102,10 +1102,10 @@ export const ResizableViewport: Story = {
         >
           <div style={{ display: 'flex', gap: 'var(--space-2)' }}>
             <ScrollGallery.Previous aria-label="Previous" render={<IconButton variant="soft" size="2" color="gray" />}>
-              <ChevronLeft16 />
+              <ChevronLeft size={16} />
             </ScrollGallery.Previous>
             <ScrollGallery.Next aria-label="Next" render={<IconButton variant="soft" size="2" color="gray" />}>
-              <ChevronRight16 />
+              <ChevronRight size={16} />
             </ScrollGallery.Next>
           </div>
 
@@ -1157,10 +1157,10 @@ export const SnapToCenter: Story = {
               aria-label="Previous"
               render={<IconButton variant="soft" size="2" color="gray" />}
             >
-              <ChevronLeft16 />
+              <ChevronLeft size={16} />
             </ScrollGallery.Previous>
             <ScrollGallery.Next step={1} aria-label="Next" render={<IconButton variant="soft" size="2" color="gray" />}>
-              <ChevronRight16 />
+              <ChevronRight size={16} />
             </ScrollGallery.Next>
           </div>
 
@@ -1245,10 +1245,10 @@ function ControlledValueDemo() {
         >
           <div style={{ display: 'flex', gap: 'var(--space-2)' }}>
             <ScrollGallery.Previous aria-label="Previous" render={<IconButton variant="soft" size="2" color="gray" />}>
-              <ChevronLeft16 />
+              <ChevronLeft size={16} />
             </ScrollGallery.Previous>
             <ScrollGallery.Next aria-label="Next" render={<IconButton variant="soft" size="2" color="gray" />}>
-              <ChevronRight16 />
+              <ChevronRight size={16} />
             </ScrollGallery.Next>
           </div>
 
@@ -1284,7 +1284,7 @@ const testimonials = [
     author: 'Sarah Chen',
     title: 'VP of Engineering, Acme Corp',
     initials: 'SC',
-    color: 'crimson' as const,
+    color: 'rose' as const,
     rating: 5,
   },
   {
@@ -1320,7 +1320,7 @@ const testimonials = [
     author: 'Amara Osei',
     title: 'CTO, Paystack',
     initials: 'AO',
-    color: 'plum' as const,
+    color: 'fuchsia' as const,
     rating: 5,
   },
 ];
@@ -1387,13 +1387,13 @@ export const ScrollBehavior: Story = {
             }}
           >
             <ScrollGallery.Previous step={1} render={<IconButton variant="surface" size="1" color="gray" />}>
-              <ChevronLeft16 />
+              <ChevronLeft size={16} />
             </ScrollGallery.Previous>
             <ScrollGallery.ScrollMarkerGroup style={{ display: 'flex', gap: 'var(--space-1)' }}>
               <MarkerDots count={people.length} />
             </ScrollGallery.ScrollMarkerGroup>
             <ScrollGallery.Next step={1} render={<IconButton variant="surface" size="1" color="gray" />}>
-              <ChevronRight16 />
+              <ChevronRight size={16} />
             </ScrollGallery.Next>
           </div>
         </ScrollGallery.Root>
@@ -1474,7 +1474,7 @@ export const Testimonials: Story = {
             aria-label="Previous testimonial"
             render={<IconButton variant="surface" size="2" color="gray" />}
           >
-            <ChevronLeft16 />
+            <ChevronLeft size={16} />
           </ScrollGallery.Previous>
 
           <ScrollGallery.ScrollMarkerGroup
@@ -1489,7 +1489,7 @@ export const Testimonials: Story = {
             aria-label="Next testimonial"
             render={<IconButton variant="surface" size="2" color="gray" />}
           >
-            <ChevronRight16 />
+            <ChevronRight size={16} />
           </ScrollGallery.Next>
         </div>
       </ScrollGallery.Root>

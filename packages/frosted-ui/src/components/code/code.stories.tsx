@@ -95,7 +95,7 @@ export const Color: Story = {
       <Code {...args} color="indigo">
         console.log()
       </Code>
-      <Code {...args} color="crimson">
+      <Code {...args} color="rose">
         console.log()
       </Code>
       <Code {...args} color="cyan">

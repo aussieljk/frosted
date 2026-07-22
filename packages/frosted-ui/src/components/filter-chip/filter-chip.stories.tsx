@@ -95,7 +95,7 @@ export const Color: Story = {
         <ExampleIcon size={20} />
         Orange
       </FilterChip>
-      <FilterChip {...args} color="crimson" defaultChecked>
+      <FilterChip {...args} color="rose" defaultChecked>
         <ExampleIcon size={20} />
         Crimson
       </FilterChip>

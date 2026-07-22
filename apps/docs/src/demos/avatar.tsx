@@ -11,7 +11,7 @@ export default function AvatarDemo() {
       <Avatar size="4" fallback="LK" color="indigo" />
       <Avatar size="4" shape="square" fallback="SQ" color="teal" />
       <Avatar size="2" fallback="S" color="orange" />
-      <Avatar size="6" fallback="L" color="crimson" highContrast />
+      <Avatar size="6" fallback="L" color="rose" highContrast />
     </div>
   );
 }

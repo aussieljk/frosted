@@ -1,4 +1,4 @@
-import { Copy12 } from '@frosted-ui/icons';
+import { Copy as CopyIcon } from 'lucide-react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 import {
@@ -45,7 +45,7 @@ export const Default: Story = {
         <DataList.Item align="center">
           <DataList.Label>Status</DataList.Label>
           <DataList.Value>
-            <Badge color="jade" variant="soft" size="1">
+            <Badge color="emerald" variant="soft" size="1">
               Active
             </Badge>
           </DataList.Value>
@@ -57,7 +57,7 @@ export const Default: Story = {
               <Code variant="ghost">biz_AB23XH123A</Code>
               <Tooltip content="Copy">
                 <IconButton size="1" aria-label="Copy value" color="gray" variant="ghost">
-                  <Copy12 />
+                  <CopyIcon size={12} />
                 </IconButton>
               </Tooltip>
             </div>
@@ -215,7 +215,7 @@ export const Color: Story = {
       </Text>
       <DataList.Root orientation="vertical" {...args}>
         <DataList.Item>
-          <DataList.Label color="iris" style={{ minWidth: 40 }}>
+          <DataList.Label color="indigo" style={{ minWidth: 40 }}>
             Color:
           </DataList.Label>
           <DataList.Value>Iris</DataList.Value>
@@ -233,7 +233,7 @@ export const Color: Story = {
           <DataList.Value>Lime</DataList.Value>
         </DataList.Item>
         <DataList.Item>
-          <DataList.Label color="crimson" style={{ minWidth: 40 }}>
+          <DataList.Label color="rose" style={{ minWidth: 40 }}>
             Color:
           </DataList.Label>
           <DataList.Value>Crimson</DataList.Value>
@@ -253,7 +253,7 @@ export const HighContrast: Story = {
       <div style={{ display: 'flex', gap: 'var(--space-9)' }}>
         <DataList.Root orientation="vertical" {...args}>
           <DataList.Item>
-            <DataList.Label color="iris">Name</DataList.Label>
+            <DataList.Label color="indigo">Name</DataList.Label>
             <DataList.Value>Iris</DataList.Value>
           </DataList.Item>
           <DataList.Item>
@@ -265,14 +265,14 @@ export const HighContrast: Story = {
             <DataList.Value>Lime</DataList.Value>
           </DataList.Item>
           <DataList.Item>
-            <DataList.Label color="crimson">Name</DataList.Label>
+            <DataList.Label color="rose">Name</DataList.Label>
             <DataList.Value>Crimson</DataList.Value>
           </DataList.Item>
         </DataList.Root>
 
         <DataList.Root orientation="vertical" {...args}>
           <DataList.Item>
-            <DataList.Label color="iris" highContrast>
+            <DataList.Label color="indigo" highContrast>
               Name
             </DataList.Label>
             <DataList.Value>Iris</DataList.Value>
@@ -290,7 +290,7 @@ export const HighContrast: Story = {
             <DataList.Value>Lime</DataList.Value>
           </DataList.Item>
           <DataList.Item>
-            <DataList.Label color="crimson" highContrast>
+            <DataList.Label color="rose" highContrast>
               Name
             </DataList.Label>
             <DataList.Value>Crimson</DataList.Value>

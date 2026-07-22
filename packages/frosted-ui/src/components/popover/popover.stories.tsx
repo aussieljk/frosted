@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-import { Bell16 } from '@frosted-ui/icons';
+import { Bell } from 'lucide-react';
 import React from 'react';
 import {
   Avatar,
@@ -449,17 +449,17 @@ export const ControlledWithMultipleTriggers: Story = {
         <div style={{ display: 'flex', gap: 'var(--space-2)' }}>
           <Popover.Trigger handle={handle} id="trigger-1">
             <IconButton variant="surface" color="gray">
-              <Bell16 />
+              <Bell size={16} />
             </IconButton>
           </Popover.Trigger>
           <Popover.Trigger handle={handle} id="trigger-2">
             <IconButton variant="surface" color="gray">
-              <Bell16 />
+              <Bell size={16} />
             </IconButton>
           </Popover.Trigger>
           <Popover.Trigger handle={handle} id="trigger-3">
             <IconButton variant="surface" color="gray">
-              <Bell16 />
+              <Bell size={16} />
             </IconButton>
           </Popover.Trigger>
           <Button
@@ -535,7 +535,7 @@ export const AnchorProp: Story = {
               display: 'flex',
             }}
           >
-            <Avatar size="5" color="magenta" fallback="JD" />
+            <Avatar size="5" color="fuchsia" fallback="JD" />
           </div>
         </div>
 

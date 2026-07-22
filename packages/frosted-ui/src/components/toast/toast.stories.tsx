@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-import { Telephone20 } from '@frosted-ui/icons';
+import { Phone } from 'lucide-react';
 import React from 'react';
 import { Avatar, Button, CircularProgress, Code, Heading, IconButton, Text, toast } from '..';
 import { Theme } from '../../theme';
@@ -518,7 +518,7 @@ export const CustomContent: Story = {
                           color="danger"
                           onClick={close}
                         >
-                          <Telephone20 style={{ transform: 'rotate(90deg)', transformOrigin: 'center' }} />
+                          <Phone size={20} style={{ transform: 'rotate(90deg)', transformOrigin: 'center' }} />
                         </IconButton>
                         <IconButton
                           aria-label="Accept call"
@@ -531,7 +531,7 @@ export const CustomContent: Story = {
                             toast.success('Call accepted');
                           }}
                         >
-                          <Telephone20 />
+                          <Phone size={20} />
                         </IconButton>
                       </div>
                     </div>

@@ -12,7 +12,7 @@
  * union in `src/icons/types.ts`.
  */
 
-export const ICON_LIBRARIES = ['lucide', 'phosphor', 'heroicons', 'tabler', 'hugeicons', 'frosted'] as const;
+export const ICON_LIBRARIES = ['lucide', 'phosphor', 'heroicons', 'tabler', 'hugeicons'] as const;
 
 export type IconLibrary = (typeof ICON_LIBRARIES)[number];
 
@@ -23,7 +23,6 @@ export const LIBRARY_MODULES: Record<IconLibrary, string> = {
   heroicons: '@heroicons/react/24/outline',
   tabler: '@tabler/icons-react',
   hugeicons: '@hugeicons/core-free-icons',
-  frosted: '@frosted-ui/icons',
 };
 
 /** The export name of the icon in each library, or `null` when unavailable. */
@@ -36,7 +35,6 @@ export const ICON_MAP = {
     heroicons: 'ExclamationCircleIcon',
     tabler: 'IconAlertCircle',
     hugeicons: 'AlertCircleIcon',
-    frosted: 'ExclamationCircle16',
   },
   Archive: {
     lucide: 'Archive',
@@ -44,7 +42,6 @@ export const ICON_MAP = {
     heroicons: 'ArchiveBoxIcon',
     tabler: 'IconArchive',
     hugeicons: 'ArchiveIcon',
-    frosted: null,
   },
   ArrowDown: {
     lucide: 'ArrowDown',
@@ -52,7 +49,6 @@ export const ICON_MAP = {
     heroicons: 'ArrowDownIcon',
     tabler: 'IconArrowDown',
     hugeicons: 'ArrowDown02Icon',
-    frosted: 'ArrowDown16',
   },
   ArrowLeft: {
     lucide: 'ArrowLeft',
@@ -60,7 +56,6 @@ export const ICON_MAP = {
     heroicons: 'ArrowLeftIcon',
     tabler: 'IconArrowLeft',
     hugeicons: 'ArrowLeft02Icon',
-    frosted: 'ArrowLeft16',
   },
   ArrowRight: {
     lucide: 'ArrowRight',
@@ -68,7 +63,6 @@ export const ICON_MAP = {
     heroicons: 'ArrowRightIcon',
     tabler: 'IconArrowRight',
     hugeicons: 'ArrowRight02Icon',
-    frosted: 'ArrowRight16',
   },
   ArrowUp: {
     lucide: 'ArrowUp',
@@ -76,7 +70,6 @@ export const ICON_MAP = {
     heroicons: 'ArrowUpIcon',
     tabler: 'IconArrowUp',
     hugeicons: 'ArrowUp02Icon',
-    frosted: 'ArrowUp16',
   },
   AtSign: {
     lucide: 'AtSign',
@@ -84,7 +77,6 @@ export const ICON_MAP = {
     heroicons: 'AtSymbolIcon',
     tabler: 'IconAt',
     hugeicons: 'AtIcon',
-    frosted: null,
   },
   Battery: {
     lucide: 'BatteryFull',
@@ -92,7 +84,6 @@ export const ICON_MAP = {
     heroicons: 'Battery100Icon',
     tabler: 'IconBattery4',
     hugeicons: 'BatteryFullIcon',
-    frosted: null,
   },
   Bell: {
     lucide: 'Bell',
@@ -100,7 +91,6 @@ export const ICON_MAP = {
     heroicons: 'BellIcon',
     tabler: 'IconBell',
     hugeicons: 'Notification03Icon',
-    frosted: 'Bell16',
   },
   Bookmark: {
     lucide: 'Bookmark',
@@ -108,7 +98,6 @@ export const ICON_MAP = {
     heroicons: 'BookmarkIcon',
     tabler: 'IconBookmark',
     hugeicons: 'Bookmark01Icon',
-    frosted: null,
   },
   Brush: {
     lucide: 'Paintbrush',
@@ -116,7 +105,6 @@ export const ICON_MAP = {
     heroicons: 'PaintBrushIcon',
     tabler: 'IconBrush',
     hugeicons: 'PaintBrush01Icon',
-    frosted: 'Brush16',
   },
   Bug: {
     lucide: 'Bug',
@@ -124,7 +112,6 @@ export const ICON_MAP = {
     heroicons: 'BugAntIcon',
     tabler: 'IconBug',
     hugeicons: 'Bug01Icon',
-    frosted: null,
   },
   Calendar: {
     lucide: 'Calendar',
@@ -132,7 +119,6 @@ export const ICON_MAP = {
     heroicons: 'CalendarIcon',
     tabler: 'IconCalendar',
     hugeicons: 'Calendar03Icon',
-    frosted: 'Calendar16',
   },
   Camera: {
     lucide: 'Camera',
@@ -140,7 +126,6 @@ export const ICON_MAP = {
     heroicons: 'CameraIcon',
     tabler: 'IconCamera',
     hugeicons: 'Camera01Icon',
-    frosted: 'Camera16',
   },
   Check: {
     lucide: 'Check',
@@ -148,7 +133,6 @@ export const ICON_MAP = {
     heroicons: 'CheckIcon',
     tabler: 'IconCheck',
     hugeicons: 'Tick02Icon',
-    frosted: 'Checkmark16',
   },
   ChevronDown: {
     lucide: 'ChevronDown',
@@ -156,7 +140,6 @@ export const ICON_MAP = {
     heroicons: 'ChevronDownIcon',
     tabler: 'IconChevronDown',
     hugeicons: 'ArrowDown01Icon',
-    frosted: 'ChevronDown16',
   },
   ChevronLeft: {
     lucide: 'ChevronLeft',
@@ -164,7 +147,6 @@ export const ICON_MAP = {
     heroicons: 'ChevronLeftIcon',
     tabler: 'IconChevronLeft',
     hugeicons: 'ArrowLeft01Icon',
-    frosted: 'ChevronLeft16',
   },
   ChevronRight: {
     lucide: 'ChevronRight',
@@ -172,7 +154,6 @@ export const ICON_MAP = {
     heroicons: 'ChevronRightIcon',
     tabler: 'IconChevronRight',
     hugeicons: 'ArrowRight01Icon',
-    frosted: 'ChevronRight16',
   },
   ChevronUp: {
     lucide: 'ChevronUp',
@@ -180,7 +161,6 @@ export const ICON_MAP = {
     heroicons: 'ChevronUpIcon',
     tabler: 'IconChevronUp',
     hugeicons: 'ArrowUp01Icon',
-    frosted: 'ChevronUp16',
   },
   Clock: {
     lucide: 'Clock',
@@ -188,7 +168,6 @@ export const ICON_MAP = {
     heroicons: 'ClockIcon',
     tabler: 'IconClock',
     hugeicons: 'Clock01Icon',
-    frosted: 'Clock16',
   },
   Close: {
     lucide: 'X',
@@ -196,7 +175,6 @@ export const ICON_MAP = {
     heroicons: 'XMarkIcon',
     tabler: 'IconX',
     hugeicons: 'Cancel01Icon',
-    frosted: 'XMark16',
   },
   Cloud: {
     lucide: 'Cloud',
@@ -204,7 +182,6 @@ export const ICON_MAP = {
     heroicons: 'CloudIcon',
     tabler: 'IconCloud',
     hugeicons: 'CloudIcon',
-    frosted: null,
   },
   Code: {
     lucide: 'Code',
@@ -212,7 +189,6 @@ export const ICON_MAP = {
     heroicons: 'CodeBracketIcon',
     tabler: 'IconCode',
     hugeicons: 'CodeIcon',
-    frosted: 'Code16',
   },
   Copy: {
     lucide: 'Copy',
@@ -220,7 +196,6 @@ export const ICON_MAP = {
     heroicons: 'DocumentDuplicateIcon',
     tabler: 'IconCopy',
     hugeicons: 'Copy01Icon',
-    frosted: 'Copy16',
   },
   CreditCard: {
     lucide: 'CreditCard',
@@ -228,7 +203,6 @@ export const ICON_MAP = {
     heroicons: 'CreditCardIcon',
     tabler: 'IconCreditCard',
     hugeicons: 'CreditCardIcon',
-    frosted: 'CreditCard16',
   },
   Database: {
     lucide: 'Database',
@@ -236,7 +210,6 @@ export const ICON_MAP = {
     heroicons: 'CircleStackIcon',
     tabler: 'IconDatabase',
     hugeicons: 'DatabaseIcon',
-    frosted: null,
   },
   DotsHorizontal: {
     lucide: 'Ellipsis',
@@ -244,7 +217,6 @@ export const ICON_MAP = {
     heroicons: 'EllipsisHorizontalIcon',
     tabler: 'IconDots',
     hugeicons: 'MoreHorizontalIcon',
-    frosted: 'ThreeDotsHorizontal16',
   },
   DotsVertical: {
     lucide: 'EllipsisVertical',
@@ -252,7 +224,6 @@ export const ICON_MAP = {
     heroicons: 'EllipsisVerticalIcon',
     tabler: 'IconDotsVertical',
     hugeicons: 'MoreVerticalIcon',
-    frosted: 'ThreeDotsVertical16',
   },
   Download: {
     lucide: 'Download',
@@ -260,7 +231,6 @@ export const ICON_MAP = {
     heroicons: 'ArrowDownTrayIcon',
     tabler: 'IconDownload',
     hugeicons: 'Download01Icon',
-    frosted: 'Download16',
   },
   Edit: {
     lucide: 'Pencil',
@@ -268,7 +238,6 @@ export const ICON_MAP = {
     heroicons: 'PencilIcon',
     tabler: 'IconPencil',
     hugeicons: 'PencilEdit02Icon',
-    frosted: 'Pencil16',
   },
   ExternalLink: {
     lucide: 'ExternalLink',
@@ -276,7 +245,6 @@ export const ICON_MAP = {
     heroicons: 'ArrowTopRightOnSquareIcon',
     tabler: 'IconExternalLink',
     hugeicons: 'LinkSquare02Icon',
-    frosted: 'ArrowUpRightFromSquare16',
   },
   Eye: {
     lucide: 'Eye',
@@ -284,7 +252,6 @@ export const ICON_MAP = {
     heroicons: 'EyeIcon',
     tabler: 'IconEye',
     hugeicons: 'ViewIcon',
-    frosted: 'Eye16',
   },
   EyeOff: {
     lucide: 'EyeOff',
@@ -292,7 +259,6 @@ export const ICON_MAP = {
     heroicons: 'EyeSlashIcon',
     tabler: 'IconEyeOff',
     hugeicons: 'ViewOffSlashIcon',
-    frosted: 'EyeSlashed16',
   },
   File: {
     lucide: 'File',
@@ -300,7 +266,6 @@ export const ICON_MAP = {
     heroicons: 'DocumentIcon',
     tabler: 'IconFile',
     hugeicons: 'File01Icon',
-    frosted: 'Document16',
   },
   Filter: {
     lucide: 'Funnel',
@@ -308,7 +273,6 @@ export const ICON_MAP = {
     heroicons: 'FunnelIcon',
     tabler: 'IconFilter',
     hugeicons: 'FilterIcon',
-    frosted: 'FilterDown16',
   },
   Flag: {
     lucide: 'Flag',
@@ -316,7 +280,6 @@ export const ICON_MAP = {
     heroicons: 'FlagIcon',
     tabler: 'IconFlag',
     hugeicons: 'Flag01Icon',
-    frosted: 'Flag16',
   },
   Flame: {
     lucide: 'Flame',
@@ -324,7 +287,6 @@ export const ICON_MAP = {
     heroicons: 'FireIcon',
     tabler: 'IconFlame',
     hugeicons: 'FireIcon',
-    frosted: 'Fire16',
   },
   Folder: {
     lucide: 'Folder',
@@ -332,7 +294,6 @@ export const ICON_MAP = {
     heroicons: 'FolderIcon',
     tabler: 'IconFolder',
     hugeicons: 'Folder01Icon',
-    frosted: null,
   },
   Gift: {
     lucide: 'Gift',
@@ -340,7 +301,6 @@ export const ICON_MAP = {
     heroicons: 'GiftIcon',
     tabler: 'IconGift',
     hugeicons: 'GiftIcon',
-    frosted: 'Gift16',
   },
   Globe: {
     lucide: 'Globe',
@@ -348,7 +308,6 @@ export const ICON_MAP = {
     heroicons: 'GlobeAltIcon',
     tabler: 'IconWorld',
     hugeicons: 'GlobalIcon',
-    frosted: 'Globe16',
   },
   Hash: {
     lucide: 'Hash',
@@ -356,7 +315,6 @@ export const ICON_MAP = {
     heroicons: 'HashtagIcon',
     tabler: 'IconHash',
     hugeicons: 'HashIcon',
-    frosted: 'Hashtag16',
   },
   Heart: {
     lucide: 'Heart',
@@ -364,7 +322,6 @@ export const ICON_MAP = {
     heroicons: 'HeartIcon',
     tabler: 'IconHeart',
     hugeicons: 'FavouriteIcon',
-    frosted: 'Heart16',
   },
   HelpCircle: {
     lucide: 'CircleQuestionMark',
@@ -372,7 +329,6 @@ export const ICON_MAP = {
     heroicons: 'QuestionMarkCircleIcon',
     tabler: 'IconHelpCircle',
     hugeicons: 'HelpCircleIcon',
-    frosted: 'QuestionCircle16',
   },
   Home: {
     lucide: 'House',
@@ -380,7 +336,6 @@ export const ICON_MAP = {
     heroicons: 'HomeIcon',
     tabler: 'IconHome',
     hugeicons: 'Home01Icon',
-    frosted: 'Home16',
   },
   Image: {
     lucide: 'Image',
@@ -388,7 +343,6 @@ export const ICON_MAP = {
     heroicons: 'PhotoIcon',
     tabler: 'IconPhoto',
     hugeicons: 'Image01Icon',
-    frosted: 'Photo16',
   },
   Inbox: {
     lucide: 'Inbox',
@@ -396,7 +350,6 @@ export const ICON_MAP = {
     heroicons: 'InboxIcon',
     tabler: 'IconInbox',
     hugeicons: 'InboxIcon',
-    frosted: 'Inbox16',
   },
   Info: {
     lucide: 'Info',
@@ -404,7 +357,6 @@ export const ICON_MAP = {
     heroicons: 'InformationCircleIcon',
     tabler: 'IconInfoCircle',
     hugeicons: 'InformationCircleIcon',
-    frosted: 'InfoCircle16',
   },
   Key: {
     lucide: 'Key',
@@ -412,7 +364,6 @@ export const ICON_MAP = {
     heroicons: 'KeyIcon',
     tabler: 'IconKey',
     hugeicons: 'Key01Icon',
-    frosted: null,
   },
   LayoutGrid: {
     lucide: 'LayoutGrid',
@@ -420,7 +371,6 @@ export const ICON_MAP = {
     heroicons: 'Squares2X2Icon',
     tabler: 'IconLayoutGrid',
     hugeicons: 'GridViewIcon',
-    frosted: 'Grid16',
   },
   Link: {
     lucide: 'Link',
@@ -428,7 +378,6 @@ export const ICON_MAP = {
     heroicons: 'LinkIcon',
     tabler: 'IconLink',
     hugeicons: 'Link01Icon',
-    frosted: 'Link16',
   },
   List: {
     lucide: 'List',
@@ -436,7 +385,6 @@ export const ICON_MAP = {
     heroicons: 'ListBulletIcon',
     tabler: 'IconList',
     hugeicons: 'LeftToRightListBulletIcon',
-    frosted: 'ListBullet16',
   },
   Lock: {
     lucide: 'Lock',
@@ -444,7 +392,6 @@ export const ICON_MAP = {
     heroicons: 'LockClosedIcon',
     tabler: 'IconLock',
     hugeicons: 'SquareLock02Icon',
-    frosted: 'Lock16',
   },
   LogIn: {
     lucide: 'LogIn',
@@ -452,7 +399,6 @@ export const ICON_MAP = {
     heroicons: 'ArrowLeftEndOnRectangleIcon',
     tabler: 'IconLogin',
     hugeicons: 'Login01Icon',
-    frosted: null,
   },
   LogOut: {
     lucide: 'LogOut',
@@ -460,7 +406,6 @@ export const ICON_MAP = {
     heroicons: 'ArrowRightStartOnRectangleIcon',
     tabler: 'IconLogout',
     hugeicons: 'Logout01Icon',
-    frosted: 'Logout16',
   },
   Mail: {
     lucide: 'Mail',
@@ -468,7 +413,6 @@ export const ICON_MAP = {
     heroicons: 'EnvelopeIcon',
     tabler: 'IconMail',
     hugeicons: 'Mail01Icon',
-    frosted: 'Mail16',
   },
   MapPin: {
     lucide: 'MapPin',
@@ -476,7 +420,6 @@ export const ICON_MAP = {
     heroicons: 'MapPinIcon',
     tabler: 'IconMapPin',
     hugeicons: 'MapPinIcon',
-    frosted: 'LocationPin16',
   },
   Menu: {
     lucide: 'Menu',
@@ -484,7 +427,6 @@ export const ICON_MAP = {
     heroicons: 'Bars3Icon',
     tabler: 'IconMenu2',
     hugeicons: 'Menu01Icon',
-    frosted: 'Menu16',
   },
   Message: {
     lucide: 'MessageCircle',
@@ -492,7 +434,6 @@ export const ICON_MAP = {
     heroicons: 'ChatBubbleOvalLeftIcon',
     tabler: 'IconMessageCircle',
     hugeicons: 'BubbleChatIcon',
-    frosted: 'Message16',
   },
   Mic: {
     lucide: 'Mic',
@@ -500,7 +441,6 @@ export const ICON_MAP = {
     heroicons: 'MicrophoneIcon',
     tabler: 'IconMicrophone',
     hugeicons: 'Mic01Icon',
-    frosted: 'Microphone16',
   },
   Minus: {
     lucide: 'Minus',
@@ -508,7 +448,6 @@ export const ICON_MAP = {
     heroicons: 'MinusIcon',
     tabler: 'IconMinus',
     hugeicons: 'MinusSignIcon',
-    frosted: 'Subtract16',
   },
   Moon: {
     lucide: 'Moon',
@@ -516,7 +455,6 @@ export const ICON_MAP = {
     heroicons: 'MoonIcon',
     tabler: 'IconMoon',
     hugeicons: 'Moon02Icon',
-    frosted: 'Moon16',
   },
   Package: {
     lucide: 'Package',
@@ -524,7 +462,6 @@ export const ICON_MAP = {
     heroicons: 'CubeIcon',
     tabler: 'IconPackage',
     hugeicons: 'PackageIcon',
-    frosted: null,
   },
   Palette: {
     lucide: 'Palette',
@@ -532,7 +469,6 @@ export const ICON_MAP = {
     heroicons: 'SwatchIcon',
     tabler: 'IconPalette',
     hugeicons: 'PaintBoardIcon',
-    frosted: 'Palette16',
   },
   Paperclip: {
     lucide: 'Paperclip',
@@ -540,7 +476,6 @@ export const ICON_MAP = {
     heroicons: 'PaperClipIcon',
     tabler: 'IconPaperclip',
     hugeicons: 'AttachmentIcon',
-    frosted: null,
   },
   Pause: {
     lucide: 'Pause',
@@ -548,7 +483,6 @@ export const ICON_MAP = {
     heroicons: 'PauseIcon',
     tabler: 'IconPlayerPause',
     hugeicons: 'PauseIcon',
-    frosted: 'Pause16',
   },
   Phone: {
     lucide: 'Phone',
@@ -556,7 +490,6 @@ export const ICON_MAP = {
     heroicons: 'PhoneIcon',
     tabler: 'IconPhone',
     hugeicons: 'CallIcon',
-    frosted: 'Telephone16',
   },
   Play: {
     lucide: 'Play',
@@ -564,7 +497,6 @@ export const ICON_MAP = {
     heroicons: 'PlayIcon',
     tabler: 'IconPlayerPlay',
     hugeicons: 'PlayIcon',
-    frosted: 'Play16',
   },
   Plus: {
     lucide: 'Plus',
@@ -572,7 +504,6 @@ export const ICON_MAP = {
     heroicons: 'PlusIcon',
     tabler: 'IconPlus',
     hugeicons: 'PlusSignIcon',
-    frosted: 'Plus16',
   },
   Printer: {
     lucide: 'Printer',
@@ -580,7 +511,6 @@ export const ICON_MAP = {
     heroicons: 'PrinterIcon',
     tabler: 'IconPrinter',
     hugeicons: 'PrinterIcon',
-    frosted: null,
   },
   Refresh: {
     lucide: 'RefreshCw',
@@ -588,7 +518,6 @@ export const ICON_MAP = {
     heroicons: 'ArrowPathIcon',
     tabler: 'IconRefresh',
     hugeicons: 'RefreshIcon',
-    frosted: 'Rotate16',
   },
   Scissors: {
     lucide: 'Scissors',
@@ -596,7 +525,6 @@ export const ICON_MAP = {
     heroicons: 'ScissorsIcon',
     tabler: 'IconScissors',
     hugeicons: 'ScissorIcon',
-    frosted: null,
   },
   Search: {
     lucide: 'Search',
@@ -604,7 +532,6 @@ export const ICON_MAP = {
     heroicons: 'MagnifyingGlassIcon',
     tabler: 'IconSearch',
     hugeicons: 'Search01Icon',
-    frosted: 'MagnifyingGlass16',
   },
   Send: {
     lucide: 'Send',
@@ -612,7 +539,6 @@ export const ICON_MAP = {
     heroicons: 'PaperAirplaneIcon',
     tabler: 'IconSend',
     hugeicons: 'SentIcon',
-    frosted: null,
   },
   Server: {
     lucide: 'Server',
@@ -620,7 +546,6 @@ export const ICON_MAP = {
     heroicons: 'ServerIcon',
     tabler: 'IconServer',
     hugeicons: 'ServerStack01Icon',
-    frosted: null,
   },
   Settings: {
     lucide: 'Settings',
@@ -628,7 +553,6 @@ export const ICON_MAP = {
     heroicons: 'Cog6ToothIcon',
     tabler: 'IconSettings',
     hugeicons: 'Settings01Icon',
-    frosted: 'Gear16',
   },
   Share: {
     lucide: 'Share',
@@ -636,7 +560,6 @@ export const ICON_MAP = {
     heroicons: 'ShareIcon',
     tabler: 'IconShare',
     hugeicons: 'Share01Icon',
-    frosted: 'ShareNodes16',
   },
   Shield: {
     lucide: 'Shield',
@@ -644,7 +567,6 @@ export const ICON_MAP = {
     heroicons: 'ShieldCheckIcon',
     tabler: 'IconShield',
     hugeicons: 'Shield01Icon',
-    frosted: 'Shield16',
   },
   ShoppingCart: {
     lucide: 'ShoppingCart',
@@ -652,7 +574,6 @@ export const ICON_MAP = {
     heroicons: 'ShoppingCartIcon',
     tabler: 'IconShoppingCart',
     hugeicons: 'ShoppingCart01Icon',
-    frosted: null,
   },
   Sliders: {
     lucide: 'SlidersHorizontal',
@@ -660,7 +581,6 @@ export const ICON_MAP = {
     heroicons: 'AdjustmentsHorizontalIcon',
     tabler: 'IconAdjustmentsHorizontal',
     hugeicons: 'PreferenceHorizontalIcon',
-    frosted: null,
   },
   Smile: {
     lucide: 'Smile',
@@ -668,7 +588,6 @@ export const ICON_MAP = {
     heroicons: 'FaceSmileIcon',
     tabler: 'IconMoodSmile',
     hugeicons: 'SmileIcon',
-    frosted: 'Happy16',
   },
   Star: {
     lucide: 'Star',
@@ -676,7 +595,6 @@ export const ICON_MAP = {
     heroicons: 'StarIcon',
     tabler: 'IconStar',
     hugeicons: 'StarIcon',
-    frosted: 'Star16',
   },
   Sun: {
     lucide: 'Sun',
@@ -684,7 +602,6 @@ export const ICON_MAP = {
     heroicons: 'SunIcon',
     tabler: 'IconSun',
     hugeicons: 'Sun03Icon',
-    frosted: 'Sun16',
   },
   Tag: {
     lucide: 'Tag',
@@ -692,7 +609,6 @@ export const ICON_MAP = {
     heroicons: 'TagIcon',
     tabler: 'IconTag',
     hugeicons: 'Tag01Icon',
-    frosted: 'Tag16',
   },
   Terminal: {
     lucide: 'Terminal',
@@ -700,7 +616,6 @@ export const ICON_MAP = {
     heroicons: 'CommandLineIcon',
     tabler: 'IconTerminal',
     hugeicons: 'CommandLineIcon',
-    frosted: null,
   },
   ThumbsDown: {
     lucide: 'ThumbsDown',
@@ -708,7 +623,6 @@ export const ICON_MAP = {
     heroicons: 'HandThumbDownIcon',
     tabler: 'IconThumbDown',
     hugeicons: 'ThumbsDownIcon',
-    frosted: 'ThumbDown16',
   },
   ThumbsUp: {
     lucide: 'ThumbsUp',
@@ -716,7 +630,6 @@ export const ICON_MAP = {
     heroicons: 'HandThumbUpIcon',
     tabler: 'IconThumbUp',
     hugeicons: 'ThumbsUpIcon',
-    frosted: 'ThumbUp16',
   },
   Trash: {
     lucide: 'Trash2',
@@ -724,7 +637,6 @@ export const ICON_MAP = {
     heroicons: 'TrashIcon',
     tabler: 'IconTrash',
     hugeicons: 'Delete02Icon',
-    frosted: 'Trash16',
   },
   Trophy: {
     lucide: 'Trophy',
@@ -732,7 +644,6 @@ export const ICON_MAP = {
     heroicons: 'TrophyIcon',
     tabler: 'IconTrophy',
     hugeicons: 'ChampionIcon',
-    frosted: 'Trophy16',
   },
   Truck: {
     lucide: 'Truck',
@@ -740,7 +651,6 @@ export const ICON_MAP = {
     heroicons: 'TruckIcon',
     tabler: 'IconTruck',
     hugeicons: 'TruckIcon',
-    frosted: 'Truck16',
   },
   Unlock: {
     lucide: 'LockOpen',
@@ -748,7 +658,6 @@ export const ICON_MAP = {
     heroicons: 'LockOpenIcon',
     tabler: 'IconLockOpen',
     hugeicons: 'SquareUnlock02Icon',
-    frosted: 'LockOpen16',
   },
   Upload: {
     lucide: 'Upload',
@@ -756,7 +665,6 @@ export const ICON_MAP = {
     heroicons: 'ArrowUpTrayIcon',
     tabler: 'IconUpload',
     hugeicons: 'Upload01Icon',
-    frosted: 'Upload16',
   },
   User: {
     lucide: 'User',
@@ -764,7 +672,6 @@ export const ICON_MAP = {
     heroicons: 'UserIcon',
     tabler: 'IconUser',
     hugeicons: 'UserIcon',
-    frosted: 'User16',
   },
   Users: {
     lucide: 'Users',
@@ -772,7 +679,6 @@ export const ICON_MAP = {
     heroicons: 'UsersIcon',
     tabler: 'IconUsers',
     hugeicons: 'UserMultiple02Icon',
-    frosted: 'People16',
   },
   Video: {
     lucide: 'Video',
@@ -780,7 +686,6 @@ export const ICON_MAP = {
     heroicons: 'VideoCameraIcon',
     tabler: 'IconVideo',
     hugeicons: 'Video01Icon',
-    frosted: null,
   },
   Volume: {
     lucide: 'Volume2',
@@ -788,7 +693,6 @@ export const ICON_MAP = {
     heroicons: 'SpeakerWaveIcon',
     tabler: 'IconVolume',
     hugeicons: 'VolumeHighIcon',
-    frosted: 'Speaker16',
   },
   VolumeOff: {
     lucide: 'VolumeX',
@@ -796,7 +700,6 @@ export const ICON_MAP = {
     heroicons: 'SpeakerXMarkIcon',
     tabler: 'IconVolumeOff',
     hugeicons: 'VolumeOffIcon',
-    frosted: null,
   },
   Warning: {
     lucide: 'TriangleAlert',
@@ -804,7 +707,6 @@ export const ICON_MAP = {
     heroicons: 'ExclamationTriangleIcon',
     tabler: 'IconAlertTriangle',
     hugeicons: 'Alert02Icon',
-    frosted: 'ExclamationTriangle16',
   },
   Wifi: {
     lucide: 'Wifi',
@@ -812,7 +714,6 @@ export const ICON_MAP = {
     heroicons: 'WifiIcon',
     tabler: 'IconWifi',
     hugeicons: 'WifiIcon',
-    frosted: null,
   },
   Zap: {
     lucide: 'Zap',
@@ -820,7 +721,6 @@ export const ICON_MAP = {
     heroicons: 'BoltIcon',
     tabler: 'IconBolt',
     hugeicons: 'ZapIcon',
-    frosted: 'Bolt16',
   },
 } as const satisfies Record<string, IconMapEntry>;
 
