@@ -16,7 +16,7 @@
     "build": "turbo run build",
     "build:storybook": "turbo run build-storybook",
     "check": "turbo run lint typecheck build && bun run --filter=@aussieljk/frosted health",
-    "dev": "turbo run dev --filter=docs --filter=tailwind --filter=@aussieljk/frosted",
+    "dev": "bun scripts/dev.ts",
     "doctor": "bun scripts/doctor.ts",
     "format": "oxfmt",
     "lint": "turbo run lint",

@@ -59,7 +59,7 @@
     "build:js": "tsdown --config tsdown.config.mts && bun scripts/fix-namespace-exports.ts",
     "build:css": "postcss src/styles/index.css -o styles.css && postcss src/styles/theme.css -o theme.css && bun scripts/build-lite-css.ts src/styles/index.css -o styles.lite.css",
     "dev": "concurrently -k -n js,css,sb \"bun run dev:js\" \"bun run dev:css\" \"bun run storybook:serve\"",
-    "dev:js": "tsdown --watch",
+    "dev:js": "tsdown --watch --no-clean",
     "dev:css": "postcss src/styles/index.css -o styles.css --watch",
     "health": "bun x publint && bun x @arethetypeswrong/cli --pack . --profile esm-only --exclude-entrypoints styles.css styles.lite.css theme.css",
     "lint": "bun run lint:js && bun run lint:css",
