@@ -113,7 +113,6 @@ function setOnToast(cb: ToastListener | undefined) {
 
 function getManager(position: ToastPosition) {
   // All managers are pre-created in the loop above
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   return managers.get(position)!;
 }
 
@@ -128,7 +127,6 @@ function normalizeDuration(duration: number | undefined): number | undefined {
 
 function mapOptions(options?: ToastOptions) {
   if (!options) return {};
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { duration, id, position, ...rest } = options;
   const normalized = normalizeDuration(duration);
   return {

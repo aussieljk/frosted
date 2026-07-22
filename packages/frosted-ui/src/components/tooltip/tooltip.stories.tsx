@@ -438,7 +438,6 @@ export const ActionsRef: Story = {
     content: 'Tooltip',
   },
   render: function Render() {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const actionsRef = React.useRef<TooltipActions>(null!);
     const [isOpen, setIsOpen] = React.useState(true);
 

@@ -43,8 +43,8 @@ export const Default: Story = {
       Follow{' '}
       <HoverCard.Root>
         <HoverCard.Trigger>
-          <Link href="https://github.com/whopio/frosted-ui" target="_blank">
-            frosted-ui
+          <Link href="https://github.com/aussieljk/frosted" target="_blank">
+            frosted
           </Link>
         </HoverCard.Trigger>
         <HoverCard.Content {...args}>
@@ -358,29 +358,28 @@ export const ProfileCard: Story = {
       </Text>
 
       <Text>
-        The project was created by{' '}
+        The project is built on{' '}
         <HoverCard.Root>
           <HoverCard.Trigger>
-            <Link href="https://github.com/whopio">@whopio</Link>
+            <Link href="https://github.com/mui/base-ui">@base-ui-components</Link>
           </HoverCard.Trigger>
           <HoverCard.Content {...args}>
             <div style={{ display: 'flex', gap: 'var(--space-4)' }}>
               <Avatar
                 size="4"
-                src="https://avatars.githubusercontent.com/u/91078276?s=200&v=4"
-                fallback="W"
+                src="https://avatars.githubusercontent.com/u/195592562?s=200&v=4"
+                fallback="B"
                 shape="square"
               />
               <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-1)' }}>
                 <Heading size="3" render={<h3 />}>
-                  Whop
+                  Base UI
                 </Heading>
                 <Text render={<div />} size="2" color="gray">
-                  @whopio
+                  @base-ui-components
                 </Text>
                 <Text render={<div />} size="2" style={{ marginTop: 'var(--space-2)', maxWidth: 280 }}>
-                  Build, sell, and engage with software products. We make it easy for creators to launch and grow their
-                  digital businesses.
+                  Unstyled UI components for building accessible web apps and design systems.
                 </Text>
                 <div style={{ display: 'flex', gap: 'var(--space-3)', marginTop: 'var(--space-2)' }}>
                   <Text size="2" color="gray">
@@ -947,13 +946,13 @@ interface UserPayload {
 }
 
 const users: Record<string, UserPayload> = {
-  whop: {
-    name: 'Whop',
-    username: '@whopio',
-    avatar: 'https://avatars.githubusercontent.com/u/91078276?s=200&v=4',
-    bio: 'Build, sell, and engage with software products.',
-    repos: 127,
-    followers: 1200,
+  github: {
+    name: 'GitHub',
+    username: '@github',
+    avatar: 'https://avatars.githubusercontent.com/u/9919?s=200&v=4',
+    bio: 'How people build software.',
+    repos: 493,
+    followers: 24000,
   },
   vercel: {
     name: 'Vercel',
@@ -991,8 +990,8 @@ export const MultipleTriggers: Story = {
 
         <Text>
           Check out{' '}
-          <HoverCard.Trigger handle={handle} payload={users.whop}>
-            <Link href="https://github.com/whopio">Whop</Link>
+          <HoverCard.Trigger handle={handle} payload={users.github}>
+            <Link href="https://github.com/github">GitHub</Link>
           </HoverCard.Trigger>
           ,{' '}
           <HoverCard.Trigger handle={handle} payload={users.vercel}>

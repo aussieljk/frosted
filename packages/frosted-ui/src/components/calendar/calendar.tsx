@@ -69,14 +69,12 @@ function Calendar({ className, ...props }: CalendarProps) {
     prevButtonProps: {
       onPress: prevOnPress,
       isDisabled: prevIsDisabled,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       onFocusChange: prevOnFocusChange,
       ...otherPrevButtonProps
     },
     nextButtonProps: {
       onPress: nextOnPress,
       isDisabled: nextIsDisabled,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       onFocusChange: nextOnFocusChange,
       ...otherNextVuttonProps
     },
@@ -149,7 +147,6 @@ function RangeCalendar({ className, ...props }: RangeCalendarProps) {
       onPress: prevOnPress,
       isDisabled: prevIsDisabled,
       // Omit "onFocusChange" because it's not recognized by FUI button (plus we don't really need it)
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       onFocusChange: prevOnFocusChange,
       ...otherPrevButtonProps
     },
@@ -157,7 +154,6 @@ function RangeCalendar({ className, ...props }: RangeCalendarProps) {
       onPress: nextOnPress,
       isDisabled: nextIsDisabled,
       // Omit "onFocusChange" because it's not recognized by FUI button (plus we don't really need it)
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       onFocusChange: nextOnFocusChange,
       ...otherNextVuttonProps
     },

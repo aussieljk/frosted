@@ -10,7 +10,6 @@ import { getMatchingGrayColor, isCustomAccentColor, isCustomGrayColor, themeProp
 import type { ThemeOptions } from './theme-options';
 import { WithThemeEvents } from './use-theme-events';
 
-// eslint-disable-next-line @typescript-eslint/no-empty-function
 const noop = () => {};
 
 interface ThemeChangeHandlers {

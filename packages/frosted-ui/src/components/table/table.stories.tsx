@@ -485,13 +485,13 @@ const data: Payment[] = [
     id: 'bhqecj4p',
     amount: 721,
     status: 'failed',
-    email: 'steven@whop.com',
+    email: 'steven@example.com',
   },
   {
     id: '5kma23ae',
     amount: 874,
     status: 'success',
-    email: 'es@whop.com',
+    email: 'es@example.com',
   },
   {
     id: '8jqecj4p',
@@ -515,7 +515,7 @@ const data: Payment[] = [
     id: '5kma93ae',
     amount: 894,
     status: 'success',
-    email: 'tristan@whop.com',
+    email: 'tristan@example.com',
   },
 ];
 

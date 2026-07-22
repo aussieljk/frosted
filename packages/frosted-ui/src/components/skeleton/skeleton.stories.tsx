@@ -447,7 +447,7 @@ export const Composed: Story = {
                   Artur
                 </Text>
                 <Text highContrast={args.highContrast} size="2">
-                  Design Engineer at Whop
+                  Design Engineer
                 </Text>
                 <Text highContrast={args.highContrast} size="2">
                   Professional button polisher.
@@ -543,7 +543,7 @@ export const ComposedColor: Story = {
                   Artur
                 </Text>
                 <Text color={args.color} highContrast={args.highContrast} size="2">
-                  Design Engineer at Whop
+                  Design Engineer
                 </Text>
                 <Text color={args.color} highContrast={args.highContrast} size="2">
                   Professional button polisher.

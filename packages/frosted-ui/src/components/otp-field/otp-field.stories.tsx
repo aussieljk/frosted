@@ -25,7 +25,6 @@ type Story = StoryObj<typeof meta>;
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 export const Default: Story = {
   render: (args) => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { children, ...otherArgs } = args;
     return (
       <div>
@@ -55,7 +54,6 @@ export const Default: Story = {
 
 export const Pattern: Story = {
   render: (args) => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { children, ...otherArgs } = args;
     return (
       <div>
@@ -78,7 +76,6 @@ export const Pattern: Story = {
 
 export const Separator: Story = {
   render: (args) => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { children, ...otherArgs } = args;
     return (
       <div>
@@ -103,7 +100,6 @@ export const Separator: Story = {
 
 export const Controlled: Story = {
   render: (args) => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { children, ...otherArgs } = args;
     const [value, setValue] = React.useState('');
 

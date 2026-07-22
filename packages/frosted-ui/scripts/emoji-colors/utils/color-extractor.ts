@@ -43,20 +43,3 @@ export async function extractColors(imageBuffer: Buffer): Promise<ExtractedColor
     dominant: dominantColor,
   };
 }
-
-/**
- * Gets the best color from extracted palettes, prioritizing vibrant over muted
- */
-function getBestColor(colors: ExtractedColors): RGBColor | null {
-  // Priority order: Vibrant > LightVibrant > DarkVibrant > Dominant > Muted
-  return (
-    colors.vibrant ||
-    colors.lightVibrant ||
-    colors.darkVibrant ||
-    colors.dominant ||
-    colors.muted ||
-    colors.lightMuted ||
-    colors.darkMuted ||
-    null
-  );
-}

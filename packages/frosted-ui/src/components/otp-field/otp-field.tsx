@@ -40,7 +40,6 @@ interface OTPFieldRootOwnProps extends Omit<PrimitiveRootProps, 'render' | 'leng
   /** Callback fired with the new OTP value when it changes. */
   onChange?: (newValue: string) => unknown;
   /** Callback fired when all slots are filled. */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onComplete?: (...args: any[]) => unknown;
   /**
    * Regex source string used to reject unwanted characters
@@ -161,7 +160,6 @@ interface OTPFieldSlotProps
  * `placeholderChar`, `hasFakeCaret`) are accepted for backwards compatibility but ignored.
  */
 // The legacy slot state props are intentionally destructured away: slots now render their own character.
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const OTPFieldSlot = ({ char, hasFakeCaret, isActive, placeholderChar, className, ...props }: OTPFieldSlotProps) => {
   return <OTPFieldPrimitive.Input className={classNames('fui-OTPFieldSlot', className)} {...props} />;
 };

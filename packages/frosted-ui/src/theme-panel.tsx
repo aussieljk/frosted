@@ -168,7 +168,6 @@ const ThemePanelImpl = React.forwardRef<ThemePanelImplElement, ThemePanelImplPro
   return (
     <Theme
       render={<div ref={forwardedRef} />}
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       inert={open ? undefined : ''}
       {...panelProps}
@@ -494,10 +493,7 @@ const ThemePanelImpl = React.forwardRef<ThemePanelImplElement, ThemePanelImplPro
                   value={value}
                   checked={resolvedAppearance === value}
                   // TODO: Currently using `onClick` as a stop-gap solution for `onChange` not working after a few changes
-                  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-                  onChange={(event) => {
-                    // handleAppearanceChange(event.target.value as ThemeOptions['appearance']);
-                  }}
+                  onChange={() => {}}
                   onClick={() => handleAppearanceChange(value)}
                 />
                 <div

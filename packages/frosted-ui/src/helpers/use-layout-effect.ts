@@ -7,7 +7,6 @@ import * as React from 'react';
  *
  * See: https://reactjs.org/docs/hooks-reference.html#uselayouteffect
  */
-// eslint-disable-next-line @typescript-eslint/no-empty-function
 const useLayoutEffect = globalThis?.document ? React.useLayoutEffect : () => {};
 
 export { useLayoutEffect };

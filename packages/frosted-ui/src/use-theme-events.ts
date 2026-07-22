@@ -30,13 +30,10 @@ function validateThemeOptions(detail: unknown) {
   for (const key of keysToCheck) {
     if (!(key in detail)) continue;
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     if (!validateThemeColor(key, (detail as any)[key])) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       console.warn(`Invalid value for ${key}: ${(detail as any)[key]}`);
       continue;
     }
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     ret[key] = (detail as any)[key];
   }
 
@@ -87,7 +84,7 @@ export function useThemeEvents() {
       const event = new CustomEvent('frosted-ui:unmounted');
       document.documentElement.dispatchEvent(event);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // oxlint-disable-next-line react-hooks/exhaustive-deps -- mount/unmount only; handlers are read fresh per event
   }, []);
 
   // Emit an event when the theme is changed.

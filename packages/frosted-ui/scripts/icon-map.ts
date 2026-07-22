@@ -723,5 +723,3 @@ export const ICON_MAP = {
     hugeicons: 'ZapIcon',
   },
 } as const satisfies Record<string, IconMapEntry>;
-
-type MappedCanonicalName = keyof typeof ICON_MAP;

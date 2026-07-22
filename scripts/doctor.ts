@@ -3,7 +3,7 @@
 //
 // Under bunfig's hoisted linker, stale nested `packages/*/node_modules` dirs
 // (leftovers from older installs — e.g. typescript 4.9.5) shadow the root
-// binaries and make a package mysteriously use an ancient tsc/eslint.
+// binaries and make a package mysteriously use an ancient tsc.
 //
 // Usage: bun run doctor [--fix]   (--fix deletes the offending dirs)
 

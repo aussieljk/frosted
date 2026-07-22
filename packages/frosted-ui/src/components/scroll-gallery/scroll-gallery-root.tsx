@@ -238,7 +238,7 @@ const ScrollGalleryRoot = React.forwardRef<ScrollGalleryRootRef, ScrollGalleryRo
           setActiveIndex(idx, 'indicator');
         }
       }
-      // eslint-disable-next-line react-hooks/exhaustive-deps
+      // oxlint-disable-next-line react-hooks/exhaustive-deps -- run once on mount; refs and stable setters only
     }, []);
 
     // In controlled mode, scroll the viewport when the external value changes.

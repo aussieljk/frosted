@@ -125,12 +125,7 @@ RadioButtonGroupIcon.displayName = 'RadioButtonGroupIcon';
 
 const addOverlayToChildren = (children: React.ReactNode): React.ReactNode => {
   if (React.Children.count(children) === 1) {
-    const child = React.Children.only(children) as React.ReactElement<
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      any,
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      string | React.JSXElementConstructor<any>
-    >;
+    const child = React.Children.only(children) as React.ReactElement<any, string | React.JSXElementConstructor<any>>;
     return React.cloneElement(
       child,
       {},

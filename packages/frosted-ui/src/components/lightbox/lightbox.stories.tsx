@@ -2280,7 +2280,6 @@ function LightboxVideo({ src, poster, active }: { src: string; poster: string; a
     const el = videoRef.current;
     if (!el) return;
     if (active) {
-      // eslint-disable-next-line @typescript-eslint/no-empty-function
       el.play().catch(() => {});
     } else {
       el.pause();

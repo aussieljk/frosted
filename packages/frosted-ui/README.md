@@ -1,11 +1,11 @@
 <h1 align="center">@aussieljk/frosted</h1>
 
-<p align="center">A fork of <a href="https://github.com/whopio/frosted-ui">Frosted UI</a>, the design system used by <a href="https://whop.com/">Whop</a></p>
+<p align="center">Frosted UI — a React design system with a themeable component library, SwiftUI-style layout primitives, and pluggable icon sets</p>
 
 <h3 align="center">
-  <a href="https://storybook.whop.dev/">Storybook</a> -
-  <a href="https://www.figma.com/design/pWs6edprYZNR54ZPwk0oRV">Figma UI kit</a> -
-  <a href="https://github.com/aussieljk/frosted/tree/main/packages/frosted-ui">Source code</a>
+  <a href="https://frosted.localhost">Docs</a> -
+  <a href="https://storybook.frosted.localhost">Storybook</a> -
+  <a href="https://play.frosted.localhost">Playground</a>
 </h3>
 
 > [!WARNING]
@@ -44,14 +44,6 @@ export default function () {
   );
 }
 ```
-
-## Guides
-
-- [Setup steps](https://storybook.whop.dev/?path=/docs/guides-1-getting-started--docs)
-- [Tailwind plugin](https://storybook.whop.dev/?path=/docs/guides-5-tailwind-plugin--docs)
-- [Typography](https://storybook.whop.dev/?path=/docs/guides-2-typography--docs)
-- [Color system](https://storybook.whop.dev/?path=/docs/guides-3-color--docs)
-- [Breakpoints](https://storybook.whop.dev/?path=/docs/guides-4-breakpoints--docs)
 
 ## Acknowledgments
 

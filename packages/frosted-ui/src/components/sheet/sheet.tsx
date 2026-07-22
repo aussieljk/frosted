@@ -73,7 +73,6 @@ const SheetRoot = ({
   onOpenChange,
   onAnimationEnd,
   onClose,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   autoFocus,
   ...props
 }: SheetRootProps) => (

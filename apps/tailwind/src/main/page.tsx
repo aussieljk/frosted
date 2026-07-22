@@ -16,7 +16,7 @@ import {
   getColorForEmoji,
 } from '@aussieljk/frosted';
 import { SiteHeader } from '../site-header';
-import WhopLogo from './WhopLogo';
+import Logo from './Logo';
 
 const colorfulEmojis = ['🌈', '🔥', '💙', '💚', '💛', '💜'];
 
@@ -41,7 +41,7 @@ export default function Main() {
           >
             <div>
               <div className="py-4 flex items-center">
-                <WhopLogo className="w-[137px] h-auto" />
+                <Logo />
               </div>
             </div>
           </div>
@@ -145,7 +145,7 @@ export default function Main() {
               <div className="text-center">
                 <Heading size="7">#172,264,047</Heading>
                 <Text size="2" color="gray">
-                  Purchased on Whop
+                  Purchased on Frosted
                 </Text>
               </div>
               <div className="text-center">
@@ -153,7 +153,7 @@ export default function Main() {
                   #172,264,047
                 </Heading>
                 <Text size="2" color="gray">
-                  Purchased on Whop
+                  Purchased on Frosted
                 </Text>
               </div>
               <div className="text-center">
@@ -161,7 +161,7 @@ export default function Main() {
                   #172,264,047
                 </Heading>
                 <Text size="2" color="gray">
-                  Purchased on Whop
+                  Purchased on Frosted
                 </Text>
               </div>
             </div>

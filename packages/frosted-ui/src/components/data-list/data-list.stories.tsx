@@ -70,14 +70,14 @@ export const Default: Story = {
         <DataList.Item>
           <DataList.Label>Email</DataList.Label>
           <DataList.Value>
-            <Link href="mailto:artur@whop.com">artur@whop.com</Link>
+            <Link href="mailto:artur@example.com">artur@example.com</Link>
           </DataList.Value>
         </DataList.Item>
         <DataList.Item>
           <DataList.Label>Company</DataList.Label>
           <DataList.Value>
-            <Link target="_blank" href="https://whop.com">
-              Whop
+            <Link target="_blank" href="https://example.com">
+              Example Inc.
             </Link>
           </DataList.Value>
         </DataList.Item>
@@ -96,14 +96,14 @@ export const Size: Story = {
         <DataList.Item>
           <DataList.Label>Email</DataList.Label>
           <DataList.Value>
-            <Link href="mailto:artur@whop.com">artur@whop.com</Link>
+            <Link href="mailto:artur@example.com">artur@example.com</Link>
           </DataList.Value>
         </DataList.Item>
         <DataList.Item>
           <DataList.Label>Company</DataList.Label>
           <DataList.Value>
-            <Link target="_blank" href="https://whop.com">
-              Whop
+            <Link target="_blank" href="https://example.com">
+              Example Inc.
             </Link>
           </DataList.Value>
         </DataList.Item>
@@ -116,14 +116,14 @@ export const Size: Story = {
         <DataList.Item>
           <DataList.Label>Email</DataList.Label>
           <DataList.Value>
-            <Link href="mailto:artur@whop.com">artur@whop.com</Link>
+            <Link href="mailto:artur@example.com">artur@example.com</Link>
           </DataList.Value>
         </DataList.Item>
         <DataList.Item>
           <DataList.Label>Company</DataList.Label>
           <DataList.Value>
-            <Link target="_blank" href="https://whop.com">
-              Whop
+            <Link target="_blank" href="https://example.com">
+              Example Inc.
             </Link>
           </DataList.Value>
         </DataList.Item>
@@ -136,14 +136,14 @@ export const Size: Story = {
         <DataList.Item>
           <DataList.Label>Email</DataList.Label>
           <DataList.Value>
-            <Link href="mailto:artur@whop.com">artur@whop.com</Link>
+            <Link href="mailto:artur@example.com">artur@example.com</Link>
           </DataList.Value>
         </DataList.Item>
         <DataList.Item>
           <DataList.Label>Company</DataList.Label>
           <DataList.Value>
-            <Link target="_blank" href="https://whop.com">
-              Whop
+            <Link target="_blank" href="https://example.com">
+              Example Inc.
             </Link>
           </DataList.Value>
         </DataList.Item>
@@ -166,14 +166,14 @@ export const Orientation: Story = {
           <DataList.Item>
             <DataList.Label>Email</DataList.Label>
             <DataList.Value>
-              <Link href="mailto:artur@whop.com">artur@whop.com</Link>
+              <Link href="mailto:artur@example.com">artur@example.com</Link>
             </DataList.Value>
           </DataList.Item>
           <DataList.Item>
             <DataList.Label>Company</DataList.Label>
             <DataList.Value>
-              <Link target="_blank" href="https://whop.com">
-                Whop
+              <Link target="_blank" href="https://example.com">
+                Example Inc.
               </Link>
             </DataList.Value>
           </DataList.Item>
@@ -190,14 +190,14 @@ export const Orientation: Story = {
           <DataList.Item>
             <DataList.Label>Email</DataList.Label>
             <DataList.Value>
-              <Link href="mailto:artur@whop.com">artur@whop.com</Link>
+              <Link href="mailto:artur@example.com">artur@example.com</Link>
             </DataList.Value>
           </DataList.Item>
           <DataList.Item>
             <DataList.Label>Company</DataList.Label>
             <DataList.Value>
-              <Link target="_blank" href="https://whop.com">
-                Whop
+              <Link target="_blank" href="https://example.com">
+                Example Inc.
               </Link>
             </DataList.Value>
           </DataList.Item>

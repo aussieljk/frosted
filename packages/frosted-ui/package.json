@@ -2,7 +2,7 @@
   "name": "@aussieljk/frosted",
   "version": "0.0.1",
   "type": "module",
-  "description": "Frosted UI design system (fork of whopio/frosted-ui)",
+  "description": "Frosted UI design system",
   "private": false,
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
