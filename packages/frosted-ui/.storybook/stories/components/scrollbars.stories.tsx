@@ -22,7 +22,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
-      <Text>Frosted-UI comes with custom styles for native CSS scrollbars:</Text>
+      <Text>@aussieljk/frosted comes with custom styles for native CSS scrollbars:</Text>
       <div
         style={{
           width: 400,

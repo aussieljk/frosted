@@ -1,7 +1,7 @@
 import type * as React from 'react';
 
 /**
- * Canonical icon names understood by frosted-ui. Every adapter maps these
+ * Canonical icon names understood by @aussieljk/frosted. Every adapter maps these
  * names to the semantically-equivalent icon of its library, so
  * `<Icons.Search />` renders the right glyph no matter which icon library
  * the consumer installed.

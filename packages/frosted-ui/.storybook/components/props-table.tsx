@@ -44,9 +44,9 @@ const cell: React.CSSProperties = { verticalAlign: 'top' };
 const mono: React.CSSProperties = { whiteSpace: 'nowrap' };
 
 /**
- * Auto-generated props table for a frosted-ui component (or component part, e.g.
+ * Auto-generated props table for an @aussieljk/frosted component (or component part, e.g.
  * `Dialog.Root`). Data comes from `.storybook/generated/component-props.json`, produced by
- * `bun run generate:props` from the frosted-ui sources — it never drifts from the code.
+ * `bun run generate:props` from the @aussieljk/frosted sources — it never drifts from the code.
  */
 export function PropsTable({ component }: { component: string }) {
   const entry = getComponentProps(component);

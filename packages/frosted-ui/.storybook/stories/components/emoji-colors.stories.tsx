@@ -45,8 +45,8 @@ function EmojiGrid() {
           🎨 Emoji Color System
         </Text>
         <Text size="3" color="gray" style={{ display: 'block', marginBottom: 'var(--space-4)' }}>
-          All {Object.keys(emojiColorMap).length} emojis automatically mapped to Frosted UI color scales based on their
-          dominant color.
+          All {Object.keys(emojiColorMap).length} emojis automatically mapped to @aussieljk/frosted color scales based
+          on their dominant color.
         </Text>
 
         {/* Filters */}
@@ -274,7 +274,7 @@ function InteractiveDemo() {
             Usage:
           </Text>
           <pre style={{ margin: 0, whiteSpace: 'pre-wrap' }}>
-            {`import { getColorForEmoji } from 'frosted-ui';
+            {`import { getColorForEmoji } from '@aussieljk/frosted';
 
 const color = getColorForEmoji('${inputEmoji}');
 // Returns: '${color || 'undefined'}'`}

@@ -1,7 +1,7 @@
 /**
  * Source of truth for the icon adapter system.
  *
- * Maps every canonical frosted-ui icon name to the semantically-equivalent
+ * Maps every canonical @aussieljk/frosted icon name to the semantically-equivalent
  * export of each supported icon library. `null` means the library has no
  * equivalent; the adapter simply omits that name and the registry falls back
  * gracefully (see `src/icons/registry.tsx`).

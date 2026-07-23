@@ -89,7 +89,7 @@ function createIcon(name: CanonicalIconName): React.ComponentType<IconProps> {
       if (typeof process !== 'undefined' && process.env.NODE_ENV !== 'production' && !warned.has(name)) {
         warned.add(name);
         console.warn(
-          `[frosted-ui] No icon adapter provides "${name}". ` +
+          `[@aussieljk/frosted] No icon adapter provides "${name}". ` +
             `Import an adapter once (e.g. \`import '@aussieljk/frosted/icons/lucide'\`) ` +
             `or wrap your app in <IconProvider library={...}>.`,
         );

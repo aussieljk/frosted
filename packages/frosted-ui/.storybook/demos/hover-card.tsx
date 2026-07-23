@@ -13,11 +13,11 @@ export default function HoverCardDemo() {
         </HoverCard.Trigger>
         <HoverCard.Content>
           <div style={{ display: 'flex', gap: 16 }}>
-            <Avatar size="3" fallback="FUI" />
+            <Avatar size="3" fallback="AF" />
             <div>
-              <Heading size="3">Frosted UI</Heading>
+              <Heading size="3">@aussieljk/frosted</Heading>
               <Text render={<div />} size="2" color="gray">
-                frosted-ui
+                aussieljk
               </Text>
               <Text render={<div />} size="2" style={{ maxWidth: 300, marginTop: 12 }}>
                 React components library built on top of Base UI primitives.

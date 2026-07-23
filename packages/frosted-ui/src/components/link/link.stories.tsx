@@ -8,7 +8,7 @@ const meta = {
   title: 'Typography/Link',
   component: Link,
   args: {
-    children: 'Frosted-UI',
+    children: '@aussieljk/frosted',
     href: 'https://frosted.localhost/',
     target: '_blank',
     color: linkPropDefs.color.default,
@@ -30,7 +30,7 @@ export const Default: Story = {};
 
 export const Size: Story = {
   args: {
-    children: 'Frosted-UI',
+    children: '@aussieljk/frosted',
     href: 'https://frosted.localhost/',
     target: '_blank',
     color: linkPropDefs.color.default,
@@ -53,7 +53,7 @@ export const Size: Story = {
 
 export const Color: Story = {
   args: {
-    children: 'Frosted-UI',
+    children: '@aussieljk/frosted',
     href: 'https://frosted.localhost/',
     target: '_blank',
     color: linkPropDefs.color.default,
@@ -70,7 +70,7 @@ export const Color: Story = {
 
 export const Underline: Story = {
   args: {
-    children: 'Frosted-UI',
+    children: '@aussieljk/frosted',
     href: 'https://frosted.localhost/',
     target: '_blank',
     color: linkPropDefs.color.default,
@@ -87,7 +87,7 @@ export const Underline: Story = {
 export const HighContrast: Story = {
   name: 'High Contrast',
   args: {
-    children: 'Frosted-UI',
+    children: '@aussieljk/frosted',
     href: 'https://frosted.localhost/',
     target: '_blank',
     color: linkPropDefs.color.default,

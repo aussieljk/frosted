@@ -24,7 +24,7 @@ Storybook is the only site; it runs from this laptop under the `frosted.localhos
 - **Storybook**: <https://frosted.localhost> (`packages/frosted-ui`)
 - **Machine-readable docs**: <https://frosted.localhost/llms.txt> and `/llms-full.txt`
 
-### Frosted UI Package (`@aussieljk/frosted`, in `packages/frosted-ui`)
+### The package (`@aussieljk/frosted`, in `packages/frosted-ui`)
 
 - **Build**: `bun run --filter="@aussieljk/frosted" build`
 - **Lint**: `bun run --filter="@aussieljk/frosted" lint`

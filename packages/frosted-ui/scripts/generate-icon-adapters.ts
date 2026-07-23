@@ -154,7 +154,7 @@ function wrap(icon: IconSvgElement): AdapterIconComponent {
     if (!warnedBrokenCjs) {
       warnedBrokenCjs = true;
       console.warn(
-        '[frosted-ui] @hugeicons/core-free-icons resolved to an empty module ' +
+        '[@aussieljk/frosted] @hugeicons/core-free-icons resolved to an empty module ' +
           '(its CommonJS entry is broken upstream). Load the hugeicons adapter from ESM instead.',
       );
     }

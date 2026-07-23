@@ -1,10 +1,10 @@
 # Emoji Color System
 
-This document describes the emoji-to-color mapping system in Frosted UI.
+This document describes the emoji-to-color mapping system in @aussieljk/frosted.
 
 ## Overview
 
-The emoji color system automatically maps emojis to color scales in the Frosted UI design system. It analyzes the dominant color of each emoji and matches it to the closest `color-9` shade in the palette.
+The emoji color system automatically maps emojis to color scales in the @aussieljk/frosted design system. It analyzes the dominant color of each emoji and matches it to the closest `color-9` shade in the palette.
 
 ## Features
 
@@ -20,7 +20,7 @@ The emoji color system automatically maps emojis to color scales in the Frosted 
 ### Basic Usage
 
 ```tsx
-import { getColorForEmoji } from 'frosted-ui';
+import { getColorForEmoji } from '@aussieljk/frosted';
 
 function EmojiButton({ emoji, children }) {
   // Provide your own fallback with nullish coalescing
@@ -43,7 +43,7 @@ function EmojiButton({ emoji, children }) {
 ### With Custom Fallbacks
 
 ```tsx
-import { getColorForEmoji } from 'frosted-ui';
+import { getColorForEmoji } from '@aussieljk/frosted';
 
 // Use different fallbacks for different contexts
 const brandColor = getColorForEmoji(emoji) ?? 'blue';
@@ -62,7 +62,7 @@ if (!color) {
 For advanced use cases, you can access the full emoji color map:
 
 ```tsx
-import { emojiColorMap, type ColorScale } from 'frosted-ui';
+import { emojiColorMap, type ColorScale } from '@aussieljk/frosted';
 
 // Iterate through all mappings
 Object.entries(emojiColorMap).forEach(([emoji, color]) => {
@@ -167,7 +167,7 @@ React hook that returns the color scale for an emoji.
 
 **Returns:**
 
-- `ColorScale` - One of the Frosted UI color scale names
+- `ColorScale` - One of the @aussieljk/frosted color scale names
 
 **Example:**
 
@@ -185,7 +185,7 @@ Helper function that returns the color scale for an emoji (non-React).
 
 **Returns:**
 
-- `ColorScale` - One of the Frosted UI color scale names (defaults to 'gray' if not found)
+- `ColorScale` - One of the @aussieljk/frosted color scale names (defaults to 'gray' if not found)
 
 **Example:**
 

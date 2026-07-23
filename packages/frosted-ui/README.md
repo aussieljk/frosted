@@ -1,6 +1,6 @@
 <h1 align="center">@aussieljk/frosted</h1>
 
-<p align="center">Frosted UI — a React design system with a themeable component library, SwiftUI-style layout primitives, and pluggable icon sets</p>
+<p align="center">@aussieljk/frosted — a React design system with a themeable component library, SwiftUI-style layout primitives, and pluggable icon sets</p>
 
 <h3 align="center">
   <a href="https://frosted.localhost">Docs &amp; Storybook</a>
@@ -13,7 +13,7 @@
 
 ## Getting Started
 
-Install Frosted UI:
+Install @aussieljk/frosted:
 
 ```sh
 $ bun add @aussieljk/frosted
@@ -45,4 +45,4 @@ export default function () {
 
 ## Acknowledgments
 
-Frosted UI is heavily based on [Radix Themes](https://www.radix-ui.com/) design system and [Radix Icons](https://github.com/radix-ui/icons).
+@aussieljk/frosted is heavily based on [Radix Themes](https://www.radix-ui.com/) design system and [Radix Icons](https://github.com/radix-ui/icons).

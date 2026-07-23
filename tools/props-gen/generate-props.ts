@@ -1,6 +1,6 @@
 /**
  * Generates `packages/frosted-ui/.storybook/generated/component-props.json` from
- * the frosted-ui sources, for storybook's `<PropsTable component="…" />` block.
+ * the @aussieljk/frosted sources, for storybook's `<PropsTable component="…" />` block.
  *
  * For every component exported from `packages/frosted-ui/src/index.ts` (including
  * namespace parts like `Dialog.Root` and attached parts like `Grid.Row`) it extracts:
@@ -12,7 +12,7 @@
  * - default values declared in the `*PropDefs` objects (`<name>.props.ts`).
  *
  * DOM props inherited from `@types/react` (the hundreds of standard HTML attributes)
- * are omitted; props declared in frosted-ui itself or in Base UI primitives are kept.
+ * are omitted; props declared in @aussieljk/frosted itself or in Base UI primitives are kept.
  *
  * Run with `bun run generate:props` (from the repo root). This package exists only
  * to scope its own `typescript` dependency — a classic JS-API compiler, NOT the
@@ -63,7 +63,7 @@ const checker = program.getTypeChecker();
 const entrySource = program.getSourceFile(entryFile);
 if (!entrySource) throw new Error(`Could not load ${entryFile}`);
 const entryModule = checker.getSymbolAtLocation(entrySource);
-if (!entryModule) throw new Error('Could not resolve the frosted-ui entry module symbol');
+if (!entryModule) throw new Error('Could not resolve the @aussieljk/frosted entry module symbol');
 
 const FORMAT_FLAGS =
   ts.TypeFormatFlags.NoTruncation |

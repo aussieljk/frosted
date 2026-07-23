@@ -228,7 +228,7 @@ const ThemeImpl = (props: ThemeImplProps) => {
         Object.assign(style, createAccentScaleStyle(accentColor));
         accentAttr = 'custom';
       } catch {
-        console.warn(`frosted-ui: unsupported accentColor "${accentColor}". Use #hex, rgb() or oklch().`);
+        console.warn(`@aussieljk/frosted: unsupported accentColor "${accentColor}". Use #hex, rgb() or oklch().`);
         accentAttr = themePropDefs.accentColor.default;
       }
     }
@@ -237,7 +237,7 @@ const ThemeImpl = (props: ThemeImplProps) => {
         Object.assign(style, createGrayScaleStyle(resolvedGrayColor));
         grayAttr = 'custom';
       } catch {
-        console.warn(`frosted-ui: unsupported grayColor "${resolvedGrayColor}". Use #hex, rgb() or oklch().`);
+        console.warn(`@aussieljk/frosted: unsupported grayColor "${resolvedGrayColor}". Use #hex, rgb() or oklch().`);
         grayAttr = themePropDefs.grayColor.default;
       }
     }

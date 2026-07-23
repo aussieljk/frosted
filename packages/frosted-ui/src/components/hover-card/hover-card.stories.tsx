@@ -49,13 +49,13 @@ export const Default: Story = {
         </HoverCard.Trigger>
         <HoverCard.Content {...args}>
           <div style={{ display: 'flex', gap: 'var(--space-4)' }}>
-            <Avatar size="3" fallback="FUI" />
+            <Avatar size="3" fallback="AF" />
             <div>
               <Heading size="3" render={<h3 />}>
-                Frosted UI
+                @aussieljk/frosted
               </Heading>
               <Text render={<div />} size="2" color="gray">
-                frosted-ui
+                aussieljk
               </Text>
 
               <Text render={<div />} size="2" style={{ maxWidth: 300, marginTop: 'var(--space-3)' }}>

@@ -7,7 +7,7 @@ import { fontBase, fontCode } from './fonts';
 addons.setConfig({
   theme: create({
     base: 'dark',
-    brandTitle: 'Frosted UI',
+    brandTitle: '@aussieljk/frosted',
     brandUrl: 'https://frosted.localhost/llms.txt',
     brandTarget: '_self',
     fontBase,

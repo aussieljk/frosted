@@ -115,7 +115,7 @@ export const Animated: Story = {
         <div style={{ width: 300, display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
           <SegmentedControl.Root value={state} onValueChange={(value) => setState(value as LibraryType)}>
             <SegmentedControl.List>
-              <SegmentedControl.Trigger value="FrostedUI">Frosted UI</SegmentedControl.Trigger>
+              <SegmentedControl.Trigger value="FrostedUI">@aussieljk/frosted</SegmentedControl.Trigger>
               <SegmentedControl.Trigger value="BaseUI">Base UI</SegmentedControl.Trigger>
               <SegmentedControl.Trigger value="React95">React95</SegmentedControl.Trigger>
             </SegmentedControl.List>

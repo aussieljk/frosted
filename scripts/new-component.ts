@@ -1,5 +1,5 @@
 #!/usr/bin/env bun
-// Scaffold a new frosted-ui component and wire it into every place the repo
+// Scaffold a new @aussieljk/frosted component and wire it into every place the repo
 // expects: component files, the components barrel, the CSS aggregate, the
 // storybook demo registry, and an authored storybook MDX docs page.
 //

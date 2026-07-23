@@ -1,6 +1,6 @@
 /**
  * Maps Tailwind CSS v4 style palettes (11 stops, 50–950) onto the 12-step
- * scales that frosted-ui components consume.
+ * scales that @aussieljk/frosted components consume.
  *
  * The mapping is static and verbatim:
  * - light: step 1 is an extra light shade (stop 50 mixed 60% toward white),
@@ -346,7 +346,7 @@ interface CreatePaletteCssOptions {
 }
 
 /**
- * Generate the frosted-ui CSS for one Tailwind-style palette. The returned CSS is
+ * Generate the @aussieljk/frosted CSS for one Tailwind-style palette. The returned CSS is
  * self-contained: inject it once (a css file or a <style> tag) and `name` becomes usable
  * everywhere a scale name works, e.g. `<Theme accentColor={'my-brand' as never}>` or
  * `data-accent-color="my-brand"` on any subtree.

@@ -18,12 +18,42 @@ const config: StorybookConfig = {
 
   addons: ['@storybook/addon-links', '@storybook/addon-docs'],
 
-  // Serves the generated llms.txt / llms-full.txt at the site root.
-  staticDirs: ['./public'],
+  // ./public holds the generated llms.txt / llms-full.txt; ./assets holds the checked-in
+  // favicon.svg (public/ is gitignored and wiped by `clean`). Both are served at the site root,
+  // and storybook picks up favicon.svg from there instead of shipping its own logo.
+  staticDirs: ['./public', './assets'],
 
   core: {
     disableTelemetry: true,
+    // Kills the "what's new in Storybook" notification toast.
+    disableWhatsNewNotifications: true,
   },
+
+  features: {
+    // The "Get started" onboarding checklist widget in the sidebar (publish your
+    // Storybook, install the Vitest addon, …) and its "Onboarding guide" menu entry.
+    sidebarOnboardingChecklist: false,
+    menuOnboardingChecklist: false,
+  },
+
+  // Storybook hardcodes "<story> ⋅ Storybook" as the document title and has no option for
+  // it, so rewrite it as it is set. The CSS drops the two Storybook-branded entries in the
+  // sidebar settings menu ("About your Storybook", "Documentation") — hiding the whole <li>
+  // rather than the link so the menu doesn't keep their empty rows.
+  managerHead: (head) => `${head}
+    <style>
+      li:has(> #list-item-about),
+      li:has(> #list-item-documentation) { display: none !important; }
+    </style>
+    <script>
+      const retitle = () => {
+        const stripped = document.title.replace(/\\s*[⋅-]\\s*Storybook$/, '');
+        const wanted = !stripped || stripped.toLowerCase() === 'storybook' ? '@aussieljk/frosted' : stripped;
+        if (document.title !== wanted) document.title = wanted;
+      };
+      new MutationObserver(retitle).observe(document.querySelector('title'), { childList: true });
+      retitle();
+    </script>`,
 
   framework: {
     name: '@storybook/react-vite',
@@ -31,9 +61,11 @@ const config: StorybookConfig = {
   },
 
   typescript: {
-    // react-docgen-typescript requires the classic TS compiler API, which the
-    // installed TypeScript 7 (native compiler) no longer provides.
-    reactDocgen: 'react-docgen',
+    // Off entirely: react-docgen parses every component on every transform, and none of its
+    // output is used — prop tables come from generated/component-props.json (`generate:props`)
+    // and controls are backfilled from the same file by enhance-arg-types.ts. The TS-aware
+    // variant isn't an option either (it needs the classic compiler API, which TS7 dropped).
+    reactDocgen: false,
   },
 
   // The demos in .storybook/demos are shown to users as copy-pasteable source, so they import

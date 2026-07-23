@@ -171,7 +171,7 @@ import type { radixColorScales } from './radix-colors';
 export type ColorScale = (typeof radixColorScales)[number] | 'gray';
 
 /**
- * Maps emojis to their corresponding color scale in the Frosted UI color system.
+ * Maps emojis to their corresponding color scale in the @aussieljk/frosted color system.
  * The color is determined by analyzing the dominant color of the emoji and matching
  * it to the closest color-9 shade in our color palette.
  */

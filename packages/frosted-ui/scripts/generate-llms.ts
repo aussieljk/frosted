@@ -167,7 +167,7 @@ function collect(dir: string): Page[] {
 const pages = collect(storiesDir).sort((a, b) => a.order.localeCompare(b.order));
 
 const index = [
-  '# Frosted UI',
+  '# @aussieljk/frosted',
   '',
   'A React design system with a themeable component library, SwiftUI-style layout primitives,',
   'and pluggable icon sets. Published as `@aussieljk/frosted`.',

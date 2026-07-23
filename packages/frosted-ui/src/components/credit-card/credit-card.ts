@@ -2,7 +2,7 @@
  * CreditCard — a composable compound component for rendering credit/debit
  * card UIs with a front/back flip interaction.
  *
- * Architecture follows frosted-ui patterns: compound components communicating
+ * Architecture follows @aussieljk/frosted patterns: compound components communicating
  * via React Context, `useRender` for flexible element rendering, and
  * `mergeProps` for combining consumer and internal props.
  *

@@ -98,7 +98,10 @@ const READY = (timeoutMs = 20_000) => `(async () => {
     const cls = document.body.classList;
     if (cls.contains('sb-show-errordisplay') || cls.contains('sb-show-nopreview')) return 'error';
     const roots = [...document.querySelectorAll('#storybook-root, #storybook-docs')];
-    if (cls.contains('sb-show-main') && roots.some((root) => root.childElementCount > 0)) {
+    // Demos load lazily (see .storybook/components/demo.tsx), so a rendered docs page can still
+    // be showing empty frames — wait for every one of them to resolve before calling it ready.
+    const pending = document.querySelectorAll('[data-demo-pending]').length > 0;
+    if (!pending && cls.contains('sb-show-main') && roots.some((root) => root.childElementCount > 0)) {
       await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
       return 'ready';
     }

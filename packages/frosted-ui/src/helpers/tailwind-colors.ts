@@ -1,5 +1,5 @@
 /**
- * The Tailwind CSS v4 palettes exposed as frosted-ui scales. The 12-step
+ * The Tailwind CSS v4 palettes exposed as @aussieljk/frosted scales. The 12-step
  * light/dark scales are generated from the installed `tailwindcss` package
  * into src/styles/tokens/palettes.css (see scripts/generate-palettes.ts).
  */
