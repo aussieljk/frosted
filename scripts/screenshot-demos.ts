@@ -1,12 +1,11 @@
 /**
  * Screenshot every fixture in the cosmos — `bun run screenshot [options]`.
  *
- * Two kinds of fixture live here, and both are captured:
- *   - stories — component fixtures colocated in src/components (converted storybook stories)
- *   - demos   — the standalone usage demos in packages/frosted-ui/demos
+ * There is one fixture per component (packages/frosted-ui/fixtures/<name>.fixture.tsx) and
+ * it renders every example of that component, so one screenshot covers the whole component.
  *
- * Fixtures (including the named ones inside multi-fixture files) are enumerated with the
- * react-cosmos Node API, and each one is rendered isolated via the vite renderer URL.
+ * Fixtures are enumerated with the react-cosmos Node API, and each one is rendered isolated
+ * via the vite renderer URL.
  * Driven by the `agent-browser` CLI (headless chromium over CDP), N sessions in parallel.
  * Starts `bun run dev` itself when cosmos isn't already up, and stops it again after.
  *
@@ -15,7 +14,6 @@
  *   --url <base>         cosmos base url (default: $COSMOS_URL or https://frosted.localhost)
  *   --concurrency <n>    parallel browser sessions (default: cores - 2)
  *   --filter <substr>    only capture ids containing <substr>
- *   --only <kind>        `stories` or `demos`
  *   --shard <i>/<n>      capture only this slice of the work, for splitting across machines
  *   --static             force serving packages/frosted-ui/cosmos-export
  *   --dev                force the dev server (skip the static export even when it is fresh)
@@ -53,10 +51,6 @@ const useDev = argv.includes('--dev');
 const outDir = resolve(root, flag('out', 'screenshots') as string);
 // Every worker is a chromium of its own competing with the vite dev server, so leave it cores.
 const concurrency = Number(flag('concurrency', String(Math.max(2, cpus().length - 2))));
-const only = flag('only');
-const wantStories = only !== 'demos';
-const wantDemos = only !== 'stories';
-
 // `--filter foo --shard 1/4` = the ids matching `foo`, every 4th one, offset 1.
 const substring = flag('filter');
 const [shard, shards] = (flag('shard', '0/1') as string).split('/').map(Number);
@@ -194,16 +188,13 @@ async function ensureCosmos(): Promise<() => void> {
 
 interface Target {
   id: string;
-  kind: 'stories' | 'demos';
   url: string;
 }
 
 /**
- * Every fixture cosmos knows about, named sub-fixtures included. The server's
- * /cosmos.fixtures.json only lists fixture *files* (it can't execute them to learn the
- * names inside multi-fixture files), so the files are imported in-process with the
- * react-cosmos Node API instead — bun runs the TSX natively — and only the renderer URL
- * base is taken from the server.
+ * Every fixture cosmos knows about. Only the renderer URL base is taken from the server's
+ * /cosmos.fixtures.json; the fixtures themselves are enumerated in-process with the
+ * react-cosmos Node API (bun runs the TSX natively).
  */
 async function fixtureTargets(): Promise<Target[]> {
   const res = await fetch(`${base}/cosmos.fixtures.json`, { tls: { rejectUnauthorized: false } });
@@ -213,18 +204,10 @@ async function fixtureTargets(): Promise<Target[]> {
   const config = await getCosmosConfigAtPath(join(frostedDir, 'cosmos.config.json'));
   const fixtures = await getFixtures(config, { rendererUrl: absoluteRendererUrl });
 
-  const slug = (s: string) =>
-    s
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, '-')
-      .replace(/^-|-$/g, '');
+  // The tree is flat, so the path is just the component name: fixtures/button → "button".
   return fixtures.map((fixture) => {
-    const kind = fixture.relativeFilePath.startsWith('demos/') ? 'demos' : 'stories';
-    // demos/button → "button"; src/components/button + "High Contrast" → "button-high-contrast"
-    const segments = fixture.treePath.filter((p) => !['src', 'components', 'demos'].includes(p));
-    // Multi-fixture files repeat the component name in fileName + treePath; dedupe neighbours.
-    const parts = segments.filter((segment, i) => segment !== segments[i - 1]).map(slug);
-    return { id: parts.join('-'), kind, url: `${fixture.rendererUrl}&locked=true` };
+    const id = fixture.treePath.filter((p) => p !== 'fixtures').join('-');
+    return { id, url: `${fixture.rendererUrl}&locked=true` };
   });
 }
 
@@ -250,10 +233,6 @@ const progress = (id: string) => {
  * (or the static export) that is fast enough to skip smarter swapping.
  */
 async function capture(targets: Target[]): Promise<Shot[]> {
-  for (const kind of ['stories', 'demos'] as const) {
-    if (targets.some((t) => t.kind === kind)) mkdirSync(join(outDir, kind), { recursive: true });
-  }
-
   const shots: Shot[] = [];
   let next = 0;
 
@@ -266,9 +245,9 @@ async function capture(targets: Target[]): Promise<Shot[]> {
         await ab(session, ['open', target.url]);
         const state = await evaluate(session, READY());
 
-        const file = join(outDir, target.kind, `${target.id}.png`);
+        const file = join(outDir, `${target.id}.png`);
         const shot = state === 'ready' ? await ab(session, ['screenshot', '--full', file]) : { ok: false };
-        if (shot.ok) shots.push({ id: target.id, file: `${target.kind}/${target.id}.png` });
+        if (shot.ok) shots.push({ id: target.id, file: `${target.id}.png` });
         else failures.push(`${target.id} (${state ?? 'no response'})`);
         progress(target.id);
       }
@@ -281,10 +260,9 @@ async function capture(targets: Target[]): Promise<Shot[]> {
 
 // ---------------------------------------------------------------- gallery
 
-/** A contact sheet, because 600 pngs in a folder are no fun to review. */
-function writeGallery(groups: { title: string; shots: Shot[] }[]) {
-  const section = ({ title, shots }: { title: string; shots: Shot[] }) => `
-    <h2>${title} <small>${shots.length}</small></h2>
+/** A contact sheet, because a hundred pngs in a folder are no fun to review. */
+function writeGallery(shots: Shot[]) {
+  const grid = `
     <div class="grid">
       ${shots
         .map(
@@ -301,17 +279,15 @@ function writeGallery(groups: { title: string; shots: Shot[] }[]) {
 <title>frosted — fixture screenshots</title>
 <style>
   body { font: 14px/1.5 system-ui, sans-serif; margin: 32px; background: #fafafa; color: #111; }
-  h2 { margin-top: 40px; } h2 small { color: #888; font-weight: 400; }
+  h1 small { color: #888; font-weight: 400; }
   .grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
   figure { margin: 0; background: #fff; border: 1px solid #e4e4e7; border-radius: 10px; overflow: hidden; }
-  img { display: block; width: 100%; height: 180px; object-fit: contain; background: #fff; }
+  /* Each shot is a full component gallery, so crop to the top rather than shrinking it away. */
+  img { display: block; width: 100%; height: 260px; object-fit: cover; object-position: top; background: #fff; }
   figcaption { border-top: 1px solid #e4e4e7; padding: 6px 10px; font-size: 12px; color: #555; word-break: break-all; }
 </style>
-<h1>frosted — fixture screenshots</h1>
-${groups
-  .filter((g) => g.shots.length)
-  .map(section)
-  .join('\n')}
+<h1>frosted — fixture screenshots <small>${shots.length}</small></h1>
+${grid}
 `,
   );
 }
@@ -325,26 +301,15 @@ try {
   if (existsSync(outDir)) rmSync(outDir, { recursive: true });
   mkdirSync(outDir, { recursive: true });
 
-  const targets = select(await fixtureTargets()).filter(
-    (t) => (t.kind === 'stories' && wantStories) || (t.kind === 'demos' && wantDemos),
-  );
+  const targets = select(await fixtureTargets());
   total = targets.length;
 
   const shots = await capture(targets);
-  const demos = shots.filter((s) => s.file.startsWith('demos/'));
-  const stories = shots.filter((s) => s.file.startsWith('stories/'));
-
-  writeGallery([
-    { title: 'Demos', shots: demos },
-    { title: 'Stories', shots: stories },
-  ]);
+  writeGallery(shots);
 
   const seconds = ((Date.now() - startedAt) / 1000).toFixed(1);
   process.stdout.write(`\r${' '.repeat(72)}\r`);
-  console.log(
-    `${c.green('✓')} ${c.bold(`${shots.length} screenshots`)} in ${seconds}s ` +
-      c.dim(`(${demos.length} demos, ${stories.length} stories)`),
-  );
+  console.log(`${c.green('✓')} ${c.bold(`${shots.length} screenshots`)} in ${seconds}s`);
   console.log(`  ${c.cyan(join(outDir, 'index.html'))}`);
   if (failures.length) {
     console.log(c.red(`  ${failures.length} failed:`));

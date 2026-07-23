@@ -14,9 +14,7 @@ const ROOT = new URL('..', import.meta.url).pathname;
 const fix = process.argv.includes('--fix');
 
 // Nested deps that are deliberate and must NOT be deleted.
-const ALLOWED: Record<string, string[]> = {
-  'tools/props-gen': ['typescript'], // generate-props needs the classic TS compiler API
-};
+const ALLOWED: Record<string, string[]> = {};
 
 let problems = 0;
 

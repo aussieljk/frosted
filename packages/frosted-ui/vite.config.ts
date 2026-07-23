@@ -34,7 +34,7 @@ export default defineConfig({
   // copies of its focus-visible global). List the fixture entries and the full react-aria
   // surface explicitly so the optimizer finishes in one pass.
   optimizeDeps: {
-    entries: ['src/components/**/*.fixture.tsx', 'demos/*.fixture.tsx', 'cosmos/**/*.tsx'],
+    entries: ['fixtures/*.fixture.tsx', 'demos/*.demo.tsx', 'cosmos/**/*.tsx'],
     include: ['@base-ui/react', 'react-aria-components'],
   },
 });

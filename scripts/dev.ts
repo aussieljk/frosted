@@ -6,19 +6,16 @@
  *
  * - Cosmos reads frosted straight from src/, so no dist/ watch build runs here
  *   at all; only the CSS watchers, which produce the styles.css the renderer imports.
- * - `generate:props` (the fixture-control prop data) is skipped when frosted src is
- *   unchanged since the last run, and refreshes in the background otherwise.
  * - Stale dev processes from a previous session (they squat the portless routes)
  *   are killed on startup; `--kill` does only that and exits.
  */
 import { spawn, type ChildProcess } from 'node:child_process';
-import { existsSync, readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
+import { existsSync } from 'node:fs';
 import { createInterface } from 'node:readline';
 import { join, resolve } from 'node:path';
 
 const root = resolve(import.meta.dir, '..');
 const frostedDir = join(root, 'packages/frosted-ui');
-const propsGenDir = join(root, 'tools/props-gen');
 
 const flags = process.argv.slice(2).filter((a) => a.startsWith('--'));
 const noOpen = flags.includes('--no-open');
@@ -166,40 +163,6 @@ async function waitAndOpen({ name, url }: { name: string; url: string }) {
   if (!noOpen) spawn('open', ['-a', 'Safari', url]);
 }
 
-// --- prop tables ---
-
-// Fingerprint of everything generate-props reads; when unchanged, skip the ~7s
-// regeneration entirely. Count catches deletions, max-mtime catches edits.
-function propsFingerprint(): string {
-  let maxMtime = statSync(join(propsGenDir, 'generate-props.ts')).mtimeMs;
-  let count = 0;
-  for (const entry of readdirSync(join(frostedDir, 'src'), { recursive: true, withFileTypes: true })) {
-    if (!entry.isFile()) continue;
-    count++;
-    const mtime = statSync(join(entry.parentPath, entry.name)).mtimeMs;
-    if (mtime > maxMtime) maxMtime = mtime;
-  }
-  return `${count}:${maxMtime}`;
-}
-
-const propsJson = join(frostedDir, 'cosmos/generated/component-props.json');
-
-async function refreshProps() {
-  const stampFile = join(frostedDir, 'cosmos/generated/.props-stamp');
-  const stamp = propsFingerprint();
-  const fresh = existsSync(propsJson) && existsSync(stampFile) && readFileSync(stampFile, 'utf8') === stamp;
-  if (fresh) return;
-
-  const run = (cmd: string[], cwd: string) =>
-    new Promise<number>((done) => {
-      spawn(cmd[0], cmd.slice(1), { cwd, stdio: 'ignore' }).on('exit', (code) => done(code ?? 1));
-    });
-
-  if ((await run(['bun', 'generate-props.ts'], propsGenDir)) !== 0) return;
-  writeFileSync(stampFile, stamp);
-  if (!shuttingDown) console.log(`${c.green('✓')} ${c.bold('props')}     refreshed  ${c.dim(elapsed())}`);
-}
-
 // --- go ---
 
 const stale = killStale();
@@ -222,21 +185,12 @@ if (!existsSync(join(frostedDir, 'styles.css')) || !existsSync(join(frostedDir, 
   if (build.exitCode !== 0) process.exit(build.exitCode);
 }
 
-// The fixture controls import the prop JSON, so on a pristine checkout it must exist
-// before cosmos spawns; otherwise the freshness check (a stat-walk of src/) and any
-// regeneration run behind the servers while they boot.
-if (!existsSync(propsJson)) {
-  console.log(c.dim('generating prop tables…'));
-  await refreshProps();
-}
-
 // The cosmos renderer is served through the proxy as https://frosted-renderer.localhost —
 // Safari blocks plain-http localhost iframes inside the https playground. The alias is
 // machine state (~/.portless/routes.json), so re-register it idempotently on every boot.
 Bun.spawnSync([join(root, 'node_modules/.bin/portless'), 'alias', 'frosted-renderer', '5050']);
 
 procs.forEach(start);
-refreshProps();
 Promise.all(servers.map(waitAndOpen)).then(() => {
   if (!shuttingDown) console.log(c.dim(`\nall ready in ${elapsed()} — ctrl-c to stop\n`));
 });

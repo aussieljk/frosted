@@ -62,7 +62,7 @@
     "dev:theme": "postcss src/styles/theme.css -o theme.css --watch",
     "health": "bun x publint && bun x @arethetypeswrong/cli --pack . --profile esm-only --exclude-entrypoints styles.css styles.lite.css theme.css",
     "lint": "bun run lint:js && bun run lint:css",
-    "lint:js": "bun x oxlint src cosmos demos",
+    "lint:js": "bun x oxlint src cosmos demos fixtures",
     "lint:css": "stylelint \"src/**/*.css\"",
     "generate:emoji-colors": "bun scripts/emoji-colors/generate.ts",
     "generate:icon-adapters": "bun scripts/generate-icon-adapters.ts",
@@ -72,8 +72,7 @@
     "release": "npm version prerelease --no-git-tag-version && npm publish --tag latest",
     "cosmos": "concurrently -k -n css,thm,cos \"bun run dev:css\" \"bun run dev:theme\" \"bun run cosmos:serve\"",
     "cosmos:serve": "portless frosted sh -c 'cosmos --port \"$PORT\"'",
-    "build-cosmos": "bun run generate:props && cosmos-export",
-    "generate:props": "bun ../../tools/props-gen/generate-props.ts",
+    "build-cosmos": "cosmos-export",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

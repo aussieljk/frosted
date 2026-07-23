@@ -1,7 +1,7 @@
 #!/usr/bin/env bun
 // Scaffold a new @aussieljk/frosted component and wire it into every place the repo
 // expects: component files, the components barrel, the CSS aggregate, a cosmos
-// fixture, and a usage demo.
+// fixture page, and a usage demo.
 //
 // Usage:
 //   bun run new:component <kebab-name> [--namespace] [--no-docs]
@@ -162,30 +162,27 @@ create(
 `,
 );
 
+// The cosmos sidebar is a flat list of components: one fixture file per component, in
+// packages/frosted-ui/fixtures, whose Gallery renders the usage demo + every example.
 create(
-  join(componentDir, `${name}.fixture.tsx`),
-  namespace
-    ? `import React from 'react';
+  join(UI, 'fixtures', `${name}.fixture.tsx`),
+  `import React from 'react';
+import { Gallery } from '../cosmos/Gallery';${withDocs ? `\nimport Demo from '../demos/${name}.demo';` : ''}
+import { ${pascal} } from '../src/components';
 
-import { ${pascal} } from '..';
-
-export default function ${pascal}Fixture() {
-  return (
+const examples = {
+  Default: ${
+    namespace
+      ? `(
     <${pascal}.Root>
       <${pascal}.Item>Item</${pascal}.Item>
     </${pascal}.Root>
-  );
-}
-`
-    : `import React from 'react';
+  )`
+      : `<${pascal} />`
+  },
+};
 
-import { ${pascal} } from '..';
-import { useComponentControls } from '../../../cosmos/controls';
-
-export default function ${pascal}Fixture() {
-  const props = useComponentControls('${pascal}');
-  return <${pascal} {...props} />;
-}
+export default <Gallery examples={examples}${withDocs ? ' demo={Demo}' : ''} />;
 `,
 );
 
@@ -217,11 +214,11 @@ edit(
 );
 
 // ---------------------------------------------------------------------------
-// usage demo (a standalone cosmos fixture in packages/frosted-ui/demos)
+// usage demo (copy-pasteable source in packages/frosted-ui/demos, shown by the fixture page)
 
 if (withDocs) {
   create(
-    join(UI, 'demos', `${name}.fixture.tsx`),
+    join(UI, 'demos', `${name}.demo.tsx`),
     namespace
       ? `import React from 'react';
 import { ${pascal} } from '@aussieljk/frosted';
@@ -247,6 +244,6 @@ export default function ${pascal}Demo() {
 console.log(`
 Done. Next steps:
   1. Implement ${pascal} in packages/frosted-ui/src/components/${name}/${name}.tsx (+ its .css and .props.ts)
-  2. Flesh out the fixture${withDocs ? ' and the demo' : ' (demo skipped — rerun without --no-docs or add one by hand)'}
-  3. Run it (regenerates prop data): bun run dev
+  2. Flesh out packages/frosted-ui/fixtures/${name}.fixture.tsx${withDocs ? ' and the demo' : ' (demo skipped — rerun without --no-docs or add one by hand)'}
+  3. Run it: bun run dev
 `);
