@@ -1,10 +1,20 @@
 /*
- * The default text font stack lives in tokens/typography.css (--default-font-family):
- * SF Pro on Apple platforms (via -apple-system), serif elsewhere. Those are all
- * system/local fonts, so no @font-face is needed for them.
+ * Inter, for everyone who doesn't get SF Pro. Apple platforms resolve
+ * -apple-system first and never reach this; everyone else lands on
+ * InterVariable/Inter. Served from rsms.me (Inter's own host) — it defines
+ * `InterVariable` inside an @supports (font-variation-settings: normal) block
+ * and plain `Inter` outside it, so listing both in --default-font-family
+ * (tokens/typography.css) picks the variable file wherever it's supported.
+ *
+ * Consumers who care about the extra request-chain hop can preload it in their
+ * document head instead — this @import stays harmless either way:
+ *   <link rel="preconnect" href="https://rsms.me/">
+ *   <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
  *
  * 'Consolas (Custom)' below is metric-adjusted and used by --code-font-family.
  */
+
+@import url('https://rsms.me/inter/inter.css');
 
 @font-face {
   font-family: 'Consolas (Custom)';

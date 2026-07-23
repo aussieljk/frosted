@@ -15,11 +15,11 @@
  *   --concurrency <n>    parallel browser sessions (default: cores - 2)
  *   --filter <substr>    only capture ids containing <substr>
  *   --shard <i>/<n>      capture only this slice of the work, for splitting across machines
- *   --static             force serving packages/frosted-ui/cosmos-export
- *   --dev                force the dev server (skip the static export even when it is fresh)
+ *   --static             serve packages/frosted-ui/cosmos-export as-is, without rebuilding
+ *   --dev                use the dev server instead of the export
  *
- * By default a static export is used when it is newer than every source file, and the dev
- * server otherwise — serving files is faster than transforming them.
+ * By default the static export is used, rebuilt first when it is older than any source file —
+ * serving files beats having vite transform every fixture.
  */
 import { existsSync, mkdirSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import { cpus } from 'node:os';
@@ -154,14 +154,23 @@ function serveStatic(): () => void {
   return () => server.stop(true);
 }
 
-/** Starts `bun run dev` when cosmos isn't up; returns a teardown for that case only. */
+/** Serves the static export (building it first when stale); `--dev` opts into the dev server. */
 async function ensureCosmos(): Promise<() => void> {
   if (useStatic) return serveStatic();
-  if (!useDev && staticExportIsFresh()) {
-    console.log(
-      c.dim('using the static export (up to date with src/, demos/, cosmos/ and fixtures/) — `--dev` to override'),
-    );
-    return serveStatic();
+  if (!useDev) {
+    if (staticExportIsFresh()) {
+      console.log(
+        c.dim('using the static export (up to date with src/, demos/, cosmos/ and fixtures/) — `--dev` to override'),
+      );
+      return serveStatic();
+    }
+    // Building costs seconds and the sweep then runs off files; screenshotting through the
+    // dev server instead means vite transforms every fixture, and N parallel chromiums can
+    // trigger a mid-session re-optimize that blanks the renderer for the rest of the run.
+    console.log(c.dim('static export is stale — building it (bun run build:cosmos) …'));
+    const built = Bun.spawnSync(['bun', 'run', 'build:cosmos'], { cwd: root, stdout: 'ignore', stderr: 'inherit' });
+    if (built.exitCode === 0) return serveStatic();
+    console.log(c.dim('build:cosmos failed — falling back to the dev server'));
   }
   if (await probe()) {
     console.log(c.dim(`cosmos already running at ${base}`));
@@ -236,7 +245,17 @@ const progress = (id: string) => {
  */
 async function capture(targets: Target[]): Promise<Shot[]> {
   const shots: Shot[] = [];
+  const missed: Target[] = [];
   let next = 0;
+
+  const shoot = async (session: string, target: Target) => {
+    await ab(session, ['open', target.url]);
+    const state = await evaluate(session, READY());
+    const file = join(outDir, `${target.id}.png`);
+    const shot = state === 'ready' ? await ab(session, ['screenshot', '--full', file]) : { ok: false };
+    if (shot.ok) shots.push({ id: target.id, file: `${target.id}.png` });
+    return shot.ok ? null : `${target.id} (${state ?? 'no response'})`;
+  };
 
   await Promise.all(
     Array.from({ length: Math.min(concurrency, targets.length) }, async (_, worker) => {
@@ -244,18 +263,28 @@ async function capture(targets: Target[]): Promise<Shot[]> {
 
       while (next < targets.length) {
         const target = targets[next++]!;
-        await ab(session, ['open', target.url]);
-        const state = await evaluate(session, READY());
-
-        const file = join(outDir, `${target.id}.png`);
-        const shot = state === 'ready' ? await ab(session, ['screenshot', '--full', file]) : { ok: false };
-        if (shot.ok) shots.push({ id: target.id, file: `${target.id}.png` });
-        else failures.push(`${target.id} (${state ?? 'no response'})`);
+        if (await shoot(session, target)) missed.push(target);
         progress(target.id);
       }
       await ab(session, ['close']);
     }),
   );
+
+  // A dev server under N parallel chromiums can blank a renderer (a mid-session vite
+  // re-optimize does it), which is transient — one serial retry recovers those rather
+  // than leaving holes in the sweep.
+  if (missed.length) {
+    process.stdout.write(`\r${' '.repeat(72)}\r`);
+    console.log(c.dim(`retrying ${missed.length} that didn't paint…`));
+    total += missed.length;
+    const session = 'frosted-shot-retry';
+    for (const target of missed) {
+      const failure = await shoot(session, target);
+      if (failure) failures.push(failure);
+      progress(target.id);
+    }
+    await ab(session, ['close']);
+  }
 
   return shots;
 }

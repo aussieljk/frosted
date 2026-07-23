@@ -17,7 +17,7 @@ export function ThemeDecorator({ children }: { children: ReactNode }) {
   const [accentColor] = useFixtureSelect('accent', { options: accentColors, defaultValue: 'blue' });
   const [grayColor] = useFixtureSelect('gray', { options: grayColors, defaultValue: 'gray' });
 
-  // No font override here: components use --default-font-family (SF Pro via -apple-system).
+  // No font override here: components use --default-font-family (SF Pro via -apple-system, Inter elsewhere).
   return (
     <Theme
       appearance={appearance}

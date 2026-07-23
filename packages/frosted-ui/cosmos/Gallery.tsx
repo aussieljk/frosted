@@ -29,7 +29,7 @@ export function Gallery({ demo, examples }: { demo?: Example; examples?: Record<
           key={name}
           style={{
             paddingBlock: 'var(--space-5)',
-            borderTop: i === 0 ? undefined : '1px solid var(--gray-a5)',
+            borderTop: i === 0 ? undefined : '1px solid var(--gray-alpha-300)',
           }}
         >
           <h2
@@ -39,7 +39,7 @@ export function Gallery({ demo, examples }: { demo?: Example; examples?: Record<
               fontWeight: 500,
               letterSpacing: '0.08em',
               textTransform: 'uppercase',
-              color: 'var(--gray-11)',
+              color: 'var(--gray-alpha-600)',
             }}
           >
             {name}
