@@ -120,7 +120,7 @@ function mdxToMarkdown(source: string): string {
 }
 
 interface Page {
-  /** Sort key — Introduction first, then the numbered guides, then the rest by title. */
+  /** Sort key — the numbered guides first, then the rest by title. */
   order: string;
   title: string;
   url: string;
@@ -151,7 +151,7 @@ function collect(dir: string): Page[] {
         ?.trim() ?? '';
 
     const numbered = entry.name.match(/^(\d+)\./)?.[1];
-    const order = entry.name === 'Introduction.mdx' ? '0' : numbered ? `1${numbered.padStart(3, '0')}` : `2${title}`;
+    const order = numbered ? `1${numbered.padStart(3, '0')}` : `2${title}`;
 
     pages.push({
       order,
