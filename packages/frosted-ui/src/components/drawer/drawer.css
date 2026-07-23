@@ -15,7 +15,7 @@
   background-color: var(--color-panel-solid);
 
   border-radius: 12px;
-  box-shadow: 0px 0px 0px 1px var(--gray-a5);
+  box-shadow: 0px 0px 0px 1px var(--gray-alpha-300);
   outline: none;
   --drawer-content-padding: 16px;
 

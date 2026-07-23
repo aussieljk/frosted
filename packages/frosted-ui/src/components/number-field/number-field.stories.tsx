@@ -723,7 +723,7 @@ export const OnValueChangeVsCommitted: Story = {
               }}
             >
               {changeLog.length === 0 ? (
-                <span style={{ color: 'var(--gray-9)' }}>No events yet...</span>
+                <span style={{ color: 'var(--gray-700)' }}>No events yet...</span>
               ) : (
                 changeLog.map((log, i) => (
                   <div key={i} style={{ opacity: 1 - i * 0.1 }}>
@@ -752,7 +752,7 @@ export const OnValueChangeVsCommitted: Story = {
               }}
             >
               {commitLog.length === 0 ? (
-                <span style={{ color: 'var(--gray-9)' }}>No events yet...</span>
+                <span style={{ color: 'var(--gray-700)' }}>No events yet...</span>
               ) : (
                 commitLog.map((log, i) => (
                   <div key={i} style={{ opacity: 1 - i * 0.1 }}>

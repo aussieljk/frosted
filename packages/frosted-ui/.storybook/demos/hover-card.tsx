@@ -12,14 +12,14 @@ export default function HoverCardDemo() {
           </Link>
         </HoverCard.Trigger>
         <HoverCard.Content>
-          <div style={{ display: 'flex', gap: 16 }}>
+          <div className="flex gap-4">
             <Avatar size="3" fallback="AF" />
             <div>
               <Heading size="3">@aussieljk/frosted</Heading>
               <Text render={<div />} size="2" color="gray">
                 aussieljk
               </Text>
-              <Text render={<div />} size="2" style={{ maxWidth: 300, marginTop: 12 }}>
+              <Text render={<div />} size="2" className="mt-3 max-w-75">
                 React components library built on top of Base UI primitives.
               </Text>
             </div>

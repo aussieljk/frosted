@@ -9,9 +9,9 @@
 
   background: var(--skeleton-background-color);
 
-  --skeleton-background-color: var(--accent-a3);
+  --skeleton-background-color: var(--accent-alpha-100);
   &:where(.fui-high-contrast) {
-    --skeleton-background-color: var(--accent-a4);
+    --skeleton-background-color: var(--accent-alpha-200);
   }
 }
 
@@ -69,9 +69,9 @@
   margin: 0;
   height: var(--skeleton-text-line-height);
 
-  --skeleton-background-color: var(--accent-a3);
+  --skeleton-background-color: var(--accent-alpha-100);
   &:where(.fui-high-contrast) {
-    --skeleton-background-color: var(--accent-a4);
+    --skeleton-background-color: var(--accent-alpha-200);
   }
 }
 
@@ -152,9 +152,9 @@
 
   background: var(--skeleton-background-color);
 
-  --skeleton-background-color: var(--accent-a3);
+  --skeleton-background-color: var(--accent-alpha-100);
   &:where(.fui-high-contrast) {
-    --skeleton-background-color: var(--accent-a4);
+    --skeleton-background-color: var(--accent-alpha-200);
   }
 }
 

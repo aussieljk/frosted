@@ -5,7 +5,7 @@ import { lucideAdapter } from '@aussieljk/frosted/icons/lucide';
 export default function CalloutDemo() {
   return (
     <IconProvider library={lucideAdapter}>
-      <Callout.Root color="warning" style={{ maxWidth: 420 }}>
+      <Callout.Root color="warning" className="max-w-105">
         <Callout.Icon>
           <Icons.Info />
         </Callout.Icon>

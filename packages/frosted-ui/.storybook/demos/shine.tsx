@@ -3,7 +3,7 @@ import { Badge, Shine, Text } from '@aussieljk/frosted';
 
 export default function ShineDemo() {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16 }}>
+    <div className="flex flex-col items-center gap-4">
       <Shine puffyness="2">
         <Text size="9" weight="bold">
           Shine ✨

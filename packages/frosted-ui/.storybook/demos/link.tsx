@@ -3,11 +3,11 @@ import { Link, Text } from '@aussieljk/frosted';
 
 export default function LinkDemo() {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
+    <div className="flex flex-col gap-2">
       <Text size="3">
         Read the <Link href="#">documentation</Link> to get started.
       </Text>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)' }}>
+      <div className="flex items-center gap-4">
         <Link href="#" underline="auto">
           Auto underline
         </Link>

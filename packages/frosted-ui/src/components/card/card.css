@@ -71,28 +71,28 @@
   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
 
   &::after {
-    box-shadow: inset 0 0 0 1px var(--gray-a5);
+    box-shadow: inset 0 0 0 1px var(--gray-alpha-300);
   }
 
   &:where(button, [href], [type='button']) {
     @media (hover: hover) {
       &:where(:hover)::after {
-        box-shadow: inset 0 0 0 1px var(--gray-a7);
+        box-shadow: inset 0 0 0 1px var(--gray-alpha-500);
       }
     }
     &:where(:active:not([data-state='open'])) {
       &:where(:focus-visible) {
-        background-color: var(--gray-a3);
+        background-color: var(--gray-alpha-100);
       }
     }
     &:where([data-pressed]),
     &:where([data-state='open']),
     &:where(:active) {
       box-shadow: none;
-      background-color: var(--gray-3);
+      background-color: var(--gray-100);
 
       &::after {
-        box-shadow: inset 0 0 0 1px var(--gray-a6);
+        box-shadow: inset 0 0 0 1px var(--gray-alpha-400);
       }
     }
   }
@@ -106,21 +106,21 @@
   &:where(button, [href], [type='button']) {
     @media (hover: hover) {
       &:where(:hover)::after {
-        box-shadow: inset 0 0 0 1px var(--gray-a7);
+        box-shadow: inset 0 0 0 1px var(--gray-alpha-500);
       }
     }
     &:where(:active:not([data-state='open'])) {
       &:where(:focus-visible) {
-        background-color: var(--gray-a3);
+        background-color: var(--gray-alpha-100);
       }
     }
     &:where([data-pressed]),
     &:where([data-state='open']),
     &:where(:active) {
-      background-color: var(--gray-3);
+      background-color: var(--gray-100);
 
       &::after {
-        box-shadow: inset 0 0 0 1px var(--gray-a6);
+        box-shadow: inset 0 0 0 1px var(--gray-alpha-400);
       }
     }
   }
@@ -132,17 +132,17 @@
   &:where(button, [href], [type='button']) {
     @media (hover: hover) {
       &:where(:hover) {
-        background-color: var(--gray-a3);
+        background-color: var(--gray-alpha-100);
       }
     }
 
     &:where([data-pressed]),
     &:where([data-state='open']),
     &:where(:active) {
-      background-color: var(--gray-a3);
+      background-color: var(--gray-alpha-100);
     }
     &:where(:active:not([data-state='open'])) {
-      background-color: var(--gray-a4);
+      background-color: var(--gray-alpha-200);
     }
   }
 }
@@ -150,22 +150,22 @@
 /* soft */
 
 .fui-Card:where(.fui-variant-soft) {
-  background-color: var(--gray-a3);
+  background-color: var(--gray-alpha-100);
 
   &:where(button, [href], [type='button']) {
     @media (hover: hover) {
       &:where(:hover) {
-        background-color: var(--gray-a4);
+        background-color: var(--gray-alpha-200);
       }
     }
 
     &:where([data-pressed]),
     &:where([data-state='open']),
     &:where(:active) {
-      background-color: var(--gray-a4);
+      background-color: var(--gray-alpha-200);
     }
     &:where(:active:not([data-state='open'])) {
-      background-color: var(--gray-a5);
+      background-color: var(--gray-alpha-300);
     }
   }
 }

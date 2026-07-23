@@ -140,7 +140,7 @@ export const InsetContent: Story = {
                   objectFit: 'cover',
                   height: '100%',
                   width: 150,
-                  backgroundColor: 'var(--gray-5)',
+                  backgroundColor: 'var(--gray-300)',
                 }}
               />
             </Inset>
@@ -429,7 +429,7 @@ export const LinkPreview: Story = {
                   width: '100%',
                   height: 120,
                   objectFit: 'cover',
-                  backgroundColor: 'var(--gray-5)',
+                  backgroundColor: 'var(--gray-300)',
                 }}
               />
             </Inset>
@@ -493,7 +493,7 @@ export const OpenChangeComplete: Story = {
         <div
           style={{
             padding: 'var(--space-3)',
-            backgroundColor: 'var(--gray-2)',
+            backgroundColor: 'var(--gray-50)',
             borderRadius: 'var(--radius-2)',
             fontFamily: 'monospace',
             fontSize: 'var(--font-size-1)',
@@ -509,7 +509,7 @@ export const OpenChangeComplete: Story = {
             </Text>
           ) : (
             events.map((event, i) => (
-              <div key={i} style={{ color: 'var(--gray-11)' }}>
+              <div key={i} style={{ color: 'var(--gray-900)' }}>
                 {event}
               </div>
             ))
@@ -637,7 +637,7 @@ export const CollisionBoundary: Story = {
         <div
           ref={setBoundary}
           style={{
-            border: '2px dashed var(--gray-6)',
+            border: '2px dashed var(--gray-400)',
             borderRadius: 'var(--radius-3)',
             padding: 'var(--space-6)',
             height: 300,
@@ -704,7 +704,7 @@ export const CollisionAvoidance: Story = {
           style={{
             height: 400,
             overflow: 'auto',
-            border: '1px solid var(--gray-6)',
+            border: '1px solid var(--gray-400)',
             borderRadius: 'var(--radius-2)',
             position: 'relative',
           }}
@@ -863,7 +863,7 @@ export const DisableAnchorTracking: Story = {
               style={{
                 width: 220,
                 height: 100,
-                border: '1px solid var(--gray-6)',
+                border: '1px solid var(--gray-400)',
                 borderRadius: 'var(--radius-2)',
                 padding: 'var(--space-3)',
                 position: 'relative',
@@ -900,7 +900,7 @@ export const DisableAnchorTracking: Story = {
               style={{
                 width: 220,
                 height: 100,
-                border: '1px solid var(--gray-6)',
+                border: '1px solid var(--gray-400)',
                 borderRadius: 'var(--radius-2)',
                 padding: 'var(--space-3)',
                 position: 'relative',

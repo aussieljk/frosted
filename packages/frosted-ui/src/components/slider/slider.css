@@ -21,28 +21,28 @@
   }
 
   & :where(.fui-SliderTrack) {
-    background-color: var(--gray-a4);
+    background-color: var(--gray-alpha-200);
     /* Blend with white to increase contrast in dark mode */
-    background-image: linear-gradient(var(--white-a1), var(--white-a1));
+    background-image: linear-gradient(var(--white-alpha-10), var(--white-alpha-10));
 
     &:where([data-disabled]) {
-      background-color: var(--gray-a4);
+      background-color: var(--gray-alpha-200);
       background-image: none;
     }
   }
 
   & :where(.fui-SliderRange) {
-    background-color: var(--accent-9);
+    background-color: var(--accent-700);
   }
 
   & :where(.fui-SliderThumb) {
     --slider-thumb-box-shadow:
-      0 0 0 1px var(--black-a3), 0 0 0 1px var(--gray-a2), 0 0 0 1px var(--accent-a2), 0 1px 2px var(--gray-a4),
-      0 1px 3px -0.5px var(--gray-a3);
+      0 0 0 1px var(--black-alpha-100), 0 0 0 1px var(--gray-alpha-50), 0 0 0 1px var(--accent-alpha-50), 0 1px 2px var(--gray-alpha-200),
+      0 1px 3px -0.5px var(--gray-alpha-100);
 
     &:where([data-disabled])::after {
-      background-color: var(--gray-1);
-      box-shadow: 0 0 0 1px var(--gray-5);
+      background-color: var(--gray-10);
+      box-shadow: 0 0 0 1px var(--gray-300);
     }
   }
 }
@@ -120,7 +120,7 @@
   &:has(:focus-visible)::after {
     box-shadow:
       var(--slider-thumb-box-shadow),
-      0 0 0 3px var(--accent-3),
+      0 0 0 3px var(--accent-100),
       0 0 0 5px var(--color-focus-root);
   }
 
@@ -150,7 +150,7 @@
 /* all high-contrast */
 
 :where(.frosted-ui) {
-  --slider-range-high-contrast-background-image: linear-gradient(var(--black-a8), var(--black-a8));
+  --slider-range-high-contrast-background-image: linear-gradient(var(--black-alpha-600), var(--black-alpha-600));
 }
 .dark,
 .dark-theme,
@@ -161,7 +161,7 @@
 .fui-SliderRoot:where(.fui-high-contrast) {
   & :where(.fui-SliderRange) {
     /* blend black and accent */
-    background: var(--accent-12);
+    background: var(--accent-950);
   }
 }
 
@@ -183,6 +183,6 @@
     mix-blend-mode: var(--slider-disabled-blend-mode);
   }
   .fui-SliderRange:where(&) {
-    background-color: var(--gray-a5);
+    background-color: var(--gray-alpha-300);
   }
 }

@@ -3,7 +3,7 @@ import { StackedHorizontalBarChart } from '@aussieljk/frosted';
 
 export default function StackedHorizontalBarChartDemo() {
   return (
-    <div style={{ width: 320 }}>
+    <div className="w-80">
       <StackedHorizontalBarChart
         data={[
           { label: 'Completed', value: 60, color: 'green' },

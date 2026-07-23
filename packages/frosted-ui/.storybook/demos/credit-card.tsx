@@ -8,7 +8,7 @@ export default function CreditCardDemo() {
         <CreditCard.Front>
           <CreditCard.FrontHeader>
             <CreditCard.Logo>
-              <span style={{ fontSize: 20, fontWeight: 700, letterSpacing: '-0.03em', lineHeight: 1 }}>frosted</span>
+              <span className="text-[20px] leading-none font-bold tracking-[-0.03em]">frosted</span>
             </CreditCard.Logo>
             <CreditCard.Brand>
               <CreditCard.BrandLogo brand="visa" />
@@ -43,7 +43,7 @@ export default function CreditCardDemo() {
         </CreditCard.Back>
       </CreditCard.Content>
 
-      <div style={{ marginTop: 16, display: 'flex', justifyContent: 'center' }}>
+      <div className="mt-4 flex justify-center">
         <CreditCard.Trigger render={<Button variant="surface" size="2" />}>Flip card</CreditCard.Trigger>
       </div>
     </CreditCard.Root>

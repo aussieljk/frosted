@@ -3,7 +3,7 @@ import { Code } from '@aussieljk/frosted';
 
 export default function CodeDemo() {
   return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)', flexWrap: 'wrap' }}>
+    <div className="flex flex-wrap items-center gap-3">
       <Code variant="solid">console.log()</Code>
       <Code variant="soft">console.log()</Code>
       <Code variant="outline">console.log()</Code>

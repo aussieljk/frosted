@@ -11,7 +11,7 @@ const Box = ({ height, children }: { height: number; children: React.ReactNode }
       display: 'grid',
       placeItems: 'center',
       borderRadius: 8,
-      background: 'var(--accent-a4)',
+      background: 'var(--accent-alpha-200)',
     }}
   >
     {children}

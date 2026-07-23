@@ -830,8 +830,8 @@ export const Controlled: Story = {
             style={{
               padding: '6px 12px',
               borderRadius: 6,
-              border: '1px solid var(--gray-6)',
-              background: 'var(--gray-3)',
+              border: '1px solid var(--gray-400)',
+              background: 'var(--gray-100)',
               cursor: 'pointer',
             }}
           >
@@ -846,8 +846,8 @@ export const Controlled: Story = {
             style={{
               padding: '6px 12px',
               borderRadius: 6,
-              border: '1px solid var(--gray-6)',
-              background: 'var(--gray-3)',
+              border: '1px solid var(--gray-400)',
+              background: 'var(--gray-100)',
               cursor: 'pointer',
             }}
           >
@@ -897,7 +897,7 @@ export const ObjectValues: Story = {
     const renderShippingValue = (method: ShippingMethod) => (
       <span style={{ display: 'flex', flexDirection: 'column', gap: 2, textAlign: 'left' }}>
         <span style={{ fontWeight: 500 }}>{method.name}</span>
-        <span style={{ fontSize: '0.85em', color: 'var(--gray-11)' }}>
+        <span style={{ fontSize: '0.85em', color: 'var(--gray-900)' }}>
           {method.duration} ({method.price})
         </span>
       </span>
@@ -926,7 +926,7 @@ export const ObjectValues: Story = {
               <Select.Item key={method.id} value={method} style={{ height: 'auto', paddingTop: 8, paddingBottom: 8 }}>
                 <span style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
                   <span style={{ fontWeight: 500 }}>{method.name}</span>
-                  <span style={{ fontSize: '0.85em', color: 'var(--gray-11)' }}>
+                  <span style={{ fontSize: '0.85em', color: 'var(--gray-900)' }}>
                     {method.duration} ({method.price})
                   </span>
                 </span>

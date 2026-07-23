@@ -3,7 +3,7 @@ import { Table } from '@aussieljk/frosted';
 
 export default function TableDemo() {
   return (
-    <Table.Root variant="surface" style={{ minWidth: 420 }}>
+    <Table.Root variant="surface" className="min-w-105">
       <Table.Table>
         <Table.Header>
           <Table.Row>

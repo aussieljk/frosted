@@ -480,7 +480,7 @@ export const InputInsidePopup: Story = {
           }
         />
         <Combobox.Content>
-          <div style={{ padding: 8, borderBottom: '1px solid var(--gray-a5)' }}>
+          <div style={{ padding: 8, borderBottom: '1px solid var(--gray-alpha-300)' }}>
             <Combobox.InputRoot>
               <Combobox.InputSlot>
                 <SearchIcon size={16} />

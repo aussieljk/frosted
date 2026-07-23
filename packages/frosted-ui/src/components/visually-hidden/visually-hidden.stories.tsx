@@ -87,7 +87,7 @@ export const SkipLink: Story = {
           left: -9999,
           zIndex: 999,
           padding: '1em',
-          backgroundColor: 'var(--accent-9)',
+          backgroundColor: 'var(--accent-700)',
           color: 'var(--accent-contrast)',
           textDecoration: 'none',
         }}
@@ -102,7 +102,7 @@ export const SkipLink: Story = {
         Skip to main content
       </a>
 
-      <div id="main-content" style={{ padding: 16, border: '1px solid var(--gray-6)' }}>
+      <div id="main-content" style={{ padding: 16, border: '1px solid var(--gray-400)' }}>
         <Text>Main content area</Text>
       </div>
     </div>
@@ -128,7 +128,7 @@ export const FormLabels: Story = {
               width: '100%',
               padding: '8px 12px',
               borderRadius: 'var(--radius-2)',
-              border: '1px solid var(--gray-6)',
+              border: '1px solid var(--gray-400)',
               backgroundColor: 'var(--color-surface)',
             }}
           />
@@ -159,7 +159,7 @@ export const WithRenderProp: Story = {
             style={{
               padding: '8px 12px',
               borderRadius: 'var(--radius-2)',
-              border: '1px solid var(--gray-6)',
+              border: '1px solid var(--gray-400)',
             }}
           />
         </div>

@@ -3,8 +3,8 @@ import { Heading, ScrollArea, Text } from '@aussieljk/frosted';
 
 export default function ScrollAreaDemo() {
   return (
-    <ScrollArea type="hover" scrollbars="vertical" style={{ height: 160, maxWidth: 480 }}>
-      <div style={{ paddingRight: 16, display: 'flex', flexDirection: 'column', gap: 12 }}>
+    <ScrollArea type="hover" scrollbars="vertical" className="h-40 max-w-120">
+      <div className="flex flex-col gap-3 pr-4">
         <Heading size="4" trim="start">
           Principles of the typographic craft
         </Heading>

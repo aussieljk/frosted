@@ -8,7 +8,7 @@
   position: relative;
 
   &:where(.fui-high-contrast) :where(.fui-AvatarFallback) {
-    color: var(--accent-12);
+    color: var(--accent-950);
   }
   &:where(.fui-shape-circle) {
     --radius-full: var(--radius-thumb);

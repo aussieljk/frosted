@@ -15,7 +15,7 @@
   min-width: 0; /* Prevent fieldset from expanding beyond container */
 
   &:where([data-disabled]) {
-    color: var(--gray-a8);
+    color: var(--gray-alpha-600);
   }
 }
 
@@ -36,7 +36,7 @@
   cursor: default;
 
   &:where([data-disabled]) {
-    color: var(--gray-a8);
+    color: var(--gray-alpha-600);
   }
   &:where([data-variant='label']) {
     margin-bottom: 8px;

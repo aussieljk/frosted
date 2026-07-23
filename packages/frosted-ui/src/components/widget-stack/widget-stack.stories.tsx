@@ -42,8 +42,8 @@ export const Default: Story = {
               height: '100%',
               justifyContent: 'space-between',
               padding: 'var(--space-4)',
-              background: 'linear-gradient(var(--blue-9), var(--blue-6))',
-              color: 'var(--blue-9-contrast)',
+              background: 'linear-gradient(var(--blue-700), var(--blue-400))',
+              color: 'var(--blue-700-contrast)',
             }}
           >
             <div
@@ -110,7 +110,7 @@ export const Default: Story = {
                 width: '100%',
                 padding: 'var(--space-4)',
                 height: '50%',
-                background: 'var(--gray-2)',
+                background: 'var(--gray-50)',
               }}
             >
               <Text weight="medium" size="4" trim="start">
@@ -183,8 +183,8 @@ export const Orientation: Story = {
                 height: '100%',
                 justifyContent: 'space-between',
                 padding: 'var(--space-4)',
-                background: 'linear-gradient(var(--blue-9), var(--blue-6))',
-                color: 'var(--blue-9-contrast)',
+                background: 'linear-gradient(var(--blue-700), var(--blue-400))',
+                color: 'var(--blue-700-contrast)',
               }}
             >
               <div
@@ -251,7 +251,7 @@ export const Orientation: Story = {
                   width: '100%',
                   padding: 'var(--space-4)',
                   height: '50%',
-                  background: 'var(--gray-2)',
+                  background: 'var(--gray-50)',
                 }}
               >
                 <Text weight="medium" size="4" trim="start">
@@ -295,8 +295,8 @@ export const Orientation: Story = {
                 height: '100%',
                 justifyContent: 'space-between',
                 padding: 'var(--space-4)',
-                background: 'linear-gradient(var(--blue-9), var(--blue-6))',
-                color: 'var(--blue-9-contrast)',
+                background: 'linear-gradient(var(--blue-700), var(--blue-400))',
+                color: 'var(--blue-700-contrast)',
               }}
             >
               <div
@@ -363,7 +363,7 @@ export const Orientation: Story = {
                   width: '100%',
                   padding: 'var(--space-4)',
                   height: '50%',
-                  background: 'var(--gray-2)',
+                  background: 'var(--gray-50)',
                 }}
               >
                 <Text weight="medium" size="4" trim="start">
@@ -438,8 +438,8 @@ export const SingleWidget: Story = {
                 height: '100%',
                 justifyContent: 'space-between',
                 padding: 'var(--space-4)',
-                background: 'linear-gradient(var(--blue-9), var(--blue-6))',
-                color: 'var(--blue-9-contrast)',
+                background: 'linear-gradient(var(--blue-700), var(--blue-400))',
+                color: 'var(--blue-700-contrast)',
               }}
             >
               <div
@@ -506,8 +506,8 @@ export const WithControls: Story = {
                 height: '100%',
                 justifyContent: 'space-between',
                 padding: 'var(--space-4)',
-                background: 'linear-gradient(var(--blue-9), var(--blue-6))',
-                color: 'var(--blue-9-contrast)',
+                background: 'linear-gradient(var(--blue-700), var(--blue-400))',
+                color: 'var(--blue-700-contrast)',
               }}
             >
               <div
@@ -574,7 +574,7 @@ export const WithControls: Story = {
                   width: '100%',
                   padding: 'var(--space-4)',
                   height: '50%',
-                  background: 'var(--gray-2)',
+                  background: 'var(--gray-50)',
                 }}
               >
                 <Text weight="medium" size="4" trim="start">
@@ -654,8 +654,8 @@ export const AutoPlay: Story = {
                 height: '100%',
                 justifyContent: 'space-between',
                 padding: 'var(--space-4)',
-                background: 'linear-gradient(var(--blue-9), var(--blue-6))',
-                color: 'var(--blue-9-contrast)',
+                background: 'linear-gradient(var(--blue-700), var(--blue-400))',
+                color: 'var(--blue-700-contrast)',
               }}
             >
               <div
@@ -722,7 +722,7 @@ export const AutoPlay: Story = {
                   width: '100%',
                   padding: 'var(--space-4)',
                   height: '50%',
-                  background: 'var(--gray-2)',
+                  background: 'var(--gray-50)',
                 }}
               >
                 <Text weight="medium" size="4" trim="start">

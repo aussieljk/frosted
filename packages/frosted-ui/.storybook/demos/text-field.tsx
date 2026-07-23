@@ -3,7 +3,7 @@ import { TextField } from '@aussieljk/frosted';
 
 export default function TextFieldDemo() {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 12, width: 280 }}>
+    <div className="flex w-70 flex-col gap-3">
       <TextField.Root>
         <TextField.Slot>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

@@ -74,10 +74,10 @@
 
 .fui-Code:where(.fui-variant-ghost) {
   --code-variant-font-size-adjust: var(--code-font-size-adjust);
-  color: var(--accent-a11);
+  color: var(--accent-alpha-900);
 
   &:where(.fui-high-contrast) {
-    color: var(--accent-12);
+    color: var(--accent-950);
   }
 
   :where(.fui-Link) & {
@@ -99,27 +99,27 @@
 
 .fui-Code:where(.fui-variant-solid) {
   padding: var(--code-padding-top) 0.25em var(--code-padding-bottom);
-  background-color: var(--accent-a9);
-  color: var(--accent-9-contrast);
+  background-color: var(--accent-alpha-700);
+  color: var(--accent-700-contrast);
 
   &:where(.fui-high-contrast) {
-    background-color: var(--accent-12);
-    color: var(--accent-1);
+    background-color: var(--accent-950);
+    color: var(--accent-10);
   }
 
   &::selection {
-    background-color: var(--accent-7);
-    color: var(--accent-12);
+    background-color: var(--accent-500);
+    color: var(--accent-950);
   }
 
   :where(.fui-Link:has(&:only-child)) {
     & .fui-Code {
       @media (hover: hover) {
         &:where(:hover) {
-          background-color: var(--accent-10);
+          background-color: var(--accent-800);
         }
         &:where(.fui-high-contrast:hover) {
-          background-color: var(--accent-12);
+          background-color: var(--accent-950);
           /* Re-use base button hover filter */
           filter: var(--base-button-solid-high-contrast-hover-filter);
         }
@@ -136,25 +136,25 @@
 
 .fui-Code:where(.fui-variant-soft) {
   padding: var(--code-padding-top) 0.25em var(--code-padding-bottom);
-  background-color: var(--accent-a3);
-  color: var(--accent-a11);
+  background-color: var(--accent-alpha-100);
+  color: var(--accent-alpha-900);
 
   &:where(.fui-high-contrast) {
-    background-color: var(--accent-a4);
-    color: var(--accent-12);
+    background-color: var(--accent-alpha-200);
+    color: var(--accent-950);
   }
 
   :where(.fui-Link:has(&:only-child)) {
     & .fui-Code {
       @media (hover: hover) {
         &:where(:hover) {
-          background-color: var(--accent-a4);
+          background-color: var(--accent-alpha-200);
         }
       }
     }
     &:where(:focus-visible) .fui-Code {
       /* Use gray outline when component color is gray */
-      outline: 2px solid var(--accent-8);
+      outline: 2px solid var(--accent-600);
       outline-offset: -1px;
     }
   }
@@ -164,21 +164,21 @@
 
 .fui-Code:where(.fui-variant-outline) {
   padding: var(--code-padding-top) 0.25em var(--code-padding-bottom);
-  box-shadow: inset 0 0 0 max(1px, 0.033em) var(--accent-a8);
-  color: var(--accent-a11);
+  box-shadow: inset 0 0 0 max(1px, 0.033em) var(--accent-alpha-600);
+  color: var(--accent-alpha-900);
 
   &:where(.fui-high-contrast) {
     box-shadow:
-      inset 0 0 0 max(1px, 0.033em) var(--accent-a7),
-      inset 0 0 0 max(1px, 0.033em) var(--gray-a11);
-    color: var(--accent-12);
+      inset 0 0 0 max(1px, 0.033em) var(--accent-alpha-500),
+      inset 0 0 0 max(1px, 0.033em) var(--gray-alpha-900);
+    color: var(--accent-950);
   }
 
   :where(.fui-Link:has(&:only-child)) {
     & .fui-Code {
       @media (hover: hover) {
         &:where(:hover) {
-          background-color: var(--accent-a2);
+          background-color: var(--accent-alpha-50);
         }
       }
     }

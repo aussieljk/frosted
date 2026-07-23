@@ -584,7 +584,7 @@ export const CustomContent: Story = {
           onClick={() =>
             toast.custom(
               ({ close, Toast }) => (
-                <Toast.Root style={{ background: 'var(--success-3)' }}>
+                <Toast.Root style={{ background: 'var(--success-100)' }}>
                   <Toast.Content>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)' }}>
                       <Text size="2" weight="medium" style={{ flex: 1 }}>

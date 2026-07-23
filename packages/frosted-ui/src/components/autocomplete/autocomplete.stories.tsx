@@ -121,9 +121,9 @@ export const Default: Story = {
       <div
         style={{
           padding: 'var(--space-4)',
-          backgroundColor: 'var(--gray-a2)',
+          backgroundColor: 'var(--gray-alpha-50)',
           borderRadius: 'var(--radius-3)',
-          borderLeft: '3px solid var(--accent-9)',
+          borderLeft: '3px solid var(--accent-700)',
         }}
       >
         <Text size="2" weight="bold" style={{ marginBottom: 'var(--space-3)', display: 'block' }}>
@@ -468,7 +468,7 @@ export const Controlled: Story = {
         <div
           style={{
             padding: 'var(--space-3)',
-            backgroundColor: 'var(--gray-a3)',
+            backgroundColor: 'var(--gray-alpha-100)',
             borderRadius: 'var(--radius-2)',
           }}
         >
@@ -934,7 +934,7 @@ export const GridLayout: Story = {
               </div>
               <Autocomplete.Empty
                 style={{
-                  color: 'var(--gray-a10)',
+                  color: 'var(--gray-alpha-800)',
                 }}
               >
                 No emojis found
@@ -961,7 +961,7 @@ export const GridLayout: Story = {
                             padding: 8,
                             fontSize: 12,
                             fontWeight: 600,
-                            color: 'var(--gray-a10)',
+                            color: 'var(--gray-alpha-800)',
                             textTransform: 'uppercase',
                             letterSpacing: '0.025em',
                             backgroundColor: 'var(--color-panel)',
@@ -1228,7 +1228,7 @@ export const CommandPicker: Story = {
                     <EmptyState.Media>
                       <Frown size={24} />
                     </EmptyState.Media>
-                    <EmptyState.Title size="2" style={{ color: 'var(--gray-12)' }}>
+                    <EmptyState.Title size="2" style={{ color: 'var(--gray-950)' }}>
                       No matching commands found
                     </EmptyState.Title>
                     <EmptyState.Description size="1" style={{ marginTop: 4 }}>
@@ -1247,7 +1247,7 @@ export const CommandPicker: Story = {
                           padding: 'var(--space-2) var(--space-3)',
                           fontSize: 'var(--font-size-1)',
                           fontWeight: 500,
-                          color: 'var(--gray-a10)',
+                          color: 'var(--gray-alpha-800)',
                           textTransform: 'uppercase',
                           letterSpacing: '0.05em',
                         }}
@@ -1283,8 +1283,8 @@ export const CommandPicker: Story = {
                                 width: 28,
                                 height: 28,
                                 borderRadius: 'var(--radius-2)',
-                                background: 'var(--gray-a3)',
-                                color: 'var(--gray-a11)',
+                                background: 'var(--gray-alpha-100)',
+                                color: 'var(--gray-alpha-900)',
                               }}
                             >
                               {command.icon}
@@ -1304,12 +1304,12 @@ export const CommandPicker: Story = {
               size="1"
               style={{
                 padding: 'var(--space-2) var(--space-3)',
-                borderTop: '1px solid var(--gray-a4)',
+                borderTop: '1px solid var(--gray-alpha-200)',
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
 
-                color: 'var(--gray-a10)',
+                color: 'var(--gray-alpha-800)',
               }}
             >
               <span style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)' }}>
@@ -1983,7 +1983,7 @@ export const LimitResults: Story = {
                   color="gray"
                   style={{
                     padding: 'var(--space-2) var(--space-3)',
-                    borderTop: '1px solid var(--gray-a4)',
+                    borderTop: '1px solid var(--gray-alpha-200)',
                     display: 'block',
                   }}
                 >
@@ -2267,7 +2267,7 @@ export const OnItemHighlighted: Story = {
         <div
           style={{
             padding: 'var(--space-3)',
-            backgroundColor: 'var(--gray-a3)',
+            backgroundColor: 'var(--gray-alpha-100)',
             borderRadius: 'var(--radius-2)',
           }}
         >
@@ -2296,7 +2296,7 @@ export const OnItemHighlighted: Story = {
             style={{
               fontFamily: 'var(--code-font-family)',
               fontSize: 'var(--font-size-1)',
-              backgroundColor: 'var(--gray-a2)',
+              backgroundColor: 'var(--gray-alpha-50)',
               borderRadius: 'var(--radius-2)',
               padding: 'var(--space-2)',
               height: 200,
@@ -2309,7 +2309,7 @@ export const OnItemHighlighted: Story = {
               </Text>
             ) : (
               highlightLog.map((log, i) => (
-                <div key={i} style={{ padding: 'var(--space-1) 0', borderBottom: '1px solid var(--gray-a4)' }}>
+                <div key={i} style={{ padding: 'var(--space-1) 0', borderBottom: '1px solid var(--gray-alpha-200)' }}>
                   <Text size="1" color="gray">
                     {log.timestamp}
                   </Text>{' '}
@@ -2731,7 +2731,7 @@ export const SubmitOnItemClick: Story = {
             <div
               style={{
                 padding: 'var(--space-3)',
-                backgroundColor: 'var(--green-a3)',
+                backgroundColor: 'var(--green-alpha-100)',
                 borderRadius: 'var(--radius-2)',
               }}
             >
@@ -2897,7 +2897,7 @@ export const InputRef: Story = {
           <div
             style={{
               padding: 'var(--space-3)',
-              backgroundColor: 'var(--gray-a3)',
+              backgroundColor: 'var(--gray-alpha-100)',
               borderRadius: 'var(--radius-2)',
               fontFamily: 'var(--code-font-family)',
               fontSize: 'var(--font-size-1)',
@@ -2950,7 +2950,7 @@ export const ActionsRef: Story = {
         <div
           style={{
             padding: 'var(--space-3)',
-            backgroundColor: 'var(--gray-a3)',
+            backgroundColor: 'var(--gray-alpha-100)',
             borderRadius: 'var(--radius-2)',
           }}
         >
@@ -2994,7 +2994,7 @@ export const ActionsRef: Story = {
           <div
             style={{
               padding: 'var(--space-3)',
-              backgroundColor: 'var(--green-a3)',
+              backgroundColor: 'var(--green-alpha-100)',
               borderRadius: 'var(--radius-2)',
             }}
           >
@@ -3166,7 +3166,7 @@ export const FormWithCustomId: Story = {
           <div
             style={{
               padding: 'var(--space-3)',
-              background: 'var(--green-a3)',
+              background: 'var(--green-alpha-100)',
               borderRadius: 'var(--radius-2)',
             }}
           >
@@ -3182,7 +3182,7 @@ export const FormWithCustomId: Story = {
         <div
           style={{
             padding: 'var(--space-3)',
-            background: 'var(--gray-a3)',
+            background: 'var(--gray-alpha-100)',
             borderRadius: 'var(--radius-2)',
           }}
         >

@@ -410,7 +410,7 @@ export const OnOpenChangeComplete: Story = {
             fontFamily: 'monospace',
             fontSize: 12,
             padding: 'var(--space-3)',
-            background: 'var(--gray-a3)',
+            background: 'var(--gray-alpha-100)',
             borderRadius: 'var(--radius-2)',
             minHeight: 140,
             width: 340,
@@ -423,7 +423,7 @@ export const OnOpenChangeComplete: Story = {
           ) : (
             events.map((entry, i) => (
               <div key={i} style={{ opacity: 0.5 + (i / events.length) * 0.5, marginBottom: 2 }}>
-                <span style={{ color: 'var(--gray-11)' }}>{entry.time}</span> <span>{entry.event}</span>
+                <span style={{ color: 'var(--gray-900)' }}>{entry.time}</span> <span>{entry.event}</span>
               </div>
             ))
           )}

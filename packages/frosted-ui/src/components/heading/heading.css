@@ -7,10 +7,10 @@
   line-height: var(--line-height);
 
   &:where([data-accent-color]) {
-    color: var(--accent-a11);
+    color: var(--accent-alpha-900);
 
     &:where(.fui-high-contrast) {
-      color: var(--accent-12);
+      color: var(--accent-950);
     }
   }
 }

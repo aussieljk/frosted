@@ -94,7 +94,7 @@
  ***************************************************************************************************/
 
 .fui-ScrollAreaScrollbar {
-  background-color: var(--gray-a3);
+  background-color: var(--gray-alpha-100);
   border-radius: var(--scrollarea-scrollbar-border-radius);
   transition: opacity 150ms ease-out;
 
@@ -113,13 +113,13 @@
 }
 
 .fui-ScrollAreaThumb {
-  background-color: var(--gray-a8);
+  background-color: var(--gray-alpha-600);
   border-radius: inherit;
   transition: background-color 100ms;
 
   @media (hover: hover) {
     &:where(:hover) {
-      background-color: var(--gray-a9);
+      background-color: var(--gray-alpha-700);
     }
   }
 }

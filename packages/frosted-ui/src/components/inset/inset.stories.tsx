@@ -33,7 +33,7 @@ export const Default: Story = {
   render: (args) => (
     <Card size="2" style={{ maxWidth: 280 }}>
       <Inset {...args}>
-        <div style={{ height: 96, background: 'var(--accent-a4)' }} />
+        <div style={{ height: 96, background: 'var(--accent-alpha-200)' }} />
       </Inset>
       <Text size="2">The tinted area bleeds to the card&apos;s edges; this text keeps the normal padding.</Text>
     </Card>

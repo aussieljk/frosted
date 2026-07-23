@@ -1,40 +1,29 @@
 import React from 'react';
 import { IconButton, Text, WidgetStack } from '@aussieljk/frosted';
 
-const itemStyle: React.CSSProperties = {
-  display: 'grid',
-  placeItems: 'center',
-  width: '100%',
-  height: '100%',
-};
+const itemClass = 'grid size-full place-items-center';
 
 export default function WidgetStackDemo() {
   return (
     <WidgetStack.Root orientation="horizontal">
-      <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-        <WidgetStack.Prev render={<IconButton variant="soft" color="gray" style={{ borderRadius: '50%' }} />}>
+      <div className="flex items-center gap-4">
+        <WidgetStack.Prev render={<IconButton variant="soft" color="gray" className="rounded-full" />}>
           {'<'}
         </WidgetStack.Prev>
 
-        <WidgetStack.Stack style={{ width: 320, height: 160 }}>
+        <WidgetStack.Stack className="h-40 w-80">
           <WidgetStack.Item>
-            <div
-              style={{
-                ...itemStyle,
-                background: 'linear-gradient(var(--blue-9), var(--blue-6))',
-                color: 'var(--blue-9-contrast)',
-              }}
-            >
+            <div className={`${itemClass} bg-linear-to-b from-blue-700 to-blue-400 text-blue-700-contrast`}>
               <Text weight="bold" size="5">
                 Sunny, 24°
               </Text>
             </div>
           </WidgetStack.Item>
           <WidgetStack.Item>
-            <div style={{ ...itemStyle, background: 'var(--grass-9)', fontSize: 64 }}>🏝️</div>
+            <div className={`${itemClass} bg-green-700 text-[64px]`}>🏝️</div>
           </WidgetStack.Item>
           <WidgetStack.Item>
-            <div style={{ ...itemStyle, background: 'var(--gray-2)' }}>
+            <div className={`${itemClass} bg-gray-50`}>
               <Text weight="medium" size="3">
                 Swipe or use the arrows
               </Text>
@@ -42,7 +31,7 @@ export default function WidgetStackDemo() {
           </WidgetStack.Item>
         </WidgetStack.Stack>
 
-        <WidgetStack.Next render={<IconButton variant="soft" color="gray" style={{ borderRadius: '50%' }} />}>
+        <WidgetStack.Next render={<IconButton variant="soft" color="gray" className="rounded-full" />}>
           {'>'}
         </WidgetStack.Next>
       </div>

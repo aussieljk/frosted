@@ -5,7 +5,7 @@ import { lucideAdapter } from '@aussieljk/frosted/icons/lucide';
 export default function IconButtonDemo() {
   return (
     <IconProvider library={lucideAdapter}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
+      <div className="flex flex-wrap items-center gap-3">
         <IconButton variant="classic" aria-label="Search">
           <Icons.Search />
         </IconButton>

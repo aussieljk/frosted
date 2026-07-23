@@ -10,7 +10,7 @@
   letter-spacing: var(--letter-spacing);
   cursor: pointer;
   &:where(&:has(.fui-RadioGroupButton[data-disabled])) {
-    color: var(--gray-a8);
+    color: var(--gray-alpha-600);
     cursor: var(--cursor-disabled);
   }
 }
@@ -77,20 +77,20 @@
 
   :where(.fui-RadioGroupButton[data-unchecked]) {
     background-color: var(--color-surface);
-    box-shadow: inset 0 0 0 1px var(--gray-a7);
+    box-shadow: inset 0 0 0 1px var(--gray-alpha-500);
   }
   :where(.fui-RadioGroupButton[data-checked]) {
-    background-color: var(--accent-9);
-    color: var(--accent-9-contrast);
+    background-color: var(--accent-700);
+    color: var(--accent-700-contrast);
   }
   &:where(.fui-high-contrast) :where(.fui-RadioGroupButton[data-checked]) {
-    background-color: var(--accent-12);
-    color: var(--accent-1);
+    background-color: var(--accent-950);
+    color: var(--accent-10);
   }
   & :where(.fui-RadioGroupButton[data-disabled]) {
-    box-shadow: inset 0 0 0 1px var(--gray-a6);
-    background-color: var(--gray-a3);
+    box-shadow: inset 0 0 0 1px var(--gray-alpha-400);
+    background-color: var(--gray-alpha-100);
     cursor: var(--cursor-disabled);
-    color: var(--gray-a8);
+    color: var(--gray-alpha-600);
   }
 }

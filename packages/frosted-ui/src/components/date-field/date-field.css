@@ -14,22 +14,22 @@
 
   border-radius: var(--radius);
 
-  background-color: var(--gray-a3);
-  color: var(--gray-12);
+  background-color: var(--gray-alpha-100);
+  color: var(--gray-950);
   caret-color: transparent;
   overflow: hidden;
 }
 
 .fui-DateFieldInput:where([data-invalid]) {
-  background-color: var(--danger-a3);
-  color: var(--danger-12);
+  background-color: var(--danger-alpha-100);
+  color: var(--danger-950);
 }
 .fui-DateFieldInput:where([data-focus-visible]) {
   outline: 2px solid var(--color-focus-root);
   outline-offset: 1px;
 }
 .fui-DateFieldInput:where([data-invalid][data-focus-visible]) {
-  outline: 2px solid var(--danger-8);
+  outline: 2px solid var(--danger-600);
   outline-offset: 1px;
 }
 .fui-DateFieldSegment:where(:not([data-type='literal'])) {
@@ -37,7 +37,7 @@
   border-radius: max(calc(var(--radius) / 2), 4px);
   /* 1px padding top to center text vertically */
   padding: 1px 2px 0px;
-  color: var(--gray-12);
+  color: var(--gray-950);
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -49,21 +49,21 @@
 }
 
 .fui-DateFieldSegment:where([data-hovered]) {
-  background: var(--gray-a4);
+  background: var(--gray-alpha-200);
 }
 .fui-DateFieldSegment:where([data-invalid][data-hovered]) {
-  background: var(--danger-a4);
+  background: var(--danger-alpha-200);
 }
 .fui-DateFieldSegment:where([data-focused]) {
-  background: var(--accent-a9);
-  color: var(--accent-9-contrast);
+  background: var(--accent-alpha-700);
+  color: var(--accent-700-contrast);
 }
 .fui-DateFieldSegment:where([data-invalid][data-focused]) {
-  background: var(--danger-a9);
-  color: var(--danger-9-contrast);
+  background: var(--danger-alpha-700);
+  color: var(--danger-700-contrast);
 }
 .fui-DateFieldSegment[data-type='literal'] {
-  color: var(--gray-a10);
+  color: var(--gray-alpha-800);
   display: flex;
   align-items: center;
 }

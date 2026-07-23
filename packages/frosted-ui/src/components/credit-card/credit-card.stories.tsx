@@ -424,7 +424,7 @@ export const InputStates: Story = {
               <BackFields state="editable" />
             </CreditCard.Content>
           </CreditCard.Root>
-          <p style={{ marginTop: 8, fontSize: 13, color: 'var(--gray-9)' }}>Editable</p>
+          <p style={{ marginTop: 8, fontSize: 13, color: 'var(--gray-700)' }}>Editable</p>
         </div>
         <div style={{ textAlign: 'center' }}>
           <CreditCard.Root defaultFace="back">
@@ -433,7 +433,7 @@ export const InputStates: Story = {
               <BackFields state="disabled" />
             </CreditCard.Content>
           </CreditCard.Root>
-          <p style={{ marginTop: 8, fontSize: 13, color: 'var(--gray-9)' }}>Disabled</p>
+          <p style={{ marginTop: 8, fontSize: 13, color: 'var(--gray-700)' }}>Disabled</p>
         </div>
         <div style={{ textAlign: 'center' }}>
           <CreditCard.Root defaultFace="back">
@@ -442,7 +442,7 @@ export const InputStates: Story = {
               <BackFields state="readonly" />
             </CreditCard.Content>
           </CreditCard.Root>
-          <p style={{ marginTop: 8, fontSize: 13, color: 'var(--gray-9)' }}>Read-only</p>
+          <p style={{ marginTop: 8, fontSize: 13, color: 'var(--gray-700)' }}>Read-only</p>
         </div>
       </div>
     );

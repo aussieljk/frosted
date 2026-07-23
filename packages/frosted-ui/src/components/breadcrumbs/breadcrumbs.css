@@ -10,12 +10,12 @@
   font-weight: var(--font-weight-medium);
 }
 .fui-BreadcrumbsItem:not(:hover) {
-  color: var(--accent-a10);
+  color: var(--accent-alpha-800);
 }
 
 .fui-BreadcrumbsItem:last-child,
 .fui-BreadcrumbsRoot .fui-BreadcrumbsLastItem {
-  color: var(--accent-a12);
+  color: var(--accent-alpha-950);
   font-weight: var(--font-weight-medium);
 }
 
@@ -24,5 +24,5 @@
 }
 
 .fui-BreadcrumbsSeparator {
-  color: var(--accent-a8);
+  color: var(--accent-alpha-600);
 }

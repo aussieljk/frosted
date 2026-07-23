@@ -23,7 +23,7 @@
 
 .fui-TableRow {
   vertical-align: inherit;
-  color: var(--gray-12);
+  color: var(--gray-950);
 }
 
 .fui-TableCell {
@@ -34,7 +34,7 @@
   padding: var(--table-cell-padding);
   /* Works as min-height */
   height: var(--table-cell-min-height);
-  color: var(--gray-11);
+  color: var(--gray-900);
   &:where(.fui-TableHeader &),
   &:where(.fui-TableFooter &) {
     padding: var(--table-column-header-cell-padding);
@@ -82,11 +82,11 @@
 }
 .fui-TableColumnHeaderCell {
   font-weight: bold;
-  color: var(--gray-12);
+  color: var(--gray-950);
 }
 .fui-TableRowHeaderCell {
   font-weight: normal;
-  color: var(--gray-12);
+  color: var(--gray-950);
   &:where(.fui-TableFooter &) {
     font-weight: bold;
   }
@@ -148,17 +148,17 @@
 
 /* When possible, use half-transparent gray for nicer border blending with the background */
 :where(.frosted-ui) {
-  --data-table-border-color: color-mix(in oklab, var(--gray-a5), var(--gray-6));
+  --data-table-border-color: color-mix(in oklab, var(--gray-alpha-300), var(--gray-400));
 }
 .dark,
 .dark-theme,
 .dark :where(.frosted-ui:not(.light, .light-theme)),
 .dark-theme :where(.frosted-ui:not(.light, .light-theme)) {
-  --data-table-border-color: color-mix(in oklab, var(--gray-a3), var(--gray-4));
+  --data-table-border-color: color-mix(in oklab, var(--gray-alpha-100), var(--gray-200));
 }
 
 .fui-TableRoot:where(.fui-variant-surface) {
-  border: 1px solid var(--gray-a5);
+  border: 1px solid var(--gray-alpha-300);
   border-radius: var(--table-border-radius);
   overflow: hidden;
   /* background-color: var(--color-panel); */
@@ -173,7 +173,7 @@
 
     & :where(.fui-TableHeader),
     & :where(.fui-TableFooter) {
-      --table-row-background-color: var(--gray-a2);
+      --table-row-background-color: var(--gray-alpha-50);
     }
   }
 }

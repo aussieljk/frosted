@@ -30,7 +30,7 @@ const meta = {
       <ContextMenu.Trigger>
         <div
           style={{
-            background: 'var(--gray-a2)',
+            background: 'var(--gray-alpha-50)',
             borderRadius: 'var(--radius-3)',
             width: 200,
             height: 200,
@@ -90,7 +90,7 @@ export const WithCheckboxAndRadio: Story = {
         <ContextMenu.Trigger>
           <div
             style={{
-              background: 'var(--gray-a2)',
+              background: 'var(--gray-alpha-50)',
               borderRadius: 'var(--radius-3)',
               width: 200,
               height: 200,
@@ -128,7 +128,7 @@ export const NestedMenu: Story = {
       <ContextMenu.Trigger>
         <div
           style={{
-            background: 'var(--gray-a2)',
+            background: 'var(--gray-alpha-50)',
             borderRadius: 'var(--radius-3)',
             width: 200,
             height: 200,
@@ -175,7 +175,7 @@ export const ItemAsLink: Story = {
       <ContextMenu.Trigger>
         <div
           style={{
-            background: 'var(--gray-a2)',
+            background: 'var(--gray-alpha-50)',
             borderRadius: 'var(--radius-3)',
             width: 200,
             height: 200,
@@ -217,7 +217,7 @@ export const DialogFromContextMenu: Story = {
           <ContextMenu.Trigger>
             <div
               style={{
-                background: 'var(--gray-a2)',
+                background: 'var(--gray-alpha-50)',
                 borderRadius: 'var(--radius-3)',
                 width: 200,
                 height: 200,
@@ -336,7 +336,7 @@ export const SideAndAlign: Story = {
           <ContextMenu.Trigger>
             <div
               style={{
-                background: 'var(--gray-a2)',
+                background: 'var(--gray-alpha-50)',
                 borderRadius: 'var(--radius-3)',
                 width: 140,
                 height: 100,
@@ -360,7 +360,7 @@ export const SideAndAlign: Story = {
           <ContextMenu.Trigger>
             <div
               style={{
-                background: 'var(--gray-a2)',
+                background: 'var(--gray-alpha-50)',
                 borderRadius: 'var(--radius-3)',
                 width: 140,
                 height: 100,
@@ -384,7 +384,7 @@ export const SideAndAlign: Story = {
           <ContextMenu.Trigger>
             <div
               style={{
-                background: 'var(--gray-a2)',
+                background: 'var(--gray-alpha-50)',
                 borderRadius: 'var(--radius-3)',
                 width: 140,
                 height: 100,
@@ -408,7 +408,7 @@ export const SideAndAlign: Story = {
           <ContextMenu.Trigger>
             <div
               style={{
-                background: 'var(--gray-a2)',
+                background: 'var(--gray-alpha-50)',
                 borderRadius: 'var(--radius-3)',
                 width: 140,
                 height: 100,
@@ -446,7 +446,7 @@ export const SideOffsetAndAlignOffset: Story = {
           <ContextMenu.Trigger>
             <div
               style={{
-                background: 'var(--gray-a2)',
+                background: 'var(--gray-alpha-50)',
                 borderRadius: 'var(--radius-3)',
                 width: 140,
                 height: 80,
@@ -470,7 +470,7 @@ export const SideOffsetAndAlignOffset: Story = {
           <ContextMenu.Trigger>
             <div
               style={{
-                background: 'var(--gray-a2)',
+                background: 'var(--gray-alpha-50)',
                 borderRadius: 'var(--radius-3)',
                 width: 140,
                 height: 80,
@@ -494,7 +494,7 @@ export const SideOffsetAndAlignOffset: Story = {
           <ContextMenu.Trigger>
             <div
               style={{
-                background: 'var(--gray-a2)',
+                background: 'var(--gray-alpha-50)',
                 borderRadius: 'var(--radius-3)',
                 width: 140,
                 height: 80,
@@ -518,7 +518,7 @@ export const SideOffsetAndAlignOffset: Story = {
           <ContextMenu.Trigger>
             <div
               style={{
-                background: 'var(--gray-a2)',
+                background: 'var(--gray-alpha-50)',
                 borderRadius: 'var(--radius-3)',
                 width: 140,
                 height: 80,

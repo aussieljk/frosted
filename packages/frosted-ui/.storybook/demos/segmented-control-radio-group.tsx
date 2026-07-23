@@ -5,7 +5,7 @@ export default function SegmentedControlRadioGroupDemo() {
   const [view, setView] = React.useState('day');
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12 }}>
+    <div className="flex flex-col items-center gap-3">
       <SegmentedControlRadioGroup.Root value={view} onValueChange={setView}>
         <SegmentedControlRadioGroup.Item value="day">Day</SegmentedControlRadioGroup.Item>
         <SegmentedControlRadioGroup.Item value="week">Week</SegmentedControlRadioGroup.Item>

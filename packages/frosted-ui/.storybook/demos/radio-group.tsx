@@ -3,7 +3,7 @@ import { RadioGroup } from '@aussieljk/frosted';
 
 export default function RadioGroupDemo() {
   return (
-    <div style={{ display: 'flex', gap: 'var(--space-6)' }}>
+    <div className="flex gap-8">
       <RadioGroup.Root defaultValue="1">
         <RadioGroup.Item value="1">Default</RadioGroup.Item>
         <RadioGroup.Item value="2">Comfortable</RadioGroup.Item>

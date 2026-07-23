@@ -709,7 +709,7 @@ export const OpenChangeComplete: Story = {
         <div
           style={{
             padding: 'var(--space-3)',
-            background: 'var(--gray-a3)',
+            background: 'var(--gray-alpha-100)',
             borderRadius: 'var(--radius-2)',
             fontFamily: 'monospace',
             fontSize: 'var(--font-size-1)',
@@ -726,7 +726,7 @@ export const OpenChangeComplete: Story = {
             </Text>
           ) : (
             logs.map((log, i) => (
-              <div key={i} style={{ color: log.includes('Complete') ? 'var(--accent-11)' : 'var(--gray-11)' }}>
+              <div key={i} style={{ color: log.includes('Complete') ? 'var(--accent-900)' : 'var(--gray-900)' }}>
                 {log}
               </div>
             ))
@@ -1086,7 +1086,7 @@ export const WithPopoverAndHoverCard: Story = {
                     alignItems: 'center',
                     justifyContent: 'space-between',
                     padding: 'var(--space-3)',
-                    background: 'var(--gray-a3)',
+                    background: 'var(--gray-alpha-100)',
                     borderRadius: 'var(--radius-2)',
                   }}
                 >
@@ -1156,7 +1156,7 @@ export const WithPopoverAndHoverCard: Story = {
                     alignItems: 'center',
                     justifyContent: 'space-between',
                     padding: 'var(--space-3)',
-                    background: 'var(--gray-a3)',
+                    background: 'var(--gray-alpha-100)',
                     borderRadius: 'var(--radius-2)',
                   }}
                 >
@@ -1209,7 +1209,7 @@ export const WithPopoverAndHoverCard: Story = {
                     alignItems: 'center',
                     justifyContent: 'space-between',
                     padding: 'var(--space-3)',
-                    background: 'var(--gray-a3)',
+                    background: 'var(--gray-alpha-100)',
                     borderRadius: 'var(--radius-2)',
                   }}
                 >
@@ -1244,7 +1244,7 @@ export const WithPopoverAndHoverCard: Story = {
                     alignItems: 'center',
                     justifyContent: 'space-between',
                     padding: 'var(--space-3)',
-                    background: 'var(--gray-a3)',
+                    background: 'var(--gray-alpha-100)',
                     borderRadius: 'var(--radius-2)',
                   }}
                 >
@@ -1300,7 +1300,7 @@ export const WithPopoverAndHoverCard: Story = {
                           alignItems: 'center',
                           justifyContent: 'space-between',
                           padding: 'var(--space-3)',
-                          background: 'var(--gray-a3)',
+                          background: 'var(--gray-alpha-100)',
                           borderRadius: 'var(--radius-2)',
                           cursor: 'context-menu',
                         }}
@@ -1418,7 +1418,7 @@ export const WithDialog: Story = {
                 style={{
                   marginTop: 'var(--space-4)',
                   padding: 'var(--space-3)',
-                  background: 'var(--red-a3)',
+                  background: 'var(--red-alpha-100)',
                   borderRadius: 'var(--radius-2)',
                 }}
               >
@@ -1470,7 +1470,7 @@ export const WithDialog: Story = {
                 style={{
                   marginTop: 'var(--space-4)',
                   padding: 'var(--space-3)',
-                  background: 'var(--gray-a3)',
+                  background: 'var(--gray-alpha-100)',
                   borderRadius: 'var(--radius-2)',
                 }}
               >

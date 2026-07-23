@@ -10,13 +10,13 @@ export default function AlertDialogDemo() {
         </Button>
       </AlertDialog.Trigger>
 
-      <AlertDialog.Content style={{ maxWidth: 450 }}>
+      <AlertDialog.Content className="max-w-[450px]">
         <AlertDialog.Title>Revoke access</AlertDialog.Title>
         <AlertDialog.Description>
           Are you sure? This application will no longer be accessible and any existing sessions will be expired.
         </AlertDialog.Description>
 
-        <div style={{ display: 'flex', gap: 12, marginTop: 16, justifyContent: 'flex-end' }}>
+        <div className="mt-4 flex justify-end gap-3">
           <AlertDialog.Cancel>
             <Button variant="soft" color="gray">
               Cancel

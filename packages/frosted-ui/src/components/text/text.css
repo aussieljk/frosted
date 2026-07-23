@@ -6,11 +6,11 @@
 
 :where([data-accent-color]) {
   &.fui-Text {
-    color: var(--accent-a11);
+    color: var(--accent-alpha-900);
   }
   &.fui-Text:where(.fui-high-contrast),
   &:where(.fui-Text, .fui-Heading) .fui-Text:where(.fui-high-contrast) {
-    color: var(--accent-12);
+    color: var(--accent-950);
   }
 }
 

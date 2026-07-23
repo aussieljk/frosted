@@ -1,5 +1,5 @@
 .fui-Separator {
-  background-color: var(--accent-a6);
+  background-color: var(--accent-alpha-400);
 
   &:where([data-orientation='vertical']) {
     width: 1px;

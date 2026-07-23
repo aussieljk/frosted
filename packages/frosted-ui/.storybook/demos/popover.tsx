@@ -7,20 +7,12 @@ export default function PopoverDemo() {
       <Popover.Trigger>
         <Button variant="soft">Comment</Button>
       </Popover.Trigger>
-      <Popover.Content style={{ width: 360 }}>
-        <div style={{ display: 'flex', gap: 12 }}>
+      <Popover.Content className="w-90">
+        <div className="flex gap-3">
           <Avatar size="2" fallback="A" />
-          <div style={{ flexGrow: 1 }}>
-            <TextArea placeholder="Write a comment…" style={{ height: 80 }} />
-            <div
-              style={{
-                display: 'flex',
-                gap: 12,
-                marginTop: 12,
-                justifyContent: 'space-between',
-                alignItems: 'center',
-              }}
-            >
+          <div className="grow">
+            <TextArea placeholder="Write a comment…" className="h-20" />
+            <div className="mt-3 flex items-center justify-between gap-3">
               <Checkbox size="2">Send to group</Checkbox>
               <Popover.Close>
                 <Button size="1">Comment</Button>

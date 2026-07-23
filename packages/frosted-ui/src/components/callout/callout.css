@@ -4,8 +4,8 @@
   align-items: flex-start;
   justify-content: flex-start;
   text-align: left;
-  color: var(--accent-a11);
-  background-color: var(--accent-a3);
+  color: var(--accent-alpha-900);
+  background-color: var(--accent-alpha-100);
   padding: 12px;
   border-radius: 12px;
 }
@@ -56,7 +56,7 @@
   line-height: var(--line-height-2);
   letter-spacing: var(--letter-spacing-2);
 
-  color: var(--gray-12);
+  color: var(--gray-950);
 
   &:where([aria-busy]) {
     position: relative;
@@ -65,29 +65,29 @@
 
 /* primary - matches `soft` button styling with an added border */
 .fui-CalloutAction:where(.fui-variant-primary) {
-  border: 1px solid var(--accent-a12);
+  border: 1px solid var(--accent-alpha-950);
 
   &:where(:focus-visible) {
-    outline: 2px solid var(--accent-a8);
+    outline: 2px solid var(--accent-alpha-600);
   }
   @media (hover: hover) {
     &:where(:hover) {
-      background-color: var(--accent-a4);
+      background-color: var(--accent-alpha-200);
     }
   }
 
   &:where([data-pressed]),
   &:where([data-state='open']) {
-    background-color: var(--accent-a4);
+    background-color: var(--accent-alpha-200);
   }
   &:where(:active:not([data-state='open'])) {
-    background-color: var(--accent-a5);
+    background-color: var(--accent-alpha-300);
   }
 
   &:where([data-disabled]) {
     cursor: var(--cursor-disabled);
-    color: var(--accent-a8);
-    border: 1px solid var(--accent-a6);
+    color: var(--accent-alpha-600);
+    border: 1px solid var(--accent-alpha-400);
     background-color: transparent;
   }
 }
@@ -96,35 +96,35 @@
 .fui-CalloutAction:where(.fui-variant-secondary) {
   @media (hover: hover) {
     &:where(:hover) {
-      background-color: var(--accent-a3);
+      background-color: var(--accent-alpha-100);
     }
   }
   &:where(:focus-visible) {
-    outline: 2px solid var(--accent-a8);
+    outline: 2px solid var(--accent-alpha-600);
   }
 
   &:where([data-pressed]),
   &:where([data-state='open']) {
-    background-color: var(--accent-a3);
+    background-color: var(--accent-alpha-100);
   }
   &:where(:active:not([data-state='open'])) {
-    background-color: var(--accent-a4);
+    background-color: var(--accent-alpha-200);
   }
 
   &:where([data-disabled]) {
     cursor: var(--cursor-disabled);
-    color: var(--accent-a8);
+    color: var(--accent-alpha-600);
     background-color: transparent;
   }
 }
 
 .fui-CalloutTitle {
-  color: var(--gray-12);
+  color: var(--gray-950);
   text-wrap-style: balance;
 }
 
 .fui-CalloutDescription {
-  color: var(--accent-a12);
+  color: var(--accent-alpha-950);
   text-wrap-style: pretty;
   &:where(.fui-CalloutTitle + &) {
     margin-top: 2px;

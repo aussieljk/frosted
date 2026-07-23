@@ -5,7 +5,7 @@ import { lucideAdapter } from '@aussieljk/frosted/icons/lucide';
 export default function IconsDemo() {
   return (
     <IconProvider library={lucideAdapter}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
+      <div className="flex flex-wrap items-center gap-3">
         <Button variant="surface">
           <Icons.Search />
           Search

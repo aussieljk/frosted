@@ -4,9 +4,9 @@ import { Badge, Overlay } from '@aussieljk/frosted';
 export default function OverlayDemo() {
   return (
     <Overlay alignment="topTrailing">
-      <div style={{ width: 160, height: 160, borderRadius: 16, background: 'var(--accent-a4)' }} />
+      <div className="size-40 rounded-2xl bg-accent-alpha-200" />
       <Overlay.Content>
-        <Badge color="red" variant="solid" style={{ margin: 8 }}>
+        <Badge color="red" variant="solid" className="m-2">
           99+
         </Badge>
       </Overlay.Content>

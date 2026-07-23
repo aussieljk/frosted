@@ -293,7 +293,7 @@ export const KeepMounted: Story = {
           <div
             style={{
               padding: '16px',
-              background: 'var(--gray-2)',
+              background: 'var(--gray-50)',
               borderRadius: '0 0 var(--radius-2) var(--radius-2)',
             }}
           >

@@ -76,19 +76,19 @@ export const Orientation: Story = {
   render: (args) => (
     <div style={{ display: 'flex', gap: 'var(--space-6)', alignItems: 'flex-start' }}>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-        <span style={{ fontSize: 'var(--font-size-2)', color: 'var(--gray-11)' }}>Horizontal</span>
+        <span style={{ fontSize: 'var(--font-size-2)', color: 'var(--gray-900)' }}>Horizontal</span>
         <div style={{ width: 200 }}>
           <Slider {...args} defaultValue={[50]} orientation="horizontal" />
         </div>
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-        <span style={{ fontSize: 'var(--font-size-2)', color: 'var(--gray-11)' }}>Vertical</span>
+        <span style={{ fontSize: 'var(--font-size-2)', color: 'var(--gray-900)' }}>Vertical</span>
         <div style={{ height: 150 }}>
           <Slider {...args} defaultValue={[50]} orientation="vertical" />
         </div>
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-        <span style={{ fontSize: 'var(--font-size-2)', color: 'var(--gray-11)' }}>Vertical Range</span>
+        <span style={{ fontSize: 'var(--font-size-2)', color: 'var(--gray-900)' }}>Vertical Range</span>
         <div style={{ height: 150 }}>
           <Slider {...args} defaultValue={[25, 75]} orientation="vertical" />
         </div>

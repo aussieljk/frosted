@@ -3,7 +3,7 @@ import { NumberField } from '@aussieljk/frosted';
 
 export default function NumberFieldDemo() {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 12, width: 180 }}>
+    <div className="flex w-45 flex-col gap-3">
       <NumberField.Root defaultValue={50} min={0} max={100}>
         <NumberField.Input />
       </NumberField.Root>

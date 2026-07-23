@@ -95,7 +95,7 @@ export const HiddenUntilFound: Story = {
   },
   render: (args: AccordionRootProps) => (
     <div>
-      <p style={{ marginBottom: 'var(--space-4)', maxWidth: 600, color: 'var(--gray-11)' }}>
+      <p style={{ marginBottom: 'var(--space-4)', maxWidth: 600, color: 'var(--gray-900)' }}>
         Use your browser's find feature (Ctrl/Cmd + F) to search for "secret keyword" - the panel will automatically
         expand when found.
       </p>

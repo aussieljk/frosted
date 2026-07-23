@@ -44,12 +44,12 @@
 /* solid */
 
 .fui-Badge:where(.fui-variant-solid) {
-  background-color: var(--accent-9);
-  color: var(--accent-9-contrast);
+  background-color: var(--accent-700);
+  color: var(--accent-700-contrast);
 
   &:where(.fui-high-contrast) {
-    background-color: var(--accent-12);
-    color: var(--accent-1);
+    background-color: var(--accent-950);
+    color: var(--accent-10);
   }
 }
 
@@ -57,31 +57,31 @@
 
 .fui-Badge:where(.fui-variant-surface) {
   background-color: var(--color-surface-accent);
-  box-shadow: inset 0 0 0 1px var(--accent-a7);
-  color: var(--accent-a11);
+  box-shadow: inset 0 0 0 1px var(--accent-alpha-500);
+  color: var(--accent-alpha-900);
 
   &:where(.fui-high-contrast) {
-    color: var(--accent-12);
+    color: var(--accent-950);
   }
 }
 
 /* soft */
 
 .fui-Badge:where(.fui-variant-soft) {
-  background-color: var(--accent-a3);
-  color: var(--accent-a11);
+  background-color: var(--accent-alpha-100);
+  color: var(--accent-alpha-900);
   &:where(.fui-high-contrast) {
-    color: var(--accent-12);
+    color: var(--accent-950);
   }
 }
 
 /* outline */
 
 .fui-Badge:where(.fui-variant-outline) {
-  box-shadow: inset 0 0 0 1px var(--accent-a8);
-  color: var(--accent-a11);
+  box-shadow: inset 0 0 0 1px var(--accent-alpha-600);
+  color: var(--accent-alpha-900);
   &:where(.fui-high-contrast) {
-    box-shadow: inset 0 0 0 1px var(--accent-a11);
-    color: var(--accent-12);
+    box-shadow: inset 0 0 0 1px var(--accent-alpha-900);
+    color: var(--accent-950);
   }
 }

@@ -1,3 +1,4 @@
+import tailwindcss from '@tailwindcss/vite';
 import type { StorybookConfig } from '@storybook/react-vite';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -90,6 +91,9 @@ const config: StorybookConfig = {
   // from the public package name; alias it to src/ (never dist/) the way the docs app did.
   viteFinal: (config) =>
     mergeConfig(config, {
+      // The demos are authored in Tailwind utilities; .storybook/preview.css is the entry
+      // that pairs tailwind with the frosted tokens + theme mapping.
+      plugins: [tailwindcss()],
       resolve: {
         alias: [
           { find: /^@aussieljk\/frosted\/icons\/(.+)$/, replacement: `${srcDir}/icons/adapters/$1` },

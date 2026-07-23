@@ -105,9 +105,9 @@ export const Trim: Story = {
         {...args}
         trim="normal"
         style={{
-          background: 'var(--gray-a2)',
-          borderTop: '1px dashed var(--gray-a7)',
-          borderBottom: '1px dashed var(--gray-a7)',
+          background: 'var(--gray-alpha-50)',
+          borderTop: '1px dashed var(--gray-alpha-500)',
+          borderBottom: '1px dashed var(--gray-alpha-500)',
         }}
       >
         Without trim
@@ -116,9 +116,9 @@ export const Trim: Story = {
         {...args}
         trim="both"
         style={{
-          background: 'var(--gray-a2)',
-          borderTop: '1px dashed var(--gray-a7)',
-          borderBottom: '1px dashed var(--gray-a7)',
+          background: 'var(--gray-alpha-50)',
+          borderTop: '1px dashed var(--gray-alpha-500)',
+          borderBottom: '1px dashed var(--gray-alpha-500)',
         }}
       >
         With trim

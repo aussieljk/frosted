@@ -44,15 +44,15 @@
   &:where(.fui-variant-soft) {
     width: 64px;
     height: 64px;
-    background: var(--accent-a3);
-    color: var(--accent-11);
+    background: var(--accent-alpha-100);
+    color: var(--accent-900);
     border-radius: 20px;
     /* In case where emoji or text like initials is inserted instead of an icon */
     font-size: 32px;
   }
 
   &:where([data-accent-color='gray']) {
-    color: var(--accent-12);
+    color: var(--accent-950);
   }
 }
 

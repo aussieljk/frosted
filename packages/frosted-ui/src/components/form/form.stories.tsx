@@ -376,7 +376,7 @@ export const FormReset: Story = {
         </Form>
 
         {result && (
-          <pre style={{ marginTop: 16, fontSize: 12, color: 'var(--gray-11)' }}>{JSON.stringify(result, null, 2)}</pre>
+          <pre style={{ marginTop: 16, fontSize: 12, color: 'var(--gray-900)' }}>{JSON.stringify(result, null, 2)}</pre>
         )}
       </div>
     );
@@ -429,7 +429,7 @@ export const SubmitAsJavaScriptObject: Story = {
           </Button>
         </Form>
         {result && (
-          <pre style={{ marginTop: 16, fontSize: 12, color: 'var(--gray-11)' }}>{JSON.stringify(result, null, 2)}</pre>
+          <pre style={{ marginTop: 16, fontSize: 12, color: 'var(--gray-900)' }}>{JSON.stringify(result, null, 2)}</pre>
         )}
       </div>
     );
@@ -679,7 +679,7 @@ export const ConditionalFields: Story = {
         </Form>
 
         {result && (
-          <pre style={{ marginTop: 16, fontSize: 12, color: 'var(--gray-11)' }}>{JSON.stringify(result, null, 2)}</pre>
+          <pre style={{ marginTop: 16, fontSize: 12, color: 'var(--gray-900)' }}>{JSON.stringify(result, null, 2)}</pre>
         )}
       </div>
     );
@@ -789,7 +789,7 @@ export const DynamicFormFields: Story = {
         </Form>
 
         {result && (
-          <pre style={{ marginTop: 16, fontSize: 12, color: 'var(--gray-11)' }}>{JSON.stringify(result, null, 2)}</pre>
+          <pre style={{ marginTop: 16, fontSize: 12, color: 'var(--gray-900)' }}>{JSON.stringify(result, null, 2)}</pre>
         )}
       </div>
     );
@@ -1069,7 +1069,7 @@ export const AutoSaveForm: Story = {
         </Form>
 
         {(formData.title || formData.description) && (
-          <pre style={{ marginTop: 16, fontSize: 12, color: 'var(--gray-11)' }}>
+          <pre style={{ marginTop: 16, fontSize: 12, color: 'var(--gray-900)' }}>
             {JSON.stringify(formData, null, 2)}
           </pre>
         )}
@@ -1134,7 +1134,7 @@ export const MultiStepWizardForm: Story = {
           <Text size="2" color="gray" style={{ marginBottom: 16, display: 'block' }}>
             Your account has been created successfully.
           </Text>
-          <pre style={{ fontSize: 12, color: 'var(--gray-11)', textAlign: 'left' }}>
+          <pre style={{ fontSize: 12, color: 'var(--gray-900)', textAlign: 'left' }}>
             {JSON.stringify(formData, null, 2)}
           </pre>
           <Button
@@ -1259,7 +1259,7 @@ export const MultiStepWizardForm: Story = {
               style={{
                 padding: 16,
                 borderRadius: 8,
-                backgroundColor: 'var(--gray-a3)',
+                backgroundColor: 'var(--gray-alpha-100)',
                 display: 'flex',
                 flexDirection: 'column',
                 gap: 12,
@@ -1399,7 +1399,7 @@ export const UsingWithZod: Story = {
           </Button>
         </Form>
         {result && (
-          <pre style={{ marginTop: 16, fontSize: 12, color: 'var(--gray-11)' }}>{JSON.stringify(result, null, 2)}</pre>
+          <pre style={{ marginTop: 16, fontSize: 12, color: 'var(--gray-900)' }}>{JSON.stringify(result, null, 2)}</pre>
         )}
       </div>
     );
@@ -1590,7 +1590,7 @@ export const ReactHookFormIntegration: Story = {
         </form>
 
         {result && (
-          <pre style={{ marginTop: 16, fontSize: 12, color: 'var(--gray-11)' }}>{JSON.stringify(result, null, 2)}</pre>
+          <pre style={{ marginTop: 16, fontSize: 12, color: 'var(--gray-900)' }}>{JSON.stringify(result, null, 2)}</pre>
         )}
       </div>
     );
@@ -1714,7 +1714,7 @@ export const TanStackFormIntegration: Story = {
         </form>
 
         {result && (
-          <pre style={{ marginTop: 16, fontSize: 12, color: 'var(--gray-11)' }}>{JSON.stringify(result, null, 2)}</pre>
+          <pre style={{ marginTop: 16, fontSize: 12, color: 'var(--gray-900)' }}>{JSON.stringify(result, null, 2)}</pre>
         )}
       </div>
     );

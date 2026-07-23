@@ -7,7 +7,7 @@ const cell: React.CSSProperties = {
   display: 'grid',
   placeItems: 'center',
   borderRadius: 8,
-  background: 'var(--accent-a4)',
+  background: 'var(--accent-alpha-200)',
 };
 
 export default function GridDemo() {

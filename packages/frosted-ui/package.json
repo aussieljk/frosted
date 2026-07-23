@@ -140,6 +140,7 @@
     "@storybook/addon-docs": "^10.5.3",
     "@storybook/react-vite": "^10.5.3",
     "@tabler/icons-react": "^3.45.0",
+    "@tailwindcss/vite": "^4.3.3",
     "@tanstack/react-form": "^1.33.2",
     "@tanstack/react-table": "^8.21.3",
     "@types/node": "^26.1.1",

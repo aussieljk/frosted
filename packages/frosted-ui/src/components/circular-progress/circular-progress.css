@@ -10,11 +10,11 @@
 }
 
 .fui-CircularProgressTrack {
-  stroke: var(--accent-a3);
+  stroke: var(--accent-alpha-100);
 }
 
 .fui-CircularProgressIndicator {
-  stroke: var(--accent-9);
+  stroke: var(--accent-700);
 }
 
 /***************************************************************************************************
@@ -56,5 +56,5 @@
 /* high-contrast */
 
 .fui-CircularProgressRoot:where(.fui-high-contrast) .fui-CircularProgressIndicator {
-  stroke: var(--accent-12);
+  stroke: var(--accent-950);
 }

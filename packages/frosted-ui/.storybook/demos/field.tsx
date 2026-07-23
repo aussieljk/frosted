@@ -3,7 +3,7 @@ import { Field, TextField } from '@aussieljk/frosted';
 
 export default function FieldDemo() {
   return (
-    <div style={{ width: 300 }}>
+    <div className="w-75">
       <Field.Root name="username">
         <Field.Label>Username</Field.Label>
         <Field.Description>Must be at least 3 characters</Field.Description>

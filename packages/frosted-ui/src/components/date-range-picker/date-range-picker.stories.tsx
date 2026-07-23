@@ -208,7 +208,7 @@ const ArrowRightIcon = () => (
   <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
       d="M0.75 6H11.25M11.25 6L7 1.75M11.25 6L7 10.25"
-      stroke="var(--gray-a10)"
+      stroke="var(--gray-alpha-800)"
       strokeWidth="1.5"
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -223,12 +223,12 @@ const CalendarIcon = () => (
         fillRule="evenodd"
         clipRule="evenodd"
         d="M4 0C4.41421 0 4.75 0.335786 4.75 0.75V2H11.25V0.75C11.25 0.335786 11.5858 0 12 0C12.4142 0 12.75 0.335786 12.75 0.75V2.03304C14.5847 2.27749 16 3.84846 16 5.75V12.25C16 14.3211 14.3211 16 12.25 16H3.75C1.67893 16 0 14.3211 0 12.25V5.75C0 3.84846 1.41532 2.27749 3.25 2.03304V0.75C3.25 0.335786 3.58579 0 4 0ZM12 3.5H4H3.75C2.50736 3.5 1.5 4.50736 1.5 5.75V6H14.5V5.75C14.5 4.50736 13.4926 3.5 12.25 3.5H12ZM1.5 7.5V12.25C1.5 13.4926 2.50736 14.5 3.75 14.5H12.25C13.4926 14.5 14.5 13.4926 14.5 12.25V7.5H1.5Z"
-        fill="var(--gray-10)"
+        fill="var(--gray-800)"
       />
     </g>
     <defs>
       <clipPath id="clip0_1869_102855">
-        <rect width="16" height="16" fill="var(--gray-10)" />
+        <rect width="16" height="16" fill="var(--gray-800)" />
       </clipPath>
     </defs>
   </svg>

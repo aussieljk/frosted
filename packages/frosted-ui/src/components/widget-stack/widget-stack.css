@@ -1,7 +1,7 @@
 .fui-WidgetStackStack {
   --widget-stack-radius: 24px;
   --widget-stack-gutter: 8px;
-  --widget-stack-background: var(--gray-a3);
+  --widget-stack-background: var(--gray-alpha-100);
 
   position: relative;
   display: flex;

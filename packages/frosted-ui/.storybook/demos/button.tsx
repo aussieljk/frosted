@@ -3,7 +3,7 @@ import { Button } from '@aussieljk/frosted';
 
 export default function ButtonDemo() {
   return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
+    <div className="flex flex-wrap items-center gap-3">
       <Button variant="classic">Classic</Button>
       <Button variant="solid">Solid</Button>
       <Button variant="soft">Soft</Button>

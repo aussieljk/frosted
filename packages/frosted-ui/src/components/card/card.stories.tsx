@@ -164,7 +164,7 @@ export const InsetContent: Story = {
           objectFit: 'cover',
           width: '100%',
           height: 140,
-          backgroundColor: 'var(--gray-5)',
+          backgroundColor: 'var(--gray-300)',
         }}
       />
 

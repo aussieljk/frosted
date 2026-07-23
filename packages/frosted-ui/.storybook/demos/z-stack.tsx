@@ -4,9 +4,9 @@ import { ZStack } from '@aussieljk/frosted';
 export default function ZStackDemo() {
   return (
     <ZStack alignment="bottomTrailing">
-      <div style={{ width: 160, height: 160, borderRadius: 16, background: 'var(--accent-a4)' }} />
-      <div style={{ width: 96, height: 96, borderRadius: 16, background: 'var(--accent-a6)' }} />
-      <div style={{ width: 40, height: 40, borderRadius: 16, background: 'var(--accent-a9)' }} />
+      <div className="size-40 rounded-2xl bg-accent-alpha-200" />
+      <div className="size-24 rounded-2xl bg-accent-alpha-400" />
+      <div className="size-10 rounded-2xl bg-accent-alpha-700" />
     </ZStack>
   );
 }

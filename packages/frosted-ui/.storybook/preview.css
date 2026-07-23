@@ -1,0 +1,24 @@
+/*
+ * Storybook preview styles.
+ *
+ * The docs demos are written in Tailwind utilities, so the preview needs the same
+ * three imports a consuming app does (see stories/07.Tailwind.mdx) — Tailwind
+ * itself, the frosted runtime tokens, and the theme that maps those tokens onto
+ * utilities like `bg-accent-700` / `text-gray-alpha-900`.
+ *
+ * styles.css and theme.css are the postcss build outputs, not src/ — they are what
+ * ships, and the dev script keeps both watched.
+ */
+@import 'tailwindcss';
+@import '../styles.css';
+@import '../theme.css';
+
+/*
+ * Tailwind's preflight resets everything to `border-color: currentColor`-less defaults,
+ * which would otherwise strip the borders frosted components draw with a bare `border`
+ * shorthand. Scanning the demos for classes is enough; the components themselves are
+ * styled by styles.css and must not be swept by preflight-adjacent utilities.
+ */
+@source '../demos';
+@source '../stories';
+@source '../components';

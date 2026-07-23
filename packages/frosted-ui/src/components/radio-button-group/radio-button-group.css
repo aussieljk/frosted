@@ -1,8 +1,8 @@
 .fui-RadioButtonGroupRoot {
-  --radio-items-base-color: var(--accent-9);
+  --radio-items-base-color: var(--accent-700);
 
   &:where(.fui-high-contrast) {
-    --radio-items-base-color: var(--accent-12);
+    --radio-items-base-color: var(--accent-950);
   }
   :where(.fui-RadioButtonGroupButton) {
     position: relative;
@@ -10,7 +10,7 @@
     user-select: none;
   }
   :where(.fui-RadioButtonGroupButton:focus-visible) {
-    outline: 2px solid var(--accent-a6);
+    outline: 2px solid var(--accent-alpha-400);
     outline-offset: 2px;
   }
   :where(.fui-RadioButtonGroupOverlay) {
@@ -31,11 +31,11 @@
     pointer-events: none;
     height: 20px;
     border-radius: 999px;
-    color: var(--accent-9-contrast);
+    color: var(--accent-700-contrast);
   }
   :where(.fui-RadioButtonGroupButton[data-checked] .fui-RadioButtonGroupIcon) {
     visibility: visible;
-    background: var(--accent-9);
+    background: var(--accent-700);
   }
 
   :where(.fui-RadioButtonGroupButton.fui-Card)::after {

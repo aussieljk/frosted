@@ -8,17 +8,17 @@
   height: var(--avatar-size);
   flex-shrink: 0;
 
-  outline: 1px solid var(--accent-a5);
+  outline: 1px solid var(--accent-alpha-300);
   outline-offset: -1px;
 
-  background-color: var(--accent-a3);
+  background-color: var(--accent-alpha-100);
   border-radius: max(25%, var(--radius-full));
 
   & :where(.fui-AvatarFallback) {
-    color: var(--accent-a11);
+    color: var(--accent-alpha-900);
   }
   &:where(.fui-high-contrast) :where(.fui-AvatarFallback) {
-    color: var(--accent-12);
+    color: var(--accent-950);
   }
   &:where(.fui-shape-circle) {
     --radius-full: var(--radius-thumb);
@@ -40,7 +40,7 @@
   /* Fix safari issue where animated avatars were blurred */
   transform: translateZ(0px);
 
-  outline: 1px solid var(--gray-a5);
+  outline: 1px solid var(--gray-alpha-300);
   outline-offset: -1px;
 }
 

@@ -5,13 +5,13 @@ const fruits = ['Apple', 'Banana', 'Orange', 'Pineapple', 'Grape', 'Mango', 'Str
 
 export default function ComboboxDemo() {
   return (
-    <div style={{ width: 300 }}>
+    <div className="w-75">
       <Combobox.Root items={fruits} defaultValue="Apple">
         <Combobox.InputRoot showClear>
           <Combobox.Input placeholder="Choose a fruit..." />
         </Combobox.InputRoot>
         <Combobox.Content>
-          <ScrollArea type="auto" style={{ maxHeight: 300 }}>
+          <ScrollArea type="auto" className="max-h-75">
             <Combobox.Empty>No fruits found.</Combobox.Empty>
             <Combobox.List>
               {(item) => (

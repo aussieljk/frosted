@@ -90,7 +90,7 @@ export const Type: Story = {
             {...args}
             type="hover"
             scrollbars="vertical"
-            style={{ height: 80, width: 200, background: 'var(--gray-a3)' }}
+            style={{ height: 80, width: 200, background: 'var(--gray-alpha-100)' }}
           >
             <div style={{ padding: 'var(--space-2)' }}>
               <Text size="2">
@@ -111,7 +111,7 @@ export const Type: Story = {
             {...args}
             type="scroll"
             scrollbars="vertical"
-            style={{ height: 80, width: 200, background: 'var(--gray-a3)' }}
+            style={{ height: 80, width: 200, background: 'var(--gray-alpha-100)' }}
           >
             <div style={{ padding: 'var(--space-2)' }}>
               <Text size="2">
@@ -133,7 +133,7 @@ export const Type: Story = {
             {...args}
             type="auto"
             scrollbars="vertical"
-            style={{ height: 80, width: 200, background: 'var(--gray-a3)' }}
+            style={{ height: 80, width: 200, background: 'var(--gray-alpha-100)' }}
           >
             <div style={{ padding: 'var(--space-2)' }}>
               <Text size="2">
@@ -154,7 +154,7 @@ export const Type: Story = {
             {...args}
             type="always"
             scrollbars="vertical"
-            style={{ height: 280, width: 200, background: 'var(--gray-a3)' }}
+            style={{ height: 280, width: 200, background: 'var(--gray-alpha-100)' }}
           >
             <div style={{ padding: 'var(--space-2)' }}>
               <Text size="2">The scrollbar is always visible, even if the content doesn't overflow.</Text>
@@ -365,7 +365,7 @@ export const ScrollableElementRef: Story = {
             style={{
               padding: 'var(--space-3)',
               borderBottom: '1px solid var(--color-stroke)',
-              background: 'var(--gray-2)',
+              background: 'var(--gray-50)',
             }}
           >
             <Text weight="medium">Chat Demo</Text>
@@ -396,8 +396,8 @@ export const ScrollableElementRef: Story = {
                         maxWidth: '75%',
                         padding: 'var(--space-2) var(--space-3)',
                         borderRadius: 'var(--radius-3)',
-                        background: message.sender === 'me' ? 'var(--accent-9)' : 'var(--gray-4)',
-                        color: message.sender === 'me' ? 'var(--accent-9-contrast)' : 'inherit',
+                        background: message.sender === 'me' ? 'var(--accent-700)' : 'var(--gray-200)',
+                        color: message.sender === 'me' ? 'var(--accent-700-contrast)' : 'inherit',
                       }}
                     >
                       <Text size="2">{message.text}</Text>

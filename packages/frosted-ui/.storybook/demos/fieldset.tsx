@@ -3,7 +3,7 @@ import { Field, Fieldset, TextField } from '@aussieljk/frosted';
 
 export default function FieldsetDemo() {
   return (
-    <Fieldset.Root style={{ width: 320 }}>
+    <Fieldset.Root className="w-80">
       <Fieldset.Legend>Billing Details</Fieldset.Legend>
 
       <Field.Root name="company">

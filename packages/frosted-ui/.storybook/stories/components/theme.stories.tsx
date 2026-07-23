@@ -71,7 +71,7 @@ export const Colors: Story = {
             flexDirection: 'column',
             gap: 'var(--space-3)',
             padding: 'var(--space-4)',
-            background: 'var(--gray-6)',
+            background: 'var(--gray-400)',
             borderRadius: 'var(--radius-5)',
           }}
         >
@@ -104,7 +104,7 @@ export const Colors: Story = {
             flexDirection: 'column',
             gap: 'var(--space-3)',
             padding: 'var(--space-4)',
-            background: 'var(--gray-6)',
+            background: 'var(--gray-400)',
             borderRadius: 'var(--radius-5)',
           }}
         >

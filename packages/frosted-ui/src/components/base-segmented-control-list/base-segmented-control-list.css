@@ -4,7 +4,7 @@
   overflow-x: auto;
   white-space: nowrap;
 
-  background: var(--gray-a3);
+  background: var(--gray-alpha-100);
   border-radius: var(--radius-4);
   scrollbar-width: none;
   padding: var(--space-1);
@@ -25,17 +25,17 @@
   padding: 0 var(--space-2);
   font-weight: var(--font-weight-medium);
   flex: 1;
-  color: var(--gray-a9);
+  color: var(--gray-alpha-700);
   outline: none;
   cursor: pointer;
 
   @media (hover: hover) {
     &:where(:hover) {
-      color: var(--gray-a11);
+      color: var(--gray-alpha-900);
     }
   }
   &:where([data-selected], [data-active], [data-checked]) {
-    color: var(--gray-a12);
+    color: var(--gray-alpha-950);
   }
   &:before {
     box-sizing: border-box;
@@ -51,7 +51,7 @@
   }
   &:where([data-selected], [data-active], [data-checked])::before {
     background: var(--color-segmented-control-thumb);
-    background-image: linear-gradient(var(--white-a3), var(--white-a3));
+    background-image: linear-gradient(var(--white-alpha-100), var(--white-alpha-100));
     box-shadow:
       0px 1px 1px 0px rgba(0, 0, 0, 0.05),
       0px 2px 4px 0px rgba(0, 0, 0, 0.05);

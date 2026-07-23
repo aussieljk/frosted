@@ -26,7 +26,7 @@ export const Default: Story = {
     alignment: 'topTrailing',
     children: (
       <>
-        <div style={{ width: 160, height: 160, borderRadius: 16, background: 'var(--accent-a4)' }} />
+        <div style={{ width: 160, height: 160, borderRadius: 16, background: 'var(--accent-alpha-200)' }} />
         <Overlay.Content>
           <Badge color="red" style={{ margin: 8 }}>
             99+

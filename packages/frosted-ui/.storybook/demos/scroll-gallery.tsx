@@ -7,21 +7,14 @@ const items = ['One', 'Two', 'Three', 'Four', 'Five', 'Six'];
 export default function ScrollGalleryDemo() {
   return (
     <IconProvider library={lucideAdapter}>
-      <ScrollGallery.Root defaultValue={0} style={{ maxWidth: 480 }}>
+      <ScrollGallery.Root defaultValue={0} className="max-w-120">
         <ScrollGallery.Viewport
           aria-label="Gallery"
-          style={{
-            display: 'flex',
-            gap: 12,
-            overflowX: 'auto',
-            overscrollBehaviorX: 'contain',
-            scrollSnapType: 'x mandatory',
-            scrollbarWidth: 'none',
-          }}
+          className="flex gap-3 overflow-x-auto [overscroll-behavior-x:contain] [scroll-snap-type:x_mandatory] [scrollbar-width:none]"
         >
           {items.map((label) => (
-            <ScrollGallery.Item key={label} style={{ scrollSnapAlign: 'start', flexShrink: 0 }}>
-              <Card size="2" style={{ width: 180, height: 100, display: 'grid', placeItems: 'center' }}>
+            <ScrollGallery.Item key={label} className="shrink-0 [scroll-snap-align:start]">
+              <Card size="2" className="grid h-25 w-45 place-items-center">
                 <Text size="3" weight="bold">
                   {label}
                 </Text>
@@ -30,8 +23,8 @@ export default function ScrollGalleryDemo() {
           ))}
         </ScrollGallery.Viewport>
 
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 12 }}>
-          <div style={{ display: 'flex', gap: 8 }}>
+        <div className="mt-3 flex items-center justify-between">
+          <div className="flex gap-2">
             <ScrollGallery.Previous aria-label="Previous" render={<IconButton variant="soft" size="1" color="gray" />}>
               <Icons.ChevronLeft />
             </ScrollGallery.Previous>
@@ -40,7 +33,7 @@ export default function ScrollGalleryDemo() {
             </ScrollGallery.Next>
           </div>
 
-          <ScrollGallery.ScrollMarkerGroup aria-label="Go to item" style={{ display: 'flex', gap: 4 }}>
+          <ScrollGallery.ScrollMarkerGroup aria-label="Go to item" className="flex gap-1">
             {items.map((label, i) => (
               <ScrollGallery.ScrollMarker
                 key={label}
@@ -48,15 +41,9 @@ export default function ScrollGalleryDemo() {
                 render={(props, state) => (
                   <button
                     {...props}
-                    style={{
-                      width: 8,
-                      height: 8,
-                      borderRadius: '50%',
-                      padding: 0,
-                      cursor: 'pointer',
-                      border: '1.5px solid var(--gray-8)',
-                      background: state.active ? 'var(--gray-12)' : 'transparent',
-                    }}
+                    className={`size-2 cursor-pointer rounded-full border-[1.5px] border-gray-600 p-0 ${
+                      state.active ? 'bg-gray-950' : 'bg-transparent'
+                    }`}
                   />
                 )}
               />

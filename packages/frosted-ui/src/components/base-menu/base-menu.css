@@ -79,7 +79,7 @@
   height: var(--base-menu-item-height);
   padding-left: var(--base-menu-item-padding-left);
   padding-right: var(--base-menu-item-padding-right);
-  color: var(--gray-a11);
+  color: var(--gray-alpha-900);
   user-select: none;
   cursor: default;
   font-weight: var(--font-weight-semi-bold);
@@ -236,25 +236,25 @@
   }
 
   & :where(.fui-BaseMenuSubTrigger[data-popup-open]) {
-    background-color: var(--gray-a3);
+    background-color: var(--gray-alpha-100);
   }
   & :where(.fui-BaseMenuItem[data-highlighted]) {
-    background-color: var(--gray-a4);
+    background-color: var(--gray-alpha-200);
 
     &:where([data-accent-color]) {
-      background-color: var(--accent-a4);
-      color: var(--accent-12);
+      background-color: var(--accent-alpha-200);
+      color: var(--accent-950);
     }
   }
 }
 .fui-BaseMenuItem:where([data-accent-color]) {
-  color: var(--accent-a11);
+  color: var(--accent-alpha-900);
 }
 .fui-BaseMenuItem:where([data-disabled]) {
-  color: var(--gray-a8);
+  color: var(--gray-alpha-600);
 }
 .fui-BaseMenuShortcut {
-  color: var(--gray-a10);
+  color: var(--gray-alpha-800);
 }
 .fui-BaseMenuItem:where([data-disabled], [data-highlighted]),
 .fui-BaseMenuSubTrigger:where([data-popup-open]) {
@@ -263,7 +263,7 @@
   }
 }
 .fui-BaseMenuSeparator {
-  background-color: var(--gray-a6);
+  background-color: var(--gray-alpha-400);
 }
 
 /***************************************************************************************************

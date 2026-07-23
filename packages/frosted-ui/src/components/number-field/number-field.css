@@ -67,39 +67,39 @@
 /* Soft variant button styling */
 :where(.fui-NumberFieldRoot.fui-variant-soft) .fui-NumberFieldButton {
   background: transparent;
-  box-shadow: -1px 0 0 0 var(--accent-a5);
+  box-shadow: -1px 0 0 0 var(--accent-alpha-300);
 
   @media (hover: hover) {
     &:where(:hover:not(:disabled):not([data-readonly])) {
-      background: var(--accent-a3);
+      background: var(--accent-alpha-100);
     }
     &:where(:active:not(:disabled):not([data-readonly])) {
-      background: var(--accent-a4);
+      background: var(--accent-alpha-200);
     }
   }
 
   &:where(:disabled) {
-    box-shadow: -1px 0 0 0 var(--gray-a5);
+    box-shadow: -1px 0 0 0 var(--gray-alpha-300);
   }
 }
 
 /* Soft variant read-only: use gray dividers */
 :where(.fui-NumberFieldRoot.fui-variant-soft:has(.fui-NumberFieldInput:read-only)) .fui-NumberFieldButton {
-  box-shadow: -1px 0 0 0 var(--gray-a5);
+  box-shadow: -1px 0 0 0 var(--gray-alpha-300);
 }
 
 /* Soft variant split layout: decrement needs right border, increment needs left border */
 :where(.fui-NumberFieldRoot.fui-variant-soft.fui-button-layout-split) .fui-NumberFieldDecrement {
-  box-shadow: 1px 0 0 0 var(--accent-a5);
+  box-shadow: 1px 0 0 0 var(--accent-alpha-300);
 
   &:where(:disabled) {
-    box-shadow: 1px 0 0 0 var(--gray-a5);
+    box-shadow: 1px 0 0 0 var(--gray-alpha-300);
   }
 }
 
 :where(.fui-NumberFieldRoot.fui-variant-soft.fui-button-layout-split:has(.fui-NumberFieldInput:read-only))
   .fui-NumberFieldDecrement {
-  box-shadow: 1px 0 0 0 var(--gray-a5);
+  box-shadow: 1px 0 0 0 var(--gray-alpha-300);
 }
 
 /***************************************************************************************************
@@ -112,10 +112,10 @@
   align-items: center;
   position: relative;
   z-index: 5;
-  color: var(--gray-a11);
+  color: var(--gray-alpha-900);
 
   &:where([data-accent-color]) {
-    color: var(--accent-a11);
+    color: var(--accent-alpha-900);
   }
 
   &:where(:empty) {
@@ -324,7 +324,7 @@
 .fui-NumberFieldRoot[data-disabled] {
   & .fui-NumberFieldInput {
     cursor: text;
-    color: var(--gray-a11);
-    -webkit-text-fill-color: var(--gray-a11);
+    color: var(--gray-alpha-900);
+    -webkit-text-fill-color: var(--gray-alpha-900);
   }
 }

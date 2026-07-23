@@ -3,7 +3,7 @@ import { Badge } from '@aussieljk/frosted';
 
 export default function BadgeDemo() {
   return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
+    <div className="flex flex-wrap items-center gap-2">
       <Badge variant="solid" color="blue">
         Solid
       </Badge>

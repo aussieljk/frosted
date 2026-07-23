@@ -5,17 +5,7 @@ export default function ContextMenuDemo() {
   return (
     <ContextMenu.Root>
       <ContextMenu.Trigger>
-        <div
-          style={{
-            background: 'var(--gray-a2)',
-            borderRadius: 'var(--radius-3)',
-            width: 200,
-            height: 150,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
+        <div className="flex h-[150px] w-50 items-center justify-center rounded-md bg-gray-alpha-50">
           Right-click here
         </div>
       </ContextMenu.Trigger>

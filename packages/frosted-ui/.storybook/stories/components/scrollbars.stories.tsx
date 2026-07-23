@@ -28,7 +28,7 @@ export const Default: Story = {
           width: 400,
           height: 400,
           overflowY: 'auto',
-          border: '1px solid var(--gray-a5)',
+          border: '1px solid var(--gray-alpha-300)',
         }}
       >
         <div
@@ -36,7 +36,7 @@ export const Default: Story = {
             width: '100%',
             height: 1000,
 
-            //   background: 'var(--gray-a3)'
+            //   background: 'var(--gray-alpha-100)'
           }}
         ></div>
       </div>
@@ -45,7 +45,7 @@ export const Default: Story = {
           width: 400,
           height: 400,
           overflowX: 'auto',
-          border: '1px solid var(--gray-a5)',
+          border: '1px solid var(--gray-alpha-300)',
         }}
       >
         <div
@@ -53,7 +53,7 @@ export const Default: Story = {
             width: 1000,
             height: '100%',
 
-            //   background: 'var(--gray-a3)'
+            //   background: 'var(--gray-alpha-100)'
           }}
         ></div>
       </div>
@@ -62,7 +62,7 @@ export const Default: Story = {
           width: 400,
           height: 400,
           overflow: 'auto',
-          border: '1px solid var(--gray-a5)',
+          border: '1px solid var(--gray-alpha-300)',
         }}
       >
         <div
@@ -70,7 +70,7 @@ export const Default: Story = {
             width: 1000,
             height: 1000,
 
-            // background: 'var(--gray-a3)'
+            // background: 'var(--gray-alpha-100)'
           }}
         ></div>
       </div>

@@ -3,7 +3,7 @@ import { Button, HStack, Spacer } from '@aussieljk/frosted';
 
 export default function SpacerDemo() {
   return (
-    <HStack spacing={0} style={{ width: 320, padding: 8, borderRadius: 12, border: '1px dashed var(--gray-a6)' }}>
+    <HStack spacing={0} className="w-80 rounded-xl border border-dashed border-gray-alpha-400 p-2">
       <Button size="1" variant="soft">
         Leading
       </Button>

@@ -3,7 +3,7 @@ import { TabsNav } from '@aussieljk/frosted';
 
 export default function TabsNavDemo() {
   return (
-    <TabsNav.Root style={{ width: '100%', maxWidth: 400 }}>
+    <TabsNav.Root className="w-full max-w-100">
       <TabsNav.Link active href="#">
         Account
       </TabsNav.Link>

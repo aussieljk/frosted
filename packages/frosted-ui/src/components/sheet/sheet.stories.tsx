@@ -250,8 +250,8 @@ export const ScrollableContent: Story = {
             style={{
               flex: 1,
               overflowY: 'auto',
-              borderTop: '1px solid var(--gray-a4)',
-              borderBottom: '1px solid var(--gray-a4)',
+              borderTop: '1px solid var(--gray-alpha-200)',
+              borderBottom: '1px solid var(--gray-alpha-200)',
             }}
           >
             <Text render={<p />} size="2" style={{ marginBottom: 'var(--space-4)' }}>
@@ -669,7 +669,7 @@ export const OpenChangeCallbacks: Story = {
         <div
           style={{
             padding: 'var(--space-3)',
-            background: 'var(--gray-a3)',
+            background: 'var(--gray-alpha-100)',
             borderRadius: 'var(--radius-2)',
             fontFamily: 'monospace',
             fontSize: 'var(--font-size-1)',
@@ -686,7 +686,7 @@ export const OpenChangeCallbacks: Story = {
             </Text>
           ) : (
             logs.map((log, i) => (
-              <div key={i} style={{ color: log.includes('AnimationEnd') ? 'var(--accent-11)' : 'var(--gray-11)' }}>
+              <div key={i} style={{ color: log.includes('AnimationEnd') ? 'var(--accent-900)' : 'var(--gray-900)' }}>
                 {log}
               </div>
             ))

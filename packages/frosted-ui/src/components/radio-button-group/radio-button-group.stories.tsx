@@ -36,7 +36,7 @@ export const Default: Story = {
               display: 'flex',
               padding: '8px 40px 8px 24px',
               borderRadius: 8,
-              border: '1px solid var(--gray-a7)',
+              border: '1px solid var(--gray-alpha-500)',
               gap: 'var(--space-2)',
               alignItems: 'center',
             }}
@@ -51,7 +51,7 @@ export const Default: Story = {
               display: 'flex',
               padding: '8px 40px 8px 24px',
               borderRadius: 8,
-              border: '1px solid var(--gray-a7)',
+              border: '1px solid var(--gray-alpha-500)',
               gap: 'var(--space-2)',
               alignItems: 'center',
             }}
@@ -66,7 +66,7 @@ export const Default: Story = {
               display: 'flex',
               padding: '8px 40px 8px 24px',
               borderRadius: 8,
-              border: '1px solid var(--gray-a7)',
+              border: '1px solid var(--gray-alpha-500)',
               gap: 'var(--space-2)',
               alignItems: 'center',
             }}
@@ -96,7 +96,7 @@ export const HighContrast: Story = {
                   width: 48,
                   height: 48,
                   borderRadius: 16,
-                  background: 'var(--lime-9)',
+                  background: 'var(--lime-700)',
                 }}
               />
             </RadioButtonGroup.Item>
@@ -110,7 +110,7 @@ export const HighContrast: Story = {
                   width: 48,
                   height: 48,
                   borderRadius: 16,
-                  background: 'var(--teal-9)',
+                  background: 'var(--teal-700)',
                 }}
               />
             </RadioButtonGroup.Item>
@@ -353,7 +353,7 @@ export const OnValueChange: Story = {
         <div
           style={{
             padding: 'var(--space-3)',
-            background: 'var(--gray-3)',
+            background: 'var(--gray-100)',
             borderRadius: 'var(--radius-2)',
           }}
         >
@@ -432,7 +432,7 @@ export const OnValueChangeEvent: Story = {
         <div
           style={{
             padding: 'var(--space-3)',
-            background: 'var(--gray-3)',
+            background: 'var(--gray-100)',
             borderRadius: 'var(--radius-2)',
           }}
         >
@@ -553,7 +553,7 @@ export const FormName: Story = {
           <Code
             style={{
               padding: 'var(--space-3)',
-              background: 'var(--gray-3)',
+              background: 'var(--gray-100)',
               borderRadius: 'var(--radius-2)',
               display: 'block',
               whiteSpace: 'pre',

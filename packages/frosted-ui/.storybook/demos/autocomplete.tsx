@@ -5,7 +5,7 @@ const tags = ['feature', 'fix', 'bug', 'docs', 'internal', 'performance', 'acces
 
 export default function AutocompleteDemo() {
   return (
-    <div style={{ width: 300 }}>
+    <div className="w-75">
       <Autocomplete.Root items={tags}>
         <TextField.Root>
           <Autocomplete.Input render={<TextField.Input placeholder="Search tags..." />} />

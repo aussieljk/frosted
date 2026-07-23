@@ -25,7 +25,7 @@
 
 .fui-FieldLabel[data-disabled],
 .fui-FieldDescription[data-disabled] {
-  color: var(--gray-a8);
+  color: var(--gray-alpha-600);
 }
 
 /* ============================================================================

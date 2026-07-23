@@ -113,7 +113,7 @@ function EmojiGrid() {
         style={{
           marginTop: 'var(--space-8)',
           padding: 'var(--space-4)',
-          background: 'var(--gray-3)',
+          background: 'var(--gray-100)',
           borderRadius: 'var(--radius-4)',
         }}
       >
@@ -214,7 +214,7 @@ function InteractiveDemo() {
           flexDirection: 'column',
           gap: 'var(--space-4)',
           padding: 'var(--space-5)',
-          background: 'var(--gray-2)',
+          background: 'var(--gray-50)',
           borderRadius: 'var(--radius-4)',
         }}
       >
@@ -264,7 +264,7 @@ function InteractiveDemo() {
           style={{
             marginTop: 'var(--space-3)',
             padding: 'var(--space-3)',
-            background: 'var(--gray-1)',
+            background: 'var(--gray-10)',
             borderRadius: 'var(--radius-3)',
             fontFamily: 'monospace',
             fontSize: '14px',

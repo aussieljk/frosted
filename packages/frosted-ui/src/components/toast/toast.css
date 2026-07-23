@@ -274,7 +274,7 @@
   font-size: var(--font-size-2);
   line-height: var(--line-height-2);
   font-weight: 500;
-  color: var(--gray-12);
+  color: var(--gray-950);
   margin: 0;
 }
 
@@ -291,7 +291,7 @@
 .fui-ToastDescription {
   font-size: var(--font-size-2);
   line-height: var(--line-height-2);
-  color: var(--gray-11);
+  color: var(--gray-900);
   margin: 0;
 }
 
@@ -314,23 +314,23 @@
 }
 
 .fui-ToastIcon-success {
-  color: var(--success-11);
+  color: var(--success-900);
 }
 
 .fui-ToastIcon-error {
-  color: var(--danger-11);
+  color: var(--danger-900);
 }
 
 .fui-ToastIcon-warning {
-  color: var(--warning-11);
+  color: var(--warning-900);
 }
 
 .fui-ToastIcon-info {
-  color: var(--info-11);
+  color: var(--info-900);
 }
 
 .fui-ToastIcon-loading {
-  color: var(--gray-11);
+  color: var(--gray-900);
 }
 
 /***************************************************************************************************
@@ -359,12 +359,12 @@
   top: calc(var(--border-radius) * 0.2929);
   transform: translate(50%, -50%);
   visibility: hidden;
-  color: var(--gray-a10);
+  color: var(--gray-alpha-800);
 
   @media (hover: hover) {
     &:where(.fui-ToastRoot[data-expanded]:not([data-ending-style], [data-swiping]):hover &) {
       visibility: visible;
-      color: var(--gray-12);
+      color: var(--gray-950);
     }
   }
 }

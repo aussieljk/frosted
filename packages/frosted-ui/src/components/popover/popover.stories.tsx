@@ -511,7 +511,7 @@ export const AnchorProp: Story = {
             alignItems: 'center',
             gap: 'var(--space-4)',
             padding: 'var(--space-4)',
-            background: 'var(--gray-a3)',
+            background: 'var(--gray-alpha-100)',
             borderRadius: 'var(--radius-3)',
           }}
         >
@@ -579,7 +579,7 @@ export const DisableAnchorTracking: Story = {
               style={{
                 width: 200,
                 height: 100,
-                border: '1px solid var(--gray-6)',
+                border: '1px solid var(--gray-400)',
                 borderRadius: 'var(--radius-2)',
                 padding: 'var(--space-3)',
                 position: 'relative',
@@ -615,7 +615,7 @@ export const DisableAnchorTracking: Story = {
               style={{
                 width: 200,
                 height: 100,
-                border: '1px solid var(--gray-6)',
+                border: '1px solid var(--gray-400)',
                 borderRadius: 'var(--radius-2)',
                 padding: 'var(--space-3)',
                 position: 'relative',
@@ -729,7 +729,7 @@ export const CollisionBoundary: Story = {
               style={{
                 width: 250,
                 height: 200,
-                border: '2px dashed var(--gray-6)',
+                border: '2px dashed var(--gray-400)',
                 borderRadius: 'var(--radius-2)',
                 padding: 'var(--space-3)',
                 display: 'flex',
@@ -757,7 +757,7 @@ export const CollisionBoundary: Story = {
               style={{
                 width: 250,
                 height: 200,
-                border: '2px dashed var(--accent-9)',
+                border: '2px dashed var(--accent-700)',
                 borderRadius: 'var(--radius-2)',
                 padding: 'var(--space-3)',
                 display: 'flex',
@@ -803,7 +803,7 @@ export const CollisionAvoidanceDemo: Story = {
             display: 'flex',
             gap: 'var(--space-4)',
             flexWrap: 'wrap',
-            border: '2px dashed var(--gray-6)',
+            border: '2px dashed var(--gray-400)',
             borderRadius: 'var(--radius-2)',
             padding: 'var(--space-4)',
           }}
@@ -955,7 +955,7 @@ export const Modal: Story = {
           style={{
             marginTop: 'var(--space-4)',
             padding: 'var(--space-4)',
-            background: 'var(--gray-a3)',
+            background: 'var(--gray-alpha-100)',
             borderRadius: 'var(--radius-3)',
             display: 'flex',
             flexDirection: 'column',
@@ -1024,7 +1024,7 @@ export const OpenChangeCallbacks: Story = {
         <div
           style={{
             padding: 'var(--space-3)',
-            background: 'var(--gray-a3)',
+            background: 'var(--gray-alpha-100)',
             borderRadius: 'var(--radius-2)',
             fontFamily: 'monospace',
             fontSize: 'var(--font-size-1)',
@@ -1040,7 +1040,7 @@ export const OpenChangeCallbacks: Story = {
             </Text>
           ) : (
             logs.map((log, i) => (
-              <div key={i} style={{ color: log.includes('Complete') ? 'var(--accent-11)' : 'var(--gray-11)' }}>
+              <div key={i} style={{ color: log.includes('Complete') ? 'var(--accent-900)' : 'var(--gray-900)' }}>
                 {log}
               </div>
             ))
@@ -1321,7 +1321,7 @@ export const FinalFocus: Story = {
           style={{
             marginTop: 'var(--space-4)',
             padding: 'var(--space-4)',
-            background: 'var(--gray-a3)',
+            background: 'var(--gray-alpha-100)',
             borderRadius: 'var(--radius-3)',
             display: 'flex',
             flexDirection: 'column',

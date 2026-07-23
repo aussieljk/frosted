@@ -318,7 +318,7 @@ export const InputRefItem: Story = {
           </RadioGroup.Item>
         </RadioGroup.Root>
 
-        <Code style={{ padding: 'var(--space-2)', background: 'var(--gray-3)', borderRadius: 'var(--radius-2)' }}>
+        <Code style={{ padding: 'var(--space-2)', background: 'var(--gray-100)', borderRadius: 'var(--radius-2)' }}>
           {JSON.stringify(states, null, 2)}
         </Code>
       </div>
@@ -359,7 +359,7 @@ export const OnValueChange: Story = {
         <div
           style={{
             padding: 'var(--space-3)',
-            background: 'var(--gray-3)',
+            background: 'var(--gray-100)',
             borderRadius: 'var(--radius-2)',
           }}
         >
@@ -424,7 +424,7 @@ export const OnValueChangeEvent: Story = {
         <div
           style={{
             padding: 'var(--space-3)',
-            background: 'var(--gray-3)',
+            background: 'var(--gray-100)',
             borderRadius: 'var(--radius-2)',
             fontFamily: 'monospace',
             fontSize: 'var(--font-size-1)',
@@ -524,7 +524,7 @@ export const FormName: Story = {
           <Code
             style={{
               padding: 'var(--space-3)',
-              background: 'var(--gray-3)',
+              background: 'var(--gray-100)',
               borderRadius: 'var(--radius-2)',
               display: 'block',
               whiteSpace: 'pre',
@@ -577,7 +577,7 @@ export const ObjectValues: Story = {
         <div
           style={{
             padding: 'var(--space-3)',
-            background: 'var(--gray-3)',
+            background: 'var(--gray-100)',
             borderRadius: 'var(--radius-2)',
           }}
         >
@@ -602,7 +602,7 @@ export const ObjectValues: Story = {
         <Code
           style={{
             padding: 'var(--space-2)',
-            background: 'var(--gray-3)',
+            background: 'var(--gray-100)',
             borderRadius: 'var(--radius-2)',
             display: 'block',
             whiteSpace: 'pre',

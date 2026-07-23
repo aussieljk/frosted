@@ -9,18 +9,7 @@ export default function PortalDemo() {
         {show ? 'Hide' : 'Show'} portaled content
       </Button>
       {show && (
-        <Portal
-          style={{
-            position: 'fixed',
-            bottom: 20,
-            right: 20,
-            padding: 16,
-            backgroundColor: 'var(--color-panel-solid)',
-            borderRadius: 'var(--radius-3)',
-            boxShadow: 'var(--shadow-5)',
-            zIndex: 1000,
-          }}
-        >
+        <Portal className="fixed right-5 bottom-5 z-[1000] rounded-md bg-panel-solid p-4 shadow-[var(--shadow-5)]">
           <Text size="2" weight="medium">
             Rendered at the end of document.body
           </Text>

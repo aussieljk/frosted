@@ -42,8 +42,8 @@ function MarkerDots({ count }: { count: number }) {
                 width: 8,
                 height: 8,
                 borderRadius: '50%',
-                border: '1.5px solid var(--gray-8)',
-                background: state.active ? 'var(--gray-12)' : 'transparent',
+                border: '1.5px solid var(--gray-600)',
+                background: state.active ? 'var(--gray-950)' : 'transparent',
                 padding: 0,
                 cursor: 'pointer',
                 transition: 'background 150ms',
@@ -386,7 +386,7 @@ function ImperativeScrollToDemo() {
             fontFamily: 'var(--code-font-family)',
             fontSize: 'var(--font-size-1)',
             lineHeight: 'var(--line-height-2)',
-            color: 'var(--gray-11)',
+            color: 'var(--gray-900)',
             minHeight: 120,
           }}
         >
@@ -554,7 +554,7 @@ function DefaultValueDemo() {
             fontFamily: 'var(--code-font-family)',
             fontSize: 'var(--font-size-1)',
             lineHeight: 'var(--line-height-2)',
-            color: 'var(--gray-11)',
+            color: 'var(--gray-900)',
             minHeight: 120,
           }}
         >
@@ -778,7 +778,7 @@ function ProductGalleryDemo() {
                   scrollSnapType: 'x mandatory',
                   scrollbarWidth: 'none',
                   borderRadius: 'var(--radius-3)',
-                  background: 'var(--gray-3)',
+                  background: 'var(--gray-100)',
                 }}
               >
                 {productImages.map((img) => (
@@ -865,7 +865,7 @@ function ProductGalleryDemo() {
                         height: 3,
                         borderRadius: 2,
                         border: 'none',
-                        background: state.active ? 'var(--gray-12)' : 'var(--gray-6)',
+                        background: state.active ? 'var(--gray-950)' : 'var(--gray-400)',
                         padding: 0,
                         cursor: 'pointer',
                         transition: 'background 150ms',
@@ -898,7 +898,7 @@ function ProductGalleryDemo() {
                         height: 80,
                         borderRadius: 'var(--radius-2)',
                         overflow: 'hidden',
-                        border: state.active ? '2px solid var(--gray-12)' : '2px solid transparent',
+                        border: state.active ? '2px solid var(--gray-950)' : '2px solid transparent',
                         padding: 0,
                         cursor: 'pointer',
                         opacity: state.active ? 1 : 0.6,
@@ -1065,7 +1065,7 @@ export const ResizableViewport: Story = {
         maxWidth: '100%',
         resize: 'horizontal',
         overflow: 'hidden',
-        border: '1px dashed var(--gray-6)',
+        border: '1px dashed var(--gray-400)',
         borderRadius: 'var(--radius-3)',
         padding: 'var(--space-4)',
       }}
@@ -1435,7 +1435,10 @@ export const Testimonials: Story = {
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)', height: '100%' }}>
                   <div style={{ display: 'flex', gap: 2 }}>
                     {Array.from({ length: 5 }, (_, i) => (
-                      <span key={i} style={{ color: i < t.rating ? 'var(--amber-9)' : 'var(--gray-5)', fontSize: 14 }}>
+                      <span
+                        key={i}
+                        style={{ color: i < t.rating ? 'var(--amber-700)' : 'var(--gray-300)', fontSize: 14 }}
+                      >
                         ★
                       </span>
                     ))}

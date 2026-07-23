@@ -24,7 +24,7 @@
 .fui-SelectIcon {
   flex-shrink: 0;
   &:where(:not(.fui-SelectTrigger[data-disabled] &)) {
-    color: var(--accent-a12);
+    color: var(--accent-alpha-950);
   }
 }
 
@@ -68,7 +68,7 @@
   }
 
   & :where(.fui-SelectItem[data-highlighted]:not([data-disabled])) {
-    background-color: var(--gray-a4);
+    background-color: var(--gray-alpha-200);
   }
 }
 
@@ -137,7 +137,7 @@
   height: var(--select-item-height);
   padding-left: var(--select-item-indicator-width);
   padding-right: var(--select-item-indicator-width);
-  color: var(--gray-a10);
+  color: var(--gray-alpha-800);
   user-select: none;
   cursor: default;
   font-weight: var(--font-weight-semi-bold);
@@ -154,7 +154,7 @@
  ***************************************************************************************************/
 
 .fui-SelectTrigger {
-  color: var(--gray-12);
+  color: var(--gray-950);
   height: var(--select-trigger-height);
 }
 
@@ -336,34 +336,34 @@
 /* surface */
 
 .fui-SelectTrigger:where(.fui-variant-surface) {
-  color: var(--accent-a11);
+  color: var(--accent-alpha-900);
   &:where([data-accent-color='gray']) {
-    color: var(--gray-12);
+    color: var(--gray-950);
   }
 
   background-color: var(--color-surface);
   box-shadow:
-    inset 0 0 0 1px var(--gray-a5),
+    inset 0 0 0 1px var(--gray-alpha-300),
     0px 1px 2px 0px rgba(0, 0, 0, 0.05);
 
   @media (hover: hover) {
     &:where(:not(:disabled):hover) {
       box-shadow:
-        inset 0 0 0 1px var(--gray-a7),
+        inset 0 0 0 1px var(--gray-alpha-500),
         0px 1px 2px 0px rgba(0, 0, 0, 0.05);
     }
   }
   &:where([data-popup-open]) {
-    box-shadow: inset 0 0 0 1px var(--gray-a7);
+    box-shadow: inset 0 0 0 1px var(--gray-alpha-500);
   }
   &:where([data-placeholder]) {
-    color: var(--accent-a10);
+    color: var(--accent-alpha-800);
   }
   &:where(:disabled) {
     cursor: var(--cursor-disabled);
-    color: var(--gray-a8);
+    color: var(--gray-alpha-600);
 
-    background-image: linear-gradient(var(--gray-a3), var(--gray-a3));
+    background-image: linear-gradient(var(--gray-alpha-100), var(--gray-alpha-100));
   }
 }
 
@@ -372,9 +372,9 @@
 /* prettier-ignore */
 :where(.frosted-ui) {
   --select-trigger-classic-box-shadow:
-		inset 0 0 0 1px var(--gray-a5),
-		inset 0 2px 1px var(--white-a11),
-		inset 0 -2px 1px var(--gray-a4)
+		inset 0 0 0 1px var(--gray-alpha-300),
+		inset 0 2px 1px var(--white-alpha-900),
+		inset 0 -2px 1px var(--gray-alpha-200)
 	;
 }
 
@@ -384,15 +384,15 @@
 .dark :where(.frosted-ui:not(.light, .light-theme)),
 .dark-theme :where(.frosted-ui:not(.light, .light-theme)) {
   --select-trigger-classic-box-shadow:
-    inset 0 0 0 1px var(--white-a4),
-    inset 0 1px 1px var(--white-a4),
-    inset 0 -1px 1px var(--black-a9)
+    inset 0 0 0 1px var(--white-alpha-200),
+    inset 0 1px 1px var(--white-alpha-200),
+    inset 0 -1px 1px var(--black-alpha-700)
 	;
 }
 
 .fui-SelectTrigger:where(.fui-variant-classic) {
-  color: var(--gray-12);
-  background-image: linear-gradient(var(--gray-2), var(--gray-1));
+  color: var(--gray-950);
+  background-image: linear-gradient(var(--gray-50), var(--gray-10));
   box-shadow: var(--select-trigger-classic-box-shadow);
   position: relative;
   z-index: 0;
@@ -407,48 +407,48 @@
     border-radius: inherit;
     pointer-events: none;
     background-image:
-      linear-gradient(var(--black-a1) -20%, transparent, var(--white-a1) 130%),
+      linear-gradient(var(--black-alpha-10) -20%, transparent, var(--white-alpha-10) 130%),
       linear-gradient(var(--color-surface), transparent);
   }
 
   @media (hover: hover) {
     &:where(:hover) {
       box-shadow:
-        inset 0 0 0 1px var(--gray-a3),
+        inset 0 0 0 1px var(--gray-alpha-100),
         var(--select-trigger-classic-box-shadow);
 
       &::before {
         background-image:
-          linear-gradient(var(--black-a1) -15%, transparent, var(--white-a1) 120%),
-          linear-gradient(var(--gray-2), var(--gray-1));
+          linear-gradient(var(--black-alpha-10) -15%, transparent, var(--white-alpha-10) 120%),
+          linear-gradient(var(--gray-50), var(--gray-10));
       }
     }
   }
   &:where([data-popup-open]) {
     box-shadow:
-      inset 0 0 0 1px var(--gray-a3),
+      inset 0 0 0 1px var(--gray-alpha-100),
       var(--select-trigger-classic-box-shadow);
 
     &::before {
       background-image:
-        linear-gradient(var(--black-a1) -15%, transparent, var(--white-a1) 120%),
-        linear-gradient(var(--gray-2), var(--gray-1));
+        linear-gradient(var(--black-alpha-10) -15%, transparent, var(--white-alpha-10) 120%),
+        linear-gradient(var(--gray-50), var(--gray-10));
     }
   }
   &:where(:disabled) {
     cursor: var(--cursor-disabled);
-    color: var(--gray-a8);
+    color: var(--gray-alpha-600);
     /* Use disabled button style for the shadow */
     box-shadow: var(--base-button-classic-disabled-box-shadow);
     &::before {
       background-image:
-        linear-gradient(var(--black-a1) -20%, transparent, var(--white-a1) 130%),
+        linear-gradient(var(--black-alpha-10) -20%, transparent, var(--white-alpha-10) 130%),
         linear-gradient(var(--color-surface), transparent);
     }
   }
   &:where([data-placeholder]) {
     & :where(.fui-SelectTriggerValue) {
-      color: var(--gray-a10);
+      color: var(--gray-alpha-800);
     }
   }
 }
@@ -457,47 +457,47 @@
 
 .fui-SelectTrigger:where(.fui-variant-soft),
 .fui-SelectTrigger:where(.fui-variant-ghost) {
-  color: var(--accent-a12);
+  color: var(--accent-alpha-950);
 
   &:where([data-placeholder]) {
-    color: var(--accent-a10);
+    color: var(--accent-alpha-800);
   }
 }
 
 .fui-SelectTrigger:where(.fui-variant-soft) {
-  background-color: var(--accent-a3);
+  background-color: var(--accent-alpha-100);
 
   @media (hover: hover) {
     &:where(:hover) {
-      background-color: var(--accent-a4);
+      background-color: var(--accent-alpha-200);
     }
   }
   &:where([data-popup-open]) {
-    background-color: var(--accent-a4);
+    background-color: var(--accent-alpha-200);
   }
   &:where(:focus-visible) {
     /* Use gray outline when component color is gray */
-    outline-color: var(--accent-8);
+    outline-color: var(--accent-600);
   }
   &:where(:disabled) {
     cursor: var(--cursor-disabled);
-    color: var(--gray-a8);
-    background-color: var(--gray-a3);
+    color: var(--gray-alpha-600);
+    background-color: var(--gray-alpha-100);
   }
 }
 
 .fui-SelectTrigger:where(.fui-variant-ghost) {
   @media (hover: hover) {
     &:where(:hover) {
-      background-color: var(--accent-a3);
+      background-color: var(--accent-alpha-100);
     }
   }
   &:where([data-popup-open]) {
-    background-color: var(--accent-a3);
+    background-color: var(--accent-alpha-100);
   }
   &:where(:disabled) {
     cursor: var(--cursor-disabled);
-    color: var(--gray-a8);
+    color: var(--gray-alpha-600);
     background-color: transparent;
   }
 }
@@ -525,10 +525,10 @@
 }
 
 .fui-SelectItem:where([data-disabled]) {
-  color: var(--gray-a8);
+  color: var(--gray-alpha-600);
   cursor: var(--cursor-disabled);
 }
 
 .fui-SelectSeparator {
-  background-color: var(--gray-a6);
+  background-color: var(--gray-alpha-400);
 }

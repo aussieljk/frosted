@@ -6,7 +6,7 @@ export default function FormDemo() {
 
   return (
     <Form
-      style={{ width: 300 }}
+      className="w-75"
       onSubmit={(event) => {
         event.preventDefault();
         setSubmitted(true);
@@ -21,7 +21,7 @@ export default function FormDemo() {
         <Field.Error match="typeMismatch">Please enter a valid email</Field.Error>
       </Field.Root>
 
-      <Button type="submit" variant="solid" style={{ width: '100%' }}>
+      <Button type="submit" variant="solid" className="w-full">
         {submitted ? 'Subscribed!' : 'Subscribe'}
       </Button>
     </Form>

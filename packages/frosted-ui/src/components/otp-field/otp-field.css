@@ -33,7 +33,7 @@
   font-family: inherit;
   font-size: 0.875rem;
   color: inherit;
-  caret-color: var(--gray-a10);
+  caret-color: var(--gray-alpha-800);
   outline: none;
   transition-property: outline;
   transition-duration: 0.2s;

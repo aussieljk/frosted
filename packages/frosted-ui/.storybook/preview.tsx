@@ -6,7 +6,8 @@ import { themePropDefs } from '../src/theme-options';
 import { Theme } from '../src/theme';
 import { enhanceArgTypesFromProps } from './enhance-arg-types';
 import { fontBase, fontCode } from './fonts';
-import '../styles.css';
+// Pulls in tailwind + ../styles.css + ../theme.css — the demos are written in utilities.
+import './preview.css';
 
 export const withTheme: Decorator = (Story, context) => {
   // Get values from story parameter first, else fallback to globals

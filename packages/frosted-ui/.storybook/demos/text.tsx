@@ -3,7 +3,7 @@ import { Text } from '@aussieljk/frosted';
 
 export default function TextDemo() {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
+    <div className="flex flex-col gap-2">
       <Text size="1">The quick brown fox jumps over the lazy dog.</Text>
       <Text size="2">The quick brown fox jumps over the lazy dog.</Text>
       <Text size="3">The quick brown fox jumps over the lazy dog.</Text>

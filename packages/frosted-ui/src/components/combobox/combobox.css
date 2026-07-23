@@ -45,12 +45,12 @@
   border: none;
   background: none;
   cursor: pointer;
-  color: var(--gray-a10);
+  color: var(--gray-alpha-800);
   border-radius: var(--radius-1);
 
   @media (hover: hover) {
     &:where(:hover:not([data-disabled])) {
-      color: var(--gray-12);
+      color: var(--gray-950);
     }
   }
 
@@ -67,7 +67,7 @@
 
 .fui-ComboboxTriggerButton {
   &[data-popup-open] {
-    color: var(--gray-12);
+    color: var(--gray-950);
   }
 }
 
@@ -120,14 +120,14 @@
   justify-content: center;
   flex-shrink: 0;
   cursor: pointer;
-  color: var(--gray-a10);
+  color: var(--gray-alpha-800);
   border: none;
   background: none;
   padding: var(--space-1);
 
   @media (hover: hover) {
     &:where(:hover:not([data-disabled])) {
-      color: var(--gray-12);
+      color: var(--gray-950);
     }
   }
 
@@ -180,7 +180,7 @@
   }
 
   & :where(.fui-ComboboxItem[data-highlighted]:not([data-disabled])) {
-    background-color: var(--gray-a4);
+    background-color: var(--gray-alpha-200);
   }
 
   &:where(.fui-r-size-1) {
@@ -330,7 +330,7 @@
   height: var(--combobox-item-height);
   padding-left: var(--combobox-item-indicator-width);
   padding-right: var(--combobox-item-indicator-width);
-  color: var(--gray-a10);
+  color: var(--gray-alpha-800);
 
   /* To account for the list padding */
   margin: 4px;
@@ -423,39 +423,39 @@
 }
 
 .fui-ComboboxChip:where(.fui-variant-solid) {
-  background-color: var(--accent-9);
-  color: var(--accent-9-contrast);
-  --chip-remove-icon-color: var(--accent-9-contrast);
-  --chip-remove-icon-hover-color: var(--accent-9-contrast);
+  background-color: var(--accent-700);
+  color: var(--accent-700-contrast);
+  --chip-remove-icon-color: var(--accent-700-contrast);
+  --chip-remove-icon-hover-color: var(--accent-700-contrast);
   &:focus-visible {
     outline-offset: 2px;
   }
 
   &:where(.fui-high-contrast) {
-    background-color: var(--accent-12);
-    color: var(--accent-1);
-    --chip-remove-icon-color: var(--accent-1);
-    --chip-remove-icon-hover-color: var(--accent-1);
+    background-color: var(--accent-950);
+    color: var(--accent-10);
+    --chip-remove-icon-color: var(--accent-10);
+    --chip-remove-icon-hover-color: var(--accent-10);
   }
 }
 
 .fui-ComboboxChip:where(.fui-variant-soft) {
-  background-color: var(--accent-a4);
-  color: var(--accent-a12);
-  --chip-remove-icon-color: var(--accent-a11);
-  --chip-remove-icon-hover-color: var(--accent-a12);
+  background-color: var(--accent-alpha-200);
+  color: var(--accent-alpha-950);
+  --chip-remove-icon-color: var(--accent-alpha-900);
+  --chip-remove-icon-hover-color: var(--accent-alpha-950);
   &:where([data-accent-color]) {
-    background-color: var(--accent-a3);
+    background-color: var(--accent-alpha-100);
 
-    color: var(--accent-a11);
+    color: var(--accent-alpha-900);
   }
   &:where([data-accent-color='gray']) {
-    background-color: var(--accent-a4);
-    color: var(--accent-a12);
+    background-color: var(--accent-alpha-200);
+    color: var(--accent-alpha-950);
   }
 
   &:where(.fui-high-contrast) {
-    color: var(--accent-12);
+    color: var(--accent-950);
   }
 }
 
@@ -480,7 +480,7 @@
 
   @media (hover: hover) {
     &:where(:hover:not([data-disabled])) {
-      color: var(--chip-remove-icon-hover-color, var(--accent-12));
+      color: var(--chip-remove-icon-hover-color, var(--accent-950));
     }
   }
 }

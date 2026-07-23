@@ -290,7 +290,7 @@ export const Controlled: Story = {
                 index={i}
                 style={{
                   ...triggerStyle,
-                  border: value === i ? '2px solid var(--accent-9)' : '2px solid transparent',
+                  border: value === i ? '2px solid var(--accent-700)' : '2px solid transparent',
                   borderRadius: 34,
                   transition: 'border-color 150ms',
                 }}
@@ -1132,7 +1132,7 @@ export const SocialFeed: Story = {
   name: 'Social Feed',
   render: () => (
     <div style={{ maxWidth: 560, margin: '0 auto' }}>
-      <div style={{ padding: 'var(--space-4) 0 var(--space-2)', borderBottom: '1px solid var(--gray-a4)' }}>
+      <div style={{ padding: 'var(--space-4) 0 var(--space-2)', borderBottom: '1px solid var(--gray-alpha-200)' }}>
         <Heading size="5">Home</Heading>
       </div>
 
@@ -1505,8 +1505,8 @@ export const RealEstateListing: Story = {
                   display: 'flex',
                   gap: 'var(--space-6)',
                   padding: 'var(--space-4) 0',
-                  borderTop: '1px solid var(--gray-a4)',
-                  borderBottom: '1px solid var(--gray-a4)',
+                  borderTop: '1px solid var(--gray-alpha-200)',
+                  borderBottom: '1px solid var(--gray-alpha-200)',
                 }}
               >
                 <StatItem value="5" label="Bedrooms" />
@@ -1522,7 +1522,7 @@ export const RealEstateListing: Story = {
                 width: 280,
                 padding: 'var(--space-4)',
                 borderRadius: 12,
-                border: '1px solid var(--gray-a4)',
+                border: '1px solid var(--gray-alpha-200)',
                 display: 'flex',
                 flexDirection: 'column',
                 gap: 'var(--space-3)',
@@ -1584,7 +1584,7 @@ export const RealEstateListing: Story = {
               {amenities.map((a) => (
                 <Text key={a} size="2" style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
                   <span
-                    style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--accent-9)', flexShrink: 0 }}
+                    style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--accent-700)', flexShrink: 0 }}
                   />
                   {a}
                 </Text>
@@ -2611,13 +2611,13 @@ function ProfileCard({ member }: { member: (typeof teamMembers)[number] }) {
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
-            <Globe size={16} style={{ color: 'var(--gray-a10)' }} />
+            <Globe size={16} style={{ color: 'var(--gray-alpha-800)' }} />
             <Text size="2" color="gray">
               {member.location}
             </Text>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
-            <Mail size={16} style={{ color: 'var(--gray-a10)' }} />
+            <Mail size={16} style={{ color: 'var(--gray-alpha-800)' }} />
             <Text size="2" color="gray">
               {member.email}
             </Text>
@@ -2660,7 +2660,7 @@ export const TeamDirectory: Story = {
                 index={i}
                 crossfade
                 style={{
-                  border: '1px solid var(--gray-a4)',
+                  border: '1px solid var(--gray-alpha-200)',
                   background: 'var(--color-surface)',
                   borderRadius: 16,
                   padding: 14,
@@ -2672,10 +2672,10 @@ export const TeamDirectory: Story = {
                   transition: 'background 150ms ease, border-color 150ms ease',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = 'var(--gray-a6)';
+                  e.currentTarget.style.borderColor = 'var(--gray-alpha-400)';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = 'var(--gray-a4)';
+                  e.currentTarget.style.borderColor = 'var(--gray-alpha-200)';
                 }}
               >
                 <div
@@ -2686,7 +2686,7 @@ export const TeamDirectory: Story = {
                     borderRadius: 14,
                     overflow: 'hidden',
                     flexShrink: 0,
-                    background: 'var(--gray-a3)',
+                    background: 'var(--gray-alpha-100)',
                   }}
                 >
                   <img
@@ -2854,7 +2854,7 @@ export const LifecycleCallbacks: Story = {
           style={{
             minWidth: 320,
             background: 'var(--color-panel)',
-            border: '1px solid var(--gray-a5)',
+            border: '1px solid var(--gray-alpha-300)',
             borderRadius: 8,
             padding: 'var(--space-3)',
             fontFamily: 'var(--code-font-family)',
@@ -2881,7 +2881,7 @@ export const LifecycleCallbacks: Story = {
               >
                 +{log.time}ms
               </Text>
-              <Text size="1" style={{ color: log.type === 'change' ? 'var(--blue-11)' : 'var(--green-11)' }}>
+              <Text size="1" style={{ color: log.type === 'change' ? 'var(--blue-900)' : 'var(--green-900)' }}>
                 {log.label}
               </Text>
             </div>
@@ -3359,7 +3359,7 @@ export const TextMessage: Story = {
         alignItems: 'flex-end',
         justifyContent: 'flex-end',
         padding: 'var(--space-6)',
-        background: 'var(--gray-2)',
+        background: 'var(--gray-50)',
       }}
     >
       <Lightbox.Root viewTransition morphTo="origin">
@@ -3380,7 +3380,7 @@ export const TextMessage: Story = {
           {/* Chat bubble */}
           <div
             style={{
-              background: 'var(--accent-9)',
+              background: 'var(--accent-700)',
               color: 'white',
               padding: 'var(--space-2) var(--space-4)',
               borderRadius: 20,
@@ -3434,7 +3434,7 @@ export const TextMessage: Story = {
                 rx="1"
                 stroke="currentColor"
                 strokeWidth="1.2"
-                fill="var(--gray-2)"
+                fill="var(--gray-50)"
               />
               <rect
                 x="9"
@@ -3444,7 +3444,7 @@ export const TextMessage: Story = {
                 rx="1"
                 stroke="currentColor"
                 strokeWidth="1.2"
-                fill="var(--gray-2)"
+                fill="var(--gray-50)"
               />
               <rect
                 x="3"
@@ -3454,7 +3454,7 @@ export const TextMessage: Story = {
                 rx="1.5"
                 stroke="currentColor"
                 strokeWidth="1.2"
-                fill="var(--gray-2)"
+                fill="var(--gray-50)"
               />
             </svg>
             <Text size="1" color="gray">

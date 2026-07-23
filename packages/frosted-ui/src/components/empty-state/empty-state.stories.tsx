@@ -636,13 +636,13 @@ export const UpgradeToPro: Story = {
           gap: 8,
           width: '100%',
           padding: 12,
-          background: 'var(--gray-a2)',
+          background: 'var(--gray-alpha-50)',
           borderRadius: 'var(--radius-3)',
         }}
       >
         {['Unlimited projects', 'Priority support', 'Advanced analytics', 'Custom integrations'].map((feature) => (
           <div key={feature} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-            <CircleCheck size={16} style={{ color: 'var(--green-a11)' }} />
+            <CircleCheck size={16} style={{ color: 'var(--green-alpha-900)' }} />
             <Text size="2">{feature}</Text>
           </div>
         ))}

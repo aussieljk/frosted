@@ -15,13 +15,13 @@ export default function SheetDemo() {
         </Sheet.Header>
         <Sheet.Body>
           <label>
-            <Text render={<div />} size="2" weight="bold" style={{ marginBottom: 4 }}>
+            <Text render={<div />} size="2" weight="bold" className="mb-1">
               Name
             </Text>
             <TextField.Input defaultValue="Freja Johnsen" placeholder="Enter your full name" />
           </label>
 
-          <div style={{ display: 'flex', gap: 12, marginTop: 16, justifyContent: 'flex-end' }}>
+          <div className="mt-4 flex justify-end gap-3">
             <Sheet.Close>
               <Button variant="soft" color="gray">
                 Cancel

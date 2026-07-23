@@ -10,7 +10,7 @@
 
   contain: size layout;
   overflow: hidden;
-  background-color: var(--accent-a3);
+  background-color: var(--accent-alpha-100);
 
   --avatar-group-inner-inset: 0.5;
   /* Casting PX values to integers to calculate scaling */
@@ -22,7 +22,7 @@
   border-radius: max(25%, var(--radius-full));
 
   &:where(.fui-high-contrast) :where(.fui-AvatarFallback) {
-    color: var(--accent-12);
+    color: var(--accent-950);
   }
   &:where(.fui-shape-circle) {
     --radius-full: var(--radius-thumb);
@@ -81,7 +81,7 @@
 }
 
 .fui-AvatarGroupRoot[data-status='loaded'] {
-  outline: 1px solid var(--gray-a5);
+  outline: 1px solid var(--gray-alpha-300);
   background: none;
 }
 
@@ -93,7 +93,7 @@
   transform-origin: center;
   /* Hide items by default to prevent displaying to many avatars in a group */
   visibility: hidden;
-  background-color: var(--accent-4);
+  background-color: var(--accent-200);
 }
 
 .fui-AvatarGroupRoot:has(.fui-AvatarGroupAvatar:nth-child(1)) {

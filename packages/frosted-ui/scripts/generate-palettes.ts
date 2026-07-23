@@ -19,6 +19,7 @@ import {
   computeScale,
   grayMappingCss,
   scaleCss,
+  scaleStops,
   semanticMappingCss,
   tailwindPaletteStops,
   type TailwindPalette,
@@ -84,7 +85,7 @@ function parsePalettes(themeCss: string): Record<string, TailwindPalette> {
 
 const alphaLadder = (color: string) =>
   [0.05, 0.1, 0.15, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.95].map(
-    (a, i) => `  --${color}-a${i + 1}: rgba(${color === 'black' ? '0, 0, 0' : '255, 255, 255'}, ${a});`,
+    (a, i) => `  --${color}-alpha-${scaleStops[i]}: rgba(${color === 'black' ? '0, 0, 0' : '255, 255, 255'}, ${a});`,
   );
 
 function generatePalettesCss(palettes: Record<string, TailwindPalette>): string {
@@ -127,12 +128,12 @@ const THEME_MARKER = '  /* GENERATED-PALETTES — everything below is written by
 function generateThemeSection(): string {
   const lines: string[] = [];
   for (const name of ALL) {
-    lines.push(`  /* ${name} */`, `  --color-${name}: var(--${name}-9);`);
-    for (let i = 1; i <= 12; i++) {
-      lines.push(`  --color-${name}-${i}: var(--${name}-${i});`);
-      if (i === 9) lines.push(`  --color-${name}-9-contrast: var(--${name}-9-contrast);`);
+    lines.push(`  /* ${name} */`, `  --color-${name}: var(--${name}-700);`);
+    for (const stop of scaleStops) {
+      lines.push(`  --color-${name}-${stop}: var(--${name}-${stop});`);
+      if (stop === 700) lines.push(`  --color-${name}-700-contrast: var(--${name}-700-contrast);`);
     }
-    for (let i = 1; i <= 12; i++) lines.push(`  --color-${name}-a${i}: var(--${name}-a${i});`);
+    for (const stop of scaleStops) lines.push(`  --color-${name}-alpha-${stop}: var(--${name}-alpha-${stop});`);
     lines.push(`  --color-${name}-surface: var(--${name}-surface);`, '');
   }
   return lines.join('\n');

@@ -355,7 +355,7 @@ export const SyncedAnimation: Story = {
           maxWidth: 480,
         }}
       >
-        <p style={{ margin: 0, fontSize: 'var(--font-size-2)', color: 'var(--gray-11)' }}>
+        <p style={{ margin: 0, fontSize: 'var(--font-size-2)', color: 'var(--gray-900)' }}>
           All skeletons pulse in sync. Click &quot;Add row&quot; to see more layouts—new ones join the same phase.
         </p>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
@@ -363,7 +363,7 @@ export const SyncedAnimation: Story = {
             const variant = SYNC_DEMO_VARIANTS[i % SYNC_DEMO_VARIANTS.length];
             return (
               <div key={i} style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-1)' }}>
-                <span style={{ fontSize: 'var(--font-size-1)', color: 'var(--gray-9)' }}>{variant.label}</span>
+                <span style={{ fontSize: 'var(--font-size-1)', color: 'var(--gray-700)' }}>{variant.label}</span>
                 {variant.render(args)}
               </div>
             );
@@ -482,8 +482,8 @@ export const ComposedColor: Story = {
           minWidth: 400,
           boxSizing: 'border-box',
           padding: 24,
-          background: `var(--${args.color}-a2)`,
-          border: `1px solid var(--${args.color}-a6)`,
+          background: `var(--${args.color}-a50)`,
+          border: `1px solid var(--${args.color}-a400)`,
           borderRadius: 'var(--radius-5)',
         }}
         onMouseOver={() => setShow(true)}

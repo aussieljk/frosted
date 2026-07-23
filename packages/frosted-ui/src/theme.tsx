@@ -106,12 +106,12 @@ const ThemeRoot = (props: ThemeRootProps) => {
 
   // Custom gray colors have no global `--{name}-1` token, so compute the dark page
   // background directly (it is applied to <body>, outside any theme scope).
-  let darkPageBackground = `var(--${resolvedGrayColor}-1)`;
+  let darkPageBackground = `var(--${resolvedGrayColor}-10)`;
   if (isCustomGrayColor(resolvedGrayColor)) {
     try {
       darkPageBackground = darkPageBackgroundFromColor(resolvedGrayColor);
     } catch {
-      darkPageBackground = 'var(--gray-1)';
+      darkPageBackground = 'var(--gray-10)';
     }
   }
 

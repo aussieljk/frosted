@@ -157,7 +157,7 @@ export const UncheckedValue: Story = {
             </Text>
             <pre
               style={{
-                background: 'var(--gray-3)',
+                background: 'var(--gray-100)',
                 padding: 'var(--space-3)',
                 borderRadius: 'var(--radius-2)',
                 fontSize: 'var(--font-size-1)',

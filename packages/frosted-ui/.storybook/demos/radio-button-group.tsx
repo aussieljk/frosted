@@ -6,19 +6,10 @@ const plans = ['Hobby', 'Pro', 'Enterprise'];
 export default function RadioButtonGroupDemo() {
   return (
     <RadioButtonGroup.Root defaultValue="Pro">
-      <div style={{ display: 'flex', gap: 'var(--space-2)' }}>
+      <div className="flex gap-2">
         {plans.map((plan) => (
           <RadioButtonGroup.Item key={plan} value={plan}>
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: 'var(--space-2)',
-                padding: '8px 16px',
-                borderRadius: 8,
-                border: '1px solid var(--gray-a7)',
-              }}
-            >
+            <div className="flex items-center gap-2 rounded-lg border border-gray-alpha-500 px-4 py-2">
               <RadioButtonGroup.Icon />
               <Text size="2">{plan}</Text>
             </div>

@@ -3,7 +3,7 @@ import { Spinner, Switch } from '@aussieljk/frosted';
 
 export default function SpinnerDemo() {
   return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: 24 }}>
+    <div className="flex items-center gap-6">
       <Spinner size="1" />
       <Spinner size="3" />
       <Spinner size="5" />

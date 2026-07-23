@@ -5,7 +5,7 @@ import { lucideAdapter } from '@aussieljk/frosted/icons/lucide';
 export default function VisuallyHiddenDemo() {
   return (
     <IconProvider library={lucideAdapter}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+      <div className="flex items-center gap-3">
         <IconButton variant="soft">
           <VisuallyHidden>Settings</VisuallyHidden>
           <Icons.Settings />

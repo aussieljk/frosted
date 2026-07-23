@@ -109,7 +109,7 @@ export const Animated: Story = {
         size="3"
         variant="surface"
         style={{
-          backgroundImage: `linear-gradient(var(--color-panel-elevation-a3), var(--color-panel-elevation-a3))`,
+          backgroundImage: `linear-gradient(var(--color-panel-elevation-alpha-100), var(--color-panel-elevation-alpha-100))`,
         }}
       >
         <div style={{ width: 300, display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
@@ -135,7 +135,7 @@ export const Animated: Story = {
                         width: 'var(--space-3)',
                         height: 'var(--space-1)',
                         borderRadius: 3,
-                        backgroundColor: `var(--${dataPoint.color}-9)`,
+                        backgroundColor: `var(--${dataPoint.color}-700)`,
                       }}
                     />
                     <Text size="2" color="gray">

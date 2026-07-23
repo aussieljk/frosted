@@ -39,10 +39,10 @@
   align-items: center;
   position: relative;
   z-index: 1;
-  color: var(--gray-a11);
+  color: var(--gray-alpha-900);
 
   &:where([data-accent-color]) {
-    color: var(--accent-a11);
+    color: var(--accent-alpha-900);
   }
   &:where(:empty) {
     display: none;
@@ -175,35 +175,35 @@
   --text-field-border-width: 1px;
   background-color: var(--color-surface);
   box-shadow:
-    inset 0 0 0 1px var(--gray-a5),
+    inset 0 0 0 1px var(--gray-alpha-300),
     0px 1px 2px 0px rgba(0, 0, 0, 0.05);
 
   @media (hover: hover) {
     &:where(:hover:has(.fui-TextFieldInput:not(:disabled))) {
       box-shadow:
-        inset 0 0 0 1px var(--gray-a7),
+        inset 0 0 0 1px var(--gray-alpha-500),
         0px 1px 2px 0px rgba(0, 0, 0, 0.05);
     }
   }
 
   &:where(:has(.fui-TextFieldInput:autofill), :has(.fui-TextFieldInput[data-com-onepassword-filled])) {
-    background-color: var(--accent-a3);
+    background-color: var(--accent-alpha-100);
     box-shadow:
-      inset 0 0 0 1px var(--gray-a7),
-      inset 0 0 0 1px var(--accent-a4);
+      inset 0 0 0 1px var(--gray-alpha-500),
+      inset 0 0 0 1px var(--accent-alpha-200);
   }
 
   &:where(:has(.fui-TextFieldInput:disabled), :has(.fui-TextFieldInput:read-only)) {
     /* Blend with grey */
-    background-image: linear-gradient(var(--gray-a3), var(--gray-a3));
+    background-image: linear-gradient(var(--gray-alpha-100), var(--gray-alpha-100));
   }
 }
 
 .fui-TextFieldInput:where(.fui-variant-surface) {
-  color: var(--gray-12);
+  color: var(--gray-950);
 
   &::placeholder {
-    color: var(--gray-a10);
+    color: var(--gray-alpha-800);
     /* Firefox */
     opacity: 1;
   }
@@ -211,7 +211,7 @@
   &:where(:autofill, [data-com-onepassword-filled]) {
     /* Reliably removes native autofill colors */
     background-clip: text;
-    -webkit-text-fill-color: var(--gray-12);
+    -webkit-text-fill-color: var(--gray-950);
   }
 }
 
@@ -219,40 +219,40 @@
 
 .fui-TextFieldRoot:where(.fui-variant-soft) {
   --text-field-border-width: 0px;
-  background-color: var(--accent-a3);
+  background-color: var(--accent-alpha-100);
 
   &:where(:has(.fui-TextFieldInput:autofill), :has(.fui-TextFieldInput[data-com-onepassword-filled])) {
-    background-color: var(--accent-a4);
-    box-shadow: inset 0 0 0 1px var(--accent-a7);
+    background-color: var(--accent-alpha-200);
+    box-shadow: inset 0 0 0 1px var(--accent-alpha-500);
   }
 
   &:where(:has(.fui-TextFieldInput:focus)) {
     /* Use gray outline when component color is gray */
-    outline-color: var(--accent-8);
+    outline-color: var(--accent-600);
   }
 
   &:where(:has(.fui-TextFieldInput:disabled), :has(.fui-TextFieldInput:read-only)) {
-    background-color: var(--gray-a4);
+    background-color: var(--gray-alpha-200);
   }
 }
 
 .fui-TextFieldInput:where(.fui-variant-soft) {
-  color: var(--accent-12);
+  color: var(--accent-950);
 
   &::placeholder {
-    color: var(--accent-12);
+    color: var(--accent-950);
     opacity: 0.6;
   }
 
   &:where(:autofill, [data-com-onepassword-filled]) {
     /* Reliably removes native autofill colors */
     background-clip: text;
-    -webkit-text-fill-color: var(--accent-12);
+    -webkit-text-fill-color: var(--accent-950);
   }
 
   &::selection {
     /* Use gray selection when component color is gray */
-    background-color: var(--accent-a5);
+    background-color: var(--accent-alpha-300);
   }
 }
 
@@ -261,9 +261,9 @@
 .fui-TextFieldInput {
   &:where(:disabled, :read-only) {
     cursor: text;
-    color: var(--gray-a11);
+    color: var(--gray-alpha-900);
     /* Safari */
-    -webkit-text-fill-color: var(--gray-a11);
+    -webkit-text-fill-color: var(--gray-alpha-900);
 
     &::placeholder {
       opacity: 0.5;
@@ -272,13 +272,13 @@
       cursor: default;
     }
     &::selection {
-      background-color: var(--gray-a5);
+      background-color: var(--gray-alpha-300);
     }
   }
 }
 
 .fui-TextFieldRoot:where(:has(.fui-TextFieldInput:disabled:focus), :has(.fui-TextFieldInput:read-only:focus)) {
-  outline: 2px solid var(--gray-8);
+  outline: 2px solid var(--gray-600);
 }
 
 /* Cursor in gaps around slots, as an enhancement */

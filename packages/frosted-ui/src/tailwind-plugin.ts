@@ -1,12 +1,12 @@
 // Forked from https://github.com/needim/frosted-ui-themes-with-tailwind
 import plugin, { type PluginAPI } from 'tailwindcss/plugin';
+import { scaleStops } from './helpers/tailwind-palette';
 import { semanticColors, themeAccentColorsGrouped, themeGrayColorsGrouped } from './theme-options';
 
 export const accentColorNames: string[] = [];
 export const grayColorNames: string[] = [];
 
-const frostedColorScales = 12;
-type FrostedColorScales = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
+type FrostedColorScales = (typeof scaleStops)[number];
 
 themeAccentColorsGrouped.map((group) => {
   accentColorNames.push(...group.values.filter((color) => color !== 'gray'));
@@ -16,23 +16,27 @@ themeGrayColorsGrouped.map((group) => {
   grayColorNames.push(...group.values.filter((color) => color !== 'auto'));
 });
 
-export function getColorTokenName(number: FrostedColorScales, alpha?: boolean): number | string {
-  return alpha ? 'a' + number : number;
+export function getColorTokenName(stop: FrostedColorScales, alpha?: boolean): number | string {
+  return alpha ? 'alpha-' + stop : stop;
 }
 
+/** `{ 'white-alpha-10': 'var(--white-alpha-10)', … }` — the 12 alpha steps of a ladder. */
+const alphaLadderColors = (keyPrefix: string, varPrefix: string): Record<string, string> =>
+  Object.fromEntries(scaleStops.map((stop) => [`${keyPrefix}alpha-${stop}`, `var(--${varPrefix}alpha-${stop})`]));
+
 export const getColorDefinitions = (color: string, alpha?: boolean) => {
-  const colors = Array.from(Array(frostedColorScales).keys()).reduce(
-    (acc, _, i) => {
-      acc[getColorTokenName((i + 1) as FrostedColorScales, alpha)] = `var(--${color}-${alpha ? 'a' : ''}${i + 1})`;
+  const colors = scaleStops.reduce(
+    (acc, stop) => {
+      acc[getColorTokenName(stop, alpha)] = `var(--${color}-${alpha ? 'alpha-' : ''}${stop})`;
       return acc;
     },
     {} as Record<string, string>,
   );
 
   if (!alpha) {
-    colors[`${getColorTokenName(9, alpha)}-contrast`] = `var(--${color}-9-contrast)`;
+    colors[`${getColorTokenName(700, alpha)}-contrast`] = `var(--${color}-700-contrast)`;
     colors['surface'] = `var(--${color}-surface)`;
-    colors['DEFAULT'] = `var(--${color}-9)`;
+    colors['DEFAULT'] = `var(--${color}-700)`;
     if (color === 'accent') {
       colors['surface'] = `var(--color-surface-accent)`;
     }
@@ -64,7 +68,7 @@ export const frostedThemePlugin: ReturnType<typeof plugin.withOptions> = plugin.
       };
 
       if (grayColorNames.includes(colorName)) {
-        c[`${getColorTokenName(2, false)}-translucent`] = `var(--${colorName}-2-translucent)`;
+        c[`${getColorTokenName(50, false)}-translucent`] = `var(--${colorName}-50-translucent)`;
       }
 
       return c;
@@ -171,45 +175,10 @@ export const frostedThemePlugin: ReturnType<typeof plugin.withOptions> = plugin.
             solid: 'var(--color-panel-solid)',
             translucent: 'var(--color-panel-translucent)',
             // panel-elevation
-            'elevation-a1': 'var(--color-panel-elevation-a1)',
-            'elevation-a2': 'var(--color-panel-elevation-a2)',
-            'elevation-a3': 'var(--color-panel-elevation-a3)',
-            'elevation-a4': 'var(--color-panel-elevation-a4)',
-            'elevation-a5': 'var(--color-panel-elevation-a5)',
-            'elevation-a6': 'var(--color-panel-elevation-a6)',
-            'elevation-a7': 'var(--color-panel-elevation-a7)',
-            'elevation-a8': 'var(--color-panel-elevation-a8)',
-            'elevation-a9': 'var(--color-panel-elevation-a9)',
-            'elevation-a10': 'var(--color-panel-elevation-a10)',
-            'elevation-a11': 'var(--color-panel-elevation-a11)',
-            'elevation-a12': 'var(--color-panel-elevation-a12)',
+            ...alphaLadderColors('elevation-', 'color-panel-elevation-'),
           },
-          // white
-          'white-a1': 'var(--white-a1)',
-          'white-a2': 'var(--white-a2)',
-          'white-a3': 'var(--white-a3)',
-          'white-a4': 'var(--white-a4)',
-          'white-a5': 'var(--white-a5)',
-          'white-a6': 'var(--white-a6)',
-          'white-a7': 'var(--white-a7)',
-          'white-a8': 'var(--white-a8)',
-          'white-a9': 'var(--white-a9)',
-          'white-a10': 'var(--white-a10)',
-          'white-a11': 'var(--white-a11)',
-          'white-a12': 'var(--white-a12)',
-          // black
-          'black-a1': 'var(--black-a1)',
-          'black-a2': 'var(--black-a2)',
-          'black-a3': 'var(--black-a3)',
-          'black-a4': 'var(--black-a4)',
-          'black-a5': 'var(--black-a5)',
-          'black-a6': 'var(--black-a6)',
-          'black-a7': 'var(--black-a7)',
-          'black-a8': 'var(--black-a8)',
-          'black-a9': 'var(--black-a9)',
-          'black-a10': 'var(--black-a10)',
-          'black-a11': 'var(--black-a11)',
-          'black-a12': 'var(--black-a12)',
+          ...alphaLadderColors('white-', 'white-'),
+          ...alphaLadderColors('black-', 'black-'),
           selection: 'var(--color-selection-root)',
           ...allFrostedColors,
           accent: generateTailwindColors('accent'),

@@ -3,9 +3,9 @@ import { Avatar, Badge, Button, Card, Heading, HStack, Spacer, Text, VStack, ZSt
 
 export default function LayoutDemo() {
   return (
-    <Card size="3" style={{ width: 340 }}>
+    <Card size="3" className="w-85">
       <VStack spacing={16} alignment="leading">
-        <HStack spacing={8} style={{ width: '100%' }}>
+        <HStack spacing={8} className="w-full">
           <Heading size="4">Members</Heading>
           <Spacer />
           <Button size="1" variant="soft">

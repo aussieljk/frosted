@@ -3,8 +3,8 @@ import { Accordion } from '@aussieljk/frosted';
 
 export default function AccordionDemo() {
   return (
-    <Accordion.Root type="single" defaultValue={['item-1']} style={{ width: '100%', maxWidth: 500 }}>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
+    <Accordion.Root type="single" defaultValue={['item-1']} className="w-full max-w-125">
+      <div className="flex flex-col gap-4">
         <Accordion.Item value="item-1">
           <Accordion.Trigger>Is it accessible?</Accordion.Trigger>
           <Accordion.Content>Yes. It adheres to the WAI-ARIA design pattern.</Accordion.Content>

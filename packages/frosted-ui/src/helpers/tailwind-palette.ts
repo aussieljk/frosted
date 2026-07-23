@@ -2,13 +2,17 @@
  * Maps Tailwind CSS v4 style palettes (11 stops, 50–950) onto the 12-step
  * scales that @aussieljk/frosted components consume.
  *
+ * Steps are named after the Tailwind stops they come from, plus a `10` step for the
+ * extra light shade — so the scale reads 10, 50, 100 … 900, 950 (see `scaleStops`).
+ *
  * The mapping is static and verbatim:
- * - light: step 1 is an extra light shade (stop 50 mixed 60% toward white),
- *   steps 2–12 are the palette stops 50…950 unchanged.
+ * - light: step 10 is an extra light shade (stop 50 mixed 60% toward white),
+ *   steps 50–950 are the palette stops of the same name, unchanged.
  * - dark: the same stops read in reverse for backgrounds and text, with the
  *   solid steps anchored so buttons stay recognizable:
  *   [50↦black 40%, 950, 900, 900·800, 800, 800·700, 700, 700·600, 600, 500, 300, 100]
- *   (a·b means the OKLab midpoint of the two stops).
+ *   (a·b means the OKLab midpoint of the two stops). Note this makes the dark
+ *   step *names* deliberately not equal to the stops they read from.
  *
  * Alpha steps are the most transparent rgba() that composites back to the
  * solid step over white (light) / black (dark), like Radix alpha scales.
@@ -24,6 +28,18 @@ type TailwindPaletteStop = 50 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 
 type TailwindPalette = Record<TailwindPaletteStop, string>;
 
 const tailwindPaletteStops = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950] as const;
+
+/**
+ * The names of the 12 scale steps: the Tailwind stops, prefixed with `10` for the
+ * extra light shade. Every `--{scale}-{stop}` / `--{scale}-a{stop}` token is named
+ * from this list, so `--accent-950` is the darkest step and `--accent-700` is solid.
+ */
+const scaleStops = [10, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950] as const;
+
+/** The solid step (`--{scale}-700`): buttons, solid backgrounds, the `--color-{scale}` default. */
+const SOLID_STOP = 700;
+/** The step the translucent surface is derived from (`--{scale}-50`). */
+const SURFACE_STOP = 50;
 
 /* * * * * * * * * * * * * * * * * * * */
 /*             Color math              */
@@ -195,9 +211,9 @@ interface ModeScale {
   stepsRgb: Rgb[];
   /** 12 alpha steps as #rrggbbaa. */
   alphas: string[];
-  /** Step-9 text color. */
+  /** Text color for the solid step (700). */
   contrast: string;
-  /** Translucent surface (#rrggbbaa) that composites back to step 2 over the page. */
+  /** Translucent surface (#rrggbbaa) that composites back to step 50 over the page. */
   surface: string;
   /** Dark-mode translucent panel color (#rrggbbaa), only meaningful for grays. */
   translucent: string;
@@ -254,26 +270,26 @@ function computeScale(palette: TailwindPalette): ScaleColors {
     100,
   ];
 
-  // Step-9 text: white, or a near-black palette tint for palettes whose solid
+  // Solid-step text: white, or a near-black palette tint for palettes whose solid
   // steps (light 700 / dark 600) are too light for white text.
   const darkText = rgbToHex(oklabToRgb(mix(ok[900], ok[950], 0.6)));
-  const contrastFor = (step9: Rgb) => (contrastWithWhite(step9) >= 2.16 ? 'white' : darkText);
+  const contrastFor = (solid: Rgb) => (contrastWithWhite(solid) >= 2.16 ? 'white' : darkText);
 
   const build = (steps: Step[], mode: 'light' | 'dark'): ModeScale => {
     const stepsRgb = steps.map((s) => oklabToRgb(typeof s === 'number' ? ok[s] : s));
     const alpha = mode === 'light' ? alphaOverWhite : alphaOverBlack;
-    const step2 = stepsRgb[1];
+    const step50 = stepsRgb[scaleStops.indexOf(SURFACE_STOP)];
     const surface =
       mode === 'light'
-        ? rgbToHex({ r: (step2.r - 51) / 0.8, g: (step2.g - 51) / 0.8, b: (step2.b - 51) / 0.8 }) + 'cc'
-        : rgbToHex({ r: step2.r * 2, g: step2.g * 2, b: step2.b * 2 }) + '80';
+        ? rgbToHex({ r: (step50.r - 51) / 0.8, g: (step50.g - 51) / 0.8, b: (step50.b - 51) / 0.8 }) + 'cc'
+        : rgbToHex({ r: step50.r * 2, g: step50.g * 2, b: step50.b * 2 }) + '80';
     return {
       steps: steps.map((s, i) => (typeof s === 'number' ? raw[s] : rgbToHex(stepsRgb[i]))),
       stepsRgb,
       alphas: stepsRgb.map(alpha),
-      contrast: contrastFor(stepsRgb[8]),
+      contrast: contrastFor(stepsRgb[scaleStops.indexOf(SOLID_STOP)]),
       surface,
-      translucent: rgbToHex(step2) + 'd9',
+      translucent: rgbToHex(step50) + 'd9',
     };
   };
 
@@ -293,11 +309,11 @@ function cssBlock(selector: string, lines: string[]): string {
 
 function scaleDeclarations(name: string, scale: ModeScale, options: { gray?: boolean; dark?: boolean }): string[] {
   return [
-    ...scale.steps.map((v, i) => `--${name}-${i + 1}: ${v}`),
-    ...scale.alphas.map((v, i) => `--${name}-a${i + 1}: ${v}`),
-    `--${name}-9-contrast: ${scale.contrast}`,
+    ...scale.steps.map((v, i) => `--${name}-${scaleStops[i]}: ${v}`),
+    ...scale.alphas.map((v, i) => `--${name}-alpha-${scaleStops[i]}: ${v}`),
+    `--${name}-${SOLID_STOP}-contrast: ${scale.contrast}`,
     `--${name}-surface: ${scale.surface}`,
-    ...(options.gray && options.dark ? [`--${name}-2-translucent: ${scale.translucent}`] : []),
+    ...(options.gray && options.dark ? [`--${name}-${SURFACE_STOP}-translucent: ${scale.translucent}`] : []),
   ];
 }
 
@@ -311,9 +327,9 @@ function scaleCss(name: string, colors: ScaleColors, options: { gray?: boolean }
 
 function mappingDeclarations(target: string, name: string): string[] {
   return [
-    ...Array.from({ length: 12 }, (_, i) => `--${target}-${i + 1}: var(--${name}-${i + 1})`),
-    ...Array.from({ length: 12 }, (_, i) => `--${target}-a${i + 1}: var(--${name}-a${i + 1})`),
-    `--${target}-9-contrast: var(--${name}-9-contrast)`,
+    ...scaleStops.map((stop) => `--${target}-${stop}: var(--${name}-${stop})`),
+    ...scaleStops.map((stop) => `--${target}-alpha-${stop}: var(--${name}-alpha-${stop})`),
+    `--${target}-${SOLID_STOP}-contrast: var(--${name}-${SOLID_STOP}-contrast)`,
   ];
 }
 
@@ -329,7 +345,7 @@ function accentMappingCss(name: string): string {
 function grayMappingCss(name: string): string {
   return cssBlock(`.frosted-ui:where([data-gray-color='${name}'])`, [
     `--gray-surface: var(--${name}-surface)`,
-    `--gray-2-translucent: var(--${name}-2-translucent)`,
+    `--gray-${SURFACE_STOP}-translucent: var(--${name}-${SURFACE_STOP}-translucent)`,
     ...mappingDeclarations('gray', name),
   ]);
 }
@@ -368,10 +384,10 @@ function createPaletteCss(name: string, palette: TailwindPalette, options: Creat
 
 function customScaleStyle(prefix: 'fui-ca' | 'fui-cg', colors: ScaleColors): Record<string, string> {
   const vars: Record<string, string> = {};
-  colors.light.steps.forEach((v, i) => (vars[`--${prefix}-l${i + 1}`] = v));
-  colors.dark.steps.forEach((v, i) => (vars[`--${prefix}-d${i + 1}`] = v));
-  colors.light.alphas.forEach((v, i) => (vars[`--${prefix}-la${i + 1}`] = v));
-  colors.dark.alphas.forEach((v, i) => (vars[`--${prefix}-da${i + 1}`] = v));
+  colors.light.steps.forEach((v, i) => (vars[`--${prefix}-l${scaleStops[i]}`] = v));
+  colors.dark.steps.forEach((v, i) => (vars[`--${prefix}-d${scaleStops[i]}`] = v));
+  colors.light.alphas.forEach((v, i) => (vars[`--${prefix}-lalpha-${scaleStops[i]}`] = v));
+  colors.dark.alphas.forEach((v, i) => (vars[`--${prefix}-dalpha-${scaleStops[i]}`] = v));
   vars[`--${prefix}-contrast`] = colors.dark.contrast;
   vars[`--${prefix}-ls`] = colors.light.surface;
   vars[`--${prefix}-ds`] = colors.dark.surface;
@@ -398,7 +414,7 @@ function createGrayScaleStyle(color: string): Record<string, string> {
 }
 
 /**
- * The dark-mode page background (scale step 1) for an arbitrary gray color, as a hex
+ * The dark-mode page background (scale step 10) for an arbitrary gray color, as a hex
  * string. theme.tsx applies this to `<body>`, which no CSS scale scope reaches.
  */
 function darkPageBackgroundFromColor(color: string): string {
@@ -470,6 +486,7 @@ export {
   grayMappingCss,
   matchingGrayFromColor,
   scaleCss,
+  scaleStops,
   semanticMappingCss,
   tailwindPaletteStops,
 };

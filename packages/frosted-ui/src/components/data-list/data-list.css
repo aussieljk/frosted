@@ -27,17 +27,17 @@
 
 .fui-DataListLabel {
   display: flex;
-  color: var(--gray-a11);
+  color: var(--gray-alpha-900);
 
   &:where(.fui-high-contrast) {
-    color: var(--gray-12);
+    color: var(--gray-950);
   }
 
   &:where([data-accent-color]) {
-    color: var(--accent-a11);
+    color: var(--accent-alpha-900);
 
     &:where(.fui-high-contrast) {
-      color: var(--accent-12);
+      color: var(--accent-950);
     }
   }
 }

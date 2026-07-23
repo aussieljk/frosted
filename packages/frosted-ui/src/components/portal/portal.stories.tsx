@@ -89,7 +89,7 @@ export const CustomContainer: Story = {
             flex: 1,
             minHeight: 200,
             padding: 16,
-            border: '2px dashed var(--gray-6)',
+            border: '2px dashed var(--gray-400)',
             borderRadius: 'var(--radius-3)',
           }}
         >
@@ -125,7 +125,7 @@ export const WithRenderProp: Story = {
               top: 20,
               right: 20,
               padding: 16,
-              backgroundColor: 'var(--accent-9)',
+              backgroundColor: 'var(--accent-700)',
               color: 'var(--accent-contrast)',
               borderRadius: 'var(--radius-3)',
               boxShadow: 'var(--shadow-5)',

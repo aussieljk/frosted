@@ -237,7 +237,7 @@ const ThemePanelImpl = React.forwardRef<ThemePanelImplElement, ThemePanelImplPro
             aria-labelledby="accent-color-title"
           >
             {themeAccentColorsOrdered.map((color) => (
-              <label key={color} className="fui-ThemePanelSwatch" style={{ backgroundColor: `var(--${color}-9)` }}>
+              <label key={color} className="fui-ThemePanelSwatch" style={{ backgroundColor: `var(--${color}-700)` }}>
                 <Tooltip
                   content={`${upperFirst(color)}${
                     accentColor === 'gray' && resolvedGrayColor !== 'gray' ? ` (${upperFirst(resolvedGrayColor)})` : ''
@@ -291,10 +291,10 @@ const ThemePanelImpl = React.forwardRef<ThemePanelImplElement, ThemePanelImplPro
                   justifyContent: 'center',
                   backgroundColor:
                     gray === 'auto'
-                      ? `var(--${autoMatchedGray}-9)`
+                      ? `var(--${autoMatchedGray}-700)`
                       : gray === 'gray'
-                        ? 'var(--gray-9)'
-                        : `var(--${gray}-9)`,
+                        ? 'var(--gray-700)'
+                        : `var(--${gray}-700)`,
                   // we override --gray so pure gray doesn't exist anymore
                   // recover something as close as possible by desaturating
                   filter: gray === 'gray' ? 'saturate(0)' : undefined,
@@ -339,7 +339,7 @@ const ThemePanelImpl = React.forwardRef<ThemePanelImplElement, ThemePanelImplPro
             aria-labelledby="info-color-title"
           >
             {infoColors.map((color) => (
-              <label key={color} className="fui-ThemePanelSwatch" style={{ backgroundColor: `var(--${color}-9)` }}>
+              <label key={color} className="fui-ThemePanelSwatch" style={{ backgroundColor: `var(--${color}-700)` }}>
                 <Tooltip content={upperFirst(color)}>
                   <input
                     className="fui-ThemePanelSwatchInput"
@@ -377,7 +377,7 @@ const ThemePanelImpl = React.forwardRef<ThemePanelImplElement, ThemePanelImplPro
             aria-labelledby="success-color-title"
           >
             {successColors.map((color) => (
-              <label key={color} className="fui-ThemePanelSwatch" style={{ backgroundColor: `var(--${color}-9)` }}>
+              <label key={color} className="fui-ThemePanelSwatch" style={{ backgroundColor: `var(--${color}-700)` }}>
                 <Tooltip content={upperFirst(color)}>
                   <input
                     className="fui-ThemePanelSwatchInput"
@@ -415,7 +415,7 @@ const ThemePanelImpl = React.forwardRef<ThemePanelImplElement, ThemePanelImplPro
             aria-labelledby="warning-color-title"
           >
             {warningColors.map((color) => (
-              <label key={color} className="fui-ThemePanelSwatch" style={{ backgroundColor: `var(--${color}-9)` }}>
+              <label key={color} className="fui-ThemePanelSwatch" style={{ backgroundColor: `var(--${color}-700)` }}>
                 <Tooltip content={upperFirst(color)}>
                   <input
                     className="fui-ThemePanelSwatchInput"
@@ -453,7 +453,7 @@ const ThemePanelImpl = React.forwardRef<ThemePanelImplElement, ThemePanelImplPro
             aria-labelledby="danger-color-title"
           >
             {dangerColors.map((color) => (
-              <label key={color} className="fui-ThemePanelSwatch" style={{ backgroundColor: `var(--${color}-9)` }}>
+              <label key={color} className="fui-ThemePanelSwatch" style={{ backgroundColor: `var(--${color}-700)` }}>
                 <Tooltip content={upperFirst(color)}>
                   <input
                     className="fui-ThemePanelSwatchInput"
