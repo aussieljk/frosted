@@ -12,7 +12,7 @@ const meta = {
   argTypes: {
     minLength: { control: 'number' },
   },
-  tags: ['autodocs'],
+  tags: ['!autodocs'],
 } satisfies Meta<typeof Spacer>;
 
 export default meta;

@@ -15,7 +15,7 @@ const meta = {
     layout: 'centered',
   },
   // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/react/writing-docs/autodocs
-  tags: ['autodocs'],
+  tags: ['!autodocs'],
   render: (args) => (
     <Text>
       We <Em {...args}>had</Em> to do something about it.

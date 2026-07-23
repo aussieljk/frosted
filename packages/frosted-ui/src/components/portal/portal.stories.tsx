@@ -13,6 +13,7 @@ const meta: Meta<typeof Portal> = {
   parameters: {
     layout: 'padded',
   },
+  tags: ['!autodocs'],
 };
 
 export default meta;

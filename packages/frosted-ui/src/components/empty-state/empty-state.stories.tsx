@@ -41,7 +41,7 @@ const meta = {
   parameters: {
     layout: 'centered',
   },
-  tags: ['autodocs'],
+  tags: ['!autodocs'],
 } satisfies Meta<typeof EmptyState.Root>;
 
 export default meta;

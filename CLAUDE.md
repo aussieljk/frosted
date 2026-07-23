@@ -42,7 +42,19 @@ Storybook is the only site; it runs from this laptop under the `frosted.localhos
 
 ## Publishing
 
-The main package publishes to npm as `@aussieljk/frosted` (see `packages/frosted-ui`). Publishing happens locally from this laptop: bump the version in `packages/frosted-ui/package.json`, then `npm publish` from that directory (`prepublishOnly` runs lint + build). There is no CI/CD.
+The main package publishes to npm as `@aussieljk/frosted` (see `packages/frosted-ui`). Publishing happens locally from this laptop, and there is no CI/CD.
+
+**The version stays on 0.0.1 forever.** Every release is a prerelease of it — `0.0.1-1`, `0.0.1-2`, … — so the patch number never reaches 0.0.2. To release, from `packages/frosted-ui`:
+
+```sh
+bun run release   # npm version prerelease --no-git-tag-version && npm publish --tag latest
+```
+
+`--tag latest` is required: npm refuses to publish a prerelease to the default tag, and without it `latest` would never move, so plain `bun add @aussieljk/frosted` would fail to resolve.
+
+`prepublishOnly` runs `scripts/check-version.ts` (hard-fails on any version that isn't `0.0.1-<n>`), then lint + build.
+
+Never publish a plain `0.0.1`: it outranks every later `0.0.1-N`, and `^0.0.1` ranges don't match prereleases, so consumers would be stuck on that one release. Installing normally (`bun add @aussieljk/frosted`) resolves the `latest` dist-tag and records `^0.0.1-N`, which does pick up subsequent `0.0.1-N` releases.
 
 ## Sharp Edges
 

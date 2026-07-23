@@ -1,6 +1,6 @@
 {
   "name": "@aussieljk/frosted",
-  "version": "0.0.1",
+  "version": "0.0.1-1",
   "type": "module",
   "description": "Frosted UI design system",
   "private": false,
@@ -69,7 +69,8 @@
     "generate:llms": "bun scripts/generate-llms.ts",
     "generate:palettes": "bun scripts/generate-palettes.ts",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist && rm -rf styles.css && rm -rf styles.lite.css && rm -rf theme.css && rm -rf .storybook/generated && rm -rf .storybook/public",
-    "prepublishOnly": "bun run lint && bun run build",
+    "prepublishOnly": "bun scripts/check-version.ts && bun run lint && bun run build",
+    "release": "npm version prerelease --no-git-tag-version && npm publish --tag latest",
     "storybook": "concurrently -k -n css,thm,sb \"bun run dev:css\" \"bun run dev:theme\" \"bun run storybook:serve\"",
     "storybook:serve": "portless frosted sh -c 'storybook dev -p \"$PORT\" --no-open'",
     "build-storybook": "bun run generate:props && bun run generate:llms && storybook build",

@@ -34,7 +34,7 @@ const meta: Meta<typeof DateRangePicker> = {
     layout: 'centered',
   },
   // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/react/writing-docs/autodocs
-  tags: ['autodocs'],
+  tags: ['!autodocs'],
 };
 
 export default meta;

@@ -40,7 +40,7 @@ const meta = {
   parameters: {
     layout: 'centered',
   },
-  tags: ['autodocs'],
+  tags: ['!autodocs'],
 } satisfies Meta<typeof NumberField.Root>;
 
 export default meta;

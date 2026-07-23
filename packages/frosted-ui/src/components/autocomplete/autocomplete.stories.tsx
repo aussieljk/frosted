@@ -23,6 +23,7 @@ import * as Autocomplete from './autocomplete';
 const meta: Meta<typeof Autocomplete.Root> = {
   title: 'Controls/Autocomplete',
   component: Autocomplete.Root,
+  tags: ['!autodocs'],
 };
 
 export default meta;

@@ -31,7 +31,7 @@ const meta = {
     },
     spacing: { control: 'number' },
   },
-  tags: ['autodocs'],
+  tags: ['!autodocs'],
 } satisfies Meta<typeof HStack>;
 
 export default meta;

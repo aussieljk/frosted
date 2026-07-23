@@ -15,7 +15,7 @@ const meta = {
       options: overlayPropDefs.alignment.values,
     },
   },
-  tags: ['autodocs'],
+  tags: ['!autodocs'],
 } satisfies Meta<typeof Overlay>;
 
 export default meta;

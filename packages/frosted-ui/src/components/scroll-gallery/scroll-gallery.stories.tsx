@@ -22,7 +22,7 @@ const meta = {
   parameters: {
     layout: 'padded',
   },
-  tags: ['autodocs'],
+  tags: ['!autodocs'],
 } satisfies Meta<typeof ScrollGallery.Root>;
 
 export default meta;

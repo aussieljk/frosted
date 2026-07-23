@@ -1,12 +1,16 @@
 import type { Decorator, Preview } from '@storybook/react-vite';
 import React from 'react';
 import { Toaster } from '../src/components/toast';
+import { themePropDefs } from '../src/theme-options';
 import { Theme } from '../src/theme';
+import { enhanceArgTypesFromProps } from './enhance-arg-types';
 import '../styles.css';
 
 export const withTheme: Decorator = (Story, context) => {
   // Get values from story parameter first, else fallback to globals
   const theme = (context.parameters.theme || context.globals.theme) as 'light' | 'dark';
+  const accentColor = (context.parameters.accentColor || context.globals.accentColor || 'blue') as string;
+  const grayColor = (context.parameters.grayColor || context.globals.grayColor || 'gray') as string;
 
   return (
     <>
@@ -22,7 +26,7 @@ export const withTheme: Decorator = (Story, context) => {
 }
 `}
       </style>
-      <Theme accentColor="blue" grayColor={'gray'} appearance={theme}>
+      <Theme accentColor={accentColor} grayColor={grayColor} appearance={theme}>
         <Story />
         <Toaster />
         {/* <ThemePanel /> */}
@@ -50,11 +54,33 @@ const preview: Preview = {
         showName: true,
       },
     },
+    accentColor: {
+      name: 'Accent',
+      description: 'Theme accent color',
+      toolbar: {
+        icon: 'paintbrush',
+        items: [...themePropDefs.accentColor.values],
+        dynamicTitle: true,
+      },
+    },
+    grayColor: {
+      name: 'Gray',
+      description: 'Theme gray scale',
+      toolbar: {
+        icon: 'contrast',
+        items: [...themePropDefs.grayColor.values],
+        dynamicTitle: true,
+      },
+    },
   },
 
   initialGlobals: {
     theme: 'light',
+    accentColor: 'blue',
+    grayColor: 'gray',
   },
+
+  argTypesEnhancers: [enhanceArgTypesFromProps],
 
   parameters: {
     actions: { argTypesRegex: '^on[A-Z].*' },

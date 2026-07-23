@@ -15,7 +15,7 @@ const meta = {
       options: zStackPropDefs.alignment.values,
     },
   },
-  tags: ['autodocs'],
+  tags: ['!autodocs'],
 } satisfies Meta<typeof ZStack>;
 
 export default meta;

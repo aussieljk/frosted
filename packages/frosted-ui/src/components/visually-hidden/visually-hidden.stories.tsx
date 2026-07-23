@@ -11,6 +11,7 @@ const meta: Meta<typeof VisuallyHidden> = {
   parameters: {
     layout: 'padded',
   },
+  tags: ['!autodocs'],
 };
 
 export default meta;

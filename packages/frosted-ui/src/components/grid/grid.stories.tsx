@@ -32,7 +32,7 @@ const meta = {
     horizontalSpacing: { control: 'number' },
     verticalSpacing: { control: 'number' },
   },
-  tags: ['autodocs'],
+  tags: ['!autodocs'],
 } satisfies Meta<typeof Grid>;
 
 export default meta;

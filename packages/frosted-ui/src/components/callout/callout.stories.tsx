@@ -18,7 +18,7 @@ const meta = {
       options: calloutRootPropDefs.color.values,
     },
   },
-  tags: ['autodocs'],
+  tags: ['!autodocs'],
 } satisfies Meta<typeof Callout.Root>;
 
 export default meta;

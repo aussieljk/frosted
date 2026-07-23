@@ -10,7 +10,7 @@ const meta: Meta<typeof Combobox.Root> = {
   parameters: {
     layout: 'centered',
   },
-  tags: ['autodocs'],
+  tags: ['!autodocs'],
 };
 
 export default meta;
