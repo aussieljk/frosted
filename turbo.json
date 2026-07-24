@@ -24,6 +24,10 @@
       "dependsOn": ["build:css"],
       "outputs": ["cosmos-export/**"]
     },
+    "@aussieljk/docs#build": {
+      "dependsOn": ["^build"],
+      "outputs": [".vercel/output/**", ".nitro/**", ".tanstack/**"]
+    },
     "typecheck": {
       "dependsOn": ["^build"],
       "outputs": []

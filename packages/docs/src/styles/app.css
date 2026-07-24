@@ -1,0 +1,17 @@
+@import 'tailwindcss';
+@import 'fumadocs-ui/css/neutral.css';
+@import 'fumadocs-ui/css/preset.css';
+
+/* The component library's runtime CSS + palette tokens. Radix-Themes-style: scoped under the
+   `<Theme>` wrapper, so it styles demos without resetting the surrounding Fumadocs chrome. */
+@import '@aussieljk/frosted/styles.css';
+@import '@aussieljk/frosted/theme.css';
+
+html {
+  scrollbar-gutter: stable;
+}
+
+html > body[data-scroll-locked] {
+  margin-right: 0px !important;
+  --removed-body-scroll-bar-size: 0px !important;
+}

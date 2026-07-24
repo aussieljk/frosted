@@ -1,0 +1,30 @@
+---
+title: Button
+description: Trigger an action or event.
+---
+
+<Demo name="button" />
+
+## Usage
+
+```tsx
+import { Button } from '@aussieljk/frosted';
+
+<Button variant="classic" size="2">
+  Get started
+</Button>;
+```
+
+Button extends the native `button` element — standard button attributes are also supported.
+
+## IconButton
+
+IconButton is a square, icon-only button — it shares the same sizes, variants, and colors:
+
+```tsx
+import { IconButton } from '@aussieljk/frosted';
+
+<IconButton variant="soft" aria-label="Search">
+  <SearchIcon />
+</IconButton>;
+```

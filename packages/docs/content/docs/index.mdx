@@ -1,0 +1,47 @@
+---
+title: Getting Started
+description: A themeable React component library, built on Base UI.
+icon: Rocket
+---
+
+Frosted is the `@aussieljk/frosted` design system — a themeable set of React components
+built on [Base UI](https://base-ui.com). Every component is driven by a single `<Theme>`
+that controls appearance (light/dark), accent color, and gray scale.
+
+## Installation
+
+```bash
+bun add @aussieljk/frosted
+```
+
+## Setup
+
+Import the stylesheet once at the root of your app, then wrap it in a `<Theme>`:
+
+```tsx
+import '@aussieljk/frosted/styles.css';
+import { Theme } from '@aussieljk/frosted';
+
+export function App({ children }: { children: React.ReactNode }) {
+  return (
+    <Theme accentColor="indigo" grayColor="slate">
+      {children}
+    </Theme>
+  );
+}
+```
+
+## Your first component
+
+```tsx
+import { Button } from '@aussieljk/frosted';
+
+<Button variant="classic" size="2">
+  Get started
+</Button>;
+```
+
+<Demo name="button" />
+
+Browse every component in the **Components** section — each page renders a live, copy-pasteable
+example straight from the package.
