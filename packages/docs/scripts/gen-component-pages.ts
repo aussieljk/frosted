@@ -54,6 +54,10 @@ description: ${title} component.
 ---
 
 <Demo name="${name}" />
+
+## Props
+
+<PropsTable component="${name}" />
 `,
   );
   created++;
