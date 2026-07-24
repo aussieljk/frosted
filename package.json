@@ -13,7 +13,7 @@
   },
   "scripts": {
     "build": "turbo run build",
-    "build:docs": "bun run --filter=@aussieljk/docs build",
+    "build:docs": "turbo run build --filter=@aussieljk/docs",
     "check": "bun run workflows:check && bun run format:check && turbo run lint typecheck build && bun run --filter=@aussieljk/frosted health",
     "deploy": "bun scripts/deploy.ts",
     "dev": "bun run --filter=@aussieljk/docs dev",
