@@ -53,8 +53,6 @@ jobs:
         run: bun run build
       - name: Package health
         run: bun run --filter=@aussieljk/frosted health
-      - name: Cosmos export
-        run: bun run build:cosmos
   deploy:
     name: Deploy
     needs: check

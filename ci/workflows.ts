@@ -5,7 +5,7 @@
  * Two workflows:
  *
  *   ci.yml       every PR and every push to master — one `check` job (format,
- *                lint, typecheck, build, package health, cosmos export, this
+ *                lint, typecheck, build, package health, this
  *                file's YAML being in sync), then a Vercel deploy: a preview
  *                URL commented on the PR, production on master.
  *
@@ -93,7 +93,6 @@ const ci: Workflow = {
         sh('Typecheck', 'bun run typecheck'),
         sh('Build', 'bun run build'),
         sh('Package health', 'bun run --filter=@aussieljk/frosted health'),
-        sh('Cosmos export', 'bun run build:cosmos'),
       ],
     },
     deploy: {
@@ -124,7 +123,7 @@ const release: Workflow = {
     workflow_dispatch: {
       inputs: {
         deploy: {
-          description: 'Also deploy the cosmos site to production',
+          description: 'Also deploy the docs site to production',
           type: 'boolean',
           default: true,
         },

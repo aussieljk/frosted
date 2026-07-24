@@ -7,30 +7,22 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ### Monorepo
 
 - **Install**: `bun install`
-- **Dev server**: `bun run dev [--no-open] [--kill]` (`scripts/dev.ts`; react-cosmos through [portless](https://www.npmjs.com/package/portless), opens Safari when ready; `--kill` clears stale sessions)
+- **Dev server**: `bun run dev` — runs the docs site (`@aussieljk/docs`, `vite dev` on port 3000). The library is consumed as a built package, so build it first (`bun run build --filter=@aussieljk/frosted`) or run `turbo` which orders it for you.
 - **Build**: `bun run build --filter=<app>`
 - **Lint**: `bun run lint --filter=<app>`
 - **Typecheck**: `bun run typecheck` (turbo for the packages, then root `tsconfig.json` for `scripts/` + `ci/`; TypeScript 7)
 - **Full check**: `bun run check` — everything CI runs (workflows in sync, format, lint, typecheck, build, publint, attw)
 - **Format**: `bun run format` / `bun run format:check` (oxfmt, JS/TS only — oxfmt would otherwise rewrite the generated workflow YAML and the markdown)
 - **Regenerate the workflows**: `bun run workflows` (see [CI/CD](#cicd))
-- **Screenshot every fixture**: `bun run screenshot [--static] [--out <dir>] [--filter <substr>] [--concurrency <n>] [--shard <i>/<n>]` (`scripts/screenshot-demos.ts`; headless via the `agent-browser` CLI, starts cosmos itself if it isn't running, writes `screenshots/` + a contact-sheet `index.html`). One shot per component, since a fixture page holds every example. `--static` serves the last `build:cosmos` export instead of the dev server (faster, but only as fresh as that build); `--shard` splits the work across machines.
-- **Scaffold a component**: `bun run new:component <kebab-name> [--namespace] [--no-docs]` (`--no-docs` skips the usage demo)
+- **Scaffold a component**: `bun run new:component <kebab-name> [--namespace] [--no-docs]` (`--no-docs` skips the usage demo; generates the component files + a docs page in `packages/docs`)
 - **Env problems**: `bun run doctor [--fix]` (stale nested node_modules, bun version)
 
-### Dev URL (portless — no port numbers)
-
-The react-cosmos playground is the only site; it runs from this laptop under the `frosted.localhost` tenant:
-
-- **Cosmos playground**: <https://frosted.localhost> (`packages/frosted-ui`)
-- **Renderer iframe**: <https://frosted-renderer.localhost> — a static portless alias to the vite dev server on 5050 (port pinned in `cosmos.config.json`, alias re-registered by `dev.ts` on every boot). Both URLs must be https: Safari (unlike Chrome) blocks plain-http `localhost` iframes inside an https page. Because the renderer sits behind the TLS proxy, `vite.config.ts` points the HMR websocket at `wss://…:443` — same trick the storybook config needed.
-
-### The package (`@aussieljk/frosted`, in `packages/frosted-ui`)
+### The library (`@aussieljk/frosted`, in `packages/frosted-ui`)
 
 - **Build**: `bun run --filter="@aussieljk/frosted" build`
 - **Lint**: `bun run --filter="@aussieljk/frosted" lint`
-- **Cosmos (standalone)**: `bun run --filter="@aussieljk/frosted" cosmos`
-- **Static export**: `bun run build:cosmos` (from the root; writes `packages/frosted-ui/cosmos-export`)
+
+The library ships no site of its own — it's built (tsdown + postcss) and consumed by the docs app.
 
 ## Code Style Guidelines
 
@@ -38,9 +30,9 @@ The react-cosmos playground is the only site; it runs from this laptop under the
 - **React**: Functional components with hooks, JSX format
 - **CSS**: Tailwind CSS v4, PostCSS with nesting/custom media/imports
 - **Formatting**: Single quotes, semicolons required, trailing commas in multiline
-- **Project**: Bun workspaces with Turborepo (`packages/*`, `tools/*`), Vite everywhere (no Next.js, no tests)
+- **Project**: Bun workspaces with Turborepo (`packages/*`), Vite everywhere (no Next.js, no tests)
 - **Commits**: Semantic commit messages (feat, fix, docs, style, refactor, perf, test, chore)
-- **Quality**: oxlint for linting (root `.oxlintrc.json`), oxfmt for formatting (`bun run format`; lefthook pre-commit runs both on staged files), react-cosmos for the component workbench
+- **Quality**: oxlint for linting (root `.oxlintrc.json`), oxfmt for formatting (`bun run format`; lefthook pre-commit runs both on staged files), Fumadocs (TanStack Start) for the docs site
 
 ## Publishing
 
@@ -75,7 +67,7 @@ Keep every `run:` a single line: Bun's YAML writer emits multi-line strings as q
 
 **Workflows**
 
-- **CI** — every PR and every push to master. `check` job: workflows-in-sync, format, lint, typecheck, build, package health (publint + attw), cosmos export. Then `deploy`: preview on PRs (URL commented on the PR), production on master.
+- **CI** — every PR and every push to master. `check` job: workflows-in-sync, format, lint, typecheck, build (turbo builds the library and the docs site), package health (publint + attw). Then `deploy`: preview on PRs (URL commented on the PR), production on master.
 - **Release** — manual `workflow_dispatch` on master, with a `deploy` input. Runs `bun run check`, then `scripts/release.ts` and `scripts/deploy.ts --prod`.
 
 **Runners are [Blacksmith](https://docs.blacksmith.sh/blacksmith-runners/overview)** (`blacksmith-4vcpu-ubuntu-2404`) — a drop-in `runs-on` swap. Blacksmith serves the stock `actions/cache` from a colocated cache, so there is nothing vendor-specific in the workflows and `actions/*` stays upstream. `Runner` in `ci/dsl.ts` types the full label set. `actionlint` flags these labels as unknown; that's expected.
@@ -102,33 +94,32 @@ A PR from a fork has no secrets, so `deploy.ts` skips with a warning instead of 
 
 The release commit is pushed with `GITHUB_TOKEN`, whose pushes deliberately do not trigger further workflow runs — so a release does not kick off a second CI + production deploy.
 
-## Cosmos (component workbench)
+## Docs site (`packages/docs` — Fumadocs on TanStack Start)
 
-- **The sidebar is a flat list of components, and there is no nesting.** One fixture file per component in `packages/frosted-ui/fixtures/<Component>.fixture.tsx`, each default-exporting a single `<Gallery>` element that renders *every* example of that component on one page. The file name *is* the sidebar label, so fixtures are named after the exported component (`AvatarGroup.fixture.tsx`, `InputOTP.fixture.tsx`, `HStack.fixture.tsx`) — the one place in the repo that isn't kebab-case. Renaming one on macOS needs `git mv` via a temp name: a case-only `git mv -f` deletes the file on a case-insensitive volume. Keep it that way: cosmos builds the sidebar from file paths, so a subdirectory under `fixtures/` (or a second fixture file for one component) re-introduces a tree node, and a default-exported *object* re-introduces per-variant sub-nodes.
-- **How a fixture page is put together**: `const examples = { Name() {…}, Other: <X /> }` (function or element values both work) plus the component's usage demo, handed to `<Gallery examples={examples} demo={Demo} />` (`cosmos/Gallery.tsx`), which labels each section and rules a line between them. The demo leads, then the examples in declared order.
-- **Usage demos live in `packages/frosted-ui/demos/<name>.demo.tsx`** and import from `@aussieljk/frosted` (aliased to `src/` in `vite.config.ts`) because their source is meant to be copy-pasteable. The `.demo.tsx` suffix keeps cosmos from indexing them as fixtures of their own — they reach the playground only through the component's Gallery. `demos/icons.demo.tsx` and `demos/layout.demo.tsx` have no component of their own, so `fixtures/icons.fixture.tsx` / `fixtures/layout.fixture.tsx` render the demo alone.
-- **`cosmos.config.json` runs `lazy: true`** deliberately — eager mode imports every fixture (and therefore the whole library) into the renderer on first load, which is exactly the slow-boot problem the old setup was tuned to avoid.
-- **No prop controls.** Fixtures render fixed examples; the props panel holds only the decorator's theme selects. A generated prop table (`cosmos/controls.ts` + `tools/props-gen`) used to seed one cosmos input per prop; it was deleted along with the controls-driven fixtures — restore it from git history if the playground ever wants live props again.
-- **Theme/accent/gray selects** on every fixture come from the shared decorator (`cosmos/ThemeDecorator.tsx`, wired via `fixtures/cosmos.decorator.tsx`), which also mounts the `Toaster`. Global CSS enters through `globalImports` in `cosmos.config.json` → `cosmos/preview.css` (tailwind + built `styles.css` + `theme.css` — the dev script keeps both watched).
-- **`index.html` at the package root is the cosmos renderer template** — the vite plugin rewrites its script tag to a virtual entry at serve time; the `/src/main.tsx` reference in it is never actually resolved.
-- **Enumerate fixtures programmatically** with `getFixtures()` from `react-cosmos` (bun runs the TSX imports natively) — that's how `scripts/screenshot-demos.ts` gets its list; the dev server's `/cosmos.fixtures.json` only carries the renderer URL base.
+The docs site is the only site: Fumadocs (`@fumadocs/base-ui` theme — a natural fit since the library is built on Base UI) running on TanStack Start (Vite), deployed to Vercel via nitro's `vercel` preset (`.vercel/output`, Build Output API). It consumes the **built** `@aussieljk/frosted` package (not `src/`), so a demo renders exactly what a consumer copy-pastes.
+
+- **Content is MDX in `content/docs/`.** `index.mdx` is Getting Started; `guides/*` are the prose guides (ordered by `guides/meta.json`); `components/*` is one page per component (ordered by `components/meta.json`). Top-level order is `content/docs/meta.json`.
+- **`<Demo name="...">`** (`src/components/demo.tsx`) renders a live demo from `packages/frosted-ui/demos/<name>.demo.tsx`, wrapped in `<Theme>`, with copy-paste source. The registry (`src/demos/registry.ts`) auto-discovers every demo via `import.meta.glob` (aliased `@demos` → the package's `demos/`), so a new demo needs no wiring. Previews render **client-only** — many components touch browser globals (CSS.supports, portals) that throw during prerender.
+- **Component pages are generated** from the demos: `bun run scripts/gen-component-pages.ts` (idempotent — only creates missing pages, so hand-authored ones like `button.mdx` survive). The demos are the source of truth for the current API; the archived Storybook MDX under `packages/frosted-ui/docs/` describes an older, drifted API.
+- **Prop tables** (`<PropsTable component="...">`, Fumadocs `TypeTable`) read `src/generated/props.json`, produced by `bun run scripts/gen-props.ts`. That generator **imports each `*.props.ts` at runtime** (bun runs the TS natively) — no TypeScript compiler API, so it sidesteps the TS7-native limitation that killed the old `tools/props-gen`. Descriptions come from a regex over the source (following one re-export hop). `props.json` is committed; re-run after prop changes. `<PropsTable>` resolves names hyphen/case-insensitively (`HStack`, `IconButton`, `Theme`).
+- **`llms.txt` / `llms-full.txt` / per-page `.md`** and Orama search come from the template routes (`src/routes/`), so the machine-readable docs artifact is served again.
+- **`routeTree.gen.ts` is committed** (TanStack generates it; `tsc` needs it), and `.source` (fumadocs-mdx) is gitignored — regenerated by the `postinstall` (`fumadocs-mdx`) and the vite `mdx()` plugin.
 
 ## Sharp Edges
 
 Non-obvious constraints — breaking any of these fails silently or in confusing ways:
 
 - **`scripts/fix-namespace-exports.ts` must run after every tsdown build** (wired into `build:js`). Rolldown lowers `export * as Tabs` into materialized getter objects, which break React Server Components (`<Tabs.Root>` renders undefined: "Element type is invalid … got: undefined").
-- **Dev never builds or watches `dist/`** — cosmos reads `src/` natively, and `vite.config.ts` aliases `@aussieljk/frosted` (and `/icons/*`) to `src/` so demo source can name the public package. Only the postcss watchers (`styles.css`, `theme.css`) run during dev. If you change the package's public entry points, check those aliases still cover them.
+- **The docs site consumes the *built* package** — `bun run dev` (the docs `vite dev`) resolves `@aussieljk/frosted` to `dist/`, so build the library first (or let turbo order it). Unlike the old cosmos setup there is no `src/` alias; changing the package's public entry points means rebuilding before the docs pick them up.
 - **`sideEffects` in `packages/frosted-ui/package.json` must stay `["./dist/icons/adapters/*"]`**, not `false`. The icon adapter subpaths (`@aussieljk/frosted/icons/lucide` etc.) register themselves on import; `sideEffects: false` silently tree-shakes them.
-- **TypeScript 7 (native compiler) is the repo default**, and it has no JS compiler API — anything needing it (the old `tools/props-gen`, now deleted) has to scope its own classic-TS pin in a workspace of its own.
+- **TypeScript 7 (native compiler) is the library default**, and it has no JS compiler API — anything needing it can't use the library's `tsc`. The docs prop generator works around this by importing the `*.props.ts` at *runtime* under bun rather than parsing them (see the Docs site section). The docs package pins its own classic TypeScript for `tsc --noEmit`.
 - **`.stylelintrc.js` must stay `.js`** — stylelint's TS config loader calls classic-TS APIs that the TS7 native compiler doesn't export.
 - **`src/styles/tokens/tailwind-color.css` is hand-maintained runtime CSS** (per-palette oklch seeds + `:where()` blocks computing all 12 steps via color-mix/relative color syntax). There is no generator anymore; edit it by hand. Tailwind palettes are prefixed `tw-` (`tw-indigo`) to coexist with the Radix scales.
 - **Icon adapters in `src/icons/adapters/` are generated** — edit `scripts/icon-map.ts` and run `bun run generate:icon-adapters`; never edit the adapters directly.
 - **`lucide-react` is v1.x** — the adapter uses v1 names (`House`, `Funnel`, `TriangleAlert`); pre-1.0 aliases like `Home` no longer exist despite the permissive peer range.
-- **The vite renderer must dep-optimize in one pass** — `vite.config.ts` lists the fixture globs as `optimizeDeps.entries` and the full react-aria surface in `include`; a dep discovered mid-session forces a re-optimize that leaves two copies of react-aria's focus-visible global in the page ("Illegal invocation", blank renderer). The same reason `resolve.dedupe` is set.
-- **`react-cosmos-plugin-vite` is patched** (`patches/`, wired via `patchedDependencies`): upstream derives the vite port from `rendererUrl`, which breaks when the rendererUrl is a reverse-proxied https URL with no explicit port — the patch falls back to `vite.port` from `cosmos.config.json`. Bumping the cosmos version requires re-checking the patch still applies.
+- **Demo previews are client-only** (`src/components/demo.tsx` gates on a mounted flag). Many frosted components touch browser globals (`CSS.supports`, portals, `ResizeObserver`) that throw under SSR/prerender, so the page shell prerenders but the live preview waits for mount. Don't "optimize" this by rendering the demo during SSR — the prerender will start erroring again.
 - **If something is mysteriously broken, run `bun run doctor`** — under the hoisted linker, stale nested `packages/*/node_modules` dirs from older installs can shadow the root binaries (a package silently using an ancient `tsc`). `doctor --fix` deletes them.
 
 ## History
 
-The repo used Storybook (docs site + stories) until 2026-07-23. The authored MDX docs pages are archived under `packages/frosted-ui/docs/` (no longer rendered by anything), and `packages/frosted-ui/docs/WHAT-WE-LOST-DROPPING-STORYBOOK.md` records exactly what the migration to react-cosmos gave up.
+The repo used Storybook (docs site + stories) until 2026-07-23, then react-cosmos (a component workbench, no docs site) until 2026-07-24, when it moved to the current Fumadocs docs site and **removed react-cosmos entirely** — fixtures, cosmos config, the screenshot pipeline, and `scripts/dev.ts` all went with it. The archived Storybook MDX under `packages/frosted-ui/docs/` (including `WHAT-WE-LOST-DROPPING-STORYBOOK.md`) describes an older API and is kept for reference only; the docs are now generated from the demos + `*.props.ts`.

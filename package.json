@@ -13,10 +13,10 @@
   },
   "scripts": {
     "build": "turbo run build",
-    "build:cosmos": "turbo run build-cosmos",
+    "build:docs": "bun run --filter=@aussieljk/docs build",
     "check": "bun run workflows:check && bun run format:check && turbo run lint typecheck build && bun run --filter=@aussieljk/frosted health",
     "deploy": "bun scripts/deploy.ts",
-    "dev": "bun scripts/dev.ts",
+    "dev": "bun run --filter=@aussieljk/docs dev",
     "doctor": "bun scripts/doctor.ts",
     "format": "oxfmt \"**/*.{ts,tsx,js,jsx,mjs,cjs}\"",
     "format:check": "oxfmt --check \"**/*.{ts,tsx,js,jsx,mjs,cjs}\"",
@@ -25,7 +25,6 @@
     "prepare": "lefthook install || true",
     "prod": "bun scripts/prod.ts",
     "release": "bun scripts/release.ts",
-    "screenshot": "bun scripts/screenshot-demos.ts",
     "typecheck": "turbo run typecheck && tsc --noEmit",
     "workflows": "bun ci/generate.ts",
     "workflows:check": "bun ci/generate.ts --check"
@@ -35,7 +34,6 @@
     "lefthook": "^2.1.10",
     "oxfmt": "^0.60.0",
     "oxlint": "^1.75.0",
-    "portless": "^0.15.4",
     "turbo": "^2.10.6",
     "typescript": "^7.0.2",
     "vercel": "^56.5.0"
@@ -44,8 +42,5 @@
     "node": "22.x",
     "bun": ">=1.2"
   },
-  "packageManager": "bun@1.3.11",
-  "patchedDependencies": {
-    "react-cosmos-plugin-vite@7.3.0": "patches/react-cosmos-plugin-vite@7.3.0.patch"
-  }
+  "packageManager": "bun@1.3.11"
 }

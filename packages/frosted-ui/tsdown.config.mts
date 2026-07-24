@@ -1,7 +1,7 @@
 import { defineConfig } from 'tsdown';
 
 export default defineConfig({
-  entry: ['src/**/*.{ts,tsx}', '!src/**/*.fixture.*', '!src/cosmos.decorator.tsx'],
+  entry: ['src/**/*.{ts,tsx}'],
   format: ['esm'],
   outDir: 'dist',
   unbundle: true,

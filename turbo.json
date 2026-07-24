@@ -20,10 +20,6 @@
     "lint:css": {
       "outputs": []
     },
-    "@aussieljk/frosted#build-cosmos": {
-      "dependsOn": ["build:css"],
-      "outputs": ["cosmos-export/**"]
-    },
     "@aussieljk/docs#build": {
       "dependsOn": ["^build"],
       "outputs": [".vercel/output/**", ".nitro/**", ".tanstack/**"]

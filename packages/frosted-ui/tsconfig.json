@@ -20,6 +20,6 @@
       "@aussieljk/frosted/icons/*": ["./src/icons/adapters/*"]
     }
   },
-  "include": ["src/**/*", "cosmos/**/*", "demos/**/*", "fixtures/**/*"],
+  "include": ["src/**/*", "demos/**/*"],
   "exclude": ["node_modules", "dist", "scripts"]
 }
